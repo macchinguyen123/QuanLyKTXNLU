@@ -83,7 +83,7 @@ public class GDSVDangKi extends JFrame {
         scrollPane.setBounds(20, 60, 760, 300);
         mainPanel.add(scrollPane);
 
-        backButton = new JButton("Quay về"){
+        backButton = new JButton("Quay về") {
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g;
@@ -100,6 +100,7 @@ public class GDSVDangKi extends JFrame {
 
                 super.paintComponent(g);
             }
+
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
