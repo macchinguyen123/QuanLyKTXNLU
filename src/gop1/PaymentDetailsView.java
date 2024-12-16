@@ -1,8 +1,6 @@
 package gop1;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -12,6 +10,7 @@ import java.util.stream.Collectors;
 public class PaymentDetailsView extends JFrame {
     private JTable paymentTable;
     private JButton filterButton;
+    private JButton sortButton;
     private JButton backButton;
 
     public PaymentDetailsView(List<Room> rooms) {
@@ -27,7 +26,7 @@ public class PaymentDetailsView extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
         // Tạo bảng
-        String[] columnNames = {"Số Phòng", "Loại Phòng", "Đã Thanh Toán", "Chưa Thanh Toán"};
+        String[] columnNames = {"Số Phòng", "Loại Phòng", "Đã Thanh Toán", "Chưa Thanh Toán", "Số Tiền"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public Class<?> getColumnClass(int column) {
@@ -42,12 +41,14 @@ public class PaymentDetailsView extends JFrame {
 
         Random random = new Random();
         for (Room room : rooms) {
-            boolean isPaid = random.nextBoolean(); // Xen kẽ phòng thanh toán và chưa thanh toán
+            boolean isPaid = random.nextBoolean();
+            int amountDue = room.getRoomType().contains("6 người") ? 600 : 800;
             tableModel.addRow(new Object[]{
                     room.getRoomNumber(),
                     room.getRoomType(),
-                    isPaid,       // Đã Thanh Toán
-                    !isPaid       // Chưa Thanh Toán
+                    isPaid, // Đã Thanh Toán
+                    !isPaid, // Chưa Thanh Toán
+                    amountDue + "K" // Số Tiền
             });
         }
 
@@ -56,29 +57,17 @@ public class PaymentDetailsView extends JFrame {
         paymentTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 22));
         paymentTable.setFont(new Font("Arial", Font.PLAIN, 18));
 
-        // Đảm bảo chỉ chọn 1 checkbox tại một thời điểm
-        tableModel.addTableModelListener(e -> {
-            int row = e.getFirstRow();
-            int column = e.getColumn();
-
-            if (column == 2 || column == 3) {
-                Boolean isPaid = (Boolean) tableModel.getValueAt(row, 2);
-                Boolean isUnpaid = (Boolean) tableModel.getValueAt(row, 3);
-
-                if (column == 2 && isPaid) {
-                    tableModel.setValueAt(false, row, 3);
-                } else if (column == 3 && isUnpaid) {
-                    tableModel.setValueAt(false, row, 2);
-                }
-            }
-        });
-
         JScrollPane scrollPane = new JScrollPane(paymentTable);
 
         // Nút lọc phòng chưa thanh toán
         filterButton = new JButton("Lọc phòng chưa thanh toán");
         filterButton.setFont(new Font("Arial", Font.BOLD, 18));
         filterButton.addActionListener(e -> showUnpaidRooms(rooms, tableModel));
+
+        // Nút sắp xếp
+        sortButton = new JButton("Sắp Xếp");
+        sortButton.setFont(new Font("Arial", Font.BOLD, 18));
+        sortButton.addActionListener(e -> showSortMessage(tableModel));
 
         // Nút quay lại
         backButton = new JButton("Quay Lại");
@@ -87,6 +76,7 @@ public class PaymentDetailsView extends JFrame {
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(filterButton);
+        buttonPanel.add(sortButton);
         buttonPanel.add(backButton);
 
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -96,42 +86,30 @@ public class PaymentDetailsView extends JFrame {
         add(mainPanel);
     }
 
-    // Phương thức lọc và hiển thị phòng chưa thanh toán
     private void showUnpaidRooms(List<Room> rooms, DefaultTableModel originalModel) {
-        // Tạo danh sách các phòng chưa thanh toán
         List<Room> unpaidRooms = rooms.stream()
                 .filter(room -> {
                     for (int i = 0; i < originalModel.getRowCount(); i++) {
                         if (originalModel.getValueAt(i, 0).equals(room.getRoomNumber())) {
-                            return (Boolean) originalModel.getValueAt(i, 3); // Chưa Thanh Toán
+                            return (Boolean) originalModel.getValueAt(i, 3);
                         }
                     }
                     return false;
                 }).collect(Collectors.toList());
 
-        // Hiển thị cửa sổ mới với danh sách phòng chưa thanh toán
         JFrame unpaidFrame = new JFrame("Phòng chưa thanh toán");
-        unpaidFrame.setSize(800, 500); // Kích thước giống trang ban đầu
+        unpaidFrame.setSize(800, 500);
         unpaidFrame.setLocationRelativeTo(null);
 
-        String[] columnNames = {"Số Phòng", "Loại Phòng", "Chưa Thanh Toán"};
-        DefaultTableModel unpaidTableModel = new DefaultTableModel(columnNames, 0) {
-            @Override
-            public Class<?> getColumnClass(int column) {
-                return column == 2 ? Boolean.class : String.class;
-            }
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Cột không chỉnh sửa
-            }
-        };
+        String[] columnNames = {"Số Phòng", "Loại Phòng", "Số Tiền"};
+        DefaultTableModel unpaidTableModel = new DefaultTableModel(columnNames, 0);
 
         for (Room room : unpaidRooms) {
+            int amountDue = room.getRoomType().contains("6 người") ? 600 : 800;
             unpaidTableModel.addRow(new Object[]{
                     room.getRoomNumber(),
                     room.getRoomType(),
-                    true
+                    amountDue + "K"
             });
         }
 
@@ -152,5 +130,49 @@ public class PaymentDetailsView extends JFrame {
         unpaidFrame.add(unpaidScrollPane, BorderLayout.CENTER);
         unpaidFrame.add(buttonPanel, BorderLayout.SOUTH);
         unpaidFrame.setVisible(true);
+    }
+
+    private void showSortMessage(DefaultTableModel tableModel) {
+        Object[] options = {"Nhỏ theo giá", "Lớn theo giá"};
+        int choice = JOptionPane.showOptionDialog(
+                this,
+                "Chọn sắp xếp theo",
+                "Sắp xếp",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        if (choice == 0) {
+            sortTable(tableModel, true); // Sắp xếp tăng dần
+        } else if (choice == 1) {
+            sortTable(tableModel, false); // Sắp xếp giảm dần
+        }
+    }
+
+    private void sortTable(DefaultTableModel tableModel, boolean ascending) {
+        List<Object[]> tableData = new java.util.ArrayList<>();
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            tableData.add(new Object[]{
+                    tableModel.getValueAt(i, 0),
+                    tableModel.getValueAt(i, 1),
+                    tableModel.getValueAt(i, 2),
+                    tableModel.getValueAt(i, 3),
+                    Integer.parseInt(tableModel.getValueAt(i, 4).toString().replace("K", ""))
+            });
+        }
+
+        tableData.sort((o1, o2) -> {
+            int price1 = (int) o1[4];
+            int price2 = (int) o2[4];
+            return ascending ? price1 - price2 : price2 - price1;
+        });
+
+        tableModel.setRowCount(0);
+        for (Object[] rowData : tableData) {
+            tableModel.addRow(new Object[]{rowData[0], rowData[1], rowData[2], rowData[3], rowData[4] + "K"});
+        }
     }
 }
