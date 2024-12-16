@@ -93,7 +93,7 @@ public class Controller {
     private class RoomManageMenuItemListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(mainView, mainModel.getRoomManage());
+//            JOptionPane.showMessageDialog(mainView, mainModel.getRoomManage());
         }
     }
 
