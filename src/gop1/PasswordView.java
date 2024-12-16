@@ -13,10 +13,18 @@ public class PasswordView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        // Panel chính với hình nền
+        JPanel backgroundPanel = new JPanel() {
+            ImageIcon backgroundImage = new ImageIcon("src/img/giaodien.jpg");
+            Image scaledImage = backgroundImage.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
 
-        JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setPreferredSize(new Dimension(800, 500));
-        mainPanel.setBackground(new Color(161, 210, 224, 50));
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(scaledImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        backgroundPanel.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -29,7 +37,7 @@ public class PasswordView extends JFrame {
         passwordLabel.setForeground(Color.BLACK);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        mainPanel.add(passwordLabel, gbc);
+        backgroundPanel.add(passwordLabel, gbc);
 
         // Password Field Panel
         JPanel passwordPanel = new JPanel();
@@ -46,7 +54,7 @@ public class PasswordView extends JFrame {
         passwordPanel.add(passwordField, BorderLayout.CENTER);
 
         gbc.gridy = 1;
-        mainPanel.add(passwordPanel, gbc);
+        backgroundPanel.add(passwordPanel, gbc);
 
         // Confirm Button
         confirmButton = new JButton("Xác nhận");
@@ -54,9 +62,9 @@ public class PasswordView extends JFrame {
         confirmButton.setForeground(Color.BLACK);
         confirmButton.setBackground(Color.WHITE);
         gbc.gridy = 2;
-        mainPanel.add(confirmButton, gbc);
+        backgroundPanel.add(confirmButton, gbc);
 
-        add(mainPanel);
+        add(backgroundPanel);
     }
 
     public String getPasswordInput() {
@@ -70,4 +78,5 @@ public class PasswordView extends JFrame {
     public void displayMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
+
 }
