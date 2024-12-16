@@ -1,4 +1,4 @@
-package gop1;
+package sinhVienDangKy;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
