@@ -1,6 +1,7 @@
-package gop1;
+package sinhVienDangKy;
 
-import javax.swing.*;
+import gop1.StudentView;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

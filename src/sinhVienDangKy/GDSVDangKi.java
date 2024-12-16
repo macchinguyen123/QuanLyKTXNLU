@@ -1,8 +1,9 @@
-package gop1;
+package sinhVienDangKy;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class GDSVDangKi extends JFrame {
     private JTable studentTable;
