@@ -4,16 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Home extends JFrame {
-    MyMainPanel mainPanel;
+    PanelChooseStudentOrManager mainPanel;
     CardLayout cards;
 
     public Home() throws HeadlessException {
         setTitle("Dormitory management system");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600,600);
+        this.setSize(800,500);
         this.setResizable(false);
-        mainPanel = new MyMainPanel();
+        mainPanel = new PanelChooseStudentOrManager();
         getContentPane().add(mainPanel,BorderLayout.CENTER);
 
 //
