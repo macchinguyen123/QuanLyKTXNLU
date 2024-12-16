@@ -1,6 +1,8 @@
 package gop1;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -8,8 +10,8 @@ import java.util.List;
 public class StudentListView extends JFrame {
     private JTextField txtSearch;
     private JButton btnSearch, btnBack;
-    private JList<String> studentList;
-    private DefaultListModel<String> listModel;
+    private JTable studentTable;
+    private DefaultTableModel tableModel;
 
     private JMenuItem menuExit, menuManage, roomManage;
 
@@ -50,11 +52,36 @@ public class StudentListView extends JFrame {
         searchPanel.add(txtSearch);
         searchPanel.add(btnSearch);
 
-        listModel = new DefaultListModel<>();
-        studentList = new JList<>(listModel);
-        studentList.setBackground(Color.LIGHT_GRAY);
-        studentList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JScrollPane scrollPane = new JScrollPane(studentList);
+        String[] columnNames = {"STT", "Tên", "MSSV", "Giới tính", "Khoa", "Năm sinh", "Cư xá", "Phòng", "Địa chỉ", "CCCD"};
+        tableModel = new DefaultTableModel(columnNames, 0);
+        studentTable = new JTable(tableModel);
+        studentTable.setFillsViewportHeight(true);
+        JScrollPane scrollPane = new JScrollPane(studentTable);
+
+        studentTable.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) { // Chỉ xử lý khi chọn xong
+                int selectedRow = studentTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    // Lấy dữ liệu từ bảng
+                    String name = tableModel.getValueAt(selectedRow, 1).toString();       // Tên
+                    String id = tableModel.getValueAt(selectedRow, 2).toString();         // MSSV
+                    String gender = tableModel.getValueAt(selectedRow, 3).toString();     // Giới tính
+                    String faculty = tableModel.getValueAt(selectedRow, 4).toString();    // Khoa
+                    String birthYear = tableModel.getValueAt(selectedRow, 5).toString();  // Năm sinh
+                    String dorm = tableModel.getValueAt(selectedRow, 6).toString();       // Cư xá
+                    String room = tableModel.getValueAt(selectedRow, 7).toString();       // Phòng
+                    String address = tableModel.getValueAt(selectedRow, 8).toString();    // Địa chỉ
+                    String idCard = tableModel.getValueAt(selectedRow, 9).toString();     // CCCD
+
+                    // Hiển thị giao diện BiographyView
+                    BiographyView bioView = new BiographyView();
+                    bioView.setStudentDetails(name, birthYear, id, gender, faculty, address, dorm, room, idCard);
+                    bioView.setVisible(true);
+                    this.dispose();
+                }
+            }
+        });
+
 
         JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         btnBack = new JButton("Quay về");
@@ -87,14 +114,6 @@ public class StudentListView extends JFrame {
         return btnSearch;
     }
 
-    public DefaultListModel<String> getListModel() {
-        return listModel;
-    }
-
-    public JList<String> getStudentList() {
-        return studentList;
-    }
-
     public void addSearchActionListener(ActionListener listener) {
         btnSearch.addActionListener(listener);
     }
@@ -116,9 +135,21 @@ public class StudentListView extends JFrame {
     }
 
     public void updateStudentList(List<Student> students) {
-        listModel.clear();
+        tableModel.setRowCount(0); // Xóa dữ liệu cũ trong bảng
+        int stt = 1;
         for (Student student : students) {
-            listModel.addElement(student.toString());
+            tableModel.addRow(new Object[]{
+                    stt++,                        // STT
+                    student.getTen(),             // Tên
+                    student.getMssv(),            // Mã số
+                    student.getGioiTinh(),        // Giới tính
+                    student.getKhoa(),            // Khoa
+                    student.getNamSinh(),         // Năm sinh
+                    student.getCuXa(),            // Cư xá
+                    student.getPhong(),           // Phòng
+                    student.getDiaChi(),          // Địa chỉ
+                    student.getIdCCCD(),          // CCCD
+            });
         }
     }
 }
