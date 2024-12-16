@@ -15,7 +15,7 @@ public class PasswordView extends JFrame {
 
         // Panel chính với hình nền
         JPanel backgroundPanel = new JPanel() {
-            ImageIcon backgroundImage = new ImageIcon("src/img/giaodien.jpg");
+            ImageIcon backgroundImage = new ImageIcon("src/img/hinhanhpassword.png");
             Image scaledImage = backgroundImage.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
 
             @Override
