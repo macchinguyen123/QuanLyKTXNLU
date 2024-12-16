@@ -66,7 +66,7 @@ public class Controller {
             } else if (password.length() != 6) {
                 passwordView.displayMessage("Mật khẩu phải có đúng 6 ký tự!");
             } else {
-                passwordView.displayMessage("Mật khẩu đã được xác nhận!");
+//                passwordView.displayMessage("Mật khẩu đã được xác nhận!");
                 passwordView.dispose();
                 openMainView();
             }
@@ -119,8 +119,6 @@ public class Controller {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(studentView, "Hiển thị Danh sách Sinh Viên Đang Ở");
-
             StudentListView studentListView = new StudentListView();
 
             DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -139,19 +137,6 @@ public class Controller {
                     studentView.setVisible(true);
                 }
             });
-        }
-    }
-
-    private class RegisteredStudentsButtonListener implements ActionListener {
-        private StudentView studentView;
-
-        public RegisteredStudentsButtonListener(StudentView studentView) {
-            this.studentView = studentView;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(studentView, "Hiển thị Danh Sách Sinh Viên Đăng Ký");
         }
     }
 
