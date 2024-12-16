@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Home extends JFrame {
-    PanelChooseStudentOrManager mainPanel;
+    MyPanelHome mainPanel;
     CardLayout cards;
 
     public Home() throws HeadlessException {
@@ -13,7 +13,7 @@ public class Home extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800,500);
         this.setResizable(false);
-        mainPanel = new PanelChooseStudentOrManager();
+        mainPanel = new MyPanelHome();
         getContentPane().add(mainPanel,BorderLayout.CENTER);
 
 //
