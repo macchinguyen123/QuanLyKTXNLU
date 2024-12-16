@@ -1,5 +1,8 @@
 package gop1;
 
+import sinhVienDangKy.MDSVDangKi;
+import sinhVienDangKy.SVDangKiTheHien;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

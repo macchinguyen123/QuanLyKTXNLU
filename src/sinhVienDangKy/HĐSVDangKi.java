@@ -1,14 +1,16 @@
-package gop1;
+package sinhVienDangKy;
+
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HĐSVDangKi {
-    private  MDSVDangKi model;
+    private MDSVDangKi model;
     private GDSVDangKi view;
 
-    public HĐSVDangKi (MDSVDangKi model, GDSVDangKi view) {
+    public HĐSVDangKi(MDSVDangKi model, GDSVDangKi view) {
         this.model = model;
         this.view = view;
 
