@@ -34,6 +34,14 @@ public class SVLoginOrSignIn extends JPanel {
         btnSignIn = new JButton("Đăng kí");
         btnSignIn.setBounds(400,600,100,200);
         btnSignIn.setBackground(new Color(173, 216, 230));
+        btnSignIn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel,"chooseRoom");
+            }
+        });
+
+
         this.add(btnSignIn);
     }
 
