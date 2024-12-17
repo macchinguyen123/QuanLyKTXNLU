@@ -7,7 +7,7 @@ public class PageChooseRoom extends JPanel {
     Image imgBackround;
     JComboBox gender, typeOfRoom, chooseDorm;
     String[] optionsGender, optionsTypeOfRoom, optionsChooseDorm;
-    public PageChooseRoom() {
+    public PageChooseRoom(JPanel cardPanel,CardLayout cardLayout) {
 
 
         this.setLayout(null);
@@ -39,6 +39,14 @@ public class PageChooseRoom extends JPanel {
         chooseDorm = new JComboBox(optionsChooseDorm);
         chooseDorm.setBounds(500,40,150,30);
         this.add(chooseDorm);
+
+        JButton btnOke = new JButton("tìm kiếm");
+        btnOke.setBackground(new Color(173, 216, 230));
+        btnOke.setBounds(300,100,150,30);
+        this.add(btnOke);
+
+        // btnBack
+
     }
 
     @Override
