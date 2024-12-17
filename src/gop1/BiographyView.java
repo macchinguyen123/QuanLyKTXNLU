@@ -2,6 +2,9 @@ package gop1;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 public class BiographyView extends JFrame {
     private JMenuItem menuExit, menuManage, roomManage;
@@ -9,14 +12,16 @@ public class BiographyView extends JFrame {
     JButton btnUpdate, btnBack;
     JPanel mainPanel, inforStudentPanel;
     JLabel labelName, labelBY, labelID, labelGender, labelPhoneNumber, labelAddress, labelDorm, labelRoom, labelIDCard;
+    StudentListView parentView;
 
-    public BiographyView() {
+    public BiographyView(StudentListView parentView) {
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
+        this.parentView = parentView;
         JMenuBar menuBar = new JMenuBar();
 
         exitMenu = new JMenu("Exit");
@@ -42,6 +47,7 @@ public class BiographyView extends JFrame {
         mainPanel.setBackground(Color.LIGHT_GRAY);
 
         inforStudentPanel = new JPanel();
+        inforStudentPanel.setPreferredSize(new Dimension(400, 400));
         inforStudentPanel.setLayout(new BoxLayout(inforStudentPanel, BoxLayout.PAGE_AXIS));
         inforStudentPanel.setBackground(new Color(173, 216, 230)); // Màu nền giống như trong hình
 
@@ -73,6 +79,14 @@ public class BiographyView extends JFrame {
         btnUpdate.setBackground(Color.GREEN);
         btnUpdate.setPreferredSize(new Dimension(100, 30));
         btnUpdate.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UpdateInforView updateInforView = new UpdateInforView();
+                updateInforView.setVisible(true);
+                dispose();
+            }
+        });
         inforStudentPanel.add(Box.createVerticalStrut(20));
         inforStudentPanel.add(btnUpdate);
 
@@ -82,6 +96,13 @@ public class BiographyView extends JFrame {
         btnBack.setBackground(new Color(153, 0, 0));
         btnBack.setForeground(Color.WHITE);
         btnBack.setFont(new Font("Arial", Font.BOLD, 14));
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                parentView.setVisible(true);
+                dispose();
+            }
+        });
         backPanel.add(btnBack);
         backPanel.setOpaque(false);
 
@@ -90,21 +111,35 @@ public class BiographyView extends JFrame {
         Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
         JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
         backgroundImage.setBounds(0, 0, 800, 500);
-        backgroundImage.setLayout(new BorderLayout());
+        backgroundImage.setLayout(new GridBagLayout()); // Đặt layout là GridBagLayout để căn giữa
 
-        backgroundImage.add(inforStudentPanel, BorderLayout.CENTER);
-        backgroundImage.add(backPanel, BorderLayout.SOUTH);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0; // Cột giữa
+        gbc.gridy = 0; // Hàng giữa
+        gbc.anchor = GridBagConstraints.CENTER; // Căn giữa cả theo chiều dọc và ngang
+        gbc.insets = new Insets(10, 0, 10, 0); // Khoảng cách (top, left, bottom, right)
+
+        backgroundImage.add(inforStudentPanel, gbc);
+
+// Thêm backPanel ở phía dưới cùng bên trái
+        gbc.gridx = 0; // Cột đầu tiên
+        gbc.gridy = 1; // Hàng thứ hai
+        gbc.weighty = 0; // Trọng số bằng 0 để không chiếm thêm không gian
+        gbc.anchor = GridBagConstraints.LAST_LINE_START; // Căn dưới cùng và bên trái
+        gbc.insets = new Insets(0, 10, 10, 0); // Khoảng cách nhỏ bên trái
+
+        backgroundImage.add(backPanel, gbc);
 
         add(backgroundImage);
     }
 
     public void setStudentDetails(String name, String birthYear, String id, String gender,
-                                  String phoneNumber, String address, String dorm, String room, String idCard) {
+                                  String faculty, String address, String dorm, String room, String idCard) {
         labelName.setText("Họ và Tên: " + name);
         labelBY.setText("Năm sinh: " + birthYear);
         labelID.setText("MSSV: " + id);
         labelGender.setText("Giới tính: " + gender);
-        labelPhoneNumber.setText("SĐT: " + phoneNumber);
+        labelPhoneNumber.setText("Khoa: " + faculty);
         labelAddress.setText("HKTT: " + address);
         labelDorm.setText("Cư xá: " + dorm);
         labelRoom.setText("Phòng: " + room);

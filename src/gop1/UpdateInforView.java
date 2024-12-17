@@ -2,6 +2,8 @@ package gop1;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class UpdateInforView extends JFrame {
     JScrollBar s2;
@@ -156,6 +158,5 @@ public class UpdateInforView extends JFrame {
 
         add(panel, BorderLayout.CENTER);
 //        add(s2, BorderLayout.EAST);
-
     }
 }
