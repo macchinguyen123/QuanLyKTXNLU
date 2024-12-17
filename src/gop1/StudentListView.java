@@ -74,7 +74,7 @@ public class StudentListView extends JFrame {
                     String idCard = tableModel.getValueAt(selectedRow, 9).toString();     // CCCD
 
                     // Hiển thị giao diện BiographyView
-                    BiographyView bioView = new BiographyView();
+                    BiographyView bioView = new BiographyView(this);
                     bioView.setStudentDetails(name, birthYear, id, gender, faculty, address, dorm, room, idCard);
                     bioView.setVisible(true);
                     this.dispose();
@@ -104,6 +104,10 @@ public class StudentListView extends JFrame {
         backgroundImage.add(backPanel, BorderLayout.SOUTH);
 
         add(backgroundImage);
+    }
+
+    public StudentController getController() {
+        return controller;
     }
 
     public JTextField getSearchField() {
@@ -144,7 +148,7 @@ public class StudentListView extends JFrame {
                     student.getMssv(),            // Mã số
                     student.getGioiTinh(),        // Giới tính
                     student.getKhoa(),            // Khoa
-                    student.getNamSinh(),         // Năm sinh
+                    student.getNamSinh().getYear(),         // Năm sinh
                     student.getCuXa(),            // Cư xá
                     student.getPhong(),           // Phòng
                     student.getDiaChi(),          // Địa chỉ
