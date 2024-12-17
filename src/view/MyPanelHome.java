@@ -13,7 +13,7 @@ public class MyPanelHome extends JPanel {
 //
 
         header = new PanelHeaderOfHome();
-        panelChoose = new PanelChooseStudentOrManager();
+//        panelChoose = new PanelChooseStudentOrManager();
         this.add(header, BorderLayout.NORTH);
         this.add(panelChoose, BorderLayout.CENTER);
 
