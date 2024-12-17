@@ -21,11 +21,13 @@ public class Home extends JFrame {
 
         // Add panels to cardPanel
         mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout);
-        SVLoginOrSignIn studentPanel = new SVLoginOrSignIn();
+        SVLoginOrSignIn studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
+        PageLogin pageLogin = new PageLogin(cardPanel, cardLayout);
 
         cardPanel.add(mainPanel, "choosePanel");
         cardPanel.add(studentPanel, "studentPanel");
-
+        cardPanel.add(new PageLogin(cardPanel, cardLayout),"login");
+        cardPanel.add(new PageTTCNcuaSVDaO(cardPanel, cardLayout),"TTCNcuaSVDaO");
         // Add cardPanel to the frame
         getContentPane().add(cardPanel, BorderLayout.CENTER);
 
