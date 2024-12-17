@@ -30,17 +30,31 @@ public class StudentView extends JFrame {
         backgroundImage.setBounds(0, 0, 800, 500);
 
         // Create buttons
-        btnStudentList = new JButton("Danh sách Sinh Viên Đang Ở");
-        btnStudentList.setBounds(50, 200, 320, 60);
-        btnStudentList.setBackground(new Color(0, 51, 153));
-        btnStudentList.setForeground(Color.WHITE);
+        // Create buttons
+        ImageIcon icon = new ImageIcon("src/img/vo.jpg"); // Đường dẫn đến hình ảnh
+        Image img = icon.getImage().getScaledInstance(320, 100, Image.SCALE_SMOOTH); // Resize ảnh để vừa nút
+        ImageIcon resizedIcon = new ImageIcon(img);
+        btnStudentList = new JButton("Danh sách Sinh Viên Đang Ở", resizedIcon);
+        btnStudentList.setBounds(50, 150, 320, 135);
+        btnStudentList.setBackground(new Color(0, 51, 153)); // Không cần nếu ảnh bao phủ toàn bộ
+        btnStudentList.setForeground(Color.WHITE); // Màu chữ
         btnStudentList.setFont(new Font("Arial", Font.BOLD, 16));
+        btnStudentList.setHorizontalTextPosition(SwingConstants.CENTER); // Đặt text vào giữa theo chiều ngang
+        btnStudentList.setVerticalTextPosition(SwingConstants.BOTTOM);   // Đặt text vào giữa theo chiều dọc
+        btnStudentList.setIconTextGap(0); // Loại bỏ khoảng cách giữa text và ảnh
 
-        btnRegisteredStudents = new JButton("Danh Sách Sinh Viên Đăng Ký");
-        btnRegisteredStudents.setBounds(430, 200, 320, 60);
+
+        ImageIcon icon1 = new ImageIcon("src/img/cong.jpg"); // Đường dẫn đến hình ảnh
+        Image img1 = icon1.getImage().getScaledInstance(320, 100, Image.SCALE_SMOOTH); // Resize ảnh để vừa nút
+        ImageIcon resizedIcon1 = new ImageIcon(img1);
+        btnRegisteredStudents = new JButton("Danh Sách Sinh Viên Đăng Ký", resizedIcon1);
+        btnRegisteredStudents.setBounds(430, 150, 320, 135);
         btnRegisteredStudents.setBackground(new Color(0, 51, 153));
         btnRegisteredStudents.setForeground(Color.WHITE);
         btnRegisteredStudents.setFont(new Font("Arial", Font.BOLD, 16));
+        btnRegisteredStudents.setHorizontalTextPosition(SwingConstants.CENTER); // Đặt text vào giữa theo chiều ngang
+        btnRegisteredStudents.setVerticalTextPosition(SwingConstants.BOTTOM);   // Đặt text vào giữa theo chiều dọc
+        btnRegisteredStudents.setIconTextGap(0); // Loại bỏ khoảng cách giữa text và ảnh
 
         // Add Back button
         btnBack = new JButton("Quay Về");

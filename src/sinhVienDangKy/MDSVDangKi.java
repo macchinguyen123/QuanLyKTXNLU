@@ -2,16 +2,20 @@ package sinhVienDangKy;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MDSVDangKi extends AbstractTableModel {
     private final String[] columnNames = {"STT", "Tên", "Mã số", "Giới tính", "Khoa", "Năm sinh", "Cư xá", "Phòng"};
     private List<String[]> data;
+    public String[] arr = {"Dang Ngoc Quyen", "23130263", "Nu", "CNTT", "2005", "D", "304F"};
 
     public MDSVDangKi() {
         data = new ArrayList<>();
         data.add(new String[]{"Nguyen Van A", "2313335", "Nam", "CNTT", "2002", "A", "101"});
         data.add(new String[]{"Le Thi B", "2313345", "Nữ", "Kinh tế", "2001", "B", "202"});
+        data.add(Arrays.copyOfRange(arr, 0, 7));
+
     }
 
     public void filterData(String keyword) {
