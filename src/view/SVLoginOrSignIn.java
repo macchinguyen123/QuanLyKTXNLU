@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SVLoginOrSignIn extends JPanel {
     Image imgBackround;
@@ -9,7 +11,7 @@ public class SVLoginOrSignIn extends JPanel {
     JLabel lblLogin, lblSignIn, labelBackround;
     JPanel panelLogin, panelSignIn, panelBackround;
 
-    public SVLoginOrSignIn() {
+    public SVLoginOrSignIn(JPanel cardPanel,CardLayout cardLayout) {
 
         //set backround
       imgBackround = new ImageIcon("src/img/backroundKTX.jpg").getImage();
@@ -18,6 +20,14 @@ public class SVLoginOrSignIn extends JPanel {
         btnLogin = new JButton("Đăng nhập");
         btnLogin.setBounds(200,600,100,200);
         btnLogin.setBackground(new Color(173, 216, 230));
+        btnLogin.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Switch to the page login
+                cardLayout.show(cardPanel, "login");
+            }
+        });
         this.add(btnLogin);
 
         // button dang ky
@@ -25,7 +35,7 @@ public class SVLoginOrSignIn extends JPanel {
         btnSignIn.setBounds(400,600,100,200);
         btnSignIn.setBackground(new Color(173, 216, 230));
         this.add(btnSignIn);
-    }  
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

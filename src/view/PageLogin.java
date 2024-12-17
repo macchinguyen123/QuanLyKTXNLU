@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PageLogin extends JPanel {
     JLabel homeIcon ;
@@ -12,15 +14,27 @@ public class PageLogin extends JPanel {
     JButton btnLogin;
     JPanel panelContent;
 
-    public PageLogin() {
+    public PageLogin(JPanel cardPanel,CardLayout cardLayout) {
         this.setBackground(new Color(200,240,240));
         this.setLayout(null);
 
 
         // icon home
-        homeIcon = new JLabel(new ImageIcon("src/img/iconHome.png"));
-        homeIcon.setBounds(10,10,30,30);
-        this.add(homeIcon);
+
+        JButton btnHome = new JButton(new ImageIcon("src/img/iconHome.png"));
+        btnHome.setBounds(10,10,30,30);
+        btnHome.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "studentPanel");
+                }
+        });
+        this.add(btnHome);
+
+
+
+
 
 
         // nhan va text field cho password
@@ -47,6 +61,12 @@ public class PageLogin extends JPanel {
         btnLogin = new JButton("Login");
         btnLogin.setBounds(150, 180, 100, 40);
         btnLogin.setBackground(new Color(173, 216, 230));
+        btnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel,"TTCNcuaSVDaO");
+            }
+        });
         this.add(btnLogin);
 
 

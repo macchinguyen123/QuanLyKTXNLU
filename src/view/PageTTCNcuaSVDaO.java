@@ -3,6 +3,8 @@ package view;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PageTTCNcuaSVDaO extends JPanel {
     JPanel panelInformation, panelTraPhong;
@@ -11,7 +13,7 @@ public class PageTTCNcuaSVDaO extends JPanel {
     JScrollPane scrollPane;
     JLabel lbInfor;
     JButton btnOK, btnTraPhong;
-    public PageTTCNcuaSVDaO() {
+    public PageTTCNcuaSVDaO(JPanel cardPanel,CardLayout cardLayout) {
         this.setLayout(new BorderLayout());
         lbInfor = new JLabel("Nguyen Van A",JLabel.CENTER);
         this.add(lbInfor, BorderLayout.NORTH);
@@ -55,8 +57,20 @@ public class PageTTCNcuaSVDaO extends JPanel {
         panelTraPhong = new JPanel(new FlowLayout(FlowLayout.CENTER));
 //
         btnOK = new JButton("OK");
+        btnOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel,"login");
+            }
+        });
         btnOK.setBackground(new Color(173, 216, 230));
         btnTraPhong = new JButton("Trả Phòng");
+        btnTraPhong.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel,"studentPanel");
+            }
+        });
         btnTraPhong.setBackground(new Color(173, 216, 230));
         panelTraPhong.add(btnOK);
         panelTraPhong.add(btnTraPhong);
