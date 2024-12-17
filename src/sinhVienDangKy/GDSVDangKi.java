@@ -55,7 +55,7 @@ public class GDSVDangKi extends JFrame {
         backgroundImage.add(mainPanel);
 
         // Thanh menu
-        JMenuBar menuBar = new JMenuBar();
+//        JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         exitMenuItem = new JMenuItem("Exit");
         manageMenuItem = new JMenuItem("Quản Lý");
@@ -65,8 +65,8 @@ public class GDSVDangKi extends JFrame {
         fileMenu.add(roomManageMenuItem);
         fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
-        menuBar.add(fileMenu);
-        setJMenuBar(menuBar);
+//        menuBar.add(fileMenu);
+//        setJMenuBar(menuBar);
 
         // Thanh tìm kiếm (di chuyển lên trên)
         filterField = new JTextField();
