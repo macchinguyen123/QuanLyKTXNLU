@@ -29,8 +29,10 @@ public class AdminRoomManagerView extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Sử dụng getResource để tải hình ảnh từ thư mục resources
-                ImageIcon originalIcon = new ImageIcon(getClass().getResource("/img/hinhanh.jpg"));
+                ImageIcon originalIcon = new ImageIcon("src/img/ktx.jpg");
                 Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+                JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
+                backgroundImage.setBounds(0, 0, 800, 500);
                 g.drawImage(scaledImage, 0, 0, null);
             }
         };
@@ -40,17 +42,41 @@ public class AdminRoomManagerView extends JFrame {
         dormitoryModel = new DefaultListModel<>();
         dormitoryList = new JList<>(dormitoryModel);
         dormitoryList.setFont(new Font("Arial", Font.PLAIN, 18));
-        dormitoryList.setFixedCellHeight(40);
+        dormitoryList.setFixedCellHeight(30);
         dormitoryList.setFixedCellWidth(20);
 
         JScrollPane scrollPane = new JScrollPane(dormitoryList);
+
+
         JPanel listPanel = new JPanel(new BorderLayout());
+        listPanel.setSize(300,300); // Kích thước nhỏ lại
+        listPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Tạo wrapperPanel để căn giữa listPanel
+        JPanel wrapperPanel = new JPanel(); // JPanel mặc định là FlowLayout
+        wrapperPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); // Căn giữa không có khoảng cách
+        wrapperPanel.add(listPanel);
+
+//        // Căn chỉnh scrollPane vào chính giữa
+//        GridBagConstraints gbc = new GridBagConstraints();
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        gbc.weightx = 1.0;
+//        gbc.weighty = 1.0;
+//        gbc.fill = GridBagConstraints.BOTH;
+//
+//        listPanel.add(scrollPane, gbc);
+
+
         listPanel.setOpaque(true); // Để hiển thị hình nền
+
         JLabel titleLabel = new JLabel("Danh Sách Cư Xá:", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setForeground(Color.BLACK); // Màu chữ trắng để nổi bật
-        listPanel.add(titleLabel, BorderLayout.NORTH);
-        listPanel.add(scrollPane, BorderLayout.CENTER);
+
+
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
+        mainPanel.add(wrapperPanel, BorderLayout.CENTER);
 
         // Nút bấm
         backButton = new JButton("Quay Lại");
