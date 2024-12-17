@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Stack;
 
 public class GDSVDangKi extends JFrame {
     private JTable studentTable;
@@ -15,12 +16,16 @@ public class GDSVDangKi extends JFrame {
     private JMenuItem roomManageMenuItem;
     private JPanel mainPanel; // Panel chứa giao diện chính
     private JLabel backgroundImage;
+    private Stack<JPanel> panelStack;
 
     public GDSVDangKi() {
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+
+        //Khoi tao Stack
+        panelStack = new Stack<>();
 
         // Tạo nền ảnh
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
@@ -152,14 +157,39 @@ public class GDSVDangKi extends JFrame {
     }
 
     public void showDetailPanel(JPanel detailPanel) {
-        mainPanel.setVisible(false);
+        //An panel hien tai va luu vao stack
+        if (!panelStack.isEmpty()) {
+            JPanel currentPanel = panelStack.peek();
+            currentPanel.setVisible(false);
+        }
+        panelStack.push(detailPanel);
+
+        //Hien Thi Panel Moi
         backgroundImage.add(detailPanel);
         detailPanel.setVisible(true);
+        mainPanel.setVisible(false);
+//        backgroundImage.add(detailPanel);
+//        detailPanel.setVisible(true);
         revalidate();
         repaint();
     }
 
     public JLabel getBackgroundImage() {
         return backgroundImage;
+    }
+
+    public void goBack() {
+        // Nếu còn panel trong stack
+        if (panelStack.size() > 1) {
+            // Loại bỏ panel hiện tại
+            JPanel currentPanel = panelStack.pop();
+            backgroundImage.remove(currentPanel);
+
+            // Hiển thị panel trước đó
+            JPanel previousPanel = panelStack.peek();
+            previousPanel.setVisible(true);
+            revalidate();
+            repaint();
+        }
     }
 }

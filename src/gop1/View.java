@@ -25,6 +25,7 @@ public class View extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         add(mainPanel); // Thêm mainPanel vào JFrame
     }
+
     public View() {
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
@@ -66,8 +67,10 @@ public class View extends JFrame {
         menuBar.add(manageMenu);
 
         setJMenuBar(menuBar);
+
         roomManageMenuItem.addActionListener(e -> openRoomManagerView());
     }
+
     private void openRoomManagerView() {
         // Gọi giao diện Quản Lý Phòng (phải tạo RoomManagerView trước)
         AdminRoomManagerView roomManagerView = new AdminRoomManagerView();
