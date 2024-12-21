@@ -43,52 +43,35 @@ public class AdminRoomManagerView extends JFrame {
         dormitoryList = new JList<>(dormitoryModel);
         dormitoryList.setFont(new Font("Arial", Font.PLAIN, 18));
         dormitoryList.setFixedCellHeight(30);
-        dormitoryList.setFixedCellWidth(20);
-
-        JScrollPane scrollPane = new JScrollPane(dormitoryList);
 
 
         JPanel listPanel = new JPanel(new BorderLayout());
-        listPanel.setSize(300,300); // Kích thước nhỏ lại
-        listPanel.add(scrollPane, BorderLayout.CENTER);
+        listPanel.add(dormitoryList, BorderLayout.CENTER);
+        listPanel.setOpaque(false);
 
         // Tạo wrapperPanel để căn giữa listPanel
-        JPanel wrapperPanel = new JPanel(); // JPanel mặc định là FlowLayout
-        wrapperPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); // Căn giữa không có khoảng cách
+        JPanel wrapperPanel = new JPanel(new GridBagLayout()); // JPanel mặc định là FlowLayout
+        wrapperPanel.setOpaque(false);
         wrapperPanel.add(listPanel);
 
-//        // Căn chỉnh scrollPane vào chính giữa
-//        GridBagConstraints gbc = new GridBagConstraints();
-//        gbc.gridx = 0;
-//        gbc.gridy = 0;
-//        gbc.weightx = 1.0;
-//        gbc.weighty = 1.0;
-//        gbc.fill = GridBagConstraints.BOTH;
-//
-//        listPanel.add(scrollPane, gbc);
-
-
-        listPanel.setOpaque(true); // Để hiển thị hình nền
-
         JLabel titleLabel = new JLabel("Danh Sách Cư Xá:", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         titleLabel.setForeground(Color.BLACK); // Màu chữ trắng để nổi bật
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0)); // Khoảng cách trên dưới
 
 
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.add(wrapperPanel, BorderLayout.CENTER);
 
-        // Nút bấm
         backButton = new JButton("Quay Lại");
         viewDetailsButton = new JButton("Xem Chi Tiết");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
         viewDetailsButton.setFont(new Font("Arial", Font.BOLD, 18));
-        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,5,50));
         buttonPanel.setOpaque(false);
         buttonPanel.add(viewDetailsButton);
         buttonPanel.add(backButton);
 
-        mainPanel.add(listPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel, BorderLayout.CENTER);
