@@ -27,7 +27,7 @@ public class Home extends JFrame {
         PageChooseRoom chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
         ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout);
         PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel,cardLayout,pageTTCNcuaSVDaO);
-
+        PanelChooseStudentOrManager chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
 
         cardPanel.add(mainPanel, "choosePanel");
         cardPanel.add(studentPanel, "studentPanel");
@@ -36,6 +36,7 @@ public class Home extends JFrame {
         cardPanel.add(new PageChooseRoom(cardPanel, cardLayout),"chooseRoom");
         cardPanel.add(new ThongTinChonPhong(cardPanel,cardLayout),"thongTinChonPhong");
         cardPanel.add(fillInformatinDK,"fillInformatinDK");
+        cardPanel.add(chooseStudentOrManager,"chooseStudentOrManager");
         // Add cardPanel to the frame
         getContentPane().add(cardPanel, BorderLayout.CENTER);
 
