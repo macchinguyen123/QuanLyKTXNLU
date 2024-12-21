@@ -124,4 +124,24 @@ public class Student {
     public void setDienChinhSach(String dienChinhSach) {
         this.dienChinhSach = dienChinhSach;
     }
+
+    public boolean isMartyrs() {
+        return this.dienChinhSach.equalsIgnoreCase("Con liệt sĩ, thương binh, bệnh binh");
+    }
+
+    public boolean isPoorHousehold() {
+        return this.dienChinhSach.equalsIgnoreCase("Hộ nghèo, gia đình khó khăn");
+    }
+
+    public boolean isDisability() {
+        return this.dienChinhSach.equalsIgnoreCase("Khuyết tật, bệnh hiểm nghèo");
+    }
+
+    public boolean isEthnic() {
+        return this.dienChinhSach.equalsIgnoreCase("Dân tộc thiểu số");
+    }
+
+    public boolean isNotSubject() {
+        return this.dienChinhSach.equalsIgnoreCase("Không thuộc các đối tượng trên");
+    }
 }

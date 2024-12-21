@@ -42,7 +42,7 @@ public class StudentListView extends JFrame {
 
         setJMenuBar(menuBar);
 
-         JLabel titleLabel = new JLabel("Danh sách sinh viên", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Danh sách sinh viên", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 
         JPanel searchPanel = new JPanel(new FlowLayout());
@@ -108,6 +108,10 @@ public class StudentListView extends JFrame {
 
     public StudentController getController() {
         return controller;
+    }
+
+    public void setController(StudentController controller) {
+        this.controller = controller;
     }
 
     public JTextField getSearchField() {

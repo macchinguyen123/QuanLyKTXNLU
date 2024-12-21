@@ -2,6 +2,8 @@ package gop1;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,9 +13,11 @@ public class UpdateInforView extends JFrame {
     JTextField fieldName, fieldBY, fieldID, fieldPhone, fieldAddress, fieldRoom, fieldCardID;
     JCheckBox martyrs, poorHousehold, disability, ethnic, notSubject;
     JComboBox cbDe, cbGender, cbNation, cbDorm;
-    JButton btnUpdate;
+    JButton btnUpdate, btnBack;
+    StudentListView studentListView;
 
-    public UpdateInforView() {
+    public UpdateInforView( StudentListView studentListView) {
+        this.studentListView = studentListView;
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -26,10 +30,26 @@ public class UpdateInforView extends JFrame {
         ethnic = new JCheckBox("Dân tộc thiểu số");
         notSubject = new JCheckBox("Không thuộc các đối tượng trên");
 
+        // Tạo ButtonGroup để nhóm các JCheckBox
+        ButtonGroup group = new ButtonGroup();
+        group.add(martyrs);
+        group.add(poorHousehold);
+        group.add(disability);
+        group.add(ethnic);
+        group.add(notSubject);
+
         String[] department = {"Kinh tế", "Quản lý đất đai", "Thú y", "Nông học", "Công nghệ thông tin", "Công nghệ thực phẩm", "Công nghệ sinh học", "Lâm nghiệp", "Ngôn ngữ anh"};
         cbDe = new JComboBox(department);
 
         btnUpdate = new JButton("Cập nhật");
+        btnBack = new JButton("Quay lại"); // Nút quay lại
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                studentListView.setVisible(true);
+            }
+        });
 
         s2 = new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0, 200);
 
@@ -107,8 +127,14 @@ public class UpdateInforView extends JFrame {
                                                 .addComponent(ethnic)
                                                 .addComponent(notSubject))))
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(350) // Căn giữa nút
-                                .addComponent(btnUpdate))
+                                .addGap(350)
+                                .addComponent(btnUpdate) // Nút cập nhật
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Khoảng cách giữa hai nút
+                        )
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(350) // Để căn giữa
+                                .addComponent(btnBack) // Nút quay lại
+                                .addGap(0, 0, Short.MAX_VALUE)) // Để căn giữa
         );
 
         // Đặt Layout (Vertical Group)
@@ -153,10 +179,34 @@ public class UpdateInforView extends JFrame {
                                 .addComponent(ethnic)
                                 .addComponent(notSubject))
                         .addGap(30) // Khoảng cách trước nút
-                        .addComponent(btnUpdate)
+                        .addComponent(btnUpdate) // Nút cập nhật
+                        .addGap(5) // Khoảng cách trước nút quay lại
+                        .addComponent(btnBack) // Nút quay lại
+                        .addGap(30) // Khoảng cách dưới cùng
         );
 
         add(panel, BorderLayout.CENTER);
 //        add(s2, BorderLayout.EAST);
+    }
+
+    public void setStudentDetails(Student student) {
+        fieldName.setText(student.getTen());
+        fieldBY.setText(student.getNamSinh().toString());
+        fieldID.setText(student.getMssv());
+        cbGender.setSelectedItem(student.getGioiTinh());
+        fieldPhone.setText(student.getSđt());
+        fieldAddress.setText(student.getDiaChi());
+        cbDe.setSelectedItem(student.getKhoa());
+        fieldRoom.setText(student.getPhong());
+        cbDorm.setSelectedItem(student.getCuXa());
+        fieldCardID.setText(student.getIdCCCD());
+        cbNation.setSelectedItem(student.getDanToc());
+
+        // Cập nhật checkbox chính sách
+        martyrs.setSelected(student.isMartyrs());
+        poorHousehold.setSelected(student.isPoorHousehold());
+        disability.setSelected(student.isDisability());
+        ethnic.setSelected(student.isEthnic());
+        notSubject.setSelected(student.isNotSubject());
     }
 }
