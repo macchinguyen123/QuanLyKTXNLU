@@ -7,75 +7,81 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PageTTCNcuaSVDaO extends JPanel {
-    JPanel panelInformation, panelTraPhong;
+    // Các thành phần khác không thay đổi
+    JLabel lbInfor;
     DefaultTableModel tableModel;
+    JPanel panelInformation,panelTraPhong;
     JTable display;
     JScrollPane scrollPane;
-    JLabel lbInfor;
-    JButton btnOK, btnTraPhong;
-    public PageTTCNcuaSVDaO(JPanel cardPanel,CardLayout cardLayout) {
+    JButton btnOK,btnTraPhong;
+
+
+    public PageTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout) {
         this.setLayout(new BorderLayout());
-        lbInfor = new JLabel("Nguyen Van A",JLabel.CENTER);
+        lbInfor = new JLabel("", JLabel.CENTER); // Hiện ban đầu để trống
         this.add(lbInfor, BorderLayout.NORTH);
 
-
-
-        //panel thong tin
+        // Panel thông tin
         panelInformation = new JPanel();
         tableModel = new DefaultTableModel();
-        tableModel.addColumn(" ");
         tableModel.addColumn("Thông tin");
-        // Dữ liệu cho bảng
-        String[][] data = {
-                {"Ngày sinh", "1/1/2005"},
-                {"Giới tính", "Nam"},
-                {"Sinh viên năm", "2"},
-                {"Sinh viên trường", "NLU"},
-                {"Mã số sinh viên", "12345"},
-                {"Khoa", "CNTT"},
-                {"Số CCCD", "080305000000"},
-                {"Nơi cấp CCCD", "CCSHS"},
-                {"Dân tộc", "Kinh"},
-                {"Tôn giáo", "Không"},
-                {"Số phòng", "404"}
-        };
-        // Thêm từng dòng dữ liệu vào model
-        for (String[] row : data) {
-            tableModel.addRow(row);
-        }
+        tableModel.addColumn("Giá trị");
 
         display = new JTable(tableModel);
         display.setRowHeight(40);
         scrollPane = new JScrollPane(display);
 
+        panelInformation.add(scrollPane, BorderLayout.CENTER);
+        this.add(panelInformation, BorderLayout.CENTER);
 
-
-        panelInformation.add(scrollPane,BorderLayout.CENTER);
-        this.add(panelInformation,BorderLayout.CENTER);
-
-        // add button ok, tra phong
+        // Các nút
         panelTraPhong = new JPanel(new FlowLayout(FlowLayout.CENTER));
-//
         btnOK = new JButton("OK");
         btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel,"login");
+                cardLayout.show(cardPanel, "login");
             }
         });
         btnOK.setBackground(new Color(173, 216, 230));
+
         btnTraPhong = new JButton("Trả Phòng");
         btnTraPhong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel,"studentPanel");
+                cardLayout.show(cardPanel, "studentPanel");
             }
         });
         btnTraPhong.setBackground(new Color(173, 216, 230));
+
         panelTraPhong.add(btnOK);
         panelTraPhong.add(btnTraPhong);
+        this.add(panelTraPhong, BorderLayout.SOUTH);
+    }
 
-        this.add(panelTraPhong,BorderLayout.SOUTH);
+    // Phương thức cập nhật thông tin sinh viên
+    public void updateInformation(String[] data) {
+        if (data == null || data.length == 0) {
+            return;
+        }
 
+        // Cập nhật tiêu đề
+        lbInfor.setText(data[0]); // Họ và tên
+
+        // Xóa thông tin cũ
+        tableModel.setRowCount(0);
+
+        // Cập nhật thông tin mới
+        String[] labels = {
+                "Họ và tên", "Giới tính", "Ngày sinh", "Mã số sinh viên",
+                "Số điện thoại", "Hộ khẩu thường trú", "Khoa",
+                "Phòng", "Cư xá", "CCCD / CMND", "Dân tộc",
+                "Con liệt sĩ, thương binh", "Gia đình khó khăn"
+        };
+
+        for (int i = 0; i < labels.length && i < data.length; i++) {
+            tableModel.addRow(new Object[]{labels[i], data[i]});
+        }
     }
 }
+

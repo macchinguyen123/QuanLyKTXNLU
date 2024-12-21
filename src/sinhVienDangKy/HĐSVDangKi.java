@@ -86,7 +86,7 @@ public class HĐSVDangKi {
 
         // Nút Quay lại
         JButton backButton = new JButton("Quay lại");
-        backButton.setBounds(50, 320, 100, 30); // Nút nằm gọn trong panel
+        backButton.setBounds(15, 320, 100, 30); // Nút nằm gọn trong panel
         backButton.addActionListener(e -> {
             view.showMainView();
             view.getContentPane().remove(detailsPanel);
@@ -97,7 +97,7 @@ public class HĐSVDangKi {
 
         // Nút Xác nhận
         JButton confirmButton = new JButton("Xác nhận");
-        confirmButton.setBounds(200, 320, 100, 30);
+        confirmButton.setBounds(140, 320, 100, 30);
         confirmButton.setBackground(new Color(34, 139, 34)); // Xanh lá cây
         confirmButton.setForeground(Color.WHITE);
         confirmButton.addActionListener(e -> {
@@ -111,7 +111,7 @@ public class HĐSVDangKi {
 
         // Nút Huỷ
         JButton cancelButton = new JButton("Huỷ");
-        cancelButton.setBounds(350, 320, 100, 30);
+        cancelButton.setBounds(265, 320, 100, 30);
         cancelButton.setBackground(Color.RED); // Đỏ
         cancelButton.setForeground(Color.WHITE);
         cancelButton.addActionListener(e -> {
@@ -122,6 +122,28 @@ public class HĐSVDangKi {
             view.repaint();
         });
         detailsPanel.add(cancelButton);
+
+        // Nút Chi Tiet
+        JButton xemCT = new JButton("Chi Tiết");
+        xemCT.setBounds(390, 320, 100, 30);
+//        xemCT.setBackground(Color.RED); // Đỏ
+        xemCT.setForeground(Color.BLACK);
+        xemCT.addActionListener(e -> {
+            // Lấy dữ liệu chi tiết của sinh viên
+            String[] studentDetails1 = model.getStudentDetails(selectedRow);
+
+            // Tạo giao diện chi tiết
+            GDXemChiTiet detailPanel = new GDXemChiTiet(studentDetails1);
+            detailPanel.setBounds(0, 0, 800, 650);
+
+            // Hiển thị giao diện chi tiết thay thế giao diện hiện tại
+            view.getContentPane().removeAll();
+            view.getContentPane().add(detailPanel);
+            view.revalidate();
+            view.repaint();
+        });
+
+        detailsPanel.add(xemCT);
 
         // Hiển thị panel chi tiết
         view.showDetailPanel(detailsPanel);
