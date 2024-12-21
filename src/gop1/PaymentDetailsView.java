@@ -103,6 +103,10 @@ public class PaymentDetailsView extends JFrame {
         unpaidTable.setFont(new Font("Arial", Font.PLAIN, 18));
         JScrollPane unpaidScrollPane = new JScrollPane(unpaidTable);
 
+        // Panel chính giữa để căn chỉnh
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.add(unpaidScrollPane, new GridBagConstraints());
+
         // Nút sắp xếp
         JButton sortButton = new JButton("Sắp Xếp");
         sortButton.setFont(new Font("Arial", Font.BOLD, 18));
