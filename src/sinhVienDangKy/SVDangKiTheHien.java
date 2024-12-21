@@ -23,7 +23,7 @@ public class SVDangKiTheHien implements ActionListener {
 
         view.setVisible(true);
         view.getBackButton().addActionListener(event -> {
-            studentView.dispose();
+//            studentView.dispose();
             studentView.setVisible(true);
             view.setVisible(false);
         });
