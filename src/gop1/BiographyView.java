@@ -82,9 +82,23 @@ public class BiographyView extends JFrame {
         btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UpdateInforView updateInforView = new UpdateInforView();
-                updateInforView.setVisible(true);
-                dispose();
+                // Lấy ID sinh viên từ view hiện tại
+                String studentID = labelID.getText().replace("MSSV: ", "").trim(); // Trích xuất ID từ label
+
+                // Lấy thông tin sinh viên từ controller
+                StudentController controller = new StudentController(parentView);
+                StudentListView studentListView = new StudentListView();
+                studentListView.setController(controller);
+                Student student = studentListView.getController().getStudentById(studentID);
+                if (student != null) {
+                    // Tạo một instance của UpdateInforView
+                    UpdateInforView updateView = new UpdateInforView(parentView);
+                    updateView.setStudentDetails(student); // Đặt thông tin sinh viên vào UpdateInforView
+                    updateView.setVisible(true); // Hiển thị UpdateInforView
+                    dispose(); // Đóng BiographyView
+                } else {
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên với ID: " + studentID);
+                }
             }
         });
         inforStudentPanel.add(Box.createVerticalStrut(20));
