@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PageChooseRoom extends JPanel {
     Image imgBackround;
@@ -40,15 +42,33 @@ public class PageChooseRoom extends JPanel {
         chooseDorm.setBounds(500,40,150,30);
         this.add(chooseDorm);
 
-        JButton btnOke = new JButton("tìm kiếm");
-        btnOke.setBackground(new Color(173, 216, 230));
-        btnOke.setBounds(300,100,150,30);
-        this.add(btnOke);
+        JButton btnTimKiem = new JButton("tìm kiếm");
+        btnTimKiem.setBackground(new Color(173, 216, 230));
+        btnTimKiem.setBounds(300,100,150,30);
+        btnTimKiem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel,"thongTinChonPhong");
+            }
+        });
+
+        this.add(btnTimKiem);
+
+
 
         // btnBack
+        JButton btnBack = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
+        btnBack.setBounds(20,10,25,25);
+        this.add(btnBack);
+        btnBack.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel,"studentPanel");
+            }
+        });
     }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
