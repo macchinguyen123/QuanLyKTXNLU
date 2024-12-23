@@ -18,7 +18,7 @@ public class GDSVDangKi extends JFrame {
     private JLabel backgroundImage;
     private Stack<JPanel> panelStack;
 
-    public GDSVDangKi() {
+    public GDSVDangKi(MDSVDangKi mdsvDangKi) {
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,7 +83,8 @@ public class GDSVDangKi extends JFrame {
         mainPanel.add(filterButton);
 
         // Bảng danh sách
-        studentTable = new JTable();
+        studentTable = new JTable(mdsvDangKi);
+        studentTable.setFillsViewportHeight(true);
         JScrollPane scrollPane = new JScrollPane(studentTable);
         scrollPane.setBounds(20, 60, 760, 300);
         mainPanel.add(scrollPane);

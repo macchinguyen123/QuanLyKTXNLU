@@ -2,6 +2,8 @@ package gop1;
 
 import sinhVienDangKy.MDSVDangKi;
 import sinhVienDangKy.SVDangKiTheHien;
+import view.Home;
+import view.PageFillInformatinDK;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +15,7 @@ public class Controller {
     private Model mainModel;
     private View mainView;
     private ExitDialog mainExitDialog;
+    Home home = new Home();
 
 //    private Model mainModel1;
     private AdminRoomManagerView roomManagerView;
@@ -49,7 +52,7 @@ public class Controller {
 
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
-        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, mdsvDangKi));
+        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, home.getMdsvDangKi()));
         studentView.setExitMenuItemListener(new StudentExitMenuItemListener(studentExitDialog));
         studentExitDialog.setThoatButtonListener(new ExitDialogThoatButtonListener());
         studentExitDialog.setHuyButtonListener(new ExitDialogHuyButtonListener());
