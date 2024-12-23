@@ -15,9 +15,13 @@ public class UpdateInforView extends JFrame {
     JComboBox cbDe, cbGender, cbNation, cbDorm;
     JButton btnUpdate, btnBack;
     StudentListView studentListView;
+    StudentController studentController;
+    Student currentStudent;
 
-    public UpdateInforView( StudentListView studentListView) {
+    public UpdateInforView( StudentListView studentListView, StudentController studentController, Student currentStudent) {
         this.studentListView = studentListView;
+        this.studentController = studentController;
+        this.currentStudent = currentStudent;
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -46,7 +50,7 @@ public class UpdateInforView extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+//                dispose();
                 studentListView.setVisible(true);
             }
         });
@@ -185,8 +189,47 @@ public class UpdateInforView extends JFrame {
                         .addGap(30) // Khoảng cách dưới cùng
         );
 
+        btnUpdate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = fieldName.getText();
+                String birthYear = fieldBY.getText();
+                String id = fieldID.getText();
+                String gender = cbGender.getSelectedItem().toString();
+                String phone = fieldPhone.getText();
+                String address = fieldAddress.getText();
+                String department = cbDe.getSelectedItem().toString();
+                String room = fieldRoom.getText();
+                String dorm = cbDorm.getSelectedItem().toString();
+                String cardID = fieldCardID.getText();
+                String nation = cbNation.getSelectedItem().toString();
+
+                boolean isMartyrs = martyrs.isSelected();
+                boolean isPoorHousehold = poorHousehold.isSelected();
+                boolean isDisability = disability.isSelected();
+                boolean isEthnic = ethnic.isSelected();
+                boolean isNotSubject = notSubject.isSelected();
+
+                currentStudent.setTen(fieldName.getText());
+                currentStudent.setMssv(fieldID.getText());
+                currentStudent.setGioiTinh(cbGender.getSelectedItem().toString());
+                currentStudent.setKhoa(cbDe.getSelectedItem().toString());
+                currentStudent.setNamSinh(LocalDate.parse(fieldBY.getText()));
+                currentStudent.setCuXa(cbDorm.getSelectedItem().toString());
+                currentStudent.setPhong(fieldRoom.getText());
+                currentStudent.setDiaChi(fieldAddress.getText());
+                currentStudent.setIdCCCD(fieldCardID.getText());
+
+                studentController.updateStudent(currentStudent);
+
+                JOptionPane.showMessageDialog(UpdateInforView.this, "Thông tin đã được cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+                studentListView.updateStudentList(studentController.getStudents());
+                studentListView.setVisible(true);
+            }
+        });
+
         add(panel, BorderLayout.CENTER);
-//        add(s2, BorderLayout.EAST);
     }
 
     public void setStudentDetails(Student student) {
@@ -209,4 +252,7 @@ public class UpdateInforView extends JFrame {
         ethnic.setSelected(student.isEthnic());
         notSubject.setSelected(student.isNotSubject());
     }
+
+
+
 }

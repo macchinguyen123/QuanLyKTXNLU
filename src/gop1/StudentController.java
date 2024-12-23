@@ -13,11 +13,11 @@ public class StudentController {
     public StudentController(StudentListView view) {
         this.students = new ArrayList<Student>();
         this.view = view;
-        Student st1 = new Student( "Nguyen Van A", "23130001", "Nam", "CNTT", LocalDate.parse("2005-01-24"), "Cu xa A", "101", "Binh Dinh", "123456", "0987654321", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
-        Student st2 = new Student("Nguyen Thi B", "23130002", "Nu", "CNHH", LocalDate.parse("2004-05-20"), "Cu xa D", "201", "Tien Giang", "234567", "0345678990", "Mông", "Dân tộc thiểu số");
-        Student st3 = new Student("Nguyen Van C", "23130003", "Nam", "CNTP", LocalDate.parse("2005-10-02"), "Cu xa C", "102", "Long An", "341678", "0168390591", "Kinh", "Không thuộc các đối tượng trên");
-        Student st4 = new Student("Nguyen Van D", "23130004", "Nam", "CNTT", LocalDate.parse("2005-08-04"), "Cu xa A", "103", "Kien Giang", "401231", "0636036812", "Kinh", "Không thuộc các đối tượng trên");
-        Student st5 = new Student("Nguyen Thi E", "23130005", "Nu", "Nong Nghiep", LocalDate.parse("2005-12-08"), "Cu xa B", "205", "Dak Lak", "579130", "0470641237", "Kinh", "Không thuộc các đối tượng trên");
+        Student st1 = new Student( "Nguyễn Văn A", "23130001", "Nam", "Công nghệ thông tin", LocalDate.parse("2005-01-24"), "Cư xá A", "101", "Bình Định", "123456", "0987654321", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
+        Student st2 = new Student("Nguyễn Thị B", "23130002", "Nữ", "Công nghệ sinh học", LocalDate.parse("2004-05-20"), "Cư xá D", "201", "Tiền Giang", "234567", "0345678990", "Mông", "Dân tộc thiểu số");
+        Student st3 = new Student("Nguyễn Văn C", "23130003", "Nam", "Công nghệ thực phẩm", LocalDate.parse("2005-10-02"), "Cư xá C", "102", "Long An", "341678", "0168390591", "Kinh", "Không thuộc các đối tượng trên");
+        Student st4 = new Student("Nguyễn Văn D", "23130004", "Nam", "Công nghệ thông tin", LocalDate.parse("2005-08-04"), "Cư xá A", "103", "Kiên Giang", "401231", "0636036812", "Kinh", "Không thuộc các đối tượng trên");
+        Student st5 = new Student("Nguyễn Thị E", "23130005", "Nữ", "Lâm nghiệp", LocalDate.parse("2005-12-08"), "Cư xá B", "205", "Dak Lak", "579130", "0470641237", "Kinh", "Không thuộc các đối tượng trên");
 
         students.add(st1);
         students.add(st2);
@@ -57,6 +57,21 @@ public class StudentController {
             studentStrings.add(student.toString());
         }
         return studentStrings;
+    }
+
+    public void openUpdateInforView(Student currentStudent) {
+        UpdateInforView updateView = new UpdateInforView(view, this, currentStudent);
+        updateView.setStudentDetails(currentStudent);
+        updateView.setVisible(true);
+    }
+
+    public void updateStudent(Student updatedStudent) {
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getMssv().equals(updatedStudent.getMssv())) {
+                students.set(i, updatedStudent); // Cập nhật thông tin
+                break;
+            }
+        }
     }
 
     private class menuAction implements ActionListener {
