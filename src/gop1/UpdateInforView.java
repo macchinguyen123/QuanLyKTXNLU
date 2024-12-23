@@ -214,7 +214,7 @@ public class UpdateInforView extends JFrame {
                 currentStudent.setMssv(fieldID.getText());
                 currentStudent.setGioiTinh(cbGender.getSelectedItem().toString());
                 currentStudent.setKhoa(cbDe.getSelectedItem().toString());
-                currentStudent.setNamSinh(LocalDate.parse(fieldBY.getText()));
+                currentStudent.setNamSinh(fieldBY.getText());
                 currentStudent.setCuXa(cbDorm.getSelectedItem().toString());
                 currentStudent.setPhong(fieldRoom.getText());
                 currentStudent.setDiaChi(fieldAddress.getText());
