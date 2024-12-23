@@ -30,12 +30,17 @@ public class StudentController {
 //            if (student.length >= 11) {
 //            }
 //        }
+//        students = studentDataStorage.getStudentData();
         students.add(st1);
         students.add(st2);
         students.add(st3);
         students.add(st4);
         students.add(st5);
-        students.add(storedData.get(0));
+        if (storedData != null && !storedData.isEmpty()) {
+            students.add(storedData.get(0));
+        } else {
+            System.out.println("Danh sách lưu trữ trống hoặc không hợp lệ.");
+        }
 
         this.view.addSearchActionListener(new searchAction());
         this.view.addMenuActionListener(new menuAction());
@@ -115,6 +120,30 @@ public class StudentController {
         }
 
     }
+
+    private void initializeSampleStudents() {
+        // Thêm sinh viên mẫu vào StudentDataStorage
+        studentDataStorage.addStudent(new String[]{
+                "Nguyễn Văn A", "23130001", "Nam", "Công nghệ thông tin", "2005-01-24", "Cư xá A", "101", "Bình Định", "123456", "0987654321", "Kinh", "Con liệt sĩ, thương binh, bệnh binh"
+        });
+
+        studentDataStorage.addStudent(new String[]{
+                "Nguyễn Thị B", "23130002", "Nữ", "Công nghệ sinh học", "2004-05-20", "Cư xá D", "201", "Tiền Giang", "234567", "0345678990", "Mông", "Dân tộc thiểu số"
+        });
+
+        studentDataStorage.addStudent(new String[]{
+                "Nguyễn Văn C", "23130003", "Nam", "Công nghệ thực phẩm", "2005-10-02", "Cư xá C", "102", "Long An", "341678", "0168390591", "Kinh", "Không thuộc các đối tượng trên"
+        });
+
+        studentDataStorage.addStudent(new String[]{
+                "Nguyễn Văn D", "23130004", "Nam", "Công nghệ thông tin", "2005-08-04", "Cư xá A", "103", "Kiên Giang", "401231", "0636036812", "Kinh", "Không thuộc các đối tượng trên"
+        });
+
+        studentDataStorage.addStudent(new String[]{
+                "Nguyễn Thị E", "23130005", "Nữ", "Lâm nghiệp", "2005-12-08", "Cư xá B", "205", "Dak Lak", "579130", "0470641237", "Kinh", "Không thuộc các đối tượng trên"
+        });
+    }
+
 }
 
 
