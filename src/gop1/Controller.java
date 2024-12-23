@@ -70,7 +70,7 @@ public class Controller {
                 passwordView.displayMessage("Mật khẩu phải có đúng 6 ký tự!");
             } else {
 //                passwordView.displayMessage("Mật khẩu đã được xác nhận!");
-                passwordView.dispose();
+//                passwordView.dispose();
                 openMainView();
             }
         }
@@ -136,7 +136,7 @@ public class Controller {
             studentListView.getBackButton().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    studentListView.dispose();
+//                    studentListView.dispose();
                     studentView.setVisible(true);
                 }
             });
@@ -165,7 +165,7 @@ public class Controller {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            studentView.dispose();
+//            studentView.dispose();
             mainView.setVisible(true);
         }
     }

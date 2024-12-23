@@ -1,5 +1,9 @@
 package view;
 
+import gop1.Controller;
+import gop1.Model;
+import gop1.PasswordView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -44,6 +48,15 @@ public class PanelChooseStudentOrManager extends JPanel {
         btnChooseManager = new JButton(new ImageIcon("src/img/manager1.jpg"));
         btnChooseManager.setBounds(20, 20, 100, 100);
         btnChooseManager.setActionCommand("manager");
+        btnChooseManager.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Model combinedModel = new Model(); // Sử dụng class đã gộp
+                PasswordView passwordView = new PasswordView();
+                new Controller(combinedModel, passwordView);
+                passwordView.setVisible(true);
+            }
+        });
         panelManager.add(btnChooseManager);
         labelManager = new JLabel("Manager", JLabel.CENTER);
         labelManager.setForeground(Color.WHITE);
