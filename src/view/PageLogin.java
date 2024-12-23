@@ -26,12 +26,12 @@ public class PageLogin extends JPanel {
         this.setLayout(null);
 
         // icon home
-        JButton btnHome = new JButton(new ImageIcon("src/img/iconHome.png"));
+        JButton btnHome = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
         btnHome.setBounds(10, 10, 30, 30);
         btnHome.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "registrationPanel");
+                cardLayout.show(cardPanel, "studentPanel");
             }
         });
         this.add(btnHome);
