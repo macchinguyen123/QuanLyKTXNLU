@@ -1,7 +1,7 @@
 package view;
 
 import sinhVienDangKy.MDSVDangKi;
-import sinhVienDangKy.StudentInfo;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,6 +56,7 @@ public class Home extends JFrame {
         this.setLocationRelativeTo(null);
         setVisible(true);
     }
+
 
     public MDSVDangKi getMdsvDangKi() {
         return mdsvDangKi;

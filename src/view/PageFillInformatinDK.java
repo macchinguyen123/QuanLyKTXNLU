@@ -19,7 +19,6 @@ public class PageFillInformatinDK extends JPanel {
     JLabel titleLabel;
     JPanel mainPanel;
 
-    // Thêm biến để lưu thông tin đăng nhập hiện tại
     private String currentMSSV;
 
     private MDSVDangKi tableModel;
@@ -74,15 +73,19 @@ public class PageFillInformatinDK extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveData();
-                JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
-                pageTTCN.updateInformation(data);
-                tableModel.addStudent(data);
+                if (allFieldsFilled()) {
+                    saveData();
+                    JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
+                    pageTTCN.updateInformation(data);
+                    tableModel.addStudent(data);
 
-                // Xóa tài khoản đăng nhập hiện tại khỏi danh sách
-                listSaveTaiKhoan.removeIf(account -> account.get("Mã số sinh viên").equals(currentMSSV));
+                    // Xóa tài khoản đăng nhập hiện tại khỏi danh sách
+                    listSaveTaiKhoan.removeIf(account -> account.get("Mã số sinh viên").equals(currentMSSV));
 
-                cardLayout.show(cardPanel, "dangKiTaiKhoanSV");
+                    cardLayout.show(cardPanel, "dangKiTaiKhoanSV");
+                } else {
+                    JOptionPane.showMessageDialog(mainPanel, "Vui lòng điền đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -112,6 +115,20 @@ public class PageFillInformatinDK extends JPanel {
 
         scrollPane = new JScrollPane(mainPanel);
         this.add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private boolean allFieldsFilled() {
+        for (JTextField textField : textFields) {
+            if (textField.getText().isEmpty()) {
+                return false;
+            }
+        }
+        for (JComboBox<String> comboBox : comboBoxes) {
+            if (comboBox.getSelectedItem() == null || comboBox.getSelectedItem().toString().isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void saveData() {
