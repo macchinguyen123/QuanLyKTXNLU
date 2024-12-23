@@ -95,6 +95,18 @@ public class PageFillInformatinDK extends JPanel {
         });
         mainPanel.add(backHome);
 
+        // nut quay lai trang Thong tin chon phong\
+        JButton backToPagePrevious = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
+        backToPagePrevious.setForeground(Color.WHITE);
+        backToPagePrevious.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backToPagePrevious.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel,"chooseRoom");
+            }
+        });
+        mainPanel.add(backToPagePrevious);
+
         scrollPane = new JScrollPane(mainPanel);
         this.add(scrollPane, BorderLayout.CENTER);
     }
