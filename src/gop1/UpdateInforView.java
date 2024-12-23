@@ -234,7 +234,7 @@ public class UpdateInforView extends JFrame {
 
     public void setStudentDetails(Student student) {
         fieldName.setText(student.getTen());
-        fieldBY.setText(student.getNamSinh().toString());
+        fieldBY.setText(student.getNamSinh());
         fieldID.setText(student.getMssv());
         cbGender.setSelectedItem(student.getGioiTinh());
         fieldPhone.setText(student.getSđt());

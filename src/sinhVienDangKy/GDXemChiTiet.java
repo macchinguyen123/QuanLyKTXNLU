@@ -14,7 +14,7 @@ public class GDXemChiTiet extends JPanel {
 
         JLabel titleLabel = new JLabel("TRƯỜNG ĐẠI HỌC NÔNG LÂM TPHCM");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        titleLabel.setBounds(150, 10, 400, 30);
+        titleLabel.setBounds(250, 10, 400, 30);
         add(titleLabel);
 
         // Labels và TextFields
@@ -27,20 +27,95 @@ public class GDXemChiTiet extends JPanel {
         textFields = new JTextField[labels.length];
 
         int xLabel = 50, xField = 200, y = 60, widthLabel = 120, widthField = 200, height = 30;
+        int gapBetweenFields = 250; // Khoảng cách giữa hai thành phần ngang hàng
 
         JCheckBox checkBox1 = null, checkBox2 = null;
 
         for (int i = 0; i < labels.length; i++) {
-            JLabel label = new JLabel(labels[i]);
-            label.setBounds(xLabel, y, widthLabel, height);
-            add(label);
+            if (i == 1) { // "GIỚI TÍNH" ngang hàng với "NGÀY SINH"
+                JLabel label = new JLabel(labels[i]);
+                label.setBounds(xLabel, y, widthLabel, height);
+                add(label);
 
-            if (i == 1) { // ComboBox cho "Giới Tính"
                 genderComboBox = new JComboBox<>(new String[]{"Nam", "Nữ"});
                 genderComboBox.setBounds(xField, y, widthField, height);
                 genderComboBox.setEnabled(false); // Vô hiệu hóa
                 add(genderComboBox);
-            } else if (i == 11) { // CheckBox
+
+                JLabel birthLabel = new JLabel(labels[2]);
+                birthLabel.setBounds(xField + gapBetweenFields, y, widthLabel, height);
+                add(birthLabel);
+
+                JTextField birthField = new JTextField();
+                birthField.setBounds(xField + gapBetweenFields + widthLabel, y, widthField, height);
+                birthField.setEditable(false);
+                add(birthField);
+                textFields[2] = birthField; // Gán cho "NGÀY SINH"
+            } else if (i == 3) { // "MÃ SỐ SINH VIÊN" ngang hàng với "SỐ ĐIỆN THOẠI"
+                JLabel label = new JLabel(labels[i]);
+                label.setBounds(xLabel, y, widthLabel, height);
+                add(label);
+
+                JTextField idField = new JTextField();
+                idField.setBounds(xField, y, widthField, height);
+                idField.setEditable(false);
+                add(idField);
+                textFields[i] = idField;
+
+                JLabel phoneLabel = new JLabel(labels[4]);
+                phoneLabel.setBounds(xField + gapBetweenFields, y, widthLabel, height);
+                add(phoneLabel);
+
+                JTextField phoneField = new JTextField();
+                phoneField.setBounds(xField + gapBetweenFields + widthLabel, y, widthField, height);
+                phoneField.setEditable(false);
+                add(phoneField);
+                textFields[4] = phoneField; // Gán cho "SỐ ĐIỆN THOẠI"
+            } else if (i == 5) { // "HỘ KHẨU THƯỜNG TRÚ" ngang hàng với "KHOA"
+                JLabel addressLabel = new JLabel(labels[i]);
+                addressLabel.setBounds(xLabel, y, widthLabel, height);
+                add(addressLabel);
+
+                JTextField addressField = new JTextField();
+                addressField.setBounds(xField, y, widthField, height);
+                addressField.setEditable(false);
+                add(addressField);
+                textFields[i] = addressField;
+
+                JLabel facultyLabel = new JLabel(labels[6]);
+                facultyLabel.setBounds(xField + gapBetweenFields, y, widthLabel, height);
+                add(facultyLabel);
+
+                JTextField facultyField = new JTextField();
+                facultyField.setBounds(xField + gapBetweenFields + widthLabel, y, widthField, height);
+                facultyField.setEditable(false);
+                add(facultyField);
+                textFields[6] = facultyField; // Gán cho "KHOA"
+            } else if (i == 7) { // "PHÒNG" ngang hàng với "CƯ XÁ"
+                JLabel roomLabel = new JLabel(labels[i]);
+                roomLabel.setBounds(xLabel, y, widthLabel, height);
+                add(roomLabel);
+
+                JTextField roomField = new JTextField();
+                roomField.setBounds(xField, y, widthField, height);
+                roomField.setEditable(false);
+                add(roomField);
+                textFields[i] = roomField;
+
+                JLabel dormLabel = new JLabel(labels[8]);
+                dormLabel.setBounds(xField + gapBetweenFields, y, widthLabel, height);
+                add(dormLabel);
+
+                JTextField dormField = new JTextField();
+                dormField.setBounds(xField + gapBetweenFields + widthLabel, y, widthField, height);
+                dormField.setEditable(false);
+                add(dormField);
+                textFields[8] = dormField; // Gán cho "CƯ XÁ"
+            } else if (i == 11) { // CheckBox và Label "DIỆN CHÍNH SÁCH"
+                JLabel policyLabel = new JLabel(labels[i]);
+                policyLabel.setBounds(xLabel, y, widthLabel, height);
+                add(policyLabel);
+
                 checkBox1 = new JCheckBox("Con liệt sĩ, thương binh, bệnh binh");
                 checkBox2 = new JCheckBox("Gia đình đặc biệt khó khăn");
                 checkBox1.setBounds(xField, y, widthField + 200, height);
@@ -50,26 +125,34 @@ public class GDXemChiTiet extends JPanel {
                 add(checkBox1);
                 add(checkBox2);
                 y += 30; // Tăng chiều cao vì có 2 dòng
-            } else { // TextField cho các trường còn lại
+            } else if (i != 2 && i != 4 && i != 6 && i != 8) { // TextField cho các trường còn lại
+                JLabel label = new JLabel(labels[i]);
+                label.setBounds(xLabel, y, widthLabel, height);
+                add(label);
+
                 JTextField textField = new JTextField();
                 textField.setBounds(xField, y, widthField, height);
                 textField.setEditable(false); // Vô hiệu hóa chỉnh sửa
                 add(textField);
                 textFields[i] = textField;
             }
-            y += 40; // Cách đều các dòng
+
+            // Tăng vị trí y cho dòng mới (trừ khi là các trường ngang hàng)
+            if (i != 1 && i != 3 && i != 5 && i != 7) {
+                y += 40; // Cách đều các dòng
+            }
         }
 
         // Nút Xác nhận
         JButton updateButton = new JButton("Xác Nhận");
-        updateButton.setBounds(100, y, 120, 40);
+        updateButton.setBounds(250, y, 120, 40);
         updateButton.setBackground(new Color(30, 144, 255));
         updateButton.setForeground(Color.WHITE);
         add(updateButton);
 
         // Nút Hủy
         JButton cancelButton = new JButton("Hủy");
-        cancelButton.setBounds(300, y, 120, 40);
+        cancelButton.setBounds(450, y, 120, 40);
         cancelButton.setBackground(Color.RED);
         cancelButton.setForeground(Color.WHITE);
         add(cancelButton);
@@ -80,7 +163,7 @@ public class GDXemChiTiet extends JPanel {
 
     private void fillData(String[] data, JCheckBox checkBox1, JCheckBox checkBox2) {
         for (int i = 0; i < data.length && i < textFields.length; i++) {
-            if (i == 1) { // Xử lý "Giới Tính"
+            if (i == 1) { // Xử lý "GIỚI TÍNH"
                 if ("Nam".equalsIgnoreCase(data[i])) {
                     genderComboBox.setSelectedItem("Nam");
                 } else if ("Nữ".equalsIgnoreCase(data[i])) {
@@ -97,21 +180,4 @@ public class GDXemChiTiet extends JPanel {
             }
         }
     }
-
-//    public static void main(String[] args) {
-//        // Dữ liệu mẫu
-//        MDSVDangKi mdsvDangKi = new MDSVDangKi();
-//        String[] sampleData = {
-//                "Nguyen Van A", "Nữ", "01/01/2000", "23130341", "0123456789",
-//                "123 ABC Street", "Khoa Công Nghệ Thông Tin", "P101", "Ký túc xá A", "123456789",
-//                "Kinh", "Diện 1"
-//        };
-//
-//        JFrame frame = new JFrame("Chi Tiết Sinh Viên");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(600, 650);
-//        frame.add(new GDXemChiTiet(mdsvDangKi.data1));
-//        frame.setLocationRelativeTo(null);
-//        frame.setVisible(true);
-//    }
 }
