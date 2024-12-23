@@ -1,4 +1,4 @@
-package gop1;
+package quanLyPhong;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,8 +7,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class AdminRoomManagerView extends JFrame {
-    private JList<String> dormitoryList;
-    private DefaultListModel<String> dormitoryModel;
+    private JList<String> maleDormitoryList;
+    private JList<String> femaleDormitoryList;
+    private DefaultListModel<String> maleDormitoryModel;
+    private DefaultListModel<String> femaleDormitoryModel;
     private JButton backButton;
     private JButton viewDetailsButton;
     private Map<String, List<Room>> dormitoryData;
@@ -38,36 +40,92 @@ public class AdminRoomManagerView extends JFrame {
         };
         mainPanel.setLayout(new BorderLayout());
 
-        // Danh sách cư xá
-        dormitoryModel = new DefaultListModel<>();
-        dormitoryList = new JList<>(dormitoryModel);
-        dormitoryList.setFont(new Font("Arial", Font.PLAIN, 18));
-        dormitoryList.setFixedCellHeight(30);
+// Danh sách cư xá nam
+        maleDormitoryModel = new DefaultListModel<>();
+        maleDormitoryList = new JList<>(maleDormitoryModel);
+        maleDormitoryList.setFont(new Font("Arial", Font.PLAIN, 20));  // Kích thước chữ nhỏ hơn
+        maleDormitoryList.setFixedCellHeight(30);  // Chiều cao mỗi ô nhỏ hơn
+        maleDormitoryList.setVisibleRowCount(4);   // Hiển thị tối đa 4 hàng (giảm chiều dài)
+        maleDormitoryList.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                femaleDormitoryList.clearSelection();
+            }
+        });
+
+        JPanel malePanel = new JPanel(new BorderLayout());
+        malePanel.setOpaque(true); // Hiển thị màu nền trắng
+        malePanel.setBackground(Color.WHITE);
+        malePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Đường viền xám
+        JLabel maleLabel = new JLabel("Cư Xá Nam", JLabel.CENTER);
+        maleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        malePanel.add(maleLabel, BorderLayout.NORTH);
+        malePanel.add(new JScrollPane(maleDormitoryList), BorderLayout.CENTER);
+        malePanel.setPreferredSize(new Dimension(150, 80)); // Giảm chiều dài và chiều cao
 
 
-        JPanel listPanel = new JPanel(new BorderLayout());
-        listPanel.add(dormitoryList, BorderLayout.CENTER);
-        listPanel.setOpaque(false);
+// Danh sách cư xá nữ
+        femaleDormitoryModel = new DefaultListModel<>();
+        femaleDormitoryList = new JList<>(femaleDormitoryModel);
+        femaleDormitoryList.setFont(new Font("Arial", Font.PLAIN, 20));  // Kích thước chữ nhỏ hơn
+        femaleDormitoryList.setFixedCellHeight(30);  // Chiều cao mỗi ô nhỏ hơn
+        femaleDormitoryList.setVisibleRowCount(4);   // Hiển thị tối đa 4 hàng (giảm chiều dài)
+        femaleDormitoryList.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                maleDormitoryList.clearSelection();
+            }
+        });
 
-        // Tạo wrapperPanel để căn giữa listPanel
-        JPanel wrapperPanel = new JPanel(new GridBagLayout()); // JPanel mặc định là FlowLayout
-        wrapperPanel.setOpaque(false);
-        wrapperPanel.add(listPanel);
+        JPanel femalePanel = new JPanel(new BorderLayout());
+        femalePanel.setOpaque(true); // Hiển thị màu nền trắng
+        femalePanel.setBackground(Color.WHITE);
+        femalePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Đường viền xám
+        JLabel femaleLabel = new JLabel("Cư Xá Nữ", JLabel.CENTER);
+        femaleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        femalePanel.add(femaleLabel, BorderLayout.NORTH);
+        femalePanel.add(new JScrollPane(femaleDormitoryList), BorderLayout.CENTER);
+        femalePanel.setPreferredSize(new Dimension(150, 80));
+
+
+        // Panel chứa cả hai danh sách với BoxLayout
+        JPanel listsPanel = new JPanel();
+        listsPanel.setLayout(new BoxLayout(listsPanel, BoxLayout.X_AXIS)); // Bố trí theo chiều ngang
+        listsPanel.setOpaque(false);
+
+// Thiết lập kích thước nhỏ hơn cho các panel cư xá nam và nữ
+        malePanel.setPreferredSize(new Dimension(200, 150));
+        femalePanel.setPreferredSize(new Dimension(200, 150));
+
+// Thêm khoảng trống hai bên để căn giữa
+        listsPanel.add(Box.createHorizontalStrut(50)); // Khoảng cách từ viền trái
+        listsPanel.add(malePanel);
+        listsPanel.add(Box.createHorizontalStrut(30)); // Khoảng cách giữa hai panel
+        listsPanel.add(femalePanel);
+        listsPanel.add(Box.createHorizontalStrut(50)); // Khoảng cách từ viền phải
+
+        mainPanel.add(listsPanel, BorderLayout.CENTER);
+
+// Thiết lập BorderLayout để bố trí nội dung chính giữa
+        mainPanel.setLayout(new BorderLayout());
+        JPanel centerPanel = new JPanel();
+        centerPanel.setOpaque(false);
+        centerPanel.add(listsPanel);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+
 
         JLabel titleLabel = new JLabel("Danh Sách Cư Xá:", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        titleLabel.setForeground(Color.BLACK); // Màu chữ trắng để nổi bật
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0)); // Khoảng cách trên dưới
-
+        titleLabel.setForeground(Color.BLACK);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
         mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.add(wrapperPanel, BorderLayout.CENTER);
+        mainPanel.add(listsPanel, BorderLayout.CENTER);
 
         backButton = new JButton("Quay Lại");
         viewDetailsButton = new JButton("Xem Chi Tiết");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
         viewDetailsButton.setFont(new Font("Arial", Font.BOLD, 18));
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,5,50));
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         buttonPanel.setOpaque(false);
         buttonPanel.add(viewDetailsButton);
         buttonPanel.add(backButton);
@@ -78,7 +136,10 @@ public class AdminRoomManagerView extends JFrame {
 
         // Sự kiện
         viewDetailsButton.addActionListener(e -> {
-            String selectedDormitory = dormitoryList.getSelectedValue();
+            String selectedMaleDormitory = maleDormitoryList.getSelectedValue();
+            String selectedFemaleDormitory = femaleDormitoryList.getSelectedValue();
+            String selectedDormitory = selectedMaleDormitory != null ? selectedMaleDormitory : selectedFemaleDormitory;
+
             if (selectedDormitory != null) {
                 String dormitoryName = selectedDormitory.split(" -")[0];
                 List<Room> rooms = dormitoryData.get(dormitoryName);
@@ -93,7 +154,7 @@ public class AdminRoomManagerView extends JFrame {
         backButton.addActionListener(e -> dispose());
 
         // Hiển thị danh sách cư xá
-        updateDormitoryList();
+        updateDormitoryLists();
     }
 
     private void initializeDormitoryData() {
@@ -197,13 +258,20 @@ public class AdminRoomManagerView extends JFrame {
         ));
     }
 
-    private void updateDormitoryList() {
-        dormitoryModel.clear();
+    private void updateDormitoryLists() {
+        maleDormitoryModel.clear();
+        femaleDormitoryModel.clear();
+
         for (String dormitory : dormitoryData.keySet()) {
             long emptyRooms = dormitoryData.get(dormitory).stream()
                     .filter(room -> room.getAvailableSlots() > 0)
                     .count();
-            dormitoryModel.addElement(dormitory + " - Phòng Trống: " + emptyRooms);
+
+            if (dormitory.equals("Cư Xá B") || dormitory.equals("Cư Xá D") || dormitory.equals("Cư Xá E")) {
+                femaleDormitoryModel.addElement(dormitory + " - Phòng Trống: " + emptyRooms);
+            } else {
+                maleDormitoryModel.addElement(dormitory + " - Phòng Trống: " + emptyRooms);
+            }
         }
     }
 }

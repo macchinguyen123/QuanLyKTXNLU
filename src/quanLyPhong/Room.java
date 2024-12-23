@@ -1,4 +1,4 @@
-package gop1;
+package quanLyPhong;
 
 public class Room {
     private String roomNumber; // Số phòng
