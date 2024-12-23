@@ -1,4 +1,4 @@
-package gop1;
+package quanLyPhong;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
