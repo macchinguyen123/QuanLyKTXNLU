@@ -25,13 +25,13 @@ public class MDSVDangKi extends AbstractTableModel {
         data.add(new String[]{"Le Thi Tuyet Van", "2313345", "Nữ", "Kinh tế", "2001", "B", "202"});
         data.add(Arrays.copyOfRange(arr, 0, 7));
         data.add(new String[]{data1[0], data1[3], data1[1], data1[6], data1[2], data1[8], data1[7]});
-        List<String[]> storedData = studentDataStorage.getStudentData();
-        for (String[] student : storedData) {
-            // Chỉ thêm các trường cần thiết (giả sử theo thứ tự: Tên, Mã số, Giới tính, Khoa, Năm sinh, Cư xá, Phòng)
-            if (student.length >= 7) {
-                data.add(new String[]{student[0], student[2], student[9], student[5], student[1], student[10], student[6]});
-            }
-        }
+//        List<String[]> storedData = studentDataStorage.getStudentData();
+//        for (String[] student : storedData) {
+//            // Chỉ thêm các trường cần thiết (giả sử theo thứ tự: Tên, Mã số, Giới tính, Khoa, Năm sinh, Cư xá, Phòng)
+//            if (student.length >= 7) {
+//                data.add(new String[]{student[0], student[2], student[9], student[5], student[1], student[10], student[6]});
+//            }
+//        }
     }
 
     public void filterData(String keyword) {
