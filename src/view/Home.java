@@ -6,11 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class Home extends JFrame {
     PanelChooseStudentOrManager mainPanel;
     CardLayout cardLayout;
     JPanel cardPanel;
     List<String> selectedAttributes;
+    MDSVDangKi mdsvDangKi = new MDSVDangKi();
 
     public Home() throws HeadlessException {
         setTitle("Dormitory management system");
@@ -30,23 +32,26 @@ public class Home extends JFrame {
         PageTTCNcuaSVDaO pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout);
         PageChooseRoom chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
 
-        ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<String> (chooseRoom.getSelectedAttributes() ));
-        MDSVDangKi mdsvDangKi = new MDSVDangKi();
-        PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel,cardLayout,pageTTCNcuaSVDaO,mdsvDangKi);
+        ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<String>(chooseRoom.getSelectedAttributes()));
+        PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi);
         PanelChooseStudentOrManager chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
 
         cardPanel.add(mainPanel, "choosePanel");
         cardPanel.add(studentPanel, "studentPanel");
-        cardPanel.add(new PageLogin(cardPanel, cardLayout),"login");
-        cardPanel.add(pageTTCNcuaSVDaO,"TTCNcuaSVDaO");
-        cardPanel.add(new PageChooseRoom(cardPanel, cardLayout),"chooseRoom");
-        cardPanel.add(thongTinChonPhong,"thongTinChonPhong");
-        cardPanel.add(fillInformatinDK,"fillInformatinDK");
-        cardPanel.add(chooseStudentOrManager,"chooseStudentOrManager");
+        cardPanel.add(new PageLogin(cardPanel, cardLayout), "login");
+        cardPanel.add(pageTTCNcuaSVDaO, "TTCNcuaSVDaO");
+        cardPanel.add(new PageChooseRoom(cardPanel, cardLayout), "chooseRoom");
+        cardPanel.add(thongTinChonPhong, "thongTinChonPhong");
+        cardPanel.add(fillInformatinDK, "fillInformatinDK");
+        cardPanel.add(chooseStudentOrManager, "chooseStudentOrManager");
         // Add cardPanel to the frame
         getContentPane().add(cardPanel, BorderLayout.CENTER);
         this.setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public MDSVDangKi getMdsvDangKi() {
+        return mdsvDangKi;
     }
 
     public static void main(String[] args) {
