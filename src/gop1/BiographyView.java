@@ -15,13 +15,13 @@ public class BiographyView extends JFrame {
     StudentListView parentView;
 
     public BiographyView(StudentListView parentView) {
+        this.parentView = parentView;
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
-        this.parentView = parentView;
         JMenuBar menuBar = new JMenuBar();
 
         exitMenu = new JMenu("Exit");
@@ -92,7 +92,7 @@ public class BiographyView extends JFrame {
                 Student student = studentListView.getController().getStudentById(studentID);
                 if (student != null) {
                     // Tạo một instance của UpdateInforView
-                    UpdateInforView updateView = new UpdateInforView(parentView);
+                    UpdateInforView updateView = new UpdateInforView(parentView, controller, student);
                     updateView.setStudentDetails(student); // Đặt thông tin sinh viên vào UpdateInforView
                     updateView.setVisible(true); // Hiển thị UpdateInforView
                     dispose(); // Đóng BiographyView
@@ -105,7 +105,6 @@ public class BiographyView extends JFrame {
         inforStudentPanel.add(btnUpdate);
 
         // Nút quay về
-        JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         btnBack = new JButton("Quay về");
         btnBack.setBackground(new Color(153, 0, 0));
         btnBack.setForeground(Color.WHITE);
@@ -114,11 +113,11 @@ public class BiographyView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 parentView.setVisible(true);
-                dispose();
+//                dispose();
             }
         });
-        backPanel.add(btnBack);
-        backPanel.setOpaque(false);
+        inforStudentPanel.add(Box.createVerticalStrut(20));
+        inforStudentPanel.add(btnBack);
 
         // Hình nền
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
@@ -130,19 +129,8 @@ public class BiographyView extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0; // Cột giữa
         gbc.gridy = 0; // Hàng giữa
-        gbc.anchor = GridBagConstraints.CENTER; // Căn giữa cả theo chiều dọc và ngang
-        gbc.insets = new Insets(10, 0, 10, 0); // Khoảng cách (top, left, bottom, right)
-
+        gbc.anchor = GridBagConstraints.CENTER; // Căn bên trái
         backgroundImage.add(inforStudentPanel, gbc);
-
-// Thêm backPanel ở phía dưới cùng bên trái
-        gbc.gridx = 0; // Cột đầu tiên
-        gbc.gridy = 1; // Hàng thứ hai
-        gbc.weighty = 0; // Trọng số bằng 0 để không chiếm thêm không gian
-        gbc.anchor = GridBagConstraints.LAST_LINE_START; // Căn dưới cùng và bên trái
-        gbc.insets = new Insets(0, 10, 10, 0); // Khoảng cách nhỏ bên trái
-
-        backgroundImage.add(backPanel, gbc);
 
         add(backgroundImage);
     }
@@ -158,5 +146,17 @@ public class BiographyView extends JFrame {
         labelDorm.setText("Cư xá: " + dorm);
         labelRoom.setText("Phòng: " + room);
         labelIDCard.setText("CCCD: " + idCard);
+    }
+
+    public void displayStudentDetails(Student student) {
+        labelName.setText("Họ và Tên: " + student.getTen());
+        labelBY.setText("Năm sinh: " + student.getNamSinh());
+        labelID.setText("MSSV: " + student.getMssv());
+        labelGender.setText("Giới tính: " + student.getGioiTinh());
+        labelPhoneNumber.setText("SĐT: " + student.getSđt());
+        labelAddress.setText("HKTT: " + student.getDiaChi());
+        labelDorm.setText("Cư xá: " + student.getCuXa());
+        labelRoom.setText("Phòng: " + student.getPhong());
+        labelIDCard.setText("CCCD: " + student.getIdCCCD());
     }
 }
