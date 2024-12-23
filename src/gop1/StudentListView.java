@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class StudentListView extends JFrame {
@@ -82,6 +84,12 @@ public class StudentListView extends JFrame {
             }
         });
 
+        studentTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               studentTableMouseClicked(e);
+            }
+        });
 
         JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         btnBack = new JButton("Quay về");
@@ -160,4 +168,28 @@ public class StudentListView extends JFrame {
             });
         }
     }
+
+    public void onStudentSelected(Student selectedStudent) {
+        // Lấy thông tin mới nhất từ StudentController
+        Student updatedStudent = controller.getStudentById(selectedStudent.getMssv());
+        if (updatedStudent != null) {
+            UpdateInforView updateDetailView = new UpdateInforView(this, controller, selectedStudent);
+            updateDetailView.setStudentDetails(updatedStudent);
+        }
+    }
+
+    public void studentTableMouseClicked(MouseEvent e) {
+        int selectedRow = studentTable.getSelectedRow();
+        if (selectedRow != -1) {
+            Student selectedStudent = controller.getStudents().get(selectedRow);
+            onStudentSelected(selectedStudent); // Gọi phương thức này
+        }
+    }
+
+
+
+
+
+
+
 }
