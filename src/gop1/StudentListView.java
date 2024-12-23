@@ -160,7 +160,7 @@ public class StudentListView extends JFrame {
                     student.getMssv(),            // Mã số
                     student.getGioiTinh(),        // Giới tính
                     student.getKhoa(),            // Khoa
-                    student.getNamSinh().getYear(),         // Năm sinh
+                    student.getNamSinh(),        // Năm sinh
                     student.getCuXa(),            // Cư xá
                     student.getPhong(),           // Phòng
                     student.getDiaChi(),          // Địa chỉ

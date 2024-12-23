@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public class Student {
     private String ten, mssv, gioiTinh, khoa;
-    private LocalDate namSinh;
+    private String namSinh;
     private String cuXa, phong;
     private String diaChi, idCCCD, sđt;
     private String danToc, dienChinhSach;
 
-    public Student(String ten, String mssv, String gioiTinh, String khoa, LocalDate namSinh, String cuXa, String phong, String diaChi, String idCCCD, String sđt, String danToc, String dienChinhSach) {
+    public Student(String ten, String mssv, String gioiTinh, String khoa, String namSinh, String cuXa, String phong, String diaChi, String idCCCD, String sđt, String danToc, String dienChinhSach) {
         this.ten = ten;
         this.mssv = mssv;
         this.gioiTinh = gioiTinh;
@@ -45,7 +45,7 @@ public class Student {
         return gioiTinh;
     }
 
-    public LocalDate getNamSinh() {
+    public String getNamSinh() {
         return namSinh;
     }
 
@@ -93,7 +93,7 @@ public class Student {
         this.khoa = khoa;
     }
 
-    public void setNamSinh(LocalDate namSinh) {
+    public void setNamSinh(String namSinh) {
         this.namSinh = namSinh;
     }
 
