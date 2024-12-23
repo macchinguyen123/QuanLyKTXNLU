@@ -1,18 +1,22 @@
 package view;
 
 import sinhVienDangKy.MDSVDangKi;
+import sinhVienDangKy.StudentInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Home extends JFrame {
+    private static List<Map<String, String>> listSaveTaiKhoan = new ArrayList<>();
     PanelChooseStudentOrManager mainPanel;
     CardLayout cardLayout;
     JPanel cardPanel;
     List<String> selectedAttributes;
     MDSVDangKi mdsvDangKi = new MDSVDangKi();
+    String currentMSSV; // thêm biến currentMSSV
 
     public Home() throws HeadlessException {
         setTitle("Dormitory management system");
@@ -28,31 +32,25 @@ public class Home extends JFrame {
         // Add panels to cardPanel
         mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout);
         SVLoginOrSignIn studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
-        PageLogin pageLogin = new PageLogin(cardPanel, cardLayout);
+        PageLogin pageLogin = new PageLogin(cardPanel, cardLayout, listSaveTaiKhoan);
         PageTTCNcuaSVDaO pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout);
         PageChooseRoom chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
 
-        ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<String>(chooseRoom.getSelectedAttributes()));
-        PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi);
+        ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
+        PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV);
         PanelChooseStudentOrManager chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
-        PageDangKiTaiKhoan dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel,cardLayout);
-
+        PageDangKiTaiKhoan dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
 
         cardPanel.add(mainPanel, "choosePanel");
         cardPanel.add(studentPanel, "studentPanel");
-        cardPanel.add(new PageLogin(cardPanel, cardLayout), "login");
+        cardPanel.add(pageLogin, "login");
         cardPanel.add(pageTTCNcuaSVDaO, "TTCNcuaSVDaO");
-        cardPanel.add(new PageChooseRoom(cardPanel, cardLayout), "chooseRoom");
+        cardPanel.add(chooseRoom, "chooseRoom");
         cardPanel.add(thongTinChonPhong, "thongTinChonPhong");
         cardPanel.add(fillInformatinDK, "fillInformatinDK");
         cardPanel.add(chooseStudentOrManager, "chooseStudentOrManager");
-        cardPanel.add(new PageLogin(cardPanel, cardLayout),"login");
-        cardPanel.add(pageTTCNcuaSVDaO,"TTCNcuaSVDaO");
-        cardPanel.add(new PageChooseRoom(cardPanel, cardLayout),"chooseRoom");
-        cardPanel.add(thongTinChonPhong,"thongTinChonPhong");
-        cardPanel.add(fillInformatinDK,"fillInformatinDK");
-        cardPanel.add(chooseStudentOrManager,"chooseStudentOrManager");
-        cardPanel.add(dangKiTaiKhoanSV,"dangKiTaiKhoanSV");
+        cardPanel.add(dangKiTaiKhoanSV, "dangKiTaiKhoanSV");
+
         // Add cardPanel to the frame
         getContentPane().add(cardPanel, BorderLayout.CENTER);
         this.setLocationRelativeTo(null);
