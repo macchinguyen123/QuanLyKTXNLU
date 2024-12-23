@@ -34,6 +34,8 @@ public class Home extends JFrame {
         MDSVDangKi mdsvDangKi = new MDSVDangKi();
         PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel,cardLayout,pageTTCNcuaSVDaO,mdsvDangKi);
         PanelChooseStudentOrManager chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
+        PageDangKiTaiKhoan dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel,cardLayout);
+
 
         cardPanel.add(mainPanel, "choosePanel");
         cardPanel.add(studentPanel, "studentPanel");
@@ -43,6 +45,7 @@ public class Home extends JFrame {
         cardPanel.add(thongTinChonPhong,"thongTinChonPhong");
         cardPanel.add(fillInformatinDK,"fillInformatinDK");
         cardPanel.add(chooseStudentOrManager,"chooseStudentOrManager");
+        cardPanel.add(dangKiTaiKhoanSV,"dangKiTaiKhoanSV");
         // Add cardPanel to the frame
         getContentPane().add(cardPanel, BorderLayout.CENTER);
         this.setLocationRelativeTo(null);

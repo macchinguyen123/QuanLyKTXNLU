@@ -78,6 +78,9 @@ public class PageFillInformatinDK extends JPanel {
 //                cardLayout.show(cardPanel, "TTCNcuaSVDaO");
 //                if (tableModel != null) {
                 tableModel.addStudent(data);
+
+                cardLayout.show(cardPanel,"dangKiTaiKhoanSV");
+
             }
         });
 
