@@ -25,6 +25,7 @@ public class PageDangKiTaiKhoan extends JPanel {
         JLabel labelDangKy = new JLabel("Đăng ký tài khoản");
         JLabel pp = new JLabel("");
         mainPanel.add(labelDangKy);
+        mainPanel.setBackground(new Color(173, 216, 230));
         mainPanel.add(pp);
         mainPanel.setFocusable(false);
         background = new ImageIcon("src/img/backroundKTX.jpg").getImage();
