@@ -42,6 +42,7 @@ JPanel mainPanel, top, bot;
         mainPanel.add(passwordLabel);
         mainPanel.add(passWordField);
         mainPanel.add(new JLabel()); // tao mot khoang trong
+
         mainPanel.add(registerButton);
 
         registerButton.addActionListener(new ActionListener() {
