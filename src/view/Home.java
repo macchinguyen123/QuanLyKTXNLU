@@ -35,6 +35,8 @@ public class Home extends JFrame {
         ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<String>(chooseRoom.getSelectedAttributes()));
         PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi);
         PanelChooseStudentOrManager chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
+        PageDangKiTaiKhoan dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel,cardLayout);
+
 
         cardPanel.add(mainPanel, "choosePanel");
         cardPanel.add(studentPanel, "studentPanel");
@@ -44,6 +46,13 @@ public class Home extends JFrame {
         cardPanel.add(thongTinChonPhong, "thongTinChonPhong");
         cardPanel.add(fillInformatinDK, "fillInformatinDK");
         cardPanel.add(chooseStudentOrManager, "chooseStudentOrManager");
+        cardPanel.add(new PageLogin(cardPanel, cardLayout),"login");
+        cardPanel.add(pageTTCNcuaSVDaO,"TTCNcuaSVDaO");
+        cardPanel.add(new PageChooseRoom(cardPanel, cardLayout),"chooseRoom");
+        cardPanel.add(thongTinChonPhong,"thongTinChonPhong");
+        cardPanel.add(fillInformatinDK,"fillInformatinDK");
+        cardPanel.add(chooseStudentOrManager,"chooseStudentOrManager");
+        cardPanel.add(dangKiTaiKhoanSV,"dangKiTaiKhoanSV");
         // Add cardPanel to the frame
         getContentPane().add(cardPanel, BorderLayout.CENTER);
         this.setLocationRelativeTo(null);

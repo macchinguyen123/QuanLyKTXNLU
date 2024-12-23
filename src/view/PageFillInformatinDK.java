@@ -76,6 +76,9 @@ public class PageFillInformatinDK extends JPanel {
                 JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
                 pageTTCN.updateInformation(data);
                 tableModel.addStudent(data);
+
+                cardLayout.show(cardPanel,"dangKiTaiKhoanSV");
+
             }
         });
 
