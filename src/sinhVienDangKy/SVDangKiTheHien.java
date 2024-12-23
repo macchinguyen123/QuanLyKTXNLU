@@ -17,9 +17,8 @@ public class SVDangKiTheHien implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MDSVDangKi model = new MDSVDangKi();
-        GDSVDangKi view = new GDSVDangKi();
-        new HĐSVDangKi(model, view);
+        GDSVDangKi view = new GDSVDangKi(mdsvDangKi);
+        new HĐSVDangKi(mdsvDangKi, view);
 
         view.setVisible(true);
         view.getBackButton().addActionListener(event -> {
