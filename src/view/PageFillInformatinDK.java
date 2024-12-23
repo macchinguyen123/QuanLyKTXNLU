@@ -1,6 +1,7 @@
 package view;
 
 import sinhVienDangKy.MDSVDangKi;
+import sinhVienDangKy.StudentDataStorage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -74,9 +75,6 @@ public class PageFillInformatinDK extends JPanel {
                 saveData();
                 JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
                 pageTTCN.updateInformation(data);
-                // Chuyển về trang login
-//                cardLayout.show(cardPanel, "TTCNcuaSVDaO");
-//                if (tableModel != null) {
                 tableModel.addStudent(data);
 
                 cardLayout.show(cardPanel,"dangKiTaiKhoanSV");
@@ -137,6 +135,11 @@ public class PageFillInformatinDK extends JPanel {
         for (String item : data) {
             System.out.println(item);
         }
+        // Lưu vào StudentDataStorage
+        StudentDataStorage storage = StudentDataStorage.getInstance();
+        storage.addStudent(data);
+
+
     }
 
     private JPanel createInputField(String labelText) {
@@ -217,10 +220,6 @@ public class PageFillInformatinDK extends JPanel {
         textFields.add(textField2);
 
         return panel;
-    }
-
-    public String[] getData() {
-        return data;
     }
 }
 
