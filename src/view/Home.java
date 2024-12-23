@@ -1,5 +1,7 @@
 package view;
 
+import sinhVienDangKy.MDSVDangKi;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,7 +28,8 @@ public class Home extends JFrame {
         PageTTCNcuaSVDaO pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout);
         PageChooseRoom chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
         ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout);
-        PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel,cardLayout,pageTTCNcuaSVDaO);
+        MDSVDangKi mdsvDangKi = new MDSVDangKi();
+        PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel,cardLayout,pageTTCNcuaSVDaO,mdsvDangKi);
         PanelChooseStudentOrManager chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
 
         cardPanel.add(mainPanel, "choosePanel");

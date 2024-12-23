@@ -1,5 +1,7 @@
 package view;
 
+import sinhVienDangKy.MDSVDangKi;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -14,13 +16,15 @@ public class PageFillInformatinDK extends JPanel {
     JLabel titleLabel;
     JPanel mainPanel;
 
+    private MDSVDangKi tableModel;
     // Lưu trữ các JTextField, JComboBox và JCheckBox
     private java.util.List<JTextField> textFields = new java.util.ArrayList<>();
     private java.util.List<JComboBox<String>> comboBoxes = new java.util.ArrayList<>();
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
 
-    public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout,PageTTCNcuaSVDaO pageTTCN) {
+    public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PageTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel) {
+        this.tableModel = tableModel;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -42,7 +46,7 @@ public class PageFillInformatinDK extends JPanel {
         mainPanel.add(createTwoInputFields2("Mã số sinh viên:", "Số điện thoại:"));
         mainPanel.add(createInputField("Hộ khẩu thường trú:"));
         mainPanel.add(createInputField("Khoa:"));
-        mainPanel.add(createTwoInputFields3("Cư xá:","Phòng:"));
+        mainPanel.add(createTwoInputFields3("Cư xá:", "Phòng:"));
         mainPanel.add(createInputField("CCCD / CMND:"));
         mainPanel.add(createInputField("Dân tộc:"));
 
@@ -72,6 +76,8 @@ public class PageFillInformatinDK extends JPanel {
                 pageTTCN.updateInformation(data);
                 // Chuyển về trang login
 //                cardLayout.show(cardPanel, "TTCNcuaSVDaO");
+//                if (tableModel != null) {
+                tableModel.addStudent(data);
             }
         });
 
@@ -196,6 +202,10 @@ public class PageFillInformatinDK extends JPanel {
         textFields.add(textField2);
 
         return panel;
+    }
+
+    public String[] getData() {
+        return data;
     }
 }
 
