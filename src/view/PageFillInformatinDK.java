@@ -77,7 +77,7 @@ public class PageFillInformatinDK extends JPanel {
                     saveData();
                     JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
                     pageTTCN.updateInformation(data);
-                    tableModel.addStudent(data);
+//                    tableModel.addStudent(data);
 
                     // Xóa tài khoản đăng nhập hiện tại khỏi danh sách
                     listSaveTaiKhoan.removeIf(account -> account.get("Mã số sinh viên").equals(currentMSSV));

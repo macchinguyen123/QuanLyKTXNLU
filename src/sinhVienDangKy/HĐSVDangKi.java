@@ -1,6 +1,8 @@
 package sinhVienDangKy;
 
 
+import gop1.Student;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -34,21 +36,24 @@ public class HĐSVDangKi {
                 JOptionPane.showMessageDialog(view, "Chức năng quản lý phòng chưa được triển khai."));
 
         // Xử lý khi bấm vào JTable
+        // Xử lý khi bấm vào JTable
         view.getStudentTable().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 int selectedRow = view.getStudentTable().getSelectedRow();
                 if (selectedRow >= 0) {
-                    // Lấy thông tin chi tiết sinh viên
-                    String[] studentDetails = model.getStudentDetails(selectedRow);
+                    // Lấy đối tượng Student từ mô hình
+                    Student studentDetails = model.getStudentDetails(selectedRow);
+                    // Hiển thị chi tiết thông tin sinh viên
                     showStudentDetailsPanel(studentDetails, selectedRow);
                 }
             }
         });
+
     }
 
 
-    private void showStudentDetailsPanel(String[] studentDetails, int selectedRow) {
+    private void showStudentDetailsPanel(Student studentDetails, int selectedRow) {
         // Tạo panel chi tiết
         JPanel detailsPanel = new JPanel(null);
         detailsPanel.setOpaque(true);
@@ -56,31 +61,31 @@ public class HĐSVDangKi {
         detailsPanel.setBounds(150, 50, 500, 400);
 
         // Hiển thị thông tin sinh viên
-        JLabel nameLabel = new JLabel("Họ Và Tên: " + studentDetails[0]);
+        JLabel nameLabel = new JLabel("Họ Và Tên: " + studentDetails.getTen());
         nameLabel.setBounds(20, 20, 460, 30); // Kích thước hợp lý, đảm bảo không bị tràn
         detailsPanel.add(nameLabel);
 
-        JLabel idLabel = new JLabel("Mã số: " + studentDetails[1]);
+        JLabel idLabel = new JLabel("Mã số: " + studentDetails.getMssv());
         idLabel.setBounds(20, 60, 460, 30);
         detailsPanel.add(idLabel);
 
-        JLabel genderLabel = new JLabel("Giới tính: " + studentDetails[2]);
+        JLabel genderLabel = new JLabel("Giới tính: " + studentDetails.getGioiTinh());
         genderLabel.setBounds(20, 100, 460, 30);
         detailsPanel.add(genderLabel);
 
-        JLabel facultyLabel = new JLabel("Khoa: " + studentDetails[3]);
+        JLabel facultyLabel = new JLabel("Khoa: " + studentDetails.getKhoa());
         facultyLabel.setBounds(20, 140, 460, 30);
         detailsPanel.add(facultyLabel);
 
-        JLabel birthLabel = new JLabel("Năm sinh: " + studentDetails[4]);
+        JLabel birthLabel = new JLabel("Năm sinh: " + studentDetails.getNamSinh());
         birthLabel.setBounds(20, 180, 460, 30);
         detailsPanel.add(birthLabel);
 
-        JLabel dormLabel = new JLabel("Cư xá: " + studentDetails[5]);
+        JLabel dormLabel = new JLabel("Cư xá: " +studentDetails.getCuXa());
         dormLabel.setBounds(20, 220, 460, 30);
         detailsPanel.add(dormLabel);
 
-        JLabel roomLabel = new JLabel("Phòng: " + studentDetails[6]);
+        JLabel roomLabel = new JLabel("Phòng: " + studentDetails.getPhong());
         roomLabel.setBounds(20, 260, 460, 30);
         detailsPanel.add(roomLabel);
 
@@ -129,19 +134,32 @@ public class HĐSVDangKi {
 //        xemCT.setBackground(Color.RED); // Đỏ
         xemCT.setForeground(Color.BLACK);
         xemCT.addActionListener(e -> {
-            // Lấy dữ liệu chi tiết của sinh viên
-            String[] studentDetails1 = model.getStudentDetails(selectedRow);
+            // Lấy MSSV của sinh viên được chọn
+            String mssv = studentDetails.getMssv(); // MSSV nằm ở vị trí thứ 2 trong mảng studentDetails
 
-            // Tạo giao diện chi tiết
-            GDXemChiTiet detailPanel = new GDXemChiTiet(studentDetails1);
-            detailPanel.setBounds(0, 0, 800, 650);
+            // Tìm dữ liệu chi tiết của sinh viên dựa trên MSSV
+            String[] studentData = null;
+//            for (String[] student : model.dataAll) {
+//                if (student[0].equals(mssv)) { // So sánh MSSV
+//                    studentData = student;
+//                }
+//            }
 
-            // Hiển thị giao diện chi tiết thay thế giao diện hiện tại
-            view.getContentPane().removeAll();
-            view.getContentPane().add(detailPanel);
-            view.revalidate();
-            view.repaint();
+            if (studentData != null) {
+                // Tạo giao diện chi tiết
+                GDXemChiTiet detailPanel = new GDXemChiTiet(studentData);
+                detailPanel.setBounds(0, 0, 800, 650);
+
+                // Hiển thị giao diện chi tiết thay thế giao diện hiện tại
+                view.getContentPane().removeAll();
+                view.getContentPane().add(detailPanel);
+                view.revalidate();
+                view.repaint();
+            } else {
+                JOptionPane.showMessageDialog(view, "Không tìm thấy thông tin sinh viên.");
+            }
         });
+
 
         detailsPanel.add(xemCT);
 

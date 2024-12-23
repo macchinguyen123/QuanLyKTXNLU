@@ -1,11 +1,15 @@
 package gop1;
 
+import view.Home;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PasswordView extends JFrame {
     private JPasswordField passwordField;
-    private JButton confirmButton;
+    private JButton confirmButton, backButton;
 
     public PasswordView() {
         setTitle("Admin Login");
@@ -24,7 +28,33 @@ public class PasswordView extends JFrame {
                 g.drawImage(scaledImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        backgroundPanel.setLayout(new GridBagLayout());
+        backgroundPanel.setLayout(new BorderLayout());
+
+        // Back Button Panel
+        JPanel topLeftPanel = new JPanel();
+        topLeftPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        topLeftPanel.setOpaque(false);
+
+        backButton = new JButton("Quay về");
+        backButton.setFont(new Font("Inter", Font.BOLD, 16));
+        backButton.setForeground(Color.BLACK);
+        backButton.setBackground(Color.WHITE);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the PasswordView frame
+                Home home = new Home(); // Open the Home frame
+                home.setVisible(true);
+            }
+        });
+
+        topLeftPanel.add(backButton);
+        backgroundPanel.add(topLeftPanel, BorderLayout.NORTH);
+
+        // Main content in the center
+        JPanel mainContentPanel = new JPanel();
+        mainContentPanel.setLayout(new GridBagLayout());
+        mainContentPanel.setOpaque(false);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -37,7 +67,7 @@ public class PasswordView extends JFrame {
         passwordLabel.setForeground(Color.BLACK);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        backgroundPanel.add(passwordLabel, gbc);
+        mainContentPanel.add(passwordLabel, gbc);
 
         // Password Field Panel
         JPanel passwordPanel = new JPanel();
@@ -54,7 +84,7 @@ public class PasswordView extends JFrame {
         passwordPanel.add(passwordField, BorderLayout.CENTER);
 
         gbc.gridy = 1;
-        backgroundPanel.add(passwordPanel, gbc);
+        mainContentPanel.add(passwordPanel, gbc);
 
         // Confirm Button
         confirmButton = new JButton("Xác nhận");
@@ -62,7 +92,9 @@ public class PasswordView extends JFrame {
         confirmButton.setForeground(Color.BLACK);
         confirmButton.setBackground(Color.WHITE);
         gbc.gridy = 2;
-        backgroundPanel.add(confirmButton, gbc);
+        mainContentPanel.add(confirmButton, gbc);
+
+        backgroundPanel.add(mainContentPanel, BorderLayout.CENTER);
 
         add(backgroundPanel);
     }
@@ -78,5 +110,4 @@ public class PasswordView extends JFrame {
     public void displayMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
-
 }
