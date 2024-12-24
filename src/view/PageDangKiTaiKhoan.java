@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class PageDangKiTaiKhoan extends JPanel {
     JPanel mainPanel;
@@ -15,10 +16,10 @@ public class PageDangKiTaiKhoan extends JPanel {
     JPasswordField passWordField;
     JButton registerButton;
     Image background;
-    List<Map<String, String>> listSaveTaiKhoan;
+    Set<Map<String, String>> listSaveTaiKhoan;
 
 
-    public PageDangKiTaiKhoan(JPanel cardPanel, CardLayout cardLayout, List<Map<String, String>> listSaveTaiKhoan) {
+    public PageDangKiTaiKhoan(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.listSaveTaiKhoan = listSaveTaiKhoan;
 
         mainPanel = new JPanel(new GridLayout(5, 2));
@@ -78,9 +79,7 @@ public class PageDangKiTaiKhoan extends JPanel {
         this.add(mainPanel);
     }
 
-    public List<Map<String, String>> getListSaveTaiKhoan() {
-        return listSaveTaiKhoan;
-    }
+
 
     @Override
     protected void paintComponent(Graphics g) {

@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 public class PageFillInformatinDK extends JPanel {
     DefaultTableModel model;
@@ -19,7 +21,7 @@ public class PageFillInformatinDK extends JPanel {
     JScrollPane scrollPane;
     JLabel titleLabel;
     JPanel mainPanel;
-
+    Stack<String> pageStack = new Stack<>();
     private String currentMSSV;
 
     private MDSVDangKi tableModel;
@@ -27,9 +29,9 @@ public class PageFillInformatinDK extends JPanel {
     private List<JComboBox<String>> comboBoxes = new java.util.ArrayList<>();
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
-    private List<Map<String, String>> listSaveTaiKhoan;
+    private Set<Map<String, String>> listSaveTaiKhoan;
 
-    public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PageTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, List<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
+    public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PageTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
         this.tableModel = tableModel;
         this.listSaveTaiKhoan = listSaveTaiKhoan;
         this.currentMSSV = currentMSSV;
@@ -221,4 +223,5 @@ public class PageFillInformatinDK extends JPanel {
         checkBox1.setSelected(false);
         checkBox2.setSelected(false);
     }
+
 }
