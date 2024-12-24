@@ -15,7 +15,16 @@ public class Home extends JFrame {
     List<String> selectedAttributes;
     MDSVDangKi mdsvDangKi = new MDSVDangKi();
     String currentMSSV; // thêm biến currentMSSV
-
+    SVLoginOrSignIn studentPanel;
+    PageLogin pageLogin;
+    PageTTCNcuaSVDaO pageTTCNcuaSVDaO;
+    PageChooseRoom chooseRoom;
+    PanelHeaderOfHome header;
+    ThongTinChonPhong thongTinChonPhong;
+    PageFillInformatinDK fillInformatinDK;
+    PanelChooseStudentOrManager chooseStudentOrManager;
+    PageDangKiTaiKhoan dangKiTaiKhoanSV;
+    PanelHeaderOfHome headerPanel;
     public Home() throws HeadlessException {
         setTitle("Dormitory management system");
         setLayout(new BorderLayout());
@@ -29,16 +38,16 @@ public class Home extends JFrame {
 
         // Add panels to cardPanel
         mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout);
-        SVLoginOrSignIn studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
-        PageLogin pageLogin = new PageLogin(cardPanel, cardLayout, listSaveTaiKhoan);
-        PageTTCNcuaSVDaO pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
-        PageChooseRoom chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
-        PanelHeaderOfHome header = new PanelHeaderOfHome(cardPanel, cardLayout);
+         studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
+         pageLogin = new PageLogin(cardPanel, cardLayout, listSaveTaiKhoan);
+         pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
+         chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
+         header = new PanelHeaderOfHome(cardPanel, cardLayout);
 
-        ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
-        PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV);
-        PanelChooseStudentOrManager chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
-        PageDangKiTaiKhoan dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
+         thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
+         fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV);
+         chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
+         dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
 
 
 
@@ -53,7 +62,7 @@ public class Home extends JFrame {
         cardPanel.add(dangKiTaiKhoanSV, "dangKiTaiKhoanSV");
 
         // Add header panel
-        PanelHeaderOfHome headerPanel = new PanelHeaderOfHome(cardPanel,cardLayout);
+         headerPanel = new PanelHeaderOfHome(cardPanel,cardLayout);
         getContentPane().add(headerPanel, BorderLayout.NORTH);
 
         // Add cardPanel to the frame

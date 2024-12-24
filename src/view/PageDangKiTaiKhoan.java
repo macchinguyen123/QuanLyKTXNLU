@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class PageDangKiTaiKhoan extends JPanel {
     JPanel mainPanel;
-    JLabel mssv, passwordLabel;
+    JLabel mssv, passwordLabel,labelDangKy,pp;
     JTextField mssvTextField;
     JPasswordField passWordField;
     JButton registerButton;
@@ -23,8 +23,8 @@ public class PageDangKiTaiKhoan extends JPanel {
         this.listSaveTaiKhoan = listSaveTaiKhoan;
 
         mainPanel = new JPanel(new GridLayout(5, 2));
-        JLabel labelDangKy = new JLabel("Đăng ký tài khoản");
-        JLabel pp = new JLabel("");
+         labelDangKy = new JLabel("Đăng ký tài khoản");
+         pp = new JLabel("");// lam trong mot dong
         mainPanel.add(labelDangKy);
         mainPanel.setBackground(new Color(173, 216, 230));
         mainPanel.add(pp);
