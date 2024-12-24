@@ -4,12 +4,11 @@ import sinhVienDangKy.MDSVDangKi;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class Home extends JFrame {
-    private static List<Map<String, String>> listSaveTaiKhoan = new ArrayList<>();
+    private static Set<Map<String, String>> listSaveTaiKhoan = new HashSet<>();
     PanelChooseStudentOrManager mainPanel;
     CardLayout cardLayout;
     JPanel cardPanel;

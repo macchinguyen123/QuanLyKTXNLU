@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class PageTTCNcuaSVDaO extends JPanel {
@@ -20,7 +21,7 @@ public class PageTTCNcuaSVDaO extends JPanel {
     JButton btnOK,btnTraPhong;
 
 
-    public PageTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout, List<Map<String, String>> listSaveTaiKhoan) {
+    public PageTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.setLayout(new BorderLayout());
         lbInfor = new JLabel("", JLabel.CENTER); // Hiện ban đầu để trống
         this.add(lbInfor, BorderLayout.NORTH);
