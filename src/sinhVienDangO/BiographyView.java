@@ -1,10 +1,9 @@
-package gop1;
+package sinhVienDangO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
 public class BiographyView extends JFrame {
     private JMenuItem menuExit, menuManage, roomManage;

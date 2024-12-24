@@ -1,15 +1,13 @@
-package gop1;
+package sinhVienDangO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class UpdateInforView extends JFrame {
     JScrollBar s2;
-    JLabel labelSchoolName, labelName, labelGender, labelBirthYear, labelID, labelPhone, labelAddress, labelDe, labelRoom, labelDorm, labelCardID, labelNation, policyArea;
+    JLabel labelName, labelGender, labelBirthYear, labelID, labelPhone, labelAddress, labelDe, labelRoom, labelDorm, labelCardID, labelNation, policyArea;
     JTextField fieldName, fieldBY, fieldID, fieldPhone, fieldAddress, fieldRoom, fieldCardID;
     JCheckBox martyrs, poorHousehold;
     JComboBox cbDe, cbGender, cbNation, cbDorm;
@@ -195,15 +193,16 @@ public class UpdateInforView extends JFrame {
                 boolean isMartyrs = martyrs.isSelected();
                 boolean isPoorHousehold = poorHousehold.isSelected();
 
-                currentStudent.setTen(fieldName.getText());
-                currentStudent.setMssv(fieldID.getText());
-                currentStudent.setGioiTinh(cbGender.getSelectedItem().toString());
-                currentStudent.setKhoa(cbDe.getSelectedItem().toString());
-                currentStudent.setNamSinh(fieldBY.getText());
-                currentStudent.setCuXa(cbDorm.getSelectedItem().toString());
-                currentStudent.setPhong(fieldRoom.getText());
-                currentStudent.setDiaChi(fieldAddress.getText());
-                currentStudent.setIdCCCD(fieldCardID.getText());
+                currentStudent.setTen(name);
+                currentStudent.setMssv(id);
+                currentStudent.setGioiTinh(gender);
+                currentStudent.setKhoa(department);
+                currentStudent.setNamSinh(birthYear);
+                currentStudent.setCuXa(dorm);
+                currentStudent.setPhong(room);
+                currentStudent.setDiaChi(address);
+                currentStudent.setIdCCCD(cardID);
+                currentStudent.setDanToc(nation);
 
                 studentController.updateStudent(currentStudent);
 
@@ -218,21 +217,21 @@ public class UpdateInforView extends JFrame {
     }
 
     public void setStudentDetails(Student student) {
-        fieldName.setText(student.getTen());
-        fieldBY.setText(student.getNamSinh());
-        fieldID.setText(student.getMssv());
-        cbGender.setSelectedItem(student.getGioiTinh());
-        fieldPhone.setText(student.getSđt());
-        fieldAddress.setText(student.getDiaChi());
-        cbDe.setSelectedItem(student.getKhoa());
-        fieldRoom.setText(student.getPhong());
-        cbDorm.setSelectedItem(student.getCuXa());
-        fieldCardID.setText(student.getIdCCCD());
-        cbNation.setSelectedItem(student.getDanToc());
+            fieldName.setText(student.getTen());
+            fieldBY.setText(student.getNamSinh());
+            fieldID.setText(student.getMssv());
+            cbGender.setSelectedItem(student.getGioiTinh());
+            fieldPhone.setText(student.getSđt());
+            fieldAddress.setText(student.getDiaChi());
+            cbDe.setSelectedItem(student.getKhoa());
+            fieldRoom.setText(student.getPhong());
+            cbDorm.setSelectedItem(student.getCuXa());
+            fieldCardID.setText(student.getIdCCCD());
+            cbNation.setSelectedItem(student.getDanToc());
 
-        // Cập nhật checkbox chính sách
-        martyrs.setSelected(student.isMartyrs());
-        poorHousehold.setSelected(student.isPoorHousehold());
+            // Cập nhật checkbox chính sách
+            martyrs.setSelected(student.isMartyrs());
+            poorHousehold.setSelected(student.isPoorHousehold());
     }
 
 

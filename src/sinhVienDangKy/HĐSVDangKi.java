@@ -1,7 +1,7 @@
 package sinhVienDangKy;
 
 
-import gop1.Student;
+import sinhVienDangO.Student;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,7 +81,7 @@ public class HĐSVDangKi {
         birthLabel.setBounds(20, 180, 460, 30);
         detailsPanel.add(birthLabel);
 
-        JLabel dormLabel = new JLabel("Cư xá: " +studentDetails.getCuXa());
+        JLabel dormLabel = new JLabel("Cư xá: " + studentDetails.getCuXa());
         dormLabel.setBounds(20, 220, 460, 30);
         detailsPanel.add(dormLabel);
 
@@ -136,26 +136,33 @@ public class HĐSVDangKi {
 //        xemCT.setBackground(Color.RED); // Đỏ
         xemCT.setForeground(Color.BLACK);
         xemCT.addActionListener(e -> {
-            // Lấy MSSV của sinh viên được chọn
-            String mssv = studentDetails.getMssv(); // MSSV nằm ở vị trí thứ 2 trong mảng studentDetails
+            // Lấy dữ liệu từ đối tượng Student
+            String[] studentData = new String[]{
+                    studentDetails.getTen(),           // Họ và tên
+                    studentDetails.getGioiTinh(),     // Giới tính
+                    studentDetails.getNamSinh(),      // Ngày sinh
+                    studentDetails.getMssv(),         // Mã số sinh viên
+                    studentDetails.getSđt(),  // Số điện thoại
+                    studentDetails.getDiaChi(),       // Hộ khẩu thường trú
+                    studentDetails.getKhoa(),         // Khoa
+                    studentDetails.getPhong(),        // Phòng
+                    studentDetails.getCuXa(),         // Cư xá
+                    studentDetails.getIdCCCD(),         // CCCD/CMND
+                    studentDetails.getDanToc(),       // Dân tộc
+                    studentDetails.getDienChinhSach() // Diện chính sách
+            };
 
-            // Tìm dữ liệu chi tiết của sinh viên dựa trên MSSV
-            String[] studentData = null;
-//            for (String[] student : model.dataAll) {
-//                if (student[0].equals(mssv)) { // So sánh MSSV
-//                    studentData = student;
-//                }
-//            }
+            // Tạo giao diện chi tiết
+            GDXemChiTiet detailPanel = new GDXemChiTiet(studentData);
+            detailPanel.setBounds(0, 0, 800, 650);
 
-                // Tạo giao diện chi tiết
-                GDXemChiTiet detailPanel = new GDXemChiTiet(studentData);
-                detailPanel.setBounds(0, 0, 800, 650);
-
-                // Hiển thị giao diện chi tiết thay thế giao diện hiện tại
-                view.getContentPane().removeAll();
-                view.getContentPane().add(detailPanel);
-                view.revalidate();
-                view.repaint();
+//            // Hiển thị giao diện chi tiết thay thế giao diện hiện tại
+            view.getContentPane().removeAll();
+            view.getContentPane().add(detailPanel);
+            view.revalidate();
+            view.repaint();
+//            view.getCardPanel().add(detailPanel, "detail");
+//            view.showCard("detail"); // Hiển thị giao diện chi tiết
         });
 
 

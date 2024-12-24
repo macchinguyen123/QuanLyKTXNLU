@@ -1,4 +1,4 @@
-package gop1;
+package sinhVienDangO;
 
 import javax.swing.*;
 import java.awt.*;
