@@ -43,6 +43,8 @@ public class UpdateInforView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                dispose();
+                UpdateInforView updateInforView = new UpdateInforView(studentListView, studentController, currentStudent);
+                updateInforView.setVisible(false);
                 studentListView.setVisible(true);
             }
         });
@@ -209,6 +211,8 @@ public class UpdateInforView extends JFrame {
                 JOptionPane.showMessageDialog(UpdateInforView.this, "Thông tin đã được cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 
                 studentListView.updateStudentList(studentController.getStudents());
+                UpdateInforView updateInforView = new UpdateInforView(studentListView, studentController, currentStudent);
+                updateInforView.setVisible(false);
                 studentListView.setVisible(true);
             }
         });
