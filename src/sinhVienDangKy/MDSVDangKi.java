@@ -16,13 +16,13 @@ public class MDSVDangKi extends AbstractTableModel {
         students = new ArrayList<>();
         studentDataStorage = StudentDataStorage.getInstance();
         // Sample data
-        students.add(new Student("Nguyen Van Tung", "2313335", "Nam", "CNTT", "2002", "A", "101", "", "", "", "", ""));
-        students.add(new Student("Le Thi Tuyet Van", "2313345", "Nữ", "Kinh tế", "2001", "B", "202", "", "", "", "", ""));
+        students.add(new Student("Nguyen Van Tung", "2313335", "Nam", "CNTT", "2002", "A", "101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Diện 1"));
+        students.add(new Student("Le Thi Tuyet Van", "2313345", "Nữ", "Kinh tế", "2001", "B", "202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Diện 1"));
         List<Student> storedData = studentDataStorage.getStudentData();
         if (storedData != null && !storedData.isEmpty()) {
             students.add(storedData.get(0));
         } else {
-            System.out.println("Danh sách lưu trữ trống hoặc không hợp lệ MDSVDAANGKY");
+            System.out.println(" ");
         }
     }
 

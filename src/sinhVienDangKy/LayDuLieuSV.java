@@ -42,6 +42,7 @@ public class LayDuLieuSV {
         Student student = new Student(name, MSSV, gender, Khoa, birthYear, CuXa, Phong, HKTT, cMND, SĐT, danToc, dienChinhSach);
 // In ra dữ liệu để kiểm tra
         System.out.println("Thêm sinh viên: " + data.getTen());
+        System.out.println("Thêm sinh viên: " + data.getDiaChi());
         // Thêm vào danh sách
         sVLuu.add(student);
     }
