@@ -43,7 +43,7 @@ public class AdminRoomManagerView extends JFrame {
 // Danh sách cư xá nam
         maleDormitoryModel = new DefaultListModel<>();
         maleDormitoryList = new JList<>(maleDormitoryModel);
-        maleDormitoryList.setFont(new Font("Arial", Font.PLAIN, 20));  // Kích thước chữ nhỏ hơn
+        maleDormitoryList.setFont(new Font("Arial", Font.PLAIN, 25));  // Kích thước chữ nhỏ hơn
         maleDormitoryList.setFixedCellHeight(30);  // Chiều cao mỗi ô nhỏ hơn
         maleDormitoryList.setVisibleRowCount(4);   // Hiển thị tối đa 4 hàng (giảm chiều dài)
         maleDormitoryList.addListSelectionListener(e -> {
@@ -57,7 +57,7 @@ public class AdminRoomManagerView extends JFrame {
         malePanel.setBackground(Color.WHITE);
         malePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Đường viền xám
         JLabel maleLabel = new JLabel("Cư Xá Nam", JLabel.CENTER);
-        maleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        maleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         malePanel.add(maleLabel, BorderLayout.NORTH);
         malePanel.add(new JScrollPane(maleDormitoryList), BorderLayout.CENTER);
         malePanel.setPreferredSize(new Dimension(150, 80)); // Giảm chiều dài và chiều cao
@@ -66,7 +66,7 @@ public class AdminRoomManagerView extends JFrame {
 // Danh sách cư xá nữ
         femaleDormitoryModel = new DefaultListModel<>();
         femaleDormitoryList = new JList<>(femaleDormitoryModel);
-        femaleDormitoryList.setFont(new Font("Arial", Font.PLAIN, 20));  // Kích thước chữ nhỏ hơn
+        femaleDormitoryList.setFont(new Font("Arial", Font.PLAIN, 25));  // Kích thước chữ nhỏ hơn
         femaleDormitoryList.setFixedCellHeight(30);  // Chiều cao mỗi ô nhỏ hơn
         femaleDormitoryList.setVisibleRowCount(4);   // Hiển thị tối đa 4 hàng (giảm chiều dài)
         femaleDormitoryList.addListSelectionListener(e -> {
@@ -80,7 +80,7 @@ public class AdminRoomManagerView extends JFrame {
         femalePanel.setBackground(Color.WHITE);
         femalePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Đường viền xám
         JLabel femaleLabel = new JLabel("Cư Xá Nữ", JLabel.CENTER);
-        femaleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        femaleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         femalePanel.add(femaleLabel, BorderLayout.NORTH);
         femalePanel.add(new JScrollPane(femaleDormitoryList), BorderLayout.CENTER);
         femalePanel.setPreferredSize(new Dimension(150, 80));

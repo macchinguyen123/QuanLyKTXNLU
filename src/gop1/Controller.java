@@ -16,7 +16,6 @@ public class Controller {
     private Model mainModel;
     private View mainView;
     private StudentView view;
-    private ExitDialog mainExitDialog;
     Home home = new Home();
 
 //    private Model mainModel1;
@@ -31,16 +30,11 @@ public class Controller {
     private void openMainView() {
         mainModel = new Model();
         mainView = new View();
-        mainExitDialog = new ExitDialog(mainView);
 
         // Main View listeners
-        mainView.setExitMenuItemListener(new ExitMenuItemListener());
         mainView.setManageMenuItemListener(new ManageMenuItemListener());
         mainView.setRoomManageMenuItemListener(new RoomManageMenuItemListener());
 
-        // ExitDialog listeners
-        mainExitDialog.setThoatButtonListener(new ExitDialogThoatButtonListener());
-        mainExitDialog.setHuyButtonListener(new ExitDialogHuyButtonListener());
 
         mainView.setVisible(true);
     }
@@ -48,7 +42,6 @@ public class Controller {
     private void openStudentManagementView() {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
-        ExitDialog studentExitDialog = new ExitDialog(studentView);
         StudentController studentController = new StudentController(new StudentListView());
         MDSVDangKi mdsvDangKi = new MDSVDangKi();
         GDSVDangKi g = new GDSVDangKi(mdsvDangKi);
@@ -56,9 +49,6 @@ public class Controller {
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
         studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, home.getMdsvDangKi(), mainView));
-        studentView.setExitMenuItemListener(new StudentExitMenuItemListener(studentExitDialog));
-        studentExitDialog.setThoatButtonListener(new ExitDialogThoatButtonListener());
-        studentExitDialog.setHuyButtonListener(new ExitDialogHuyButtonListener());
         studentView.getBtnBack().addActionListener(new BackButtonListener(studentView));
         studentView.setVisible(true);
     }
@@ -81,12 +71,6 @@ public class Controller {
         }
     }
 
-    private class ExitMenuItemListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            mainExitDialog.setVisible(true);
-        }
-    }
 
     private class ManageMenuItemListener implements ActionListener {
         @Override
@@ -109,12 +93,6 @@ public class Controller {
         }
     }
 
-    private class ExitDialogHuyButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            mainExitDialog.setVisible(false);
-        }
-    }
 
     private class StudentListButtonListener implements ActionListener {
         private StudentView studentView;
@@ -148,18 +126,6 @@ public class Controller {
         }
     }
 
-    private class StudentExitMenuItemListener implements ActionListener {
-        private ExitDialog studentExitDialog;
-
-        public StudentExitMenuItemListener(ExitDialog studentExitDialog) {
-            this.studentExitDialog = studentExitDialog;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            studentExitDialog.setVisible(true);
-        }
-    }
 
     private class BackButtonListener implements ActionListener {
         private StudentView studentView;
