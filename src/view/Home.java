@@ -33,11 +33,14 @@ public class Home extends JFrame {
         PageLogin pageLogin = new PageLogin(cardPanel, cardLayout, listSaveTaiKhoan);
         PageTTCNcuaSVDaO pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
         PageChooseRoom chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
+        PanelHeaderOfHome header = new PanelHeaderOfHome(cardPanel, cardLayout);
 
         ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
         PageFillInformatinDK fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV);
         PanelChooseStudentOrManager chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
         PageDangKiTaiKhoan dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
+
+
 
         cardPanel.add(mainPanel, "choosePanel");
         cardPanel.add(studentPanel, "studentPanel");
@@ -50,7 +53,7 @@ public class Home extends JFrame {
         cardPanel.add(dangKiTaiKhoanSV, "dangKiTaiKhoanSV");
 
         // Add header panel
-        PanelHeaderOfHome headerPanel = new PanelHeaderOfHome();
+        PanelHeaderOfHome headerPanel = new PanelHeaderOfHome(cardPanel,cardLayout);
         getContentPane().add(headerPanel, BorderLayout.NORTH);
 
         // Add cardPanel to the frame

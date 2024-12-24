@@ -8,11 +8,11 @@ public class MyPanelHome extends JPanel {
     PanelChooseStudentOrManager panelChoose;
 
 
-    public MyPanelHome() {
+    public MyPanelHome(JPanel cardpanel, CardLayout cardLayout) {
         setLayout(new BorderLayout());
 //
 
-        header = new PanelHeaderOfHome();
+        header = new PanelHeaderOfHome(cardpanel, cardLayout);
 //        panelChoose = new PanelChooseStudentOrManager();
         this.add(header, BorderLayout.NORTH);
         this.add(panelChoose, BorderLayout.CENTER);
