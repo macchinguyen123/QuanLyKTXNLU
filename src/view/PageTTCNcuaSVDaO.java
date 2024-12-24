@@ -5,8 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -78,12 +77,7 @@ public class PageTTCNcuaSVDaO extends JPanel {
         tableModel.setRowCount(0);
 
         // Cập nhật thông tin mới
-//        String[] labels = {
-//                "Họ và tên", "Giới tính", "Ngày sinh", "Mã số sinh viên",
-//                "Số điện thoại", "Hộ khẩu thường trú", "Khoa",
-//                "Phòng", "Cư xá", "CCCD / CMND", "Dân tộc",
-//                "Con liệt sĩ, thương binh", "Gia đình khó khăn"
-//        };
+
         String[] labels = {
                 "Họ và tên","Ngày sinh", "Mã số sinh viên","Số điện thoại", "Hộ khẩu thường trú",
                 "Khoa","Phòng","CCCD / CMND","Dân tộc","Giới tính","Cư xá", "Con liệt sĩ, thương binh", "Gia đình khó khăn"

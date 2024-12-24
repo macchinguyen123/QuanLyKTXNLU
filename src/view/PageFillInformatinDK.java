@@ -30,6 +30,8 @@ public class PageFillInformatinDK extends JPanel {
     private JCheckBox checkBox1;
     private JCheckBox checkBox2;
     private Set<Map<String, String>> listSaveTaiKhoan;
+    JPanel policyPanel;
+    JButton confirmButton,backHome,backToPagePrevious;
 
     public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PageTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
         this.tableModel = tableModel;
@@ -57,7 +59,7 @@ public class PageFillInformatinDK extends JPanel {
         mainPanel.add(createInputField("CCCD / CMND:"));
         mainPanel.add(createInputField("Dân tộc:"));
 
-        JPanel policyPanel = new JPanel();
+         policyPanel = new JPanel();
         policyPanel.setLayout(new BoxLayout(policyPanel, BoxLayout.Y_AXIS));
         policyPanel.setBorder(BorderFactory.createTitledBorder("Diện chính sách"));
         checkBox1 = new JCheckBox("Con liệt sĩ, thương binh, bệnh binh");
@@ -67,7 +69,7 @@ public class PageFillInformatinDK extends JPanel {
         mainPanel.add(policyPanel);
         mainPanel.add(Box.createVerticalStrut(20));
 
-        JButton confirmButton = new JButton("XÁC NHẬN");
+        confirmButton = new JButton("XÁC NHẬN");
         confirmButton.setFont(new Font("Arial", Font.BOLD, 16));
         confirmButton.setBackground(new Color(173, 216, 230));
         confirmButton.setForeground(Color.WHITE);
@@ -94,7 +96,7 @@ public class PageFillInformatinDK extends JPanel {
 
         mainPanel.add(confirmButton);
 
-        JButton backHome = new JButton(new ImageIcon("src/img/iconHome.png"));
+         backHome = new JButton(new ImageIcon("src/img/iconHome.png"));
         backHome.setForeground(Color.WHITE);
         backHome.setAlignmentX(Component.CENTER_ALIGNMENT);
         backHome.addActionListener(new ActionListener() {
@@ -105,7 +107,7 @@ public class PageFillInformatinDK extends JPanel {
         });
         mainPanel.add(backHome);
 
-        JButton backToPagePrevious = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
+        backToPagePrevious = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
         backToPagePrevious.setForeground(Color.WHITE);
         backToPagePrevious.setAlignmentX(Component.CENTER_ALIGNMENT);
         backToPagePrevious.addActionListener(new ActionListener() {

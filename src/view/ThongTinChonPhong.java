@@ -6,7 +6,11 @@ import java.util.List;
 
 public class ThongTinChonPhong extends JPanel {
     Image imgBackround;
-
+    JComboBox<String> genderBox,capacityBox,dormBox;
+    JButton btnBack;
+    JPanel topPanel, mainPanel;
+    JScrollPane scrollPane;
+    String[] roomsA, roomsB,roomsC,roomsD,roomsE,roomsF;
     public ThongTinChonPhong(JPanel cardPanel, CardLayout cardLayout, List<String> selectedAttributes) {
         if (selectedAttributes == null || selectedAttributes.isEmpty()) {
             throw new IllegalArgumentException("Danh sách thuộc tính đã chọn không được null hoặc rỗng!");
@@ -14,17 +18,17 @@ public class ThongTinChonPhong extends JPanel {
 
         imgBackround = new ImageIcon("src/img/backroundKTX.jpg").getImage();
 
-        JComboBox<String> genderBox = createStyledComboBox(new String[]{selectedAttributes.get(0)});
-        JComboBox<String> capacityBox = createStyledComboBox(new String[]{selectedAttributes.get(1)});
-        JComboBox<String> dormBox = createStyledComboBox(new String[]{selectedAttributes.get(2)});
+        genderBox = createStyledComboBox(new String[]{selectedAttributes.get(0)});
+        capacityBox = createStyledComboBox(new String[]{selectedAttributes.get(1)});
+        dormBox = createStyledComboBox(new String[]{selectedAttributes.get(2)});
 
         // Nút quay lại
-        JButton btnBack = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
+         btnBack = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
         btnBack.setBounds(20, 10, 25, 25);
         this.add(btnBack);
         btnBack.addActionListener(e -> cardLayout.show(cardPanel, "chooseRoom"));
 
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+         topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel.setBackground(new Color(200, 220, 255));
         topPanel.add(genderBox);
         topPanel.add(capacityBox);
@@ -34,18 +38,18 @@ public class ThongTinChonPhong extends JPanel {
         this.add(topPanel, BorderLayout.NORTH);
 
         // Nội dung chính
-        JPanel mainPanel = new JPanel();
+         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBackground(Color.WHITE);
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
+         scrollPane = new JScrollPane(mainPanel);
         this.add(scrollPane, BorderLayout.CENTER);
 
-        String[] roomsA = {"A101 còn 1 chỗ trống", "A201 còn 1 chỗ trống", "A206 còn 1 chỗ trống","A207 còn 1 chỗ trống"};
-        String[] roomsB = {"B101 còn 1 chỗ trống", "B201 còn 1 chỗ trống", "B206 còn 1 chỗ trống"};
-        String[] roomsC = {"C101 còn 1 chỗ trống", "C201 còn 1 chỗ trống", "C206 còn 1 chỗ trống"};
-        String[] roomsD = {"D101 còn 1 chỗ trống", "D201 còn 1 chỗ trống", "D206 còn 1 chỗ trống"};
-        String[] roomsE = {"E101 còn 1 chỗ trống", "E201 còn 1 chỗ trống", "E206 còn 1 chỗ trống"};
-        String[] roomsF = {"F101 còn 1 chỗ trống", "F201 còn 1 chỗ trống", "F206 còn 1 chỗ trống"};
+        roomsA = new String[] {"A101 còn 1 chỗ trống", "A201 còn 1 chỗ trống", "A206 còn 1 chỗ trống","A207 còn 1 chỗ trống"};
+         roomsB = new String[]{"B101 còn 1 chỗ trống", "B201 còn 1 chỗ trống", "B206 còn 1 chỗ trống"};
+        roomsC = new String[]{"C101 còn 1 chỗ trống", "C201 còn 1 chỗ trống", "C206 còn 1 chỗ trống"};
+        roomsD =new String[] {"D101 còn 1 chỗ trống", "D201 còn 1 chỗ trống", "D206 còn 1 chỗ trống"};
+        roomsE = new String[]{"E101 còn 1 chỗ trống", "E201 còn 1 chỗ trống", "E206 còn 1 chỗ trống"};
+         roomsF =new String[] {"F101 còn 1 chỗ trống", "F201 còn 1 chỗ trống", "F206 còn 1 chỗ trống"};
         // hien thi danh sach phong trong theo cu xa
 
         if (dormBox.getSelectedItem().equals("B")){
