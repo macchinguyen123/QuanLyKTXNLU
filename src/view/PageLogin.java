@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class PageLogin extends JPanel {
     JLabel homeIcon;
@@ -13,12 +14,12 @@ public class PageLogin extends JPanel {
     JLabel labelIdSV, labelPasswd;
     JPasswordField txtPasswd;
     JButton btnLogin;
-    List<Map<String, String>> listSaveTaiKhoan;
+    Set<Map<String, String>> listSaveTaiKhoan;
     CardLayout cardLayout;
     JPanel cardPanel;
     String currentMSSV; // thêm biến currentMSSV
 
-    public PageLogin(JPanel cardPanel, CardLayout cardLayout, List<Map<String, String>> listSaveTaiKhoan) {
+    public PageLogin(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.listSaveTaiKhoan = listSaveTaiKhoan;
         this.cardLayout = cardLayout;
         this.cardPanel = cardPanel;
