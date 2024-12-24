@@ -37,9 +37,8 @@ public class StudentController {
         students.add(st8);
         if (storedData != null && !storedData.isEmpty()) {
             students.addAll(storedData);
-            System.out.println("Đã thêm " + storedData.size() + " sinh viên từ LayDuLieuSV.");
         } else {
-            System.out.println("Danh sách lưu trữ trống hoặc không hợp lệ.");
+            System.out.println(" ");
         }
 
         this.view.addSearchActionListener(new searchAction());

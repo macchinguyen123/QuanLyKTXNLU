@@ -80,7 +80,7 @@ public class HĐSVDangKi {
         JPanel panel = new JPanel(null);
         panel.setOpaque(true);
         panel.setBackground(new Color(173, 216, 230)); // Màu xanh nhạt
-        panel.setBounds(150,50,500,400);
+        panel.setBounds(150, 50, 500, 400);
         // Hiển thị thông tin sinh viên
         JLabel nameLabel = new JLabel("Họ Và Tên: " + studentDetails.getTen());
         nameLabel.setBounds(20, 20, 460, 30); // Kích thước hợp lý, đảm bảo không bị tràn
@@ -113,7 +113,10 @@ public class HĐSVDangKi {
         // Nút Quay lại
         JButton backButton = new JButton("Quay lại");
         backButton.setBounds(15, 320, 100, 30); // Nút nằm gọn trong frame
-        backButton.addActionListener(e -> detailsFrame.dispose());
+        backButton.addActionListener(e -> {
+            view.setVisible(true);
+            detailsFrame.dispose();
+        });
         panel.add(backButton);
 
         // Nút Xác nhận
@@ -125,8 +128,10 @@ public class HĐSVDangKi {
             LayDuLieuSV storage = LayDuLieuSV.getInstances();
             storage.addStudent(studentDetails);
             model.removeStudent(selectedRow);
+            model.removeStudentTimKiem(selectedRow);
             detailsFrame.setVisible(false);
             detailsFrame.dispose();
+            view.setVisible(true);
         });
         panel.add(confirmButton);
 
@@ -136,7 +141,9 @@ public class HĐSVDangKi {
         cancelButton.setBackground(Color.RED); // Đỏ
         cancelButton.setForeground(Color.WHITE);
         cancelButton.addActionListener(e -> {
+            view.setVisible(true);
             model.removeStudent(selectedRow);
+            model.removeStudentTimKiem(selectedRow);
             detailsFrame.dispose();
         });
         panel.add(cancelButton);
@@ -164,11 +171,12 @@ public class HĐSVDangKi {
 
             // Tạo giao diện chi tiết
             GDXemChiTiet detailPanel = new GDXemChiTiet(studentData, view);
+            detailsFrame.setVisible(false);
             detailPanel.setVisible(true);
             detailPanel.getButtonQuayLai().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    view.setVisible(true);
+                    detailsFrame.setVisible(true);
                     detailPanel.dispose();
                 }
             });
@@ -176,10 +184,10 @@ public class HĐSVDangKi {
         panel.add(xemCT);
 
         detailsFrame.add(panel);
+        view.setVisible(false);
         // Hiển thị JFrame
         detailsFrame.setVisible(true);
     }
-
 
 
 }

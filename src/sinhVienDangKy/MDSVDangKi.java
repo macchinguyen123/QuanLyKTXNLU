@@ -11,21 +11,24 @@ public class MDSVDangKi extends AbstractTableModel {
     private final String[] columnNames = {"STT", "Tên", "Mã số", "Giới tính", "Khoa", "Năm sinh", "Cư xá", "Phòng"};
     private final List<Student> students;
     public StudentDataStorage studentDataStorage;
+    // Lưu danh sách sinh viên gốc (chỉ thực hiện một lần, ví dụ trong constructor hoặc khởi tạo)
+    private final List<Student> originalStudents = new ArrayList<>();
 
     public MDSVDangKi() {
         students = new ArrayList<>();
         studentDataStorage = StudentDataStorage.getInstance();
         // Sample data
         students.add(new Student("Nguyen Van Tung", "2313335", "Nam", "Công Nghệ Thông Tin", "22/08/2002", "A", "101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Có"));
-        students.add(new Student("Nguyen Van Tung", "2313335", "Nam", "Công Nghệ Thông Tin", "22/08/2002", "A", "101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Không"));
+        students.add(new Student("Nguyen Van Mai Huong", "23139990", "Nam", "Công Nghệ Thông Tin", "22/08/2002", "A", "101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Không"));
         students.add(new Student("Le Thi Ngoc Mai", "23130001", "Nữ", "Kinh tế", "23/01/2001", "B", "202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Không"));
         students.add(new Student("Chau Thi Anh Thu", "23126578", "Nữ", "Kinh tế", "23/01/2001", "C", "202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Có"));
         List<Student> storedData = studentDataStorage.getStudentData();
         if (storedData != null && !storedData.isEmpty()) {
-            students.add(storedData.get(0));
+            students.addAll(storedData);
         } else {
             System.out.println(" ");
         }
+        originalStudents.addAll(students);
     }
 
 
@@ -48,9 +51,46 @@ public class MDSVDangKi extends AbstractTableModel {
         }
     }
 
+    public void removeStudentTimKiem(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < originalStudents.size()) {
+            Student removedStudent = originalStudents.get(rowIndex);
+            originalStudents.remove(rowIndex);
+            fireTableDataChanged();
+
+            // Cập nhật StudentDataStorage
+            studentDataStorage.removeStudent(removedStudent.getMssv());
+        }
+    }
+
 
     public void filterData(String keyword) {
-        students.removeIf(student -> !student.getCuXa().toLowerCase().contains(keyword.toLowerCase()));
+        // Loại bỏ khoảng trắng thừa trong từ khóa
+//        keyword = keyword.trim();
+
+        // Nếu từ khóa rỗng, khôi phục danh sách gốc và cập nhật bảng
+        if (keyword.isEmpty()) {
+            students.clear();
+            students.addAll(originalStudents);
+            fireTableDataChanged();
+            return;
+        }
+
+        // Tạo danh sách tạm chứa các sinh viên phù hợp
+        List<Student> filteredList = students.stream()
+                .filter(student -> student.getCuXa().toLowerCase().contains(keyword.toLowerCase()))
+                .toList();
+
+        // Nếu không tìm thấy sinh viên nào, hiển thị thông báo và giữ nguyên danh sách
+        if (filteredList.isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Không tìm thấy cư xá nào khớp với từ khóa!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Cập nhật danh sách sinh viên với dữ liệu lọc được
+        students.clear();
+        students.addAll(filteredList);
+
+        // Thông báo dữ liệu bảng đã thay đổi
         fireTableDataChanged();
     }
 
