@@ -2,7 +2,6 @@ package view;
 
 import sinhVienDangKy.MDSVDangKi;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -51,12 +50,15 @@ public class Home extends JFrame {
         cardPanel.add(chooseStudentOrManager, "chooseStudentOrManager");
         cardPanel.add(dangKiTaiKhoanSV, "dangKiTaiKhoanSV");
 
+        // Add header panel
+        PanelHeaderOfHome headerPanel = new PanelHeaderOfHome();
+        getContentPane().add(headerPanel, BorderLayout.NORTH);
+
         // Add cardPanel to the frame
         getContentPane().add(cardPanel, BorderLayout.CENTER);
         this.setLocationRelativeTo(null);
         setVisible(true);
     }
-
 
     public MDSVDangKi getMdsvDangKi() {
         return mdsvDangKi;
