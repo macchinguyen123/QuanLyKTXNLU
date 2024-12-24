@@ -151,7 +151,8 @@ public class AdminRoomManagerView extends JFrame {
             }
         });
 
-        backButton.addActionListener(e -> dispose());
+        backButton.addActionListener(e ->
+                dispose());
 
         // Hiển thị danh sách cư xá
         updateDormitoryLists();
@@ -273,5 +274,9 @@ public class AdminRoomManagerView extends JFrame {
                 maleDormitoryModel.addElement(dormitory + " - Phòng Trống: " + emptyRooms);
             }
         }
+    }
+
+    public JButton getBackButton() {
+        return backButton;
     }
 }
