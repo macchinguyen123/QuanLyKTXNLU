@@ -48,4 +48,9 @@ public class StudentDataStorage {
     public void clearData() {
         studentData.clear();
     }
+
+    public void removeStudent(String mssv) {
+        studentData.removeIf(student -> student.getMssv().equals(mssv));
+    }
+
 }
