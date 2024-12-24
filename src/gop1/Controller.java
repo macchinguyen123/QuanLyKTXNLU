@@ -55,7 +55,7 @@ public class Controller {
 
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
-        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, home.getMdsvDangKi()));
+        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, home.getMdsvDangKi(), mainView));
         studentView.setExitMenuItemListener(new StudentExitMenuItemListener(studentExitDialog));
         studentExitDialog.setThoatButtonListener(new ExitDialogThoatButtonListener());
         studentExitDialog.setHuyButtonListener(new ExitDialogHuyButtonListener());

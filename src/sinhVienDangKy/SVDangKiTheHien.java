@@ -1,6 +1,7 @@
 package sinhVienDangKy;
 
 import gop1.StudentView;
+import gop1.View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +10,12 @@ import java.awt.event.ActionListener;
 public class SVDangKiTheHien implements ActionListener {
     private StudentView studentView;
     private MDSVDangKi mdsvDangKi;
+    private View view1;
 
-    public SVDangKiTheHien(StudentView studentView, MDSVDangKi mdsvDangKi) {
+    public SVDangKiTheHien(StudentView studentView, MDSVDangKi mdsvDangKi, View view1) {
         this.studentView = studentView;
         this.mdsvDangKi = mdsvDangKi;
+        this.view1=view1;
     }
 
     @Override
@@ -23,7 +26,7 @@ public class SVDangKiTheHien implements ActionListener {
         view.setVisible(true);
         view.getBackButton().addActionListener(event -> {
 //            studentView.dispose();
-            studentView.setVisible(true);
+            view1.setVisible(true);
             view.setVisible(false);
         });
     }
