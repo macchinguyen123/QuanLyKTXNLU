@@ -33,7 +33,7 @@ public class Home extends JFrame {
         mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout);
         SVLoginOrSignIn studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
         PageLogin pageLogin = new PageLogin(cardPanel, cardLayout, listSaveTaiKhoan);
-        PageTTCNcuaSVDaO pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout);
+        PageTTCNcuaSVDaO pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
         PageChooseRoom chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
 
         ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));

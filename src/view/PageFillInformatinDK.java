@@ -78,7 +78,7 @@ public class PageFillInformatinDK extends JPanel {
                     JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
                     pageTTCN.updateInformation(data);
 //                    tableModel.addStudent(data);
-
+                    clearFields();
                     // Xóa tài khoản đăng nhập hiện tại khỏi danh sách
                     listSaveTaiKhoan.removeIf(account -> account.get("Mã số sinh viên").equals(currentMSSV));
 
@@ -162,7 +162,7 @@ public class PageFillInformatinDK extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2, 2, 10, 10));
         JLabel label1 = new JLabel(label1Text);
-        JComboBox<String> comboBox1 = new JComboBox<>(new String[]{"Nam", "Nữ", "Khác"});
+        JComboBox<String> comboBox1 = new JComboBox<>(new String[]{"Nam", "Nữ"});
         JLabel label2 = new JLabel(label2Text);
         JTextField textField2 = new JTextField();
         panel.add(label1);
@@ -207,5 +207,16 @@ public class PageFillInformatinDK extends JPanel {
         comboBoxes.add(comboBox1);
         textFields.add(textField2);
         return panel;
+    }
+
+    private void clearFields() {
+        for (JTextField textField : textFields) {
+            textField.setText("");
+        }
+        for (JComboBox<String> comboBox : comboBoxes) {
+            comboBox.setSelectedIndex(-1);
+        }
+        checkBox1.setSelected(false);
+        checkBox2.setSelected(false);
     }
 }

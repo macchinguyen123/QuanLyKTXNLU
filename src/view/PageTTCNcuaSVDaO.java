@@ -5,6 +5,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class PageTTCNcuaSVDaO extends JPanel {
@@ -17,7 +20,7 @@ public class PageTTCNcuaSVDaO extends JPanel {
     JButton btnOK,btnTraPhong;
 
 
-    public PageTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout) {
+    public PageTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout, List<Map<String, String>> listSaveTaiKhoan) {
         this.setLayout(new BorderLayout());
         lbInfor = new JLabel("", JLabel.CENTER); // Hiện ban đầu để trống
         this.add(lbInfor, BorderLayout.NORTH);
@@ -50,6 +53,7 @@ public class PageTTCNcuaSVDaO extends JPanel {
         btnTraPhong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                listSaveTaiKhoan.clear();
                 cardLayout.show(cardPanel, "studentPanel");
             }
         });
