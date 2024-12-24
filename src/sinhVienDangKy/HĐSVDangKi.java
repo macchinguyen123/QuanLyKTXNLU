@@ -14,6 +14,7 @@ public class HĐSVDangKi {
     private MDSVDangKi model;
     private GDSVDangKi view;
     private JLabel backgroundImage;
+    private JFrame detailsFrame;
 
     public HĐSVDangKi(MDSVDangKi model, GDSVDangKi view1) {
         this.model = model;
@@ -39,12 +40,17 @@ public class HĐSVDangKi {
                 JOptionPane.showMessageDialog(view, "Chức năng quản lý phòng chưa được triển khai."));
 
         // Xử lý khi bấm vào JTable
-        // Xử lý khi bấm vào JTable
         view.getStudentTable().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 int selectedRow = view.getStudentTable().getSelectedRow();
                 if (selectedRow >= 0) {
+                    // Kiểm tra nếu JFrame chi tiết đã được hiển thị
+                    if (detailsFrame != null && detailsFrame.isShowing()) {
+//                        JOptionPane.showMessageDialog(view, "Cửa sổ chi tiết đang mở!");
+                        return; // Không tạo thêm JFrame
+                    }
+
                     // Lấy đối tượng Student từ mô hình
                     Student studentDetails = model.getStudentDetails(selectedRow);
                     // Hiển thị chi tiết thông tin sinh viên
@@ -58,7 +64,7 @@ public class HĐSVDangKi {
 
     private void showStudentDetailsPanel(Student studentDetails, int selectedRow) {
         // Tạo JFrame chi tiết
-        JFrame detailsFrame = new JFrame("Chi Tiết Sinh Viên");
+        detailsFrame = new JFrame("Chi Tiết Sinh Viên");
         detailsFrame.setLayout(null);
         detailsFrame.setSize(800, 500);
         detailsFrame.setLocationRelativeTo(null);
@@ -71,7 +77,6 @@ public class HĐSVDangKi {
         detailsFrame.setContentPane(backgroundImage); // Đặt nền ảnh làm nền chính
         backgroundImage.setLayout(null);
 
-        detailsFrame.getContentPane().setBackground(new Color(173, 216, 230)); // Màu xanh nhạt
         JPanel panel = new JPanel(null);
         panel.setOpaque(true);
         panel.setBackground(new Color(173, 216, 230)); // Màu xanh nhạt

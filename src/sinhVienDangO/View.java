@@ -5,6 +5,7 @@ import view.PanelChooseStudentOrManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class View extends JFrame {
@@ -53,13 +54,15 @@ public class View extends JFrame {
 
         setJMenuBar(menuBar);
 
-        roomManageMenuItem.addActionListener(e -> openRoomManagerView());
+        roomManageMenuItem.addActionListener(e ->
+                openRoomManagerView());
         exitMenuItem.addActionListener(e -> showLogoutConfirmation());
     }
 
     private void openRoomManagerView() {
         // Gọi giao diện Quản Lý Phòng
         AdminRoomManagerView roomManagerView = new AdminRoomManagerView();
+        this.setVisible(false);
         roomManagerView.setVisible(true);
     }
 

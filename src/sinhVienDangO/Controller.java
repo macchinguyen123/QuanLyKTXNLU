@@ -15,7 +15,7 @@ public class Controller {
     private PasswordView passwordView;
     private Model mainModel;
     private View mainView;
-    private StudentView view;
+    private StudentView studentView;
     Home home = new Home();
 
 //    private Model mainModel1;
@@ -50,6 +50,7 @@ public class Controller {
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
         studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, home.getMdsvDangKi(), mainView));
         studentView.getBtnBack().addActionListener(new BackButtonListener(studentView));
+        mainView.setVisible(false);
         studentView.setVisible(true);
     }
 
@@ -64,8 +65,7 @@ public class Controller {
             } else if (password.length() != 6) {
                 passwordView.displayMessage("Mật khẩu phải có đúng 6 ký tự!");
             } else {
-//                passwordView.displayMessage("Mật khẩu đã được xác nhận!");
-//                passwordView.dispose();
+                passwordView.setVisible(false);
                 openMainView();
             }
         }
@@ -115,11 +115,13 @@ public class Controller {
             studentListView.updateStudentList(studentController.getStudents());
 
             studentListView.setVisible(true);
+            studentView.setVisible(false);
 
             studentListView.getBackButton().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 //                    studentListView.dispose();
+                    studentListView.setVisible(false);
                     studentView.setVisible(true);
                 }
             });
@@ -136,7 +138,7 @@ public class Controller {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-//            studentView.dispose();
+            studentView.setVisible(false);
             mainView.setVisible(true);
         }
     }
