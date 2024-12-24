@@ -1,6 +1,4 @@
-package gop1;
-
-import java.time.LocalDate;
+package sinhVienDangO;
 
 public class Student {
     private String ten, mssv, gioiTinh, khoa;

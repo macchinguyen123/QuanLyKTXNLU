@@ -1,4 +1,4 @@
-package gop1;
+package sinhVienDangO;
 
 import java.util.ArrayList;
 import java.util.List;

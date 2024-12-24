@@ -1,7 +1,7 @@
 // Class to store and manage student data
 package sinhVienDangKy;
 
-import gop1.Student;
+import sinhVienDangO.Student;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

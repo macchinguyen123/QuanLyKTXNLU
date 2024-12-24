@@ -1,6 +1,6 @@
 package sinhVienDangKy;
 
-import gop1.Student;
+import sinhVienDangO.Student;
 
 import java.util.ArrayList;
 import java.util.List;
