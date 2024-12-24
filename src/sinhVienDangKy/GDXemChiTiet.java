@@ -1,19 +1,25 @@
 package sinhVienDangKy;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GDXemChiTiet extends JPanel {
+public class GDXemChiTiet extends JFrame {
 
     private JTextField[] textFields;
     private JComboBox<String> genderComboBox;
+    private GDSVDangKi view;
+    private JButton buttonQuayLai;
 
-    public GDXemChiTiet(String[] data) {
+    public GDXemChiTiet(String[] data, GDSVDangKi parentFrame) {
+        this.view = parentFrame;
+        setTitle("Chi Tiết Sinh Viên");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
-        setBackground(new Color(250, 250, 250));
+        setSize(800, 500);
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(250, 250, 250));
 
         JLabel titleLabel = new JLabel("TRƯỜNG ĐẠI HỌC NÔNG LÂM TPHCM");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -147,17 +153,11 @@ public class GDXemChiTiet extends JPanel {
         }
 
         // Nút Quay lai
-        JButton quayLai = new JButton("Quay Lại");
-        quayLai.setBounds(250, y, 120, 40);
-        quayLai.setBackground(new Color(30, 144, 255));
-        quayLai.setForeground(Color.WHITE);
-        quayLai.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        add(quayLai);
-
+        buttonQuayLai = new JButton("Quay Lại");
+        buttonQuayLai.setBounds(250, y, 120, 40);
+        buttonQuayLai.setBackground(new Color(30, 144, 255));
+        buttonQuayLai.setForeground(Color.WHITE);
+        add(buttonQuayLai);
 
         // Điền dữ liệu từ mảng vào các textFields và checkboxes
         fillData(data, checkBox1, checkBox2);
@@ -181,5 +181,9 @@ public class GDXemChiTiet extends JPanel {
                 textFields[i].setText(data[i]);
             }
         }
+    }
+
+    public JButton getButtonQuayLai() {
+        return buttonQuayLai;
     }
 }
