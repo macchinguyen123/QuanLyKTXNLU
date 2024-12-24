@@ -8,16 +8,17 @@ import java.awt.event.ActionListener;
 public class SVLoginOrSignIn extends JPanel {
     Image imgBackround;
     JButton btnLogin, btnSignIn, backToHome;
-
+    GridBagConstraints gbcCenter,gbc;
+    JPanel panelCenter,panelTopLeft;
     public SVLoginOrSignIn(JPanel cardPanel, CardLayout cardLayout) {
         this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+         gbc = new GridBagConstraints();
 
         // set background
         imgBackround = new ImageIcon("src/img/backroundKTX.jpg").getImage();
 
         // panel chứa nút Home
-        JPanel panelTopLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
+         panelTopLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelTopLeft.setOpaque(false);
 
 //        // button back to home
@@ -38,9 +39,9 @@ public class SVLoginOrSignIn extends JPanel {
         this.add(panelTopLeft, gbc);
 
         // panel chứa các nút Đăng nhập và Đăng ký
-        JPanel panelCenter = new JPanel(new GridBagLayout());
+         panelCenter = new JPanel(new GridBagLayout());
         panelCenter.setOpaque(false);
-        GridBagConstraints gbcCenter = new GridBagConstraints();
+         gbcCenter = new GridBagConstraints();
         gbcCenter.insets = new Insets(10, 10, 10, 10);
         gbcCenter.gridx = 0;
         gbcCenter.gridy = 0;
