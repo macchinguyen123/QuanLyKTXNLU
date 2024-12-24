@@ -172,9 +172,9 @@ public class GDXemChiTiet extends JFrame {
                     genderComboBox.setSelectedItem("Nữ");
                 }
             } else if (i == 11) { // Xử lý "DIỆN CHÍNH SÁCH"
-                if ("Diện 1".equalsIgnoreCase(data[i])) {
+                if ("Có".equalsIgnoreCase(data[i])) {
                     if (checkBox1 != null) checkBox1.setSelected(true);
-                } else if ("Diện 2".equalsIgnoreCase(data[i])) {
+                } else if ("Không".equalsIgnoreCase(data[i])) {
                     if (checkBox2 != null) checkBox2.setSelected(true);
                 }
             } else if (textFields[i] != null) {

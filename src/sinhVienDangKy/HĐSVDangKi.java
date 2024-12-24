@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 public class HĐSVDangKi {
     private MDSVDangKi model;
     private GDSVDangKi view;
+    private JLabel backgroundImage;
 
     public HĐSVDangKi(MDSVDangKi model, GDSVDangKi view1) {
         this.model = model;
@@ -56,48 +57,59 @@ public class HĐSVDangKi {
 
 
     private void showStudentDetailsPanel(Student studentDetails, int selectedRow) {
-        // Tạo panel chi tiết
-        JPanel detailsPanel = new JPanel(null);
-        detailsPanel.setOpaque(true);
-        detailsPanel.setBackground(new Color(173, 216, 230)); // Màu xanh nhạt
-        detailsPanel.setBounds(150, 50, 500, 400);
+        // Tạo JFrame chi tiết
+        JFrame detailsFrame = new JFrame("Chi Tiết Sinh Viên");
+        detailsFrame.setLayout(null);
+        detailsFrame.setSize(800, 500);
+        detailsFrame.setLocationRelativeTo(null);
 
+        ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
+        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        backgroundImage = new JLabel(scaledIcon);
+        backgroundImage.setBounds(0, 0, 800, 500);
+        detailsFrame.setContentPane(backgroundImage); // Đặt nền ảnh làm nền chính
+        backgroundImage.setLayout(null);
+
+        detailsFrame.getContentPane().setBackground(new Color(173, 216, 230)); // Màu xanh nhạt
+        JPanel panel = new JPanel(null);
+        panel.setOpaque(true);
+        panel.setBackground(new Color(173, 216, 230)); // Màu xanh nhạt
+        panel.setBounds(150,50,500,400);
         // Hiển thị thông tin sinh viên
         JLabel nameLabel = new JLabel("Họ Và Tên: " + studentDetails.getTen());
         nameLabel.setBounds(20, 20, 460, 30); // Kích thước hợp lý, đảm bảo không bị tràn
-        detailsPanel.add(nameLabel);
+        panel.add(nameLabel);
 
         JLabel idLabel = new JLabel("Mã số: " + studentDetails.getMssv());
         idLabel.setBounds(20, 60, 460, 30);
-        detailsPanel.add(idLabel);
+        panel.add(idLabel);
 
         JLabel genderLabel = new JLabel("Giới tính: " + studentDetails.getGioiTinh());
         genderLabel.setBounds(20, 100, 460, 30);
-        detailsPanel.add(genderLabel);
+        panel.add(genderLabel);
 
         JLabel facultyLabel = new JLabel("Khoa: " + studentDetails.getKhoa());
         facultyLabel.setBounds(20, 140, 460, 30);
-        detailsPanel.add(facultyLabel);
+        panel.add(facultyLabel);
 
         JLabel birthLabel = new JLabel("Năm sinh: " + studentDetails.getNamSinh());
         birthLabel.setBounds(20, 180, 460, 30);
-        detailsPanel.add(birthLabel);
+        panel.add(birthLabel);
 
         JLabel dormLabel = new JLabel("Cư xá: " + studentDetails.getCuXa());
         dormLabel.setBounds(20, 220, 460, 30);
-        detailsPanel.add(dormLabel);
+        panel.add(dormLabel);
 
         JLabel roomLabel = new JLabel("Phòng: " + studentDetails.getPhong());
         roomLabel.setBounds(20, 260, 460, 30);
-        detailsPanel.add(roomLabel);
+        panel.add(roomLabel);
 
         // Nút Quay lại
         JButton backButton = new JButton("Quay lại");
-        backButton.setBounds(15, 320, 100, 30); // Nút nằm gọn trong panel
-        backButton.addActionListener(e -> {
-            view.showMainView();
-        });
-        detailsPanel.add(backButton);
+        backButton.setBounds(15, 320, 100, 30); // Nút nằm gọn trong frame
+        backButton.addActionListener(e -> detailsFrame.dispose());
+        panel.add(backButton);
 
         // Nút Xác nhận
         JButton confirmButton = new JButton("Xác nhận");
@@ -108,9 +120,10 @@ public class HĐSVDangKi {
             LayDuLieuSV storage = LayDuLieuSV.getInstances();
             storage.addStudent(studentDetails);
             model.removeStudent(selectedRow);
-            view.showMainView();
+            detailsFrame.setVisible(false);
+            detailsFrame.dispose();
         });
-        detailsPanel.add(confirmButton);
+        panel.add(confirmButton);
 
         // Nút Huỷ
         JButton cancelButton = new JButton("Huỷ");
@@ -119,14 +132,13 @@ public class HĐSVDangKi {
         cancelButton.setForeground(Color.WHITE);
         cancelButton.addActionListener(e -> {
             model.removeStudent(selectedRow);
-            view.showMainView();
+            detailsFrame.dispose();
         });
-        detailsPanel.add(cancelButton);
+        panel.add(cancelButton);
 
-        // Nút Chi Tiet
+        // Nút Chi Tiết
         JButton xemCT = new JButton("Chi Tiết");
         xemCT.setBounds(390, 320, 100, 30);
-//        xemCT.setBackground(Color.RED); // Đỏ
         xemCT.setForeground(Color.BLACK);
         xemCT.addActionListener(e -> {
             // Lấy dữ liệu từ đối tượng Student
@@ -135,12 +147,12 @@ public class HĐSVDangKi {
                     studentDetails.getGioiTinh(),     // Giới tính
                     studentDetails.getNamSinh(),      // Ngày sinh
                     studentDetails.getMssv(),         // Mã số sinh viên
-                    studentDetails.getSđt(),  // Số điện thoại
+                    studentDetails.getSđt(),          // Số điện thoại
                     studentDetails.getDiaChi(),       // Hộ khẩu thường trú
                     studentDetails.getKhoa(),         // Khoa
                     studentDetails.getPhong(),        // Phòng
                     studentDetails.getCuXa(),         // Cư xá
-                    studentDetails.getIdCCCD(),         // CCCD/CMND
+                    studentDetails.getIdCCCD(),       // CCCD/CMND
                     studentDetails.getDanToc(),       // Dân tộc
                     studentDetails.getDienChinhSach() // Diện chính sách
             };
@@ -151,18 +163,18 @@ public class HĐSVDangKi {
             detailPanel.getButtonQuayLai().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    view.showMainView();
+                    view.setVisible(true);
                     detailPanel.dispose();
                 }
             });
         });
+        panel.add(xemCT);
 
-
-        detailsPanel.add(xemCT);
-
-        // Hiển thị panel chi tiết
-        view.showDetailPanel(detailsPanel);
+        detailsFrame.add(panel);
+        // Hiển thị JFrame
+        detailsFrame.setVisible(true);
     }
+
 
 
 }
