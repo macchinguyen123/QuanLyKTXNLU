@@ -36,7 +36,6 @@ public class StudentController {
             System.out.println("Danh sách lưu trữ trống hoặc không hợp lệ.");
         }
 
-
         this.view.addSearchActionListener(new searchAction());
         this.view.addMenuActionListener(new menuAction());
     }

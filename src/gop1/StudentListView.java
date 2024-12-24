@@ -4,9 +4,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentListView extends JFrame {
@@ -87,7 +89,7 @@ public class StudentListView extends JFrame {
         studentTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               studentTableMouseClicked(e);
+                studentTableMouseClicked(e);
             }
         });
 
@@ -100,6 +102,31 @@ public class StudentListView extends JFrame {
         backPanel.add(btnBack);
         backPanel.setOpaque(false);
 
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StudentController studentController = new StudentController(StudentListView.this);
+                StudentListView studentListView = new StudentListView();
+                studentListView.setController(studentController);
+                String search = txtSearch.getText().trim();
+
+                if (search.isEmpty()) {
+                    JOptionPane.showMessageDialog(StudentListView.this, "Vui lòng nhập mã số sinh viên để tìm kiếm!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                List<Student> re = searchStudentByMSSV(search);
+
+                updateStudentList(re);
+
+                if (re.isEmpty()) {
+                    JOptionPane.showMessageDialog(StudentListView.this, "Không tìm thấy sinh viên với mã số: " + search, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    updateStudentList(studentController.getStudents()); // Hiển thị lại danh sách sinh viên ban đầu
+                } else {
+                    updateStudentList(re); // Hiển thị danh sách kết quả tìm kiếm
+                }
+            }
+        });
 
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
         Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
@@ -182,14 +209,28 @@ public class StudentListView extends JFrame {
         int selectedRow = studentTable.getSelectedRow();
         if (selectedRow != -1) {
             Student selectedStudent = controller.getStudents().get(selectedRow);
-            onStudentSelected(selectedStudent); // Gọi phương thức này
+            onStudentSelected(selectedStudent);
         }
     }
 
+    private List<Student> searchStudentByMSSV(String mssv) {
+        StudentController studentController = new StudentController(this);
+        StudentListView studentListView = new StudentListView();
+        studentListView.setController(studentController);
+        List<Student> result = new ArrayList<>();
 
+        if (studentController == null || studentController.getStudents() == null) {
+            JOptionPane.showMessageDialog(this, "Dữ liệu sinh viên không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return result;
+        }
 
-
-
-
-
+        for (Student student : studentController.getStudents()) {
+//            System.out.println("So sánh: " + student.getMssv() + " với " + mssv);
+            if (student.getMssv().trim().equalsIgnoreCase(mssv.trim())) {
+                result.add(student);
+            }
+        }
+        return result;
+    }
 }
+
