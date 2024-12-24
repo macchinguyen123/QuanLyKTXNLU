@@ -153,27 +153,22 @@ public class GDSVDangKi extends JFrame {
 
     public void showMainView() {
         mainPanel.setVisible(true);
+//        revalidate();
+//        repaint();
+    }
+    public void showMainView1() {
+        setVisible(true);
         revalidate();
         repaint();
     }
 
-    public void showDetailPanel(JPanel detailPanel) {
-        //An panel hien tai va luu vao stack
-        if (!panelStack.isEmpty()) {
-            JPanel currentPanel = panelStack.peek();
-            currentPanel.setVisible(false);
-        }
-        panelStack.push(detailPanel);
-
-        //Hien Thi Panel Moi
-        backgroundImage.add(detailPanel);
-        detailPanel.setVisible(true);
-        mainPanel.setVisible(false);
-//        backgroundImage.add(detailPanel);
-//        detailPanel.setVisible(true);
+    public void showDetailPanel(JPanel detailsPanel) {
+        getContentPane().removeAll(); // Xóa tất cả các thành phần hiện tại
+        getContentPane().add(detailsPanel); // Hiển thị giao diện chi tiết
         revalidate();
         repaint();
     }
+
 
     public JLabel getBackgroundImage() {
         return backgroundImage;
@@ -193,4 +188,13 @@ public class GDSVDangKi extends JFrame {
             repaint();
         }
     }
+    public void goBackToMainPanel() {
+        getContentPane().removeAll(); // Xóa tất cả các thành phần hiện tại
+        getContentPane().add(mainPanel); // Thêm lại giao diện chính (mainPanel)
+        revalidate(); // Xác nhận lại các thành phần trong giao diện
+        repaint(); // Vẽ lại giao diện
+    }
+
+
+
 }
