@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class StudentListView extends JFrame {
@@ -114,18 +115,17 @@ public class StudentListView extends JFrame {
                     return;
                 }
 
-                List<Student> re = searchStudentByMSSV(search);
+                List<Student> result = searchStudentByMSSV(search);
 
-                updateStudentList(re);
-
-                if (re.isEmpty()) {
+                if (result.isEmpty()) {
                     JOptionPane.showMessageDialog(StudentListView.this, "Không tìm thấy sinh viên với mã số: " + search, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     updateStudentList(studentController.getStudents()); // Hiển thị lại danh sách sinh viên ban đầu
                 } else {
-                    updateStudentList(re); // Hiển thị danh sách kết quả tìm kiếm
+                    updateStudentList(result); // Hiển thị danh sách kết quả tìm kiếm
                 }
             }
         });
+
 
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
         Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
@@ -213,23 +213,22 @@ public class StudentListView extends JFrame {
     }
 
     private List<Student> searchStudentByMSSV(String mssv) {
-        StudentController studentController = new StudentController(this);
+        StudentController studentController = new StudentController(StudentListView.this);
         StudentListView studentListView = new StudentListView();
         studentListView.setController(studentController);
-        List<Student> result = new ArrayList<>();
-
-        if (studentController == null || studentController.getStudents() == null) {
-            JOptionPane.showMessageDialog(this, "Dữ liệu sinh viên không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return result;
+        // Tạo HashMap tạm thời để ánh xạ MSSV với Student
+        HashMap<String, Student> studentMap = new HashMap<>();
+        for (Student student : studentController.getStudents()) {
+            studentMap.put(student.getMssv(), student);
         }
 
-        for (Student student : studentController.getStudents()) {
-//            System.out.println("So sánh: " + student.getMssv() + " với " + mssv);
-            if (student.getMssv().trim().equalsIgnoreCase(mssv.trim())) {
-                result.add(student);
-            }
+        // Tìm kiếm sinh viên trong HashMap
+        List<Student> result = new ArrayList<>();
+        Student foundStudent = studentMap.get(mssv.trim());
+        if (foundStudent != null) {
+            result.add(foundStudent);
         }
         return result;
     }
-}
 
+}
