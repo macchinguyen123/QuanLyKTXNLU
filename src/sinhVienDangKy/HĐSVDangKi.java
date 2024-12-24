@@ -1,7 +1,7 @@
 package sinhVienDangKy;
 
 
-import gop1.Student;
+import sinhVienDangO.Student;
 
 import javax.swing.*;
 import java.awt.*;

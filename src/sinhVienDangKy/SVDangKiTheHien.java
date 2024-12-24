@@ -1,7 +1,7 @@
 package sinhVienDangKy;
 
-import gop1.StudentView;
-import gop1.View;
+import sinhVienDangO.StudentView;
+import sinhVienDangO.View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

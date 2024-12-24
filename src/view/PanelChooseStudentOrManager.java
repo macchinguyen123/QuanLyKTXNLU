@@ -1,8 +1,8 @@
 package view;
 
-import gop1.Controller;
-import gop1.Model;
-import gop1.PasswordView;
+import sinhVienDangO.Controller;
+import sinhVienDangO.Model;
+import sinhVienDangO.PasswordView;
 
 import javax.swing.*;
 import java.awt.*;
