@@ -73,15 +73,19 @@ public class PageTTCNcuaSVDaO extends JPanel {
         tableModel.setRowCount(0);
 
         // Cập nhật thông tin mới
-        String[] labels = {
-                "Họ và tên", "Giới tính", "Ngày sinh", "Mã số sinh viên",
-                "Số điện thoại", "Hộ khẩu thường trú", "Khoa",
-                "Phòng", "Cư xá", "CCCD / CMND", "Dân tộc",
-                "Con liệt sĩ, thương binh", "Gia đình khó khăn"
+//        String[] labels = {
+//                "Họ và tên", "Giới tính", "Ngày sinh", "Mã số sinh viên",
+//                "Số điện thoại", "Hộ khẩu thường trú", "Khoa",
+//                "Phòng", "Cư xá", "CCCD / CMND", "Dân tộc",
+//                "Con liệt sĩ, thương binh", "Gia đình khó khăn"
+//        };
+        String[] labels1 = {
+                "Họ và tên","Ngày sinh", "Mã số sinh viên","Số điện thoại", "Hộ khẩu thường trú",
+                "Khoa","Phòng","CCCD / CMND","Dân tộc","Giới tính","Cư xá", "Con liệt sĩ, thương binh", "Gia đình khó khăn"
         };
 
-        for (int i = 0; i < labels.length && i < data.length; i++) {
-            tableModel.addRow(new Object[]{labels[i], data[i]});
+        for (int i = 0; i < labels1.length && i < data.length; i++) {
+            tableModel.addRow(new Object[]{labels1[i], data[i]});
         }
     }
 }
