@@ -79,13 +79,13 @@ public class PageTTCNcuaSVDaO extends JPanel {
 //                "Phòng", "Cư xá", "CCCD / CMND", "Dân tộc",
 //                "Con liệt sĩ, thương binh", "Gia đình khó khăn"
 //        };
-        String[] labels1 = {
+        String[] labels = {
                 "Họ và tên","Ngày sinh", "Mã số sinh viên","Số điện thoại", "Hộ khẩu thường trú",
                 "Khoa","Phòng","CCCD / CMND","Dân tộc","Giới tính","Cư xá", "Con liệt sĩ, thương binh", "Gia đình khó khăn"
         };
 
-        for (int i = 0; i < labels1.length && i < data.length; i++) {
-            tableModel.addRow(new Object[]{labels1[i], data[i]});
+        for (int i = 0; i < labels.length && i < data.length; i++) {
+            tableModel.addRow(new Object[]{labels[i], data[i]});
         }
     }
 }
