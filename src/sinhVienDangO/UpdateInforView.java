@@ -74,7 +74,7 @@ public class UpdateInforView extends JFrame {
         labelRoom = new JLabel("Phòng: ");
         fieldRoom = new JTextField(10);
         labelDorm = new JLabel("Cư xá: ");
-        String[] dorm = {"Cư xá A", "Cư xá B", "Cư xá C", "Cư xá D", "Cư xá E", "Cư xá F"};
+        String[] dorm = {"A", "B", "C", "D", "E", "F"};
         cbDorm = new JComboBox(dorm);
         labelCardID = new JLabel("CCCD / CMND: ");
         fieldCardID = new JTextField(10);

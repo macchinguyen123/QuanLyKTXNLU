@@ -22,16 +22,16 @@ public class StudentDataStorage {
 
     public void addStudent(String[] data) {
         String name = data[0];
-        String gender = data[1];
-        String birthYear = data[2]; // Giả sử birthYear là một số nguyên
-        String MSSV = data[3];
-        String SĐT = data[4];
-        String HKTT = data[5];
-        String Khoa = data[6];
-        String CuXa = data[7];
-        String Phong = data[8];
-        String cMND = data[9];
-        String danToc = data[10];
+        String gender = data[9];
+        String birthYear = data[1]; // Giả sử birthYear là một số nguyên
+        String MSSV = data[2];
+        String SĐT = data[3];
+        String HKTT = data[4];
+        String Khoa = data[5];
+        String CuXa = data[10];
+        String Phong = data[6];
+        String cMND = data[7];
+        String danToc = data[8];
         String dienChinhSach = data[11];
 
         // Khởi tạo đối tượng Student

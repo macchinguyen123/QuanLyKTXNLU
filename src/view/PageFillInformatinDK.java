@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -147,6 +148,7 @@ public class PageFillInformatinDK extends JPanel {
 
         StudentDataStorage storage = StudentDataStorage.getInstance();
         storage.addStudent(data);
+        System.out.println(Arrays.toString(data));
     }
 
     private JPanel createInputField(String labelText) {

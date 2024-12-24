@@ -5,6 +5,8 @@ import sinhVienDangO.Student;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,9 +14,9 @@ public class HĐSVDangKi {
     private MDSVDangKi model;
     private GDSVDangKi view;
 
-    public HĐSVDangKi(MDSVDangKi model, GDSVDangKi view) {
+    public HĐSVDangKi(MDSVDangKi model, GDSVDangKi view1) {
         this.model = model;
-        this.view = view;
+        this.view = view1;
 
         view.getStudentTable().setModel(model);
 
@@ -94,9 +96,6 @@ public class HĐSVDangKi {
         backButton.setBounds(15, 320, 100, 30); // Nút nằm gọn trong panel
         backButton.addActionListener(e -> {
             view.showMainView();
-//            view.getContentPane().remove(detailsPanel);
-            view.revalidate();
-            view.repaint();
         });
         detailsPanel.add(backButton);
 
@@ -110,9 +109,6 @@ public class HĐSVDangKi {
             storage.addStudent(studentDetails);
             model.removeStudent(selectedRow);
             view.showMainView();
-            view.getContentPane().remove(detailsPanel);
-            view.revalidate();
-            view.repaint();
         });
         detailsPanel.add(confirmButton);
 
@@ -124,9 +120,6 @@ public class HĐSVDangKi {
         cancelButton.addActionListener(e -> {
             model.removeStudent(selectedRow);
             view.showMainView();
-            view.getContentPane().remove(detailsPanel);
-            view.revalidate();
-            view.repaint();
         });
         detailsPanel.add(cancelButton);
 
@@ -153,16 +146,15 @@ public class HĐSVDangKi {
             };
 
             // Tạo giao diện chi tiết
-            GDXemChiTiet detailPanel = new GDXemChiTiet(studentData);
-            detailPanel.setBounds(0, 0, 800, 650);
-
-//            // Hiển thị giao diện chi tiết thay thế giao diện hiện tại
-            view.getContentPane().removeAll();
-            view.getContentPane().add(detailPanel);
-            view.revalidate();
-            view.repaint();
-//            view.getCardPanel().add(detailPanel, "detail");
-//            view.showCard("detail"); // Hiển thị giao diện chi tiết
+            GDXemChiTiet detailPanel = new GDXemChiTiet(studentData, view);
+            detailPanel.setVisible(true);
+            detailPanel.getButtonQuayLai().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    view.showMainView();
+                    detailPanel.dispose();
+                }
+            });
         });
 
 
