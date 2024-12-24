@@ -40,10 +40,37 @@ public class ThongTinChonPhong extends JPanel {
         JScrollPane scrollPane = new JScrollPane(mainPanel);
         this.add(scrollPane, BorderLayout.CENTER);
 
-        String[] rooms = {"P101 còn 1 chỗ trống", "P201 còn 1 chỗ trống", "P206 còn 1 chỗ trống"};
-        for (String room : rooms) {
-            mainPanel.add(createRoomPanel(room, cardPanel, cardLayout));
+        String[] roomsA = {"A101 còn 1 chỗ trống", "A201 còn 1 chỗ trống", "A206 còn 1 chỗ trống","A207 còn 1 chỗ trống"};
+        String[] roomsB = {"B101 còn 1 chỗ trống", "B201 còn 1 chỗ trống", "B206 còn 1 chỗ trống"};
+        String[] roomsC = {"C101 còn 1 chỗ trống", "C201 còn 1 chỗ trống", "C206 còn 1 chỗ trống"};
+        String[] roomsD = {"D101 còn 1 chỗ trống", "D201 còn 1 chỗ trống", "D206 còn 1 chỗ trống"};
+        String[] roomsE = {"E101 còn 1 chỗ trống", "E201 còn 1 chỗ trống", "E206 còn 1 chỗ trống"};
+        String[] roomsF = {"F101 còn 1 chỗ trống", "F201 còn 1 chỗ trống", "F206 còn 1 chỗ trống"};
+        // hien thi danh sach phong trong theo cu xa
+
+        if (dormBox.getSelectedItem().equals("B")){
+            for (String room : roomsB) {
+                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
+            }
+        }else if (dormBox.getSelectedItem().equals("C")){
+            for (String room : roomsC) {
+                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
+            }
+        }else if (dormBox.getSelectedItem().equals("D")){
+            for (String room : roomsD) {
+                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
+            }
+        }else if (dormBox.getSelectedItem().equals("E")){
+            for (String room : roomsE) {
+                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
+            }
+        }else {
+            for (String room : roomsF) {
+                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
+            }
         }
+
+
     }
 
     private JComboBox<String> createStyledComboBox(String[] items) {
@@ -55,7 +82,7 @@ public class ThongTinChonPhong extends JPanel {
         return comboBox;
     }
 
-    private JComponent createRoomPanel(String room, JPanel cardPanel, CardLayout cardLayout) {
+    private JComponent createRoomPanelA(String room, JPanel cardPanel, CardLayout cardLayout) {
         JPanel roomPanel = new JPanel(new BorderLayout());
         roomPanel.setPreferredSize(new Dimension(700, 50));
 
@@ -69,6 +96,7 @@ public class ThongTinChonPhong extends JPanel {
 
         return roomPanel;
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {
