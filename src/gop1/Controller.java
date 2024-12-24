@@ -1,6 +1,7 @@
 package gop1;
 
 import quanLyPhong.AdminRoomManagerView;
+import sinhVienDangKy.GDSVDangKi;
 import sinhVienDangKy.MDSVDangKi;
 import sinhVienDangKy.SVDangKiTheHien;
 import view.Home;
@@ -14,6 +15,7 @@ public class Controller {
     private PasswordView passwordView;
     private Model mainModel;
     private View mainView;
+    private StudentView view;
     private ExitDialog mainExitDialog;
     Home home = new Home();
 
@@ -49,6 +51,7 @@ public class Controller {
         ExitDialog studentExitDialog = new ExitDialog(studentView);
         StudentController studentController = new StudentController(new StudentListView());
         MDSVDangKi mdsvDangKi = new MDSVDangKi();
+        GDSVDangKi g = new GDSVDangKi(mdsvDangKi);
 
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
@@ -57,7 +60,6 @@ public class Controller {
         studentExitDialog.setThoatButtonListener(new ExitDialogThoatButtonListener());
         studentExitDialog.setHuyButtonListener(new ExitDialogHuyButtonListener());
         studentView.getBtnBack().addActionListener(new BackButtonListener(studentView));
-
         studentView.setVisible(true);
     }
 
