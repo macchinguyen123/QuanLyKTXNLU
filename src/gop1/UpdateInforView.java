@@ -22,7 +22,7 @@ public class UpdateInforView extends JFrame {
         this.studentListView = studentListView;
         this.studentController = studentController;
         this.currentStudent = currentStudent;
-        setTitle("Quản Lý Sinh Viên");
+        setTitle("Cập nhật thông tin");
         setSize(800, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

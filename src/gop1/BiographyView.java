@@ -16,7 +16,7 @@ public class BiographyView extends JFrame {
 
     public BiographyView(StudentListView parentView) {
         this.parentView = parentView;
-        setTitle("Quản Lý Sinh Viên");
+        setTitle("Thông tin cá nhân của sinh viên");
         setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
