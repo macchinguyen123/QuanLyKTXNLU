@@ -1,7 +1,10 @@
 package quanLyPhong;
 
+import sinhVienDangO.View;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,6 +17,8 @@ public class AdminRoomManagerView extends JFrame {
     private JButton backButton;
     private JButton viewDetailsButton;
     private Map<String, List<Room>> dormitoryData;
+    List<Room> rooms= new ArrayList<>();
+    String dormitoryName;
 
     public AdminRoomManagerView() {
         setTitle("Quản Lý Cư Xá");
@@ -141,19 +146,21 @@ public class AdminRoomManagerView extends JFrame {
             String selectedDormitory = selectedMaleDormitory != null ? selectedMaleDormitory : selectedFemaleDormitory;
 
             if (selectedDormitory != null) {
-                String dormitoryName = selectedDormitory.split(" -")[0];
-                List<Room> rooms = dormitoryData.get(dormitoryName);
+               dormitoryName = selectedDormitory.split(" -")[0];
+                rooms = dormitoryData.get(dormitoryName);
                 if (rooms != null) {
                     new DormitoryDetailsView(dormitoryName, rooms).setVisible(true);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn một cư xá!");
             }
+            this.setVisible(false);
         });
 
-        backButton.addActionListener(e ->
-                dispose());
-
+//        backButton.addActionListener(e -> {
+////                dispose());
+//                    this.setVisible(false);
+//                });
         // Hiển thị danh sách cư xá
         updateDormitoryLists();
     }
@@ -278,5 +285,13 @@ public class AdminRoomManagerView extends JFrame {
 
     public JButton getBackButton() {
         return backButton;
+    }
+
+    public String getDormitoryName() {
+        return dormitoryName;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
     }
 }

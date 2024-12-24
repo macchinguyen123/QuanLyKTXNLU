@@ -8,8 +8,12 @@ import java.util.List;
 
 public class PaymentDetailsView extends JFrame {
     private JTable paymentTable;
+    JButton backButton;
+    private DormitoryDetailsView dormitoryDetailsView;
+//    DormitoryDetailsView dormitoryDetailsView= new DormitoryDetailsView();
 
-    public PaymentDetailsView(List<Room> rooms) {
+    public PaymentDetailsView(List<Room> rooms,DormitoryDetailsView dormitoryDetailsView) {
+        this.dormitoryDetailsView = dormitoryDetailsView;
         setTitle("Danh sách thanh toán tiền điện nước");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -60,12 +64,18 @@ public class PaymentDetailsView extends JFrame {
         // Nút lọc phòng chưa thanh toán
         JButton filterButton = new JButton("Lọc phòng chưa thanh toán");
         filterButton.setFont(new Font("Arial", Font.BOLD, 18));
-        filterButton.addActionListener(e -> showUnpaidRooms(tableModel));
+        filterButton.addActionListener(e -> {
+            this.setVisible(false);
+            showUnpaidRooms(tableModel);
+        });
 
         // Nút quay lại
         JButton backButton = new JButton("Quay Lại");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
-        backButton.addActionListener(e -> dispose());
+        backButton.addActionListener(e -> {
+//            dormitoryDetailsView.setVisible(true);
+            this.setVisible(false);
+        });
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(filterButton);
@@ -113,9 +123,12 @@ public class PaymentDetailsView extends JFrame {
         sortButton.addActionListener(e -> showSortOptions(unpaidFrame, unpaidTableModel));
 
         // Nút quay lại
-        JButton backButton = new JButton("Quay Lại");
+        backButton = new JButton("Quay Lại");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
-        backButton.addActionListener(e -> unpaidFrame.dispose());
+        backButton.addActionListener(e -> {
+            dormitoryDetailsView.setVisible(true);
+                    unpaidFrame.dispose();
+        });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(sortButton);
@@ -164,5 +177,9 @@ public class PaymentDetailsView extends JFrame {
         for (Object[] rowData : tableData) {
             tableModel.addRow(new Object[]{rowData[0], rowData[1], rowData[2] + "K"});
         }
+    }
+
+    public JButton getBackButton() {
+        return backButton;
     }
 }

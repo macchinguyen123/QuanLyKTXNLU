@@ -1,4 +1,4 @@
-package sinhVienDangO;
+package quanLyPhong;
 
 import java.util.ArrayList;
 import java.util.List;
