@@ -22,7 +22,7 @@ public class MDSVDangKi extends AbstractTableModel {
         if (storedData != null && !storedData.isEmpty()) {
             students.add(storedData.get(0));
         } else {
-            System.out.println("Danh sách lưu trữ trống hoặc không hợp lệ.");
+            System.out.println("Danh sách lưu trữ trống hoặc không hợp lệ MDSVDAANGKY");
         }
     }
 
@@ -37,10 +37,15 @@ public class MDSVDangKi extends AbstractTableModel {
 
     public void removeStudent(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < students.size()) {
+            Student removedStudent = students.get(rowIndex);
             students.remove(rowIndex);
             fireTableDataChanged();
+
+            // Cập nhật StudentDataStorage
+            studentDataStorage.removeStudent(removedStudent.getMssv());
         }
     }
+
 
     public void filterData(String keyword) {
         students.removeIf(student -> !student.toString().toLowerCase().contains(keyword.toLowerCase()));

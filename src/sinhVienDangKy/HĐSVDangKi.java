@@ -94,7 +94,7 @@ public class HĐSVDangKi {
         backButton.setBounds(15, 320, 100, 30); // Nút nằm gọn trong panel
         backButton.addActionListener(e -> {
             view.showMainView();
-            view.getContentPane().remove(detailsPanel);
+//            view.getContentPane().remove(detailsPanel);
             view.revalidate();
             view.repaint();
         });
@@ -106,6 +106,8 @@ public class HĐSVDangKi {
         confirmButton.setBackground(new Color(34, 139, 34)); // Xanh lá cây
         confirmButton.setForeground(Color.WHITE);
         confirmButton.addActionListener(e -> {
+            LayDuLieuSV storage = LayDuLieuSV.getInstances();
+            storage.addStudent(studentDetails);
             model.removeStudent(selectedRow);
             view.showMainView();
             view.getContentPane().remove(detailsPanel);
@@ -145,7 +147,6 @@ public class HĐSVDangKi {
 //                }
 //            }
 
-            if (studentData != null) {
                 // Tạo giao diện chi tiết
                 GDXemChiTiet detailPanel = new GDXemChiTiet(studentData);
                 detailPanel.setBounds(0, 0, 800, 650);
@@ -155,9 +156,6 @@ public class HĐSVDangKi {
                 view.getContentPane().add(detailPanel);
                 view.revalidate();
                 view.repaint();
-            } else {
-                JOptionPane.showMessageDialog(view, "Không tìm thấy thông tin sinh viên.");
-            }
         });
 
 

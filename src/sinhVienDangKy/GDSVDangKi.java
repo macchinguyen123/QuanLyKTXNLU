@@ -1,7 +1,11 @@
 package sinhVienDangKy;
 
+import gop1.StudentView;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Stack;
@@ -17,6 +21,7 @@ public class GDSVDangKi extends JFrame {
     private JPanel mainPanel; // Panel chứa giao diện chính
     private JLabel backgroundImage;
     private Stack<JPanel> panelStack;
+    private StudentView studentView =new StudentView();
 
     public GDSVDangKi(MDSVDangKi mdsvDangKi) {
         setTitle("Quản Lý Sinh Viên");
@@ -118,6 +123,13 @@ public class GDSVDangKi extends JFrame {
         backButton.setFont(new Font("Arial", Font.BOLD, 14)); // Font chữ đậm
         backButton.setFocusPainted(false); // Loại bỏ viền khi chọn
         backButton.setBorder(BorderFactory.createLineBorder(new Color(200, 40, 50), 2, true)); // Viền bo tròn
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                studentView.setVisible(true);
+                setVisible(false);
+            }
+        });
 
         mainPanel.add(backButton);
         setLocationRelativeTo(null);
