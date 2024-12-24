@@ -1,7 +1,10 @@
 package sinhVienDangKy;
 
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GDXemChiTiet extends JPanel {
 
@@ -143,19 +146,18 @@ public class GDXemChiTiet extends JPanel {
             }
         }
 
-        // Nút Xác nhận
-        JButton updateButton = new JButton("Xác Nhận");
-        updateButton.setBounds(250, y, 120, 40);
-        updateButton.setBackground(new Color(30, 144, 255));
-        updateButton.setForeground(Color.WHITE);
-        add(updateButton);
+        // Nút Quay lai
+        JButton quayLai = new JButton("Quay Lại");
+        quayLai.setBounds(250, y, 120, 40);
+        quayLai.setBackground(new Color(30, 144, 255));
+        quayLai.setForeground(Color.WHITE);
+        quayLai.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        add(quayLai);
 
-        // Nút Hủy
-        JButton cancelButton = new JButton("Hủy");
-        cancelButton.setBounds(450, y, 120, 40);
-        cancelButton.setBackground(Color.RED);
-        cancelButton.setForeground(Color.WHITE);
-        add(cancelButton);
 
         // Điền dữ liệu từ mảng vào các textFields và checkboxes
         fillData(data, checkBox1, checkBox2);
