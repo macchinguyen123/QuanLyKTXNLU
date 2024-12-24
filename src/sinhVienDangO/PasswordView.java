@@ -35,10 +35,14 @@ public class PasswordView extends JFrame {
         topLeftPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         topLeftPanel.setOpaque(false);
 
-        backButton = new JButton("Quay về");
-        backButton.setFont(new Font("Inter", Font.BOLD, 16));
-        backButton.setForeground(Color.BLACK);
-        backButton.setBackground(Color.WHITE);
+        ImageIcon backIcon = new ImageIcon("src/img/arrow-back-icon.png"); // Đường dẫn đến file hình ảnh
+        Image scaledBackIcon = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH); // Điều chỉnh kích thước
+        backButton = new JButton(backIcon);
+        backButton.setIcon(new ImageIcon(scaledBackIcon));
+        backButton.setText(null);
+        backButton.setContentAreaFilled(false);
+        backButton.setBorderPainted(false);
+        backButton.setFocusPainted(false);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
