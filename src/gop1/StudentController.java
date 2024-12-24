@@ -18,10 +18,10 @@ public class StudentController {
         this.layDuLieuSV = LayDuLieuSV.getInstances();
         this.view = view;
         Student st1 = new Student("Nguyễn Văn A", "23130001", "Nam", "Công nghệ thông tin", "2005-01-24", "Cư xá A", "101", "Bình Định", "123456", "0987654321", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
-        Student st2 = new Student("Nguyễn Thị B", "23130002", "Nữ", "Công nghệ sinh học", "2004-05-20", "Cư xá D", "201", "Tiền Giang", "234567", "0345678990", "Mông", "Dân tộc thiểu số");
-        Student st3 = new Student("Nguyễn Văn C", "23130003", "Nam", "Công nghệ thực phẩm", "2005-10-02", "Cư xá C", "102", "Long An", "341678", "0168390591", "Kinh", "Không thuộc các đối tượng trên");
-        Student st4 = new Student("Nguyễn Văn D", "23130004", "Nam", "Công nghệ thông tin", "2005-08-04", "Cư xá A", "103", "Kiên Giang", "401231", "0636036812", "Kinh", "Không thuộc các đối tượng trên");
-        Student st5 = new Student("Nguyễn Thị E", "23130005", "Nữ", "Lâm nghiệp", "2005-12-08", "Cư xá B", "205", "Dak Lak", "579130", "0470641237", "Kinh", "Không thuộc các đối tượng trên");
+        Student st2 = new Student("Nguyễn Thị B", "23130002", "Nữ", "Công nghệ sinh học", "2004-05-20", "Cư xá D", "201", "Tiền Giang", "234567", "0345678990", "Mông", "Gia đình đặc biệt khó khăn");
+        Student st3 = new Student("Nguyễn Văn C", "23130003", "Nam", "Công nghệ thực phẩm", "2005-10-02", "Cư xá C", "102", "Long An", "341678", "0168390591", "Kinh", "");
+        Student st4 = new Student("Nguyễn Văn D", "23130004", "Nam", "Công nghệ thông tin", "2005-08-04", "Cư xá A", "103", "Kiên Giang", "401231", "0636036812", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
+        Student st5 = new Student("Nguyễn Thị E", "23130005", "Nữ", "Lâm nghiệp", "2005-12-08", "Cư xá B", "205", "Dak Lak", "579130", "0470641237", "Kinh", "Gia đình đặc biệt khó khăn");
         List<Student> storedData = layDuLieuSV.getsVLuu();
 
         students.add(st1);

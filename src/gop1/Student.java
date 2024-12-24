@@ -130,18 +130,6 @@ public class Student {
     }
 
     public boolean isPoorHousehold() {
-        return this.dienChinhSach.equalsIgnoreCase("Hộ nghèo, gia đình khó khăn");
-    }
-
-    public boolean isDisability() {
-        return this.dienChinhSach.equalsIgnoreCase("Khuyết tật, bệnh hiểm nghèo");
-    }
-
-    public boolean isEthnic() {
-        return this.dienChinhSach.equalsIgnoreCase("Dân tộc thiểu số");
-    }
-
-    public boolean isNotSubject() {
-        return this.dienChinhSach.equalsIgnoreCase("Không thuộc các đối tượng trên");
+        return this.dienChinhSach.equalsIgnoreCase("Gia đình đặc biệt khó khăn");
     }
 }

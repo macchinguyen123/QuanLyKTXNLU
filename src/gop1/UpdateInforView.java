@@ -11,7 +11,7 @@ public class UpdateInforView extends JFrame {
     JScrollBar s2;
     JLabel labelSchoolName, labelName, labelGender, labelBirthYear, labelID, labelPhone, labelAddress, labelDe, labelRoom, labelDorm, labelCardID, labelNation, policyArea;
     JTextField fieldName, fieldBY, fieldID, fieldPhone, fieldAddress, fieldRoom, fieldCardID;
-    JCheckBox martyrs, poorHousehold, disability, ethnic, notSubject;
+    JCheckBox martyrs, poorHousehold;
     JComboBox cbDe, cbGender, cbNation, cbDorm;
     JButton btnUpdate, btnBack;
     StudentListView studentListView;
@@ -29,18 +29,12 @@ public class UpdateInforView extends JFrame {
         setLayout(new BorderLayout());
 
         martyrs = new JCheckBox("Con liệt sĩ, thương binh, bệnh binh");
-        poorHousehold = new JCheckBox("Hộ nghèo, gia đình khó khăn");
-        disability = new JCheckBox("Khuyết tật, bệnh hiểm nghèo");
-        ethnic = new JCheckBox("Dân tộc thiểu số");
-        notSubject = new JCheckBox("Không thuộc các đối tượng trên");
+        poorHousehold = new JCheckBox("Gia đình đặc biệt khó khăn");
 
         // Tạo ButtonGroup để nhóm các JCheckBox
         ButtonGroup group = new ButtonGroup();
         group.add(martyrs);
         group.add(poorHousehold);
-        group.add(disability);
-        group.add(ethnic);
-        group.add(notSubject);
 
         String[] department = {"Kinh tế", "Quản lý đất đai", "Thú y", "Nông học", "Công nghệ thông tin", "Công nghệ thực phẩm", "Công nghệ sinh học", "Lâm nghiệp", "Ngôn ngữ anh"};
         cbDe = new JComboBox(department);
@@ -126,10 +120,7 @@ public class UpdateInforView extends JFrame {
                                         .addComponent(cbNation)
                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                 .addComponent(martyrs)
-                                                .addComponent(poorHousehold)
-                                                .addComponent(disability)
-                                                .addComponent(ethnic)
-                                                .addComponent(notSubject))))
+                                                .addComponent(poorHousehold))))
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(350)
                                 .addComponent(btnUpdate) // Nút cập nhật
@@ -178,10 +169,7 @@ public class UpdateInforView extends JFrame {
                                 .addComponent(policyArea))
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(martyrs)
-                                .addComponent(poorHousehold)
-                                .addComponent(disability)
-                                .addComponent(ethnic)
-                                .addComponent(notSubject))
+                                .addComponent(poorHousehold))
                         .addGap(30) // Khoảng cách trước nút
                         .addComponent(btnUpdate) // Nút cập nhật
                         .addGap(5) // Khoảng cách trước nút quay lại
@@ -206,9 +194,6 @@ public class UpdateInforView extends JFrame {
 
                 boolean isMartyrs = martyrs.isSelected();
                 boolean isPoorHousehold = poorHousehold.isSelected();
-                boolean isDisability = disability.isSelected();
-                boolean isEthnic = ethnic.isSelected();
-                boolean isNotSubject = notSubject.isSelected();
 
                 currentStudent.setTen(fieldName.getText());
                 currentStudent.setMssv(fieldID.getText());
@@ -248,9 +233,6 @@ public class UpdateInforView extends JFrame {
         // Cập nhật checkbox chính sách
         martyrs.setSelected(student.isMartyrs());
         poorHousehold.setSelected(student.isPoorHousehold());
-        disability.setSelected(student.isDisability());
-        ethnic.setSelected(student.isEthnic());
-        notSubject.setSelected(student.isNotSubject());
     }
 
 
