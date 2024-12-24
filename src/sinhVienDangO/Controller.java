@@ -1,6 +1,7 @@
 package sinhVienDangO;
 
 import quanLyPhong.AdminRoomManagerView;
+import quanLyPhong.Model;
 import sinhVienDangKy.GDSVDangKi;
 import sinhVienDangKy.MDSVDangKi;
 import sinhVienDangKy.SVDangKiTheHien;

@@ -62,6 +62,13 @@ public class View extends JFrame {
     private void openRoomManagerView() {
         // Gọi giao diện Quản Lý Phòng
         AdminRoomManagerView roomManagerView = new AdminRoomManagerView();
+        roomManagerView.getBackButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                roomManagerView.setVisible(false);
+                setVisible(true);
+            }
+        });
         this.setVisible(false);
         roomManagerView.setVisible(true);
     }

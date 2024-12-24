@@ -3,6 +3,8 @@ package quanLyPhong;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -81,7 +83,10 @@ public class DormitoryDetailsView extends JFrame {
         JButton backButton = new JButton("Quay Lại");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
         backButton.setBounds(100, 400, 150, 40); // Đặt vị trí và kích thước
-        backButton.addActionListener(e -> dispose());
+        backButton.addActionListener(e -> {
+            this.setVisible(false);
+            new AdminRoomManagerView().setVisible(true);
+        });
         mainPanel.add(backButton);
 
         // Nút danh sách thanh toán tiền điện nước
@@ -90,8 +95,13 @@ public class DormitoryDetailsView extends JFrame {
         paymentButton.setBounds(300, 400, 400, 40); // Đặt vị trí và kích thước
         paymentButton.addActionListener(e -> {
             // Hiển thị giao diện thanh toán tiền điện nước
-            new PaymentDetailsView(rooms).setVisible(true);
+            PaymentDetailsView paymentDetailsView = new PaymentDetailsView(rooms, this);
+            paymentDetailsView.setVisible(true);
+
+            // Ẩn cửa sổ hiện tại
+            this.setVisible(false);
         });
+
 
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);

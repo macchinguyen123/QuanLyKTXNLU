@@ -1,7 +1,7 @@
 package view;
 
 import sinhVienDangO.Controller;
-import sinhVienDangO.Model;
+import quanLyPhong.Model;
 import sinhVienDangO.PasswordView;
 
 import javax.swing.*;
@@ -52,6 +52,7 @@ public class PanelChooseStudentOrManager extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Switch to the Student Panel
                 cardLayout.show(cardPanel, "studentPanel");
+                disable();
             }
         });
         panelStudent.add(btnChooseStudent, BorderLayout.CENTER);
