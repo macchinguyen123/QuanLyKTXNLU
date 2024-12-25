@@ -154,7 +154,7 @@ public class GDXemChiTiet extends JFrame {
 
         // Nút Quay lai
         buttonQuayLai = new JButton("Quay Lại");
-        buttonQuayLai.setBounds(250, y, 120, 40);
+        buttonQuayLai.setBounds(350, y, 120, 40);
         buttonQuayLai.setBackground(new Color(30, 144, 255));
         buttonQuayLai.setForeground(Color.WHITE);
         add(buttonQuayLai);
