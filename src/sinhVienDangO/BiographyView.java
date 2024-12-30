@@ -111,6 +111,7 @@ public class BiographyView extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 setVisible(false);
                 parentView.setVisible(true);
             }

@@ -209,6 +209,7 @@ public class UpdateInforView extends JFrame {
                 JOptionPane.showMessageDialog(UpdateInforView.this, "Thông tin đã được cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 
                 studentListView.updateStudentList(studentController.getStudents());
+
                 setVisible(false);
                 studentListView.setVisible(true);
             }
