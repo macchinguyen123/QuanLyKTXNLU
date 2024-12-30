@@ -21,16 +21,6 @@ public class SVLoginOrSignIn extends JPanel {
          panelTopLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelTopLeft.setOpaque(false);
 
-//        // button back to home
-//        backToHome = new JButton(new ImageIcon("src/img/iconHome.png"));
-//        backToHome.setBackground(new Color(173, 216, 230));
-//        backToHome.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                cardLayout.show(cardPanel, "chooseStudentOrManager");
-//            }
-//        });
-//        panelTopLeft.add(backToHome);
 
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
