@@ -111,10 +111,9 @@ public class BiographyView extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BiographyView biographyView = new BiographyView(parentView);
-                biographyView.setVisible(false);
+
+                setVisible(false);
                 parentView.setVisible(true);
-//                dispose();
             }
         });
         inforStudentPanel.add(Box.createVerticalStrut(20));
