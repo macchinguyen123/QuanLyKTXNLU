@@ -46,11 +46,12 @@ public class PasswordView extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the PasswordView frame
-                Home home = new Home(); // Open the Home frame
-                home.setVisible(true);
+                dispose(); // Đóng cửa sổ PasswordView
+                Home home = new Home(); // Tạo cửa sổ Home
+                home.setVisible(true); // Hiển thị cửa sổ Home
             }
         });
+
 
         topLeftPanel.add(backButton);
         backgroundPanel.add(topLeftPanel, BorderLayout.NORTH);

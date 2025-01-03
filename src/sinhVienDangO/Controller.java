@@ -17,7 +17,7 @@ public class Controller {
     private Model mainModel;
     private View mainView;
     private StudentView studentView;
-    Home home = new Home();
+//    Home home = new Home();
 
 //    private Model mainModel1;
     private AdminRoomManagerView roomManagerView;
@@ -49,7 +49,7 @@ public class Controller {
 
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
-        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, home.getMdsvDangKi(), mainView));
+//        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, home.getMdsvDangKi(), mainView));
         studentView.getBtnBack().addActionListener(new BackButtonListener(studentView));
         mainView.setVisible(false);
         studentView.setVisible(true);
