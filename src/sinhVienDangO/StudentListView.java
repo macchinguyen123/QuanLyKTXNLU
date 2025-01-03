@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StudentListView extends JFrame {
     private JTextField txtSearch;
@@ -20,6 +21,7 @@ public class StudentListView extends JFrame {
     private JMenuItem menuExit, menuManage, roomManage;
 
     private StudentController controller;
+    private Map<String, Student> studentMap;
 
     public StudentListView() {
         setTitle("Quản Lý Sinh Viên");
@@ -178,6 +180,7 @@ public class StudentListView extends JFrame {
 
     public void updateStudentList(List<Student> students) {
         tableModel.setRowCount(0); // Xóa dữ liệu cũ trong bảng
+        studentMap = new HashMap<>();
         int stt = 1;
         for (Student student : students) {
             tableModel.addRow(new Object[]{
@@ -192,6 +195,7 @@ public class StudentListView extends JFrame {
                     student.getDiaChi(),          // Địa chỉ
                     student.getIdCCCD(),          // CCCD
             });
+            studentMap.put(student.getMssv(), student);
         }
     }
 
@@ -213,20 +217,10 @@ public class StudentListView extends JFrame {
     }
 
     private List<Student> searchStudentByMSSV(String mssv) {
-        StudentController studentController = new StudentController(StudentListView.this);
-        StudentListView studentListView = new StudentListView();
-        studentListView.setController(studentController);
-        // Tạo HashMap tạm thời để ánh xạ MSSV với Student
-        HashMap<String, Student> studentMap = new HashMap<>();
-        for (Student student : studentController.getStudents()) {
-            studentMap.put(student.getMssv(), student);
-        }
-
-        // Tìm kiếm sinh viên trong HashMap
         List<Student> result = new ArrayList<>();
-        Student foundStudent = studentMap.get(mssv.trim());
-        if (foundStudent != null) {
-            result.add(foundStudent);
+        Student foundStu = studentMap.get(mssv.trim());
+        if(foundStu != null) {
+            result.add(foundStu);
         }
         return result;
     }
