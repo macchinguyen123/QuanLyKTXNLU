@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UnpaidRoomView extends JFrame {
-    private JTable unpaidTable;
+    private JTable unpaidTable; // Bảng hiển thị phòng chưa thanh toán
+    private JFrame parentFrame; // Frame cha được sử dụng để quay lại
 
     public UnpaidRoomView(JFrame parentFrame, DefaultTableModel originalModel) {
+        this.parentFrame = parentFrame; // Gán frame cha cho thuộc tính
         setTitle("Phòng chưa thanh toán");
         setSize(800, 500);
         setLocationRelativeTo(null);
@@ -44,7 +46,7 @@ public class UnpaidRoomView extends JFrame {
         JButton backButton = new JButton("Quay Lại");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
         backButton.addActionListener(e -> {
-            parentFrame.setVisible(true);
+            this.parentFrame.setVisible(true);
             this.dispose();
         });
 

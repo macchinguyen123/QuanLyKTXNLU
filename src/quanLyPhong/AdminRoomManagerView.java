@@ -176,7 +176,7 @@ public class AdminRoomManagerView extends JFrame {
 
         for (String dormitory : dormitoryData.keySet()) {
             long emptyRooms = dormitoryData.get(dormitory).stream()
-                    .filter(room -> room.getAvailableSlots() > 0)
+                    .filter(room -> room.getCurrentOccupancy() > 0)
                     .count();
 
             if (dormitory.equals("Cư Xá B") || dormitory.equals("Cư Xá D") || dormitory.equals("Cư Xá E")) {

@@ -10,6 +10,8 @@ public class PaymentDetailsView extends JFrame {
     private JTable paymentTable;
     private JButton backButton;
     private DormitoryDetailsView dormitoryDetailsView;
+    private DefaultTableModel tableModel;
+    private UnpaidRoomView unpaidRoomView;
 
     public PaymentDetailsView(List<Room> rooms, DormitoryDetailsView dormitoryDetailsView) {
         this.dormitoryDetailsView = dormitoryDetailsView;
@@ -24,7 +26,7 @@ public class PaymentDetailsView extends JFrame {
 
         // Tạo bảng chính
         String[] columnNames = {"Số Phòng", "Loại Phòng", "Đã Thanh Toán", "Chưa Thanh Toán", "Số Tiền"};
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public Class<?> getColumnClass(int column) {
                 return (column == 2 || column == 3) ? Boolean.class : String.class;
@@ -65,7 +67,8 @@ public class PaymentDetailsView extends JFrame {
         filterButton.setFont(new Font("Arial", Font.BOLD, 18));
         filterButton.addActionListener(e -> {
             this.setVisible(false);
-            new UnpaidRoomView(this, tableModel).setVisible(true);
+            unpaidRoomView = new UnpaidRoomView(this, tableModel);
+            unpaidRoomView.setVisible(true);
         });
 
         // Nút quay lại
