@@ -3,6 +3,7 @@ package sinhVienDangKy;
 
 import sinhVienDangO.Student;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -103,6 +104,8 @@ public class MDSVDangKi extends AbstractTableModel {
                 .collect(Collectors.toCollection(() -> new TreeSet<>(customComparator)));
 
         if (filteredTreeSet.isEmpty()) {
+            // Hiển thị hộp thoại thông báo
+            JOptionPane.showMessageDialog(null, "Không Tìm Thấy Cư Xá : " + keyword, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
