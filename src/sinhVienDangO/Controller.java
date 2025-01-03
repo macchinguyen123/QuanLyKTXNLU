@@ -19,7 +19,7 @@ public class Controller {
     private StudentView studentView;
 //    Home home = new Home();
 
-//    private Model mainModel1;
+    //    private Model mainModel1;
     private AdminRoomManagerView roomManagerView;
     public Controller(Model passwordModel, PasswordView passwordView) {
         this.passwordModel = passwordModel;
