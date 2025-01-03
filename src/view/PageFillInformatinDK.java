@@ -22,17 +22,17 @@ public class PageFillInformatinDK extends JPanel {
     JLabel titleLabel;
     JPanel mainPanel;
     Stack<String> pageStack = new Stack<>();
-    private String currentMSSV;
+     String currentMSSV;
 
-    private MDSVDangKi tableModel;
-    private List<JTextField> textFields = new java.util.ArrayList<>();
-    private List<JComboBox<String>> comboBoxes = new java.util.ArrayList<>();
-    private JCheckBox checkBox1;
-    private JCheckBox checkBox2;
-    private Set<Map<String, String>> listSaveTaiKhoan;
+     MDSVDangKi tableModel;
+     List<JTextField> textFields = new java.util.ArrayList<>();
+     List<JComboBox<String>> comboBoxes = new java.util.ArrayList<>();
+     JCheckBox checkBox1;
+     JCheckBox checkBox2;
+     Set<Map<String, String>> listSaveTaiKhoan;
     JPanel policyPanel;
     JButton confirmButton,backHome,backToPagePrevious;
-    private StudentDataStorage storage;
+     StudentDataStorage storage;
 
     public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PageTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
         this.tableModel = tableModel;
@@ -123,7 +123,7 @@ public class PageFillInformatinDK extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private boolean allFieldsFilled() {
+    public boolean allFieldsFilled() {
         for (JTextField textField : textFields) {
             if (textField.getText().isEmpty()) {
                 return false;
@@ -137,7 +137,7 @@ public class PageFillInformatinDK extends JPanel {
         return true;
     }
 
-    private void saveData() {
+    public void saveData() {
         data = new String[textFields.size() + comboBoxes.size() + 2];
         int index = 0;
         for (JTextField textField : textFields) {
@@ -160,7 +160,7 @@ public class PageFillInformatinDK extends JPanel {
         System.out.println(Arrays.toString(data));
     }
 
-    private JPanel createInputField(String labelText) {
+    public JPanel createInputField(String labelText) {
         JPanel panel = new JPanel(new BorderLayout());
         JLabel label = new JLabel(labelText);
         JTextField textField = new JTextField();
@@ -171,7 +171,7 @@ public class PageFillInformatinDK extends JPanel {
         return panel;
     }
 
-    private JPanel createTwoInputFields1(String label1Text, String label2Text) {
+    public JPanel createTwoInputFields1(String label1Text, String label2Text) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2, 2, 10, 10));
         JLabel label1 = new JLabel(label1Text);
@@ -188,7 +188,7 @@ public class PageFillInformatinDK extends JPanel {
         return panel;
     }
 
-    private JPanel createTwoInputFields2(String label1Text, String label2Text) {
+    public JPanel createTwoInputFields2(String label1Text, String label2Text) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2, 2, 10, 10));
         JLabel label1 = new JLabel(label1Text);
@@ -205,7 +205,7 @@ public class PageFillInformatinDK extends JPanel {
         return panel;
     }
 
-    private JPanel createTwoInputFields3(String label1Text, String label2Text) {
+    public JPanel createTwoInputFields3(String label1Text, String label2Text) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2, 2, 10, 10));
         JLabel label1 = new JLabel(label1Text);
@@ -222,7 +222,7 @@ public class PageFillInformatinDK extends JPanel {
         return panel;
     }
 
-    private void clearFields() {
+    public void clearFields() {
         for (JTextField textField : textFields) {
             textField.setText("");
         }

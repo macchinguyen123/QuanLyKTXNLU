@@ -9,12 +9,12 @@ import java.util.Set;
 
 public class PageLogin extends JPanel {
 
-    private JTextField textIdSV;
-    private JPasswordField txtPasswd;
-    private Set<Map<String, String>> listSaveTaiKhoan;
-    private CardLayout cardLayout;
-    private JPanel cardPanel;
-    private String currentMSSV;
+     JTextField textIdSV;
+     JPasswordField txtPasswd;
+     Set<Map<String, String>> listSaveTaiKhoan;
+     CardLayout cardLayout;
+     JPanel cardPanel;
+     String currentMSSV;
 
     public PageLogin(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.listSaveTaiKhoan = listSaveTaiKhoan;
