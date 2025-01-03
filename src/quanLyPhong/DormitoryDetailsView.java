@@ -89,7 +89,7 @@ public class DormitoryDetailsView extends JFrame {
     private void addButtons(JPanel mainPanel, List<Room> rooms) {
         JButton backButton = new JButton("Quay Lại");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
-        backButton.setBounds(100, 400, 150, 40);
+        backButton.setBounds(520, 400, 150, 40);  // Đổi vị trí của nút Quay lại
         backButton.addActionListener(e -> {
             this.setVisible(false);
             new AdminRoomManagerView().setVisible(true);
@@ -98,7 +98,7 @@ public class DormitoryDetailsView extends JFrame {
 
         JButton paymentButton = new JButton("Danh sách thanh toán tiền điện nước");
         paymentButton.setFont(new Font("Arial", Font.BOLD, 18));
-        paymentButton.setBounds(300, 400, 400, 40);
+        paymentButton.setBounds(100, 400, 400, 40);  // Đổi vị trí của nút Danh sách thanh toán
         paymentButton.addActionListener(e -> {
             PaymentDetailsView paymentDetailsView = new PaymentDetailsView(rooms, this);
             paymentDetailsView.setVisible(true);
@@ -106,6 +106,7 @@ public class DormitoryDetailsView extends JFrame {
         });
         mainPanel.add(paymentButton);
     }
+
 
     private void showRoomMembersDialog(String roomNumber, List<String> members) {
         JPanel panel = new JPanel();
