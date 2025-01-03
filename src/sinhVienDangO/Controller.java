@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 public class Controller {
     private Model passwordModel;
     private PasswordView passwordView;
-    private Model mainModel;
     private View mainView;
     private StudentView studentView;
 
@@ -39,7 +38,7 @@ public class Controller {
     }
 
     private void openMainView() {
-        mainModel = new Model();
+        passwordModel = new Model();
         mainView = new View();
 
         // Main View listeners
