@@ -1,6 +1,7 @@
 package sinhVienDangO;
 
 import quanLyPhong.AdminRoomManagerView;
+import quanLyPhong.Model;
 import view.Home;
 import view.PanelChooseStudentOrManager;
 
@@ -111,8 +112,10 @@ public class View extends JFrame {
         if (choice == JOptionPane.YES_OPTION) {
             this.dispose(); // Đóng cửa sổ hiện tại
 
-            // Mở PasswordView
+            // Mở cửa sổ đăng nhập quản lý
+            Model combinedModel = new Model();
             PasswordView passwordView = new PasswordView();
+            new Controller(combinedModel, passwordView);
             passwordView.setVisible(true);
         }
     }
