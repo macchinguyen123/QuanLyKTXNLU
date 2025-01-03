@@ -38,15 +38,6 @@ public class MDSVDangKi extends AbstractTableModel {
         originalStudents.addAll(students);
     }
 
-
-    public void addStudent(Student student) {
-        if (student != null) {
-            students.add(student);
-            fireTableDataChanged();
-            System.out.println("Đã thêm sinh viên: " + student);
-        }
-    }
-
     public void removeStudent(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < students.size()) {
             Student removedStudent = students.get(rowIndex);
