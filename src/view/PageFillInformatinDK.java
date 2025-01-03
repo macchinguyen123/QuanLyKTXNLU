@@ -32,6 +32,7 @@ public class PageFillInformatinDK extends JPanel {
     private Set<Map<String, String>> listSaveTaiKhoan;
     JPanel policyPanel;
     JButton confirmButton,backHome,backToPagePrevious;
+    private StudentDataStorage storage;
 
     public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PageTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
         this.tableModel = tableModel;
@@ -154,7 +155,7 @@ public class PageFillInformatinDK extends JPanel {
 
 
 
-        StudentDataStorage storage = StudentDataStorage.getInstance();
+        storage = StudentDataStorage.getInstance();
         storage.addStudent(data);
         System.out.println(Arrays.toString(data));
     }

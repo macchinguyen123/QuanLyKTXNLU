@@ -38,6 +38,7 @@ public class View extends JFrame {
         roomManageMenuItem.addActionListener(e -> openRoomManagerView());
         exitMenuItem.addActionListener(e -> showLogoutConfirmation());
     }
+
     // Cung cấp phương thức truy cập View hiện tại
     public static View getCurrentView() {
         return currentView;
@@ -120,33 +121,7 @@ public class View extends JFrame {
         }
     }
 
-
-    // Mở giao diện "Chọn chế độ"
-    private void openChooseStudentOrManagerView() {
-        JFrame newFrame = new JFrame("Chọn chế độ");
-        CardLayout cardLayout = new CardLayout();
-        JPanel cardPanel = new JPanel(cardLayout);
-
-        // Thêm PanelChooseStudentOrManager vào cardPanel
-//        cardPanel.add(new PanelChooseStudentOrManager(cardPanel, cardLayout, (Home) newFrame), "choosePanel");
-
-        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        newFrame.setSize(800, 500);
-        newFrame.setLocationRelativeTo(null);
-        newFrame.setContentPane(cardPanel);
-        newFrame.setVisible(true);
-    }
-
-    // Cung cấp phương thức để gắn sự kiện cho các menu item
-    public void setExitMenuItemListener(ActionListener listener) {
-        exitMenuItem.addActionListener(listener);
-    }
-
     public void setManageMenuItemListener(ActionListener listener) {
         manageMenuItem.addActionListener(listener);
-    }
-
-    public void setRoomManageMenuItemListener(ActionListener listener) {
-        roomManageMenuItem.addActionListener(listener);
     }
 }

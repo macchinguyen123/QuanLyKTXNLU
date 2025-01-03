@@ -100,21 +100,4 @@ public class StudentView extends JFrame {
         return btnBack;
     }
 
-    public JMenuItem getMenuExit() {
-        return menuExit;
-    }
-
-    public JMenuItem getMenuManage() {
-        return menuManage;
-    }
-
-    // Method to set the exit action listener
-    public void setExitMenuItemListener(ActionListener listener) {
-        menuExit.addActionListener(listener);
-    }
-
-    // Method to set the manage action listener
-    public void setManageMenuItemListener(ActionListener listener) {
-        menuManage.addActionListener(listener);
-    }
 }
