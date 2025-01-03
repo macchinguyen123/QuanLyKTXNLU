@@ -17,8 +17,8 @@ public class AdminRoomManagerView extends JFrame {
     private JButton backButton;
     private JButton viewDetailsButton;
     private Map<String, List<Room>> dormitoryData;
-    List<Room> rooms = new ArrayList<>();
-    String dormitoryName;
+    private List<Room> rooms = new ArrayList<>();
+    private String dormitoryName;
 
     public AdminRoomManagerView() {
         setTitle("Quản Lý Cư Xá");

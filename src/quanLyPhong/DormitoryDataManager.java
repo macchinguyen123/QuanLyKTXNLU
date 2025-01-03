@@ -116,9 +116,33 @@ public class DormitoryDataManager {
         return dormitoryData;
     }
     public List<String> getRoomMembers(String roomNumber, int memberCount) {
-        return List.of("Nguyễn Văn A", "Trần Thị B", "Lê Văn C", "Hoàng Thị D", "Phạm Văn E", "Vũ Thị F", "Ngô Văn G", "Đinh Thị H")
-                .subList(0, Math.min(memberCount, 8));
+        List<String> maleNames = List.of("Nguyễn Văn Anh", "Lê Văn Bảo", "Hoàng Văn Tài", "Phạm Văn Huy ", "Vũ Thành", "Ngô Văn Giang", "Đinh Quang Toàn");
+        List<String> femaleNames = List.of("Nguyễn Thị Lan", "Trần Thị Thư", "Lê Thị Hoa", "Nguyễn Thị Kim", "Trần Thị Tuyết", "Lê Thị Thu", "Nguyễn Thị Mai");
+
+        Random random = new Random();
+        List<String> selectedMembers = new ArrayList<>();
+        List<String> availableNames;
+
+        // Kiểm tra cư xá và phân loại tên người
+        if (roomNumber.startsWith("A") || roomNumber.startsWith("C") || roomNumber.startsWith("F")) {
+            // Cư xá nam
+            availableNames = new ArrayList<>(maleNames);
+        } else {
+            // Cư xá nữ
+            availableNames = new ArrayList<>(femaleNames);
+        }
+
+        // Xáo trộn danh sách tên
+        Collections.shuffle(availableNames, random);
+
+        // Lấy các tên ngẫu nhiên mà không trùng lặp
+        for (int i = 0; i < memberCount && i < availableNames.size(); i++) {
+            selectedMembers.add(availableNames.get(i));
+        }
+
+        return selectedMembers;
     }
+
     public List<String> getRoomData() {
         return roomData;
     }
