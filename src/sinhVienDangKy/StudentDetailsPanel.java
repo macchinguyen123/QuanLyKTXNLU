@@ -12,6 +12,8 @@ public class StudentDetailsPanel {
     private GDSVDangKi view;
     private JLabel backgroundImage;
     private JFrame detailsFrame;
+    private LayDuLieuSV storage;
+    private GDXemChiTiet detailPanel;
 
     public StudentDetailsPanel(Student studentDetails, int selectedRow, MDSVDangKi model, GDSVDangKi view) {
         this.model = model;
@@ -78,7 +80,7 @@ public class StudentDetailsPanel {
         confirmButton.setBackground(new Color(34, 139, 34)); // Xanh lá cây
         confirmButton.setForeground(Color.WHITE);
         confirmButton.addActionListener(e -> {
-            LayDuLieuSV storage = LayDuLieuSV.getInstances();
+            storage = LayDuLieuSV.getInstances();
             storage.addStudent(studentDetails);
             model.removeStudent(selectedRow);
             model.removeStudentTimKiem(selectedRow);
@@ -123,7 +125,7 @@ public class StudentDetailsPanel {
             };
 
             // Tạo giao diện chi tiết
-            GDXemChiTiet detailPanel = new GDXemChiTiet(studentData, view);
+            detailPanel = new GDXemChiTiet(studentData, view);
             detailsFrame.setVisible(false);
             detailPanel.setVisible(true);
             detailPanel.getButtonQuayLai().addActionListener(new ActionListener() {
