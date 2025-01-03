@@ -5,6 +5,7 @@ import java.util.*;
 public class DormitoryDataManager {
     private List<String> roomData;
     private Map<String, List<Room>> dormitoryData;
+    private List<RoomPaymentData> paymentData;
 
     public DormitoryDataManager() {
         dormitoryData = new TreeMap<>();
@@ -158,7 +159,7 @@ public class DormitoryDataManager {
     }
     public List<RoomPaymentData> generateRoomPaymentData(String dormitory) {
         Random random = new Random();
-        List<RoomPaymentData> paymentData = new ArrayList<>();
+         paymentData = new ArrayList<>();
 
         List<Room> rooms = dormitoryData.get(dormitory);
         if (rooms != null) {
