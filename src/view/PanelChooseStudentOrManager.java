@@ -13,8 +13,10 @@ public class PanelChooseStudentOrManager extends JPanel {
     JButton btnChooseStudent, btnChooseManager, btnExit;
     JLabel labelStudent, labelManager, labelLogin;
     Image background;
+    Home parentFrame;
 
-    public PanelChooseStudentOrManager(JPanel cardPanel, CardLayout cardLayout) {
+    public PanelChooseStudentOrManager(JPanel cardPanel, CardLayout cardLayout, Home parentFrame) {
+        this.parentFrame = parentFrame;
         // Load background image
         background = new ImageIcon("src/img/backroundKTX.jpg").getImage();
         this.setLayout(new BorderLayout());
@@ -50,6 +52,7 @@ public class PanelChooseStudentOrManager extends JPanel {
         btnChooseStudent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Tắt Home (JFrame) và chuyển sang PasswordView
                 // Switch to the Student Panel
                 cardLayout.show(cardPanel, "studentPanel");
                 disable();
@@ -72,13 +75,18 @@ public class PanelChooseStudentOrManager extends JPanel {
         btnChooseManager.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open manager login window
+                if (parentFrame != null) {
+                    parentFrame.dispose(); // Đóng JFrame Home
+                }
+
+                // Mở cửa sổ đăng nhập quản lý
                 Model combinedModel = new Model();
                 PasswordView passwordView = new PasswordView();
                 new Controller(combinedModel, passwordView);
                 passwordView.setVisible(true);
             }
         });
+
         panelManager.add(btnChooseManager, BorderLayout.CENTER);
 
         labelManager = new JLabel("Manager", JLabel.CENTER);

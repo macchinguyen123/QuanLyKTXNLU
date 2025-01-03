@@ -1,6 +1,7 @@
 package sinhVienDangO;
 
 import quanLyPhong.AdminRoomManagerView;
+import view.Home;
 import view.PanelChooseStudentOrManager;
 
 import javax.swing.*;
@@ -98,7 +99,6 @@ public class View extends JFrame {
         roomManagerView.setVisible(true);
     }
 
-    // Hiển thị xác nhận đăng xuất
     private void showLogoutConfirmation() {
         int choice = JOptionPane.showConfirmDialog(
                 this,
@@ -109,10 +109,14 @@ public class View extends JFrame {
         );
 
         if (choice == JOptionPane.YES_OPTION) {
-            openChooseStudentOrManagerView();
-            this.dispose();
+            this.dispose(); // Đóng cửa sổ hiện tại
+
+            // Mở PasswordView
+            PasswordView passwordView = new PasswordView();
+            passwordView.setVisible(true);
         }
     }
+
 
     // Mở giao diện "Chọn chế độ"
     private void openChooseStudentOrManagerView() {
@@ -121,7 +125,7 @@ public class View extends JFrame {
         JPanel cardPanel = new JPanel(cardLayout);
 
         // Thêm PanelChooseStudentOrManager vào cardPanel
-        cardPanel.add(new PanelChooseStudentOrManager(cardPanel, cardLayout), "choosePanel");
+//        cardPanel.add(new PanelChooseStudentOrManager(cardPanel, cardLayout, (Home) newFrame), "choosePanel");
 
         newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         newFrame.setSize(800, 500);

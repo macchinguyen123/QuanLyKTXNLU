@@ -40,7 +40,7 @@ public class Home extends JFrame {
         cardPanel = new JPanel(cardLayout);
 
         // Add panels to cardPanel
-        mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout);
+        mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout,this);
         studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
         pageLogin = new PageLogin(cardPanel, cardLayout, listSaveTaiKhoan);
         pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
@@ -49,7 +49,7 @@ public class Home extends JFrame {
 
         thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
         fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV);
-        chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout);
+        chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout,this);
         dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
 
 
