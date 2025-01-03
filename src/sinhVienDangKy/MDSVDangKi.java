@@ -29,6 +29,7 @@ public class MDSVDangKi extends AbstractTableModel {
         students.add(new Student("Mai Van Hung", "23139990", "Nam", "Lâm Nghiệp", "22/08/2002", "A", "101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Không"));
         students.add(new Student("Le Thi Ngoc Mai", "23130001", "Nữ", "Kinh tế", "23/01/2001", "B", "202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Không"));
         students.add(new Student("Chau Mai Tú", "23126578", "Nam", "Kinh tế", "23/01/2001", "C", "202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Có"));
+
         List<Student> storedData = studentDataStorage.getStudentData();
         if (storedData != null && !storedData.isEmpty()) {
             students.addAll(storedData);
