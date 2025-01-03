@@ -1,5 +1,6 @@
 package view;
 
+import quanLyPhong.Model;
 import sinhVienDangKy.MDSVDangKi;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class Home extends JFrame {
     PanelChooseStudentOrManager chooseStudentOrManager;
     PageDangKiTaiKhoan dangKiTaiKhoanSV;
     PanelHeaderOfHome headerPanel;
+    Model model;
 
     public Home() throws HeadlessException {
         setTitle("Dormitory management system");

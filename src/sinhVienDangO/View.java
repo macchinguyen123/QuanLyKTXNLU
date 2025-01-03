@@ -13,55 +13,79 @@ public class View extends JFrame {
     private JMenuItem manageMenuItem;
     private JMenuItem roomManageMenuItem;
     protected JPanel mainPanel;
+    private static View currentView;
 
     public View() {
+        currentView = this;
+
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(null);
-        mainPanel.setBackground(new Color(161, 210, 224, 50));
+        // Tạo giao diện chính
+        mainPanel = createMainPanel();
         setContentPane(mainPanel);
 
-        // Tải và thay đổi kích thước ảnh nền để phù hợp với JFrame
-        ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        JLabel backgroundImage = new JLabel(scaledIcon);
-        backgroundImage.setBounds(0, 0, 800, 500);
-        mainPanel.add(backgroundImage);
+        // Tạo menu
+        JMenuBar menuBar = createMenuBar();
+        setJMenuBar(menuBar);
 
+        // Xử lý sự kiện cho các menu item
+        roomManageMenuItem.addActionListener(e -> openRoomManagerView());
+        exitMenuItem.addActionListener(e -> showLogoutConfirmation());
+    }
+    // Cung cấp phương thức truy cập View hiện tại
+    public static View getCurrentView() {
+        return currentView;
+    }
+
+    // Tạo panel chính
+    private JPanel createMainPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBackground(new Color(161, 210, 224, 50));
+
+        // Tải và thay đổi kích thước ảnh nền
+        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/img/hinhanh.jpg"));
+        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
+        backgroundImage.setBounds(0, 0, 800, 500);
+        panel.add(backgroundImage);
+
+        return panel;
+    }
+
+    // Tạo menu bar
+    private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
+        // Menu "Exit"
         JMenu exitMenu = new JMenu("Exit");
         exitMenuItem = new JMenuItem("Đăng Xuất");
         exitMenuItem.setFont(new Font("Inter", Font.BOLD, 16));
         exitMenu.add(exitMenuItem);
         menuBar.add(exitMenu);
 
+        // Menu "Quản Lý"
         JMenu manageMenu = new JMenu("Quản Lý");
         manageMenuItem = new JMenuItem("Quản Lý Sinh Viên");
         roomManageMenuItem = new JMenuItem("Quản Lý Phòng");
         manageMenuItem.setFont(new Font("Inter", Font.BOLD, 16));
         roomManageMenuItem.setFont(new Font("Inter", Font.BOLD, 16));
-
         manageMenu.add(manageMenuItem);
         manageMenu.add(roomManageMenuItem);
         menuBar.add(manageMenu);
 
-        setJMenuBar(menuBar);
-
-        roomManageMenuItem.addActionListener(e ->
-                openRoomManagerView());
-        exitMenuItem.addActionListener(e -> showLogoutConfirmation());
+        return menuBar;
     }
 
+    // Mở giao diện Quản Lý Phòng
     private void openRoomManagerView() {
-        // Gọi giao diện Quản Lý Phòng
         AdminRoomManagerView roomManagerView = new AdminRoomManagerView();
+
+        // Xử lý quay lại từ giao diện quản lý phòng
         roomManagerView.getBackButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,10 +93,12 @@ public class View extends JFrame {
                 setVisible(true);
             }
         });
+
         this.setVisible(false);
         roomManagerView.setVisible(true);
     }
 
+    // Hiển thị xác nhận đăng xuất
     private void showLogoutConfirmation() {
         int choice = JOptionPane.showConfirmDialog(
                 this,
@@ -83,25 +109,28 @@ public class View extends JFrame {
         );
 
         if (choice == JOptionPane.YES_OPTION) {
-            // Mở giao diện PanelChooseStudentOrManager
-            JFrame newFrame = new JFrame("Chọn chế độ");
-            CardLayout cardLayout = new CardLayout();
-            JPanel cardPanel = new JPanel(cardLayout);
-
-            // Thêm PanelChooseStudentOrManager vào cardPanel
-            cardPanel.add(new PanelChooseStudentOrManager(cardPanel, cardLayout), "choosePanel");
-
-            newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            newFrame.setSize(800, 500);
-            newFrame.setLocationRelativeTo(null);
-            newFrame.setContentPane(cardPanel);
-            newFrame.setVisible(true);
-
-            // Đóng giao diện hiện tại
+            openChooseStudentOrManagerView();
             this.dispose();
         }
     }
 
+    // Mở giao diện "Chọn chế độ"
+    private void openChooseStudentOrManagerView() {
+        JFrame newFrame = new JFrame("Chọn chế độ");
+        CardLayout cardLayout = new CardLayout();
+        JPanel cardPanel = new JPanel(cardLayout);
+
+        // Thêm PanelChooseStudentOrManager vào cardPanel
+        cardPanel.add(new PanelChooseStudentOrManager(cardPanel, cardLayout), "choosePanel");
+
+        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newFrame.setSize(800, 500);
+        newFrame.setLocationRelativeTo(null);
+        newFrame.setContentPane(cardPanel);
+        newFrame.setVisible(true);
+    }
+
+    // Cung cấp phương thức để gắn sự kiện cho các menu item
     public void setExitMenuItemListener(ActionListener listener) {
         exitMenuItem.addActionListener(listener);
     }

@@ -148,6 +148,12 @@ public class PageFillInformatinDK extends JPanel {
         data[index++] = checkBox1.isSelected() ? "Có" : "Không";
         data[index] = checkBox2.isSelected() ? "Có" : "Không";
 
+        // Lấy thông tin cư xá và phòng
+        String dorm = comboBoxes.get(0).getSelectedItem().toString();
+        String room = textFields.get(textFields.size() - 1).getText();
+
+
+
         StudentDataStorage storage = StudentDataStorage.getInstance();
         storage.addStudent(data);
         System.out.println(Arrays.toString(data));
@@ -225,5 +231,7 @@ public class PageFillInformatinDK extends JPanel {
         checkBox1.setSelected(false);
         checkBox2.setSelected(false);
     }
+
+
 
 }
