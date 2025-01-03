@@ -49,7 +49,7 @@ public class Controller {
 
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
-//        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, home.getMdsvDangKi(), mainView));
+        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, mdsvDangKi, mainView));
         studentView.getBtnBack().addActionListener(new BackButtonListener(studentView));
         mainView.setVisible(false);
         studentView.setVisible(true);
