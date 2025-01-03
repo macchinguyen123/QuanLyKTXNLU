@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 public class HĐSVDangKi {
     private MDSVDangKi model;
     private GDSVDangKi view;
-    private  StudentDetailsPanel showStudentDetailsPanel;
+    private StudentDetailsPanel showStudentDetailsPanel;
 
     public HĐSVDangKi(MDSVDangKi model, GDSVDangKi view1) {
         this.model = model;

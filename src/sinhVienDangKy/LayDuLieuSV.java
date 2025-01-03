@@ -48,12 +48,4 @@ public class LayDuLieuSV {
         return sVLuu;
     }
 
-    public void clearData() {
-        sVLuu.clear();
-    }
-
-    public void removeStudent(String mssv) {
-        sVLuu.removeIf(student -> student.getMssv().equals(mssv));
-    }
-
 }

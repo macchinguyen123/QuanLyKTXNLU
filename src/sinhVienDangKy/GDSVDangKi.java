@@ -16,16 +16,12 @@ public class GDSVDangKi extends JFrame {
     private JMenuItem roomManageMenuItem;
     private JPanel mainPanel; // Panel chứa giao diện chính
     private JLabel backgroundImage;
-    private Stack<JPanel> panelStack;
 
     public GDSVDangKi(MDSVDangKi mdsvDangKi) {
         setTitle("Quản Lý Sinh Viên");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-
-        //Khoi tao Stack
-        panelStack = new Stack<>();
 
         // Tạo nền ảnh
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
@@ -150,51 +146,5 @@ public class GDSVDangKi extends JFrame {
     public JMenuItem getRoomManageMenuItem() {
         return roomManageMenuItem;
     }
-
-    public void showMainView() {
-        mainPanel.setVisible(true);
-//        revalidate();
-//        repaint();
-    }
-    public void showMainView1() {
-        setVisible(true);
-        revalidate();
-        repaint();
-    }
-
-    public void showDetailPanel(JPanel detailsPanel) {
-        getContentPane().removeAll(); // Xóa tất cả các thành phần hiện tại
-        getContentPane().add(detailsPanel); // Hiển thị giao diện chi tiết
-        revalidate();
-        repaint();
-    }
-
-
-    public JLabel getBackgroundImage() {
-        return backgroundImage;
-    }
-
-    public void goBack() {
-        // Nếu còn panel trong stack
-        if (panelStack.size() > 1) {
-            // Loại bỏ panel hiện tại
-            JPanel currentPanel = panelStack.pop();
-            backgroundImage.remove(currentPanel);
-
-            // Hiển thị panel trước đó
-            JPanel previousPanel = panelStack.peek();
-            previousPanel.setVisible(true);
-            revalidate();
-            repaint();
-        }
-    }
-    public void goBackToMainPanel() {
-        getContentPane().removeAll(); // Xóa tất cả các thành phần hiện tại
-        getContentPane().add(mainPanel); // Thêm lại giao diện chính (mainPanel)
-        revalidate(); // Xác nhận lại các thành phần trong giao diện
-        repaint(); // Vẽ lại giao diện
-    }
-
-
 
 }
