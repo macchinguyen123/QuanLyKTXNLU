@@ -5,17 +5,17 @@ import sinhVienDangO.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LayDuLieuSV {
-    private static LayDuLieuSV instance;
+public class TakeData {
+    private static TakeData instance;
     private List<Student> sVLuu;
 
-    private LayDuLieuSV() {
+    private TakeData() {
         sVLuu = new ArrayList<>();
     }
 
-    public static LayDuLieuSV getInstances() {
+    public static TakeData getInstances() {
         if (instance == null) {
-            instance = new LayDuLieuSV();
+            instance = new TakeData();
         }
         return instance;
     }

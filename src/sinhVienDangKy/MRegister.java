@@ -1,4 +1,3 @@
-// Class to store and manage student data
 package sinhVienDangKy;
 
 import sinhVienDangO.Student;
@@ -11,15 +10,13 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class MDSVDangKi extends AbstractTableModel {
-    private final String[] columnNames = {"STT", "Tên", "Mã số", "Giới tính", "Khoa", "Năm sinh", "Cư xá", "Phòng", "Hành động"};
+public class MRegister extends AbstractTableModel {
     private final List<Student> students;
     public StudentDataStorage studentDataStorage;
     TreeSet<Student> filteredTreeSet;
-    // Lưu danh sách sinh viên gốc (chỉ thực hiện một lần, ví dụ trong constructor hoặc khởi tạo)
     private final List<Student> originalStudents = new ArrayList<>();
 
-    public MDSVDangKi() {
+    public MRegister() {
         students = new ArrayList<>();
         studentDataStorage = StudentDataStorage.getInstance();
         // Sample data
@@ -61,7 +58,6 @@ public class MDSVDangKi extends AbstractTableModel {
         }
     }
 
-
     public void filterData(String keyword) {
 
         if (keyword.isEmpty()) {
@@ -73,40 +69,30 @@ public class MDSVDangKi extends AbstractTableModel {
 
         // Comparator để sắp xếp theo ký tự cuối cùng, sau đó toàn bộ chuỗi
         Comparator<Student> customComparator = (s1, s2) -> {
-            // Lấy tên của từng sinh viên
             String name1 = s1.getTen().trim();
             String name2 = s2.getTen().trim();
-
-            // Lấy ký tự cuối cùng
             char lastChar1 = name1.charAt(name1.length() - 1);
             char lastChar2 = name2.charAt(name2.length() - 1);
 
-            // So sánh ký tự cuối cùng trước
             if (lastChar1 != lastChar2) {
                 return Character.compare(lastChar1, lastChar2);
             }
-
-            // Nếu giống nhau, so sánh toàn bộ chuỗi
             return name1.compareTo(name2);
         };
 
-        // Sử dụng TreeSet với Comparator tùy chỉnh
         filteredTreeSet = originalStudents.stream()
                 .filter(student -> student.getCuXa().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toCollection(() -> new TreeSet<>(customComparator)));
 
         if (filteredTreeSet.isEmpty()) {
-            // Hiển thị hộp thoại thông báo
             JOptionPane.showMessageDialog(null, "Không Tìm Thấy Cư Xá : " + keyword, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
-        // Cập nhật danh sách sinh viên
         students.clear();
         students.addAll(filteredTreeSet);
         fireTableDataChanged();
     }
-
 
     @Override
     public int getRowCount() {
@@ -115,12 +101,23 @@ public class MDSVDangKi extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return columnNames.length;
+        return 9; // Số cột cố định
     }
 
     @Override
     public String getColumnName(int column) {
-        return columnNames[column];
+        switch (column) {
+            case 0: return "STT";
+            case 1: return "Tên";
+            case 2: return "Mã số";
+            case 3: return "Giới tính";
+            case 4: return "Khoa";
+            case 5: return "Năm sinh";
+            case 6: return "Cư xá";
+            case 7: return "Phòng";
+            case 8: return "Hành động";
+            default: return "";
+        }
     }
 
     @Override
@@ -139,7 +136,6 @@ public class MDSVDangKi extends AbstractTableModel {
             default: return "";
         }
     }
-
 
     public Student getStudentDetails(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < students.size()) {

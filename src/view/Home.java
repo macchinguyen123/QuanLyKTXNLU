@@ -1,7 +1,7 @@
 package view;
 
 import quanLyPhong.Model;
-import sinhVienDangKy.MDSVDangKi;
+import sinhVienDangKy.MRegister;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class Home extends JFrame {
     CardLayout cardLayout;
     JPanel cardPanel;
     List<String> selectedAttributes;
-    MDSVDangKi mdsvDangKi = new MDSVDangKi();
+    MRegister mdsvDangKi = new MRegister();
     String currentMSSV; // thêm biến currentMSSV
     SVLoginOrSignIn studentPanel;
     PanelLogin pageLogin;
@@ -74,7 +74,7 @@ public class Home extends JFrame {
         setVisible(true);
     }
 
-    public MDSVDangKi getMdsvDangKi() {
+    public MRegister getMdsvDangKi() {
         return mdsvDangKi;
     }
 
