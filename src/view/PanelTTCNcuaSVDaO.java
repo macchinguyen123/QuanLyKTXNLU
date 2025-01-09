@@ -1,5 +1,9 @@
 package view;
 
+import sinhVienDangKy.DataSVDangKi;
+import sinhVienDangKy.StudentDataStorage;
+import sinhVienDangO.Student;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -18,6 +22,8 @@ public class PanelTTCNcuaSVDaO extends JPanel {
     JTable display;
     JScrollPane scrollPane;
     JButton btnOK,btnTraPhong;
+    // Thuộc tính lưu trữ dữ liệu
+    private final DataSVDangKi dataSVDangKi;
 
 
     public PanelTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
@@ -62,34 +68,54 @@ public class PanelTTCNcuaSVDaO extends JPanel {
         panelTraPhong.add(btnOK);
         panelTraPhong.add(btnTraPhong);
         this.add(panelTraPhong, BorderLayout.SOUTH);
+        // Khởi tạo StudentDataStorage
+        this.dataSVDangKi = DataSVDangKi.getInstance();
+        if (!dataSVDangKi.getStudentData().isEmpty()) {
+            updateInformation(dataSVDangKi.getStudentData().get(0).getMssv());
+        } else {
+            lbInfor.setText("Danh sách sinh viên trống.");
+            tableModel.setRowCount(0);
+        }
     }
 
     // Phương thức cập nhật thông tin sinh viên
-    public void updateInformation(String[] data) {
-        if (data == null || data.length == 0) {
+    public void updateInformation(String mssv) {
+        // Lấy thông tin sinh viên từ StudentDataStorage
+        Student student = dataSVDangKi.getStudent(mssv);
+
+        if (student == null) {
+            lbInfor.setText("Không tìm thấy thông tin sinh viên");
+            tableModel.setRowCount(0); // Xóa bảng cũ
             return;
         }
 
         // Cập nhật tiêu đề
-        lbInfor.setText(data[0]); // Họ và tên
+        lbInfor.setText(student.getTen()); // Hiển thị tên sinh viên
 
         // Xóa thông tin cũ
         tableModel.setRowCount(0);
 
         // Cập nhật thông tin mới
-
-//        String[] labels = {
-//                "Họ và tên","Ngày sinh", "Mã số sinh viên","Số điện thoại", "Hộ khẩu thường trú",
-//                "Khoa","Phòng","CCCD / CMND","Dân tộc","Giới tính","Cư xá", "Con liệt sĩ, thương binh", "Gia đình khó khăn"
-//        };
-        String[] labels = {
-                "Họ và tên","Ngày sinh", "Mã số sinh viên","Số điện thoại", "Hộ khẩu thường trú",
-                "Phòng","CCCD / CMND","Dân tộc","Giới tính", "Khoa","Cư xá", "Con liệt sĩ, thương binh", "Gia đình khó khăn"
+        String[][] data = {
+                {"Họ và tên", student.getTen()},
+                {"Ngày sinh", student.getNamSinh()},
+                {"Mã số sinh viên", student.getMssv()},
+                {"Số điện thoại", student.getSđt()},
+                {"Hộ khẩu thường trú", student.getDiaChi()},
+                {"Phòng", student.getPhong()},
+                {"CCCD / CMND", student.getIdCCCD()},
+                {"Dân tộc", student.getDanToc()},
+                {"Giới tính", student.getGioiTinh()},
+                {"Khoa", student.getKhoa()},
+                {"Cư xá", student.getCuXa()},
+                {"Con liệt sĩ, thương binh", student.getDienChinhSach()},
+                {"Gia đình khó khăn", student.getDienChinhSach()}
         };
 
-        for (int i = 0; i < labels.length && i < data.length; i++) {
-            tableModel.addRow(new Object[]{labels[i], data[i]});
+        for (String[] row : data) {
+            tableModel.addRow(row);
         }
     }
+
 }
 

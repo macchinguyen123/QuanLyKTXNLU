@@ -5,17 +5,17 @@ import sinhVienDangO.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentDataStorage {
-    private static StudentDataStorage instance;
+public class DataSVDangKi {
+    private static DataSVDangKi instance;
     private List<Student> studentData;
 
-    private StudentDataStorage() {
+    private DataSVDangKi() {
         studentData = new ArrayList<>();
     }
 
-    public static StudentDataStorage getInstance() {
+    public static DataSVDangKi getInstance() {
         if (instance == null) {
-            instance = new StudentDataStorage();
+            instance = new DataSVDangKi();
         }
         return instance;
     }

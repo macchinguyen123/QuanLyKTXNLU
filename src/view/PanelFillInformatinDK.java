@@ -1,5 +1,6 @@
 package view;
 
+import sinhVienDangKy.DataSVDangKi;
 import sinhVienDangKy.MDSVDangKi;
 import sinhVienDangKy.StudentDataStorage;
 
@@ -33,6 +34,7 @@ public class PanelFillInformatinDK extends JPanel {
     JPanel policyPanel;
     JButton confirmButton,backHome,backToPagePrevious;
     StudentDataStorage storage;
+    DataSVDangKi dataSVDangKi;
     String[] listKhoa = {"Công nghệ thông tin","Chăn nuôi thú y","Cơ khí","Khoa học sinh học","Thủy sản","Nông học"};
 
     public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
@@ -83,7 +85,8 @@ public class PanelFillInformatinDK extends JPanel {
                 if (allFieldsFilled()) {
                     saveData();
                     JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
-                    pageTTCN.updateInformation(data);
+                    // Cập nhật thông tin vào giao diện
+                    pageTTCN.updateInformation(storage.getStudentData().get(0).getMssv());
 //                    tableModel.addStudent(data);
                     clearFields();
                     // Xóa tài khoản đăng nhập hiện tại khỏi danh sách
@@ -169,6 +172,8 @@ public class PanelFillInformatinDK extends JPanel {
 
         storage = StudentDataStorage.getInstance();
         storage.addStudent(data);
+        dataSVDangKi = DataSVDangKi.getInstance();
+        dataSVDangKi.addStudent(data);
         System.out.println(Arrays.toString(data));
     }
 
