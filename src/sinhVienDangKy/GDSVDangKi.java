@@ -21,6 +21,7 @@ public class GDSVDangKi extends JFrame {
     private JPanel mainPanel; // Panel chứa giao diện chính
     private JLabel backgroundImage;
     private LayDuLieuSV storage;
+    private GDXemChiTiet detailView;
 
     public GDSVDangKi(MDSVDangKi mdsvDangKi) {
         setTitle("Quản Lý Sinh Viên");
@@ -93,6 +94,10 @@ public class GDSVDangKi extends JFrame {
                 if (rowIndex >= 0) {
                     Student student = mdsvDangKi.getStudentDetails(rowIndex); // Lấy dữ liệu sinh viên
                     if (student != null) {
+                        // Kiểm tra nếu detailView đã tồn tại và đang hiển thị
+                        if (detailView != null && detailView.isShowing()) {
+                            return; // Không tạo mới nếu đang mở
+                        }
                         // Tạo mảng dữ liệu từ đối tượng Student
                         String[] studentData = {
                                 student.getTen(),
@@ -109,14 +114,16 @@ public class GDSVDangKi extends JFrame {
                                 student.getDienChinhSach()
                         };
 
+
                         // Hiển thị giao diện GDXemChiTiet
-                        GDXemChiTiet detailView = new GDXemChiTiet(studentData, GDSVDangKi.this);
+                        detailView = new GDXemChiTiet(studentData, GDSVDangKi.this);
                         detailView.setVisible(true);
                         detailView.getButtonQuayLai().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 setVisible(true);
                                 detailView.dispose();
+                                detailView=null;
                             }
                         });
                         detailView.getButtonXacNhan().addActionListener(new ActionListener() {
@@ -127,6 +134,7 @@ public class GDSVDangKi extends JFrame {
                                 mdsvDangKi.removeStudent(rowIndex);
                                 mdsvDangKi.removeStudentTimKiem(rowIndex);
                                 detailView.dispose();
+                                detailView=null;
                                 setVisible(true);
                             }
                         });
@@ -136,6 +144,7 @@ public class GDSVDangKi extends JFrame {
                                 setVisible(true);
                                 mdsvDangKi.removeStudentTimKiem(rowIndex);
                                 mdsvDangKi.removeStudent(rowIndex);
+                                detailView=null;
                                 detailView.dispose();
                             }
                         });
