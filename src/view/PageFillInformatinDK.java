@@ -35,7 +35,7 @@ public class PageFillInformatinDK extends JPanel {
     StudentDataStorage storage;
     String[] listKhoa = {"Công nghệ thông tin","Chăn nuôi thú y","Cơ khí","Khoa học sinh học","Thủy sản","Nông học"};
 
-    public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PageTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
+    public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
         this.tableModel = tableModel;
         this.listSaveTaiKhoan = listSaveTaiKhoan;
         this.currentMSSV = currentMSSV;
@@ -101,7 +101,7 @@ public class PageFillInformatinDK extends JPanel {
 
         // Tạo một panel cho nút "Back"
         JPanel backButtonPanel = new JPanel(new BorderLayout());
-        backButtonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Thêm khoảng cách
+        backButtonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 5)); // Thêm khoảng cách
         backButtonPanel.setOpaque(false);
 
         // Nút "Back"

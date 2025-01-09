@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageChooseRoom extends JPanel {
+public class PanelChooseRoom extends JPanel {
     Image imgBackround;
     JComboBox<String> gender, typeOfRoom, chooseDorm;
     String[] optionsGender, optionsTypeOfRoom, optionsChooseDorm;
 
-    public PageChooseRoom(JPanel cardPanel, CardLayout cardLayout) {
+    public PanelChooseRoom(JPanel cardPanel, CardLayout cardLayout) {
         this.setLayout(null);
 
         imgBackround = new ImageIcon("src/img/backroundKTX.jpg").getImage();

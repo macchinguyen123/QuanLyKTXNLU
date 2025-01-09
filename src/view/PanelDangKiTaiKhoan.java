@@ -5,11 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class PageDangKiTaiKhoan extends JPanel {
+public class PanelDangKiTaiKhoan extends JPanel {
     JPanel mainPanel;
     JLabel mssv, passwordLabel,labelDangKy,pp;
     JTextField mssvTextField;
@@ -19,7 +18,7 @@ public class PageDangKiTaiKhoan extends JPanel {
     Set<Map<String, String>> listSaveTaiKhoan;
 
 
-    public PageDangKiTaiKhoan(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
+    public PanelDangKiTaiKhoan(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.listSaveTaiKhoan = listSaveTaiKhoan;
 
         mainPanel = new JPanel(new GridLayout(5, 2));
