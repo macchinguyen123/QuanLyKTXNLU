@@ -28,6 +28,7 @@ public class Home extends JFrame {
     PanelHeaderOfHome headerPanel;
     Model model;
 
+
     public Home() throws HeadlessException {
         setTitle("Dormitory management system");
         setLayout(new BorderLayout());
@@ -48,7 +49,7 @@ public class Home extends JFrame {
         header = new PanelHeaderOfHome(cardPanel, cardLayout);
 
         thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
-        fillInformatinDK = new PanelFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV);
+        fillInformatinDK = new PanelFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV, chooseRoom);
         chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout,this);
         dangKiTaiKhoanSV = new PanelDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
 

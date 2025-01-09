@@ -68,7 +68,12 @@ public class ThongTinChonPhong extends JPanel {
             for (String room : roomsE) {
                 mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
             }
-        }else {
+        }else if (dormBox.getSelectedItem().equals("A")){
+            for (String room : roomsA) {
+                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
+            }
+        }
+        else {
             for (String room : roomsF) {
                 mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
             }
