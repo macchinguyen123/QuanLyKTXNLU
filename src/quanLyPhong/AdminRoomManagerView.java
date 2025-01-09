@@ -180,7 +180,7 @@ public class AdminRoomManagerView extends JFrame {
 
             String displayText = dormitory + " - Phòng Trống: " + emptyRooms;
 
-            if (dormitory.equals("Cư Xá B") || dormitory.equals("Cư Xá D") || dormitory.equals("Cư Xá E")) {
+            if (dormitory.equals("B") || dormitory.equals("D") || dormitory.equals("E")) {
                 femaleDormitoryModel.addElement(displayText);
             } else {
                 maleDormitoryModel.addElement(displayText);
