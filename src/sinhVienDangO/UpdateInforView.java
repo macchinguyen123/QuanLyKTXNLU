@@ -270,40 +270,7 @@ public class UpdateInforView extends JFrame {
         btnUpdate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = fieldName.getText();
-                String birthYear = fieldBY.getText();
-                String id = fieldID.getText();
-                String gender = cbGender.getSelectedItem().toString();
-                String phone = fieldPhone.getText();
-                String address = fieldAddress.getText();
-                String department = cbDe.getSelectedItem().toString();
-                String room = cbRoom.getSelectedItem().toString();
-                String dorm = cbDorm.getSelectedItem().toString();
-                String cardID = fieldCardID.getText();
-                String nation = cbNation.getSelectedItem().toString();
-
-                boolean isMartyrs = martyrs.isSelected();
-                boolean isPoorHousehold = poorHousehold.isSelected();
-
-                currentStudent.setTen(name);
-                currentStudent.setMssv(id);
-                currentStudent.setGioiTinh(gender);
-                currentStudent.setKhoa(department);
-                currentStudent.setNamSinh(birthYear);
-                currentStudent.setCuXa(dorm);
-                currentStudent.setPhong(room);
-                currentStudent.setDiaChi(address);
-                currentStudent.setIdCCCD(cardID);
-                currentStudent.setDanToc(nation);
-
-                studentController.updateStudent(currentStudent);
-
-                JOptionPane.showMessageDialog(UpdateInforView.this, "Thông tin đã được cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
-                studentListView.updateStudentList(studentController.getStudents());
-
-                setVisible(false);
-                studentListView.setVisible(true);
+                updateStudentInfor();
             }
         });
 
@@ -347,6 +314,45 @@ public class UpdateInforView extends JFrame {
             System.out.println("Không có phòng nào cho cư xá: " + dormitory); // Kiểm tra nếu không có phòng
         }
     }
+
+    private void updateStudentInfor(){
+        String name = fieldName.getText();
+        String birthYear = fieldBY.getText();
+        String id = fieldID.getText();
+        String gender = cbGender.getSelectedItem().toString();
+        String phone = fieldPhone.getText();
+        String address = fieldAddress.getText();
+        String department = cbDe.getSelectedItem().toString();
+        String room = cbRoom.getSelectedItem().toString();
+        String dorm = cbDorm.getSelectedItem().toString();
+        String cardID = fieldCardID.getText();
+        String nation = cbNation.getSelectedItem().toString();
+
+        boolean isMartyrs = martyrs.isSelected();
+        boolean isPoorHousehold = poorHousehold.isSelected();
+
+        currentStudent.setTen(name);
+        currentStudent.setMssv(id);
+        currentStudent.setGioiTinh(gender);
+        currentStudent.setKhoa(department);
+        currentStudent.setNamSinh(birthYear);
+        currentStudent.setCuXa(dorm);
+        currentStudent.setPhong(room);
+        currentStudent.setDiaChi(address);
+        currentStudent.setIdCCCD(cardID);
+        currentStudent.setDanToc(nation);
+
+        studentController.updateStudent(currentStudent);
+
+        JOptionPane.showMessageDialog(UpdateInforView.this, "Thông tin đã được cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+        studentListView.updateStudentList(studentController.getStudents());
+
+        setVisible(false);
+        studentListView.setVisible(true);
+    }
+
+
 
 
 }

@@ -119,24 +119,7 @@ public class StudentListView extends JFrame {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StudentController studentController = new StudentController(StudentListView.this);
-                StudentListView studentListView = new StudentListView();
-                studentListView.setController(studentController);
-                String search = txtSearch.getText().trim();
-
-                if (search.isEmpty()) {
-                    JOptionPane.showMessageDialog(StudentListView.this, "Vui lòng nhập mã số sinh viên để tìm kiếm!", "Lỗi", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-
-                List<Student> result = searchStudentByMSSV(search);
-
-                if (result.isEmpty()) {
-                    JOptionPane.showMessageDialog(StudentListView.this, "Không tìm thấy sinh viên với mã số: " + search, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    updateStudentList(studentController.getStudents()); // Hiển thị lại danh sách sinh viên ban đầu
-                } else {
-                    updateStudentList(result); // Hiển thị danh sách kết quả tìm kiếm
-                }
+                handleSearchAction();
             }
         });
 
@@ -235,6 +218,27 @@ public class StudentListView extends JFrame {
             result.add(foundStu);
         }
         return result;
+    }
+
+    private  void handleSearchAction(){
+        StudentController studentController = new StudentController(StudentListView.this);
+        StudentListView studentListView = new StudentListView();
+        studentListView.setController(studentController);
+        String search = txtSearch.getText().trim();
+
+        if (search.isEmpty()) {
+            JOptionPane.showMessageDialog(StudentListView.this, "Vui lòng nhập mã số sinh viên để tìm kiếm!", "Lỗi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        List<Student> result = searchStudentByMSSV(search);
+
+        if (result.isEmpty()) {
+            JOptionPane.showMessageDialog(StudentListView.this, "Không tìm thấy sinh viên với mã số: " + search, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            updateStudentList(studentController.getStudents()); // Hiển thị lại danh sách sinh viên ban đầu
+        } else {
+            updateStudentList(result); // Hiển thị danh sách kết quả tìm kiếm
+        }
     }
 
 }
