@@ -33,7 +33,7 @@ public class Home extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 500);
-        this.setResizable(false);
+//        this.setResizable(false);
         selectedAttributes = new ArrayList<>();
         // Initialize CardLayout and JPanel
         cardLayout = new CardLayout();
