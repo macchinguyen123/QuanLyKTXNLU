@@ -85,4 +85,8 @@ public class PanelChooseRoom extends JPanel {
         super.paintComponent(g);
         g.drawImage(imgBackround, 0, 0, getWidth(), getHeight(), this);
     }
+
+
+
+
 }
