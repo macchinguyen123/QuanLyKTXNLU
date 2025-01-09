@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-public class PageFillInformatinDK extends JPanel {
+public class PanelFillInformatinDK extends JPanel {
     DefaultTableModel model;
     JTable table;
     String[] data;
@@ -35,7 +35,7 @@ public class PageFillInformatinDK extends JPanel {
     StudentDataStorage storage;
     String[] listKhoa = {"Công nghệ thông tin","Chăn nuôi thú y","Cơ khí","Khoa học sinh học","Thủy sản","Nông học"};
 
-    public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
+    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
         this.tableModel = tableModel;
         this.listSaveTaiKhoan = listSaveTaiKhoan;
         this.currentMSSV = currentMSSV;
