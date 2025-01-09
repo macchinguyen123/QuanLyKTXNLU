@@ -1,7 +1,11 @@
 package sinhVienDangKy;
 
+import sinhVienDangO.Student;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Stack;
@@ -16,6 +20,7 @@ public class GDSVDangKi extends JFrame {
     private JMenuItem roomManageMenuItem;
     private JPanel mainPanel; // Panel chứa giao diện chính
     private JLabel backgroundImage;
+    private LayDuLieuSV storage;
 
     public GDSVDangKi(MDSVDangKi mdsvDangKi) {
         setTitle("Quản Lý Sinh Viên");
@@ -81,6 +86,65 @@ public class GDSVDangKi extends JFrame {
         // Bảng danh sách
         studentTable = new JTable(mdsvDangKi);
         studentTable.setFillsViewportHeight(true);
+        // Bắt sự kiện khi nhấp chuột vào hàng
+        studentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int rowIndex = studentTable.rowAtPoint(evt.getPoint());
+                if (rowIndex >= 0) {
+                    Student student = mdsvDangKi.getStudentDetails(rowIndex); // Lấy dữ liệu sinh viên
+                    if (student != null) {
+                        // Tạo mảng dữ liệu từ đối tượng Student
+                        String[] studentData = {
+                                student.getTen(),
+                                student.getGioiTinh(),
+                                student.getNamSinh(),
+                                student.getMssv(),
+                                student.getSđt(),
+                                student.getDiaChi(),
+                                student.getKhoa(),
+                                student.getPhong(),
+                                student.getCuXa(),
+                                student.getIdCCCD(),
+                                student.getDanToc(),
+                                student.getDienChinhSach()
+                        };
+
+                        // Hiển thị giao diện GDXemChiTiet
+                        GDXemChiTiet detailView = new GDXemChiTiet(studentData, GDSVDangKi.this);
+                        detailView.setVisible(true);
+                        detailView.getButtonQuayLai().addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                setVisible(true);
+                                detailView.dispose();
+                            }
+                        });
+                        detailView.getButtonXacNhan().addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                storage = LayDuLieuSV.getInstances();
+                                storage.addStudent(student);
+                                mdsvDangKi.removeStudent(rowIndex);
+                                mdsvDangKi.removeStudentTimKiem(rowIndex);
+                                detailView.dispose();
+                                setVisible(true);
+                            }
+                        });
+                        detailView.getButtonHuy().addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                setVisible(true);
+                                mdsvDangKi.removeStudentTimKiem(rowIndex);
+                                mdsvDangKi.removeStudent(rowIndex);
+                                detailView.dispose();
+                            }
+                        });
+                    }
+                }
+                setVisible(false);
+            }
+        });
         JScrollPane scrollPane = new JScrollPane(studentTable);
         scrollPane.setBounds(20, 60, 760, 300);
         mainPanel.add(scrollPane);
@@ -117,6 +181,9 @@ public class GDSVDangKi extends JFrame {
 
         mainPanel.add(backButton);
         setLocationRelativeTo(null);
+        // Gắn Renderer và Editor cho cột nút
+        studentTable.getColumnModel().getColumn(8).setCellRenderer(new ButtonRenderer());
+//        studentTable.getColumnModel().getColumn(8).setCellEditor(new ButtonEditor(new JCheckBox(), studentTable));
     }
 
     public JTable getStudentTable() {

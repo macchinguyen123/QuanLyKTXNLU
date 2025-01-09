@@ -8,7 +8,7 @@ public class GDXemChiTiet extends JFrame {
     private JTextField[] textFields;
     private JComboBox<String> genderComboBox;
     private GDSVDangKi view;
-    private JButton buttonQuayLai;
+    private JButton buttonQuayLai, buttonXacNhan, buttonHuy;
 
     public GDXemChiTiet(String[] data, GDSVDangKi parentFrame) {
         this.view = parentFrame;
@@ -152,10 +152,20 @@ public class GDXemChiTiet extends JFrame {
 
         // Nút Quay lai
         buttonQuayLai = new JButton("Quay Lại");
-        buttonQuayLai.setBounds(350, y, 120, 40);
+        buttonQuayLai.setBounds(400, y, 120, 40);
         buttonQuayLai.setBackground(new Color(30, 144, 255));
         buttonQuayLai.setForeground(Color.WHITE);
+        buttonXacNhan = new JButton("Xac Nhan");
+        buttonXacNhan.setBounds(100, y, 120, 40);
+        buttonXacNhan.setBackground(Color.GREEN);
+        buttonXacNhan.setForeground(Color.WHITE);
+        buttonHuy = new JButton("Huy");
+        buttonHuy.setBounds(250, y, 120, 40);
+        buttonHuy.setBackground(Color.red);
+        buttonHuy.setForeground(Color.WHITE);
         add(buttonQuayLai);
+        add(buttonXacNhan);
+        add(buttonHuy);
 
         // Điền dữ liệu từ mảng vào các textFields và checkboxes
         fillData(data, checkBox1, checkBox2);
@@ -179,6 +189,14 @@ public class GDXemChiTiet extends JFrame {
                 textFields[i].setText(data[i]);
             }
         }
+    }
+
+    public JButton getButtonHuy() {
+        return buttonHuy;
+    }
+
+    public JButton getButtonXacNhan() {
+        return buttonXacNhan;
     }
 
     public JButton getButtonQuayLai() {

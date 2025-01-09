@@ -12,7 +12,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class MDSVDangKi extends AbstractTableModel {
-    private final String[] columnNames = {"STT", "Tên", "Mã số", "Giới tính", "Khoa", "Năm sinh", "Cư xá", "Phòng"};
+    private final String[] columnNames = {"STT", "Tên", "Mã số", "Giới tính", "Khoa", "Năm sinh", "Cư xá", "Phòng", "Hành động"};
     private final List<Student> students;
     public StudentDataStorage studentDataStorage;
     TreeSet<Student> filteredTreeSet;
@@ -127,26 +127,19 @@ public class MDSVDangKi extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Student student = students.get(rowIndex);
         switch (columnIndex) {
-            case 0:
-                return rowIndex + 1; // STT
-            case 1:
-                return student.getTen();
-            case 2:
-                return student.getMssv();
-            case 3:
-                return student.getGioiTinh();
-            case 4:
-                return student.getKhoa();
-            case 5:
-                return student.getNamSinh();
-            case 6:
-                return student.getCuXa();
-            case 7:
-                return student.getPhong();
-            default:
-                return "";
+            case 0: return rowIndex + 1; // STT
+            case 1: return student.getTen();
+            case 2: return student.getMssv();
+            case 3: return student.getGioiTinh();
+            case 4: return student.getKhoa();
+            case 5: return student.getNamSinh();
+            case 6: return student.getCuXa();
+            case 7: return student.getPhong();
+            case 8: return "Xem xét"; // Giá trị hiển thị trên nút
+            default: return "";
         }
     }
+
 
     public Student getStudentDetails(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < students.size()) {
