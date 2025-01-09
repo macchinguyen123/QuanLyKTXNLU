@@ -13,7 +13,7 @@ public class StudentView extends JFrame {
 
     public StudentView() {
 
-        setSize(800, 500);
+        setSize(900, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -25,17 +25,17 @@ public class StudentView extends JFrame {
 
         // Set background image
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
-        backgroundImage.setBounds(0, 0, 800, 500);
+        backgroundImage.setBounds(0, 0, getWidth(), getHeight());
 
         // Create buttons
         // Create buttons
         ImageIcon icon = new ImageIcon("src/img/vo.jpg"); // Đường dẫn đến hình ảnh
-        Image img = icon.getImage().getScaledInstance(320, 100, Image.SCALE_SMOOTH); // Resize ảnh để vừa nút
+        Image img = icon.getImage().getScaledInstance(380, 120, Image.SCALE_SMOOTH); // Resize ảnh để vừa nút
         ImageIcon resizedIcon = new ImageIcon(img);
         btnStudentList = new JButton("Danh sách Sinh Viên Đang Ở", resizedIcon);
-        btnStudentList.setBounds(50, 150, 320, 135);
+        btnStudentList.setBounds(60, 180, 380, 162);
         btnStudentList.setBackground(new Color(0, 51, 153)); // Không cần nếu ảnh bao phủ toàn bộ
         btnStudentList.setForeground(Color.WHITE); // Màu chữ
         btnStudentList.setFont(new Font("Arial", Font.BOLD, 16));
@@ -45,10 +45,10 @@ public class StudentView extends JFrame {
 
 
         ImageIcon icon1 = new ImageIcon("src/img/cong.jpg"); // Đường dẫn đến hình ảnh
-        Image img1 = icon1.getImage().getScaledInstance(320, 100, Image.SCALE_SMOOTH); // Resize ảnh để vừa nút
+        Image img1 = icon1.getImage().getScaledInstance(380, 120, Image.SCALE_SMOOTH); // Resize ảnh để vừa nút
         ImageIcon resizedIcon1 = new ImageIcon(img1);
         btnRegisteredStudents = new JButton("Danh Sách Sinh Viên Đăng Ký", resizedIcon1);
-        btnRegisteredStudents.setBounds(430, 150, 320, 135);
+        btnRegisteredStudents.setBounds(480, 180, 380, 162);
         btnRegisteredStudents.setBackground(new Color(0, 51, 153));
         btnRegisteredStudents.setForeground(Color.WHITE);
         btnRegisteredStudents.setFont(new Font("Arial", Font.BOLD, 16));
@@ -58,7 +58,7 @@ public class StudentView extends JFrame {
 
         // Add Back button
         btnBack = new JButton("Quay Về");
-        btnBack.setBounds(20, 400, 100, 40);
+        btnBack.setBounds(45, 600, 120, 50);
         btnBack.setBackground(new Color(153, 0, 0));
         btnBack.setForeground(Color.WHITE);
         btnBack.setFont(new Font("Arial", Font.BOLD, 14));
