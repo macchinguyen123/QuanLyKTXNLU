@@ -206,4 +206,9 @@ public class GDXemChiTiet extends JFrame {
     public JButton getButtonQuayLai() {
         return buttonQuayLai;
     }
+    @Override
+    public boolean isShowing() {
+        return super.isShowing(); // Gọi trực tiếp phương thức isShowing() từ JFrame
+    }
+
 }
