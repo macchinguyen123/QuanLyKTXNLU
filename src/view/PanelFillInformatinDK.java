@@ -1,7 +1,7 @@
 package view;
 
-import sinhVienDangKy.DataSVDangKi;
-import sinhVienDangKy.MDSVDangKi;
+import sinhVienDangKy.DataRegister;
+import sinhVienDangKy.MRegister;
 import sinhVienDangKy.StudentDataStorage;
 
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class PanelFillInformatinDK extends JPanel {
     Stack<String> pageStack = new Stack<>();
     String currentMSSV;
 
-    MDSVDangKi tableModel;
+    MRegister tableModel;
     List<JTextField> textFields = new java.util.ArrayList<>();
     List<JComboBox<String>> comboBoxes = new java.util.ArrayList<>();
     JCheckBox checkBox1;
@@ -34,10 +34,10 @@ public class PanelFillInformatinDK extends JPanel {
     JPanel policyPanel;
     JButton confirmButton,backHome,backToPagePrevious;
     StudentDataStorage storage;
-    DataSVDangKi dataSVDangKi;
+    DataRegister dataSVDangKi;
     String[] listKhoa = {"Công nghệ thông tin","Chăn nuôi thú y","Cơ khí","Khoa học sinh học","Thủy sản","Nông học"};
 
-    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV,PanelChooseRoom chooseRoom) {
+    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MRegister tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV, PanelChooseRoom chooseRoom) {
         this.tableModel = tableModel;
         this.listSaveTaiKhoan = listSaveTaiKhoan;
         this.currentMSSV = currentMSSV;
@@ -172,7 +172,7 @@ public class PanelFillInformatinDK extends JPanel {
 
         storage = StudentDataStorage.getInstance();
         storage.addStudent(data);
-        dataSVDangKi = DataSVDangKi.getInstance();
+        dataSVDangKi = DataRegister.getInstance();
         dataSVDangKi.addStudent(data);
         System.out.println(Arrays.toString(data));
     }

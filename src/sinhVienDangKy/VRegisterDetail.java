@@ -3,14 +3,14 @@ package sinhVienDangKy;
 import javax.swing.*;
 import java.awt.*;
 
-public class GDXemChiTiet extends JFrame {
+public class VRegisterDetail extends JFrame {
 
     private JTextField[] textFields;
     private JComboBox<String> genderComboBox;
-    private GDSVDangKi view;
+    private VRegister view;
     private JButton buttonQuayLai, buttonXacNhan, buttonHuy;
 
-    public GDXemChiTiet(String[] data, GDSVDangKi parentFrame) {
+    public VRegisterDetail(String[] data, VRegister parentFrame) {
         this.view = parentFrame;
         setTitle("Chi Tiết Sinh Viên");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -1,6 +1,6 @@
 package sinhVienDangO;
 
-import sinhVienDangKy.LayDuLieuSV;
+import sinhVienDangKy.TakeData;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,11 +11,11 @@ public class StudentController {
     private List<Student> students;
     private List<String[]> data1 = new ArrayList<>();
     private StudentListView view;
-    public LayDuLieuSV layDuLieuSV;
+    public TakeData layDuLieuSV;
 
     public StudentController(StudentListView view) {
         this.students = new ArrayList<>();
-        this.layDuLieuSV = LayDuLieuSV.getInstances();
+        this.layDuLieuSV = TakeData.getInstances();
         this.view = view;
         Student st1 = new Student("Nguyễn Văn A", "23130001", "Nam", "Công nghệ thông tin", "24/01/2005", "A", "A04", "Bình Định", "123456", "0987654321", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
         Student st2 = new Student("Nguyễn Thị B", "23130002", "Nữ", "Công nghệ sinh học", "20/05/2004", "D", "D10", "Tiền Giang", "234567", "0345678990", "Mông", "Gia đình đặc biệt khó khăn");

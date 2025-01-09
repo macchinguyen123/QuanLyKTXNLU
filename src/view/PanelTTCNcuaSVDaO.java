@@ -1,7 +1,6 @@
 package view;
 
-import sinhVienDangKy.DataSVDangKi;
-import sinhVienDangKy.StudentDataStorage;
+import sinhVienDangKy.DataRegister;
 import sinhVienDangO.Student;
 
 import javax.swing.*;
@@ -23,7 +22,7 @@ public class PanelTTCNcuaSVDaO extends JPanel {
     JScrollPane scrollPane;
     JButton btnOK,btnTraPhong;
     // Thuộc tính lưu trữ dữ liệu
-    private final DataSVDangKi dataSVDangKi;
+    private final DataRegister dataSVDangKi;
 
 
     public PanelTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
@@ -69,7 +68,7 @@ public class PanelTTCNcuaSVDaO extends JPanel {
         panelTraPhong.add(btnTraPhong);
         this.add(panelTraPhong, BorderLayout.SOUTH);
         // Khởi tạo StudentDataStorage
-        this.dataSVDangKi = DataSVDangKi.getInstance();
+        this.dataSVDangKi = DataRegister.getInstance();
         if (!dataSVDangKi.getStudentData().isEmpty()) {
             updateInformation(dataSVDangKi.getStudentData().get(0).getMssv());
         } else {

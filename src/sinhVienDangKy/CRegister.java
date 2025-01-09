@@ -1,17 +1,13 @@
 package sinhVienDangKy;
 
 
-import sinhVienDangO.Student;
-
 import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-public class HĐSVDangKi {
-    private MDSVDangKi model;
-    private GDSVDangKi view;
+public class CRegister {
+    private MRegister model;
+    private VRegister view;
 
-    public HĐSVDangKi(MDSVDangKi model, GDSVDangKi view1) {
+    public CRegister(MRegister model, VRegister view1) {
         this.model = model;
         this.view = view1;
 

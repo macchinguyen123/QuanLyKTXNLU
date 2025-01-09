@@ -6,11 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.Stack;
 
-public class GDSVDangKi extends JFrame {
+public class VRegister extends JFrame {
     private JTable studentTable;
     private JTextField filterField;
     private JButton filterButton;
@@ -20,10 +17,10 @@ public class GDSVDangKi extends JFrame {
     private JMenuItem roomManageMenuItem;
     private JPanel mainPanel; // Panel chứa giao diện chính
     private JLabel backgroundImage;
-    private LayDuLieuSV storage;
-    private GDXemChiTiet detailView;
+    private TakeData storage;
+    private VRegisterDetail detailView;
 
-    public GDSVDangKi(MDSVDangKi mdsvDangKi) {
+    public VRegister(MRegister mdsvDangKi) {
         setTitle("Quản Lý Sinh Viên");
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,7 +113,7 @@ public class GDSVDangKi extends JFrame {
 
 
                         // Hiển thị giao diện GDXemChiTiet
-                        detailView = new GDXemChiTiet(studentData, GDSVDangKi.this);
+                        detailView = new VRegisterDetail(studentData, VRegister.this);
                         detailView.setVisible(true);
                         detailView.getButtonQuayLai().addActionListener(new ActionListener() {
                             @Override
@@ -129,7 +126,7 @@ public class GDSVDangKi extends JFrame {
                         detailView.getButtonXacNhan().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                storage = LayDuLieuSV.getInstances();
+                                storage = TakeData.getInstances();
                                 storage.addStudent(student);
                                 mdsvDangKi.removeStudent(rowIndex);
                                 mdsvDangKi.removeStudentTimKiem(rowIndex);

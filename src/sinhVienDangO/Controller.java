@@ -1,13 +1,10 @@
 package sinhVienDangO;
 
-import quanLyPhong.AdminRoomManagerView;
 import quanLyPhong.Model;
-import sinhVienDangKy.GDSVDangKi;
-import sinhVienDangKy.MDSVDangKi;
+import sinhVienDangKy.VRegister;
+import sinhVienDangKy.MRegister;
 import sinhVienDangKy.SVDangKiTheHien;
-import view.Home;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -56,8 +53,8 @@ public class Controller {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
         StudentController studentController = new StudentController(new StudentListView());
-        MDSVDangKi mdsvDangKi = new MDSVDangKi();
-        GDSVDangKi g = new GDSVDangKi(mdsvDangKi);
+        MRegister mdsvDangKi = new MRegister();
+        VRegister g = new VRegister(mdsvDangKi);
 
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
