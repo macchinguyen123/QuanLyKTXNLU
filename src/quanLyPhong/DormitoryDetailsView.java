@@ -12,7 +12,7 @@ public class DormitoryDetailsView extends JFrame {
     private DormitoryDataManager dataManager; // Quản lý dữ liệu ký túc xá
 
     public DormitoryDetailsView(String dormitoryName, List<Room> rooms) {
-        setTitle("Chi Tiết Cư Xá - " + dormitoryName);
+        setTitle("Chi Tiết Cư Xá Cư Xá " + dormitoryName);
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -44,7 +44,7 @@ public class DormitoryDetailsView extends JFrame {
         };
         mainPanel.setLayout(null);
 
-        JLabel titleLabel = new JLabel("Chi Tiết Phòng - " + dormitoryName, JLabel.CENTER);
+        JLabel titleLabel = new JLabel("Chi Tiết Phòng Cư Xá " + dormitoryName, JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setForeground(Color.BLACK);
         titleLabel.setBounds(50, 20, 700, 40);
