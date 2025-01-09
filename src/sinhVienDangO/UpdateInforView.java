@@ -25,13 +25,15 @@ public class UpdateInforView extends JFrame {
         this.studentController = studentController;
         this.currentStudent = currentStudent;
         setTitle("Cập nhật thông tin");
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         martyrs = new JCheckBox("Con liệt sĩ, thương binh, bệnh binh");
         poorHousehold = new JCheckBox("Gia đình đặc biệt khó khăn");
+        martyrs.setBounds(50, 50, 400, 30);
+        poorHousehold.setBounds(50, 90, 400, 30);
 
         // Tạo ButtonGroup để nhóm các JCheckBox
         ButtonGroup group = new ButtonGroup();
@@ -42,7 +44,13 @@ public class UpdateInforView extends JFrame {
         cbDe = new JComboBox(department);
 
         btnUpdate = new JButton("Cập nhật");
-        btnBack = new JButton("Quay lại"); // Nút quay lại
+        btnUpdate.setBounds(300, 620, 150, 40); // Dịch xuống và đặt ở giữa
+        btnUpdate.setFont(new Font("Inter", Font.BOLD, 16));
+
+        // Nút quay lại
+        btnBack = new JButton("Quay lại");
+        btnBack.setBounds(500, 620, 150, 40); // Dịch xuống và đặt ở giữa
+        btnBack.setFont(new Font("Inter", Font.BOLD, 16));
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,6 +105,74 @@ public class UpdateInforView extends JFrame {
         String[] nation = {"Kinh", "Hoa", "Ê đê", "Mông", "Thái", "Khác"};
         cbNation = new JComboBox(nation);
         policyArea = new JLabel("Diện chính sách: ");
+
+        // Điều chỉnh kích thước các thành phần
+        Font labelFont = new Font("Inter", Font.BOLD, 16); // Tăng kích thước chữ cho label
+        Font fieldFont = new Font("Inter", Font.PLAIN, 16); // Tăng kích thước chữ cho field
+
+        martyrs.setBounds(50, 50, 400, 30);
+        martyrs.setFont(labelFont);
+
+        poorHousehold.setBounds(50, 90, 400, 30);
+        poorHousehold.setFont(labelFont);
+
+        labelName.setBounds(50, 140, 150, 30);
+        labelName.setFont(labelFont);
+        fieldName.setBounds(220, 140, 250, 30);
+        fieldName.setFont(fieldFont);
+
+        labelGender.setBounds(50, 180, 150, 30);
+        labelGender.setFont(labelFont);
+        cbGender.setBounds(220, 180, 120, 30);
+        cbGender.setFont(fieldFont);
+
+        labelBirthYear.setBounds(50, 220, 200, 30);
+        labelBirthYear.setFont(labelFont);
+        fieldBY.setBounds(220, 220, 250, 30);
+        fieldBY.setFont(fieldFont);
+
+        labelID.setBounds(50, 260, 150, 30);
+        labelID.setFont(labelFont);
+        fieldID.setBounds(220, 260, 250, 30);
+        fieldID.setFont(fieldFont);
+
+        labelPhone.setBounds(50, 300, 150, 30);
+        labelPhone.setFont(labelFont);
+        fieldPhone.setBounds(220, 300, 250, 30);
+        fieldPhone.setFont(fieldFont);
+
+        labelAddress.setBounds(50, 340, 200, 30);
+        labelAddress.setFont(labelFont);
+        fieldAddress.setBounds(220, 340, 250, 30);
+        fieldAddress.setFont(fieldFont);
+
+        labelDe.setBounds(50, 380, 150, 30);
+        labelDe.setFont(labelFont);
+        cbDe.setBounds(220, 380, 250, 30);
+        cbDe.setFont(fieldFont);
+
+        labelDorm.setBounds(50, 420, 150, 30);
+        labelDorm.setFont(labelFont);
+        cbDorm.setBounds(220, 420, 120, 30);
+        cbDorm.setFont(fieldFont);
+
+        labelRoom.setBounds(370, 420, 100, 30);
+        labelRoom.setFont(labelFont);
+        cbRoom.setBounds(470, 420, 120, 30);
+        cbRoom.setFont(fieldFont);
+
+        labelCardID.setBounds(50, 460, 150, 30);
+        labelCardID.setFont(labelFont);
+        fieldCardID.setBounds(220, 460, 250, 30);
+        fieldCardID.setFont(fieldFont);
+
+        labelNation.setBounds(50, 500, 150, 30);
+        labelNation.setFont(labelFont);
+        cbNation.setBounds(220, 500, 250, 30);
+        cbNation.setFont(fieldFont);
+
+        policyArea.setBounds(50, 540, 200, 30);
+        policyArea.setFont(labelFont);
 
 
         // Đặt Layout (Horizontal Group)

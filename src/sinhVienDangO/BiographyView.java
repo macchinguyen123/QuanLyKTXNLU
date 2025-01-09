@@ -16,7 +16,7 @@ public class BiographyView extends JFrame {
     public BiographyView(StudentListView parentView) {
         this.parentView = parentView;
         setTitle("Thông tin cá nhân của sinh viên");
-        setSize(800, 500);
+        setSize(900, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -46,7 +46,7 @@ public class BiographyView extends JFrame {
         mainPanel.setBackground(Color.LIGHT_GRAY);
 
         inforStudentPanel = new JPanel();
-        inforStudentPanel.setPreferredSize(new Dimension(400, 400));
+        inforStudentPanel.setPreferredSize(new Dimension(600, 400));
         inforStudentPanel.setLayout(new BoxLayout(inforStudentPanel, BoxLayout.PAGE_AXIS));
         inforStudentPanel.setBackground(new Color(173, 216, 230)); // Màu nền giống như trong hình
 
@@ -76,7 +76,7 @@ public class BiographyView extends JFrame {
         btnUpdate.setFont(new Font("Arial", Font.BOLD, 18));
         btnUpdate.setForeground(Color.BLACK);
         btnUpdate.setBackground(Color.GREEN);
-        btnUpdate.setPreferredSize(new Dimension(100, 30));
+        btnUpdate.setPreferredSize(new Dimension(200, 40));
         btnUpdate.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnUpdate.addActionListener(new ActionListener() {
             @Override
@@ -107,7 +107,8 @@ public class BiographyView extends JFrame {
         btnBack = new JButton("Quay về");
         btnBack.setBackground(new Color(153, 0, 0));
         btnBack.setForeground(Color.WHITE);
-        btnBack.setFont(new Font("Arial", Font.BOLD, 14));
+        btnBack.setFont(new Font("Arial", Font.BOLD, 18));
+        btnBack.setPreferredSize(new Dimension(200, 40));
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -121,9 +122,9 @@ public class BiographyView extends JFrame {
 
         // Hình nền
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(900, 700, Image.SCALE_SMOOTH);
         JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
-        backgroundImage.setBounds(0, 0, 800, 500);
+        backgroundImage.setBounds(0, 0, 900, 700);
         backgroundImage.setLayout(new GridBagLayout()); // Đặt layout là GridBagLayout để căn giữa
 
         GridBagConstraints gbc = new GridBagConstraints();
