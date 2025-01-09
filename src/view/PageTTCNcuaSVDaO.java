@@ -78,9 +78,13 @@ public class PageTTCNcuaSVDaO extends JPanel {
 
         // Cập nhật thông tin mới
 
+//        String[] labels = {
+//                "Họ và tên","Ngày sinh", "Mã số sinh viên","Số điện thoại", "Hộ khẩu thường trú",
+//                "Khoa","Phòng","CCCD / CMND","Dân tộc","Giới tính","Cư xá", "Con liệt sĩ, thương binh", "Gia đình khó khăn"
+//        };
         String[] labels = {
                 "Họ và tên","Ngày sinh", "Mã số sinh viên","Số điện thoại", "Hộ khẩu thường trú",
-                "Khoa","Phòng","CCCD / CMND","Dân tộc","Giới tính","Cư xá", "Con liệt sĩ, thương binh", "Gia đình khó khăn"
+                "Phòng","CCCD / CMND","Dân tộc","Giới tính", "Khoa","Cư xá", "Con liệt sĩ, thương binh", "Gia đình khó khăn"
         };
 
         for (int i = 0; i < labels.length && i < data.length; i++) {

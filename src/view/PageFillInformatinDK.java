@@ -131,6 +131,7 @@ public class PageFillInformatinDK extends JPanel {
         JComboBox<String> comboBox = new JComboBox<>(listKhoa);
         panel.setMaximumSize(new Dimension(600, 80));
         panel.add(comboBox);
+        comboBoxes.add(comboBox);
         return panel;
     }
 
