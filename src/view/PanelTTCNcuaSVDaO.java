@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class PageTTCNcuaSVDaO extends JPanel {
+public class PanelTTCNcuaSVDaO extends JPanel {
     // Các thành phần khác không thay đổi
     JLabel lbInfor;
     DefaultTableModel tableModel;
@@ -20,7 +20,7 @@ public class PageTTCNcuaSVDaO extends JPanel {
     JButton btnOK,btnTraPhong;
 
 
-    public PageTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
+    public PanelTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.setLayout(new BorderLayout());
         lbInfor = new JLabel("", JLabel.CENTER); // Hiện ban đầu để trống
         this.add(lbInfor, BorderLayout.NORTH);

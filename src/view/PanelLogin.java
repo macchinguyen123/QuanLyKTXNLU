@@ -2,12 +2,10 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.Set;
 
-public class PageLogin extends JPanel {
+public class PanelLogin extends JPanel {
 
      JTextField textIdSV;
      JPasswordField txtPasswd;
@@ -16,7 +14,7 @@ public class PageLogin extends JPanel {
      JPanel cardPanel;
      String currentMSSV;
 
-    public PageLogin(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
+    public PanelLogin(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.listSaveTaiKhoan = listSaveTaiKhoan;
         this.cardLayout = cardLayout;
         this.cardPanel = cardPanel;
@@ -93,7 +91,7 @@ public class PageLogin extends JPanel {
                 textIdSV.setText("");
                 txtPasswd.setText("");
             } else {
-                JOptionPane.showMessageDialog(PageLogin.this, "MSSV hoặc mật khẩu sai!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(PanelLogin.this, "MSSV hoặc mật khẩu sai!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         });
 

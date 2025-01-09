@@ -17,14 +17,14 @@ public class Home extends JFrame {
     MDSVDangKi mdsvDangKi = new MDSVDangKi();
     String currentMSSV; // thêm biến currentMSSV
     SVLoginOrSignIn studentPanel;
-    PageLogin pageLogin;
-    PageTTCNcuaSVDaO pageTTCNcuaSVDaO;
-    PageChooseRoom chooseRoom;
+    PanelLogin pageLogin;
+    PanelTTCNcuaSVDaO pageTTCNcuaSVDaO;
+    PanelChooseRoom chooseRoom;
     PanelHeaderOfHome header;
     ThongTinChonPhong thongTinChonPhong;
     PageFillInformatinDK fillInformatinDK;
     PanelChooseStudentOrManager chooseStudentOrManager;
-    PageDangKiTaiKhoan dangKiTaiKhoanSV;
+    PanelDangKiTaiKhoan dangKiTaiKhoanSV;
     PanelHeaderOfHome headerPanel;
     Model model;
 
@@ -32,7 +32,7 @@ public class Home extends JFrame {
         setTitle("Dormitory management system");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 500);
+        this.setSize(900, 700);
 //        this.setResizable(false);
         selectedAttributes = new ArrayList<>();
         // Initialize CardLayout and JPanel
@@ -42,15 +42,15 @@ public class Home extends JFrame {
         // Add panels to cardPanel
         mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout,this);
         studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
-        pageLogin = new PageLogin(cardPanel, cardLayout, listSaveTaiKhoan);
-        pageTTCNcuaSVDaO = new PageTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
-        chooseRoom = new PageChooseRoom(cardPanel, cardLayout);
+        pageLogin = new PanelLogin(cardPanel, cardLayout, listSaveTaiKhoan);
+        pageTTCNcuaSVDaO = new PanelTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
+        chooseRoom = new PanelChooseRoom(cardPanel, cardLayout);
         header = new PanelHeaderOfHome(cardPanel, cardLayout);
 
         thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
         fillInformatinDK = new PageFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV);
         chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout,this);
-        dangKiTaiKhoanSV = new PageDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
+        dangKiTaiKhoanSV = new PanelDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
 
 
         cardPanel.add(mainPanel, "choosePanel");
