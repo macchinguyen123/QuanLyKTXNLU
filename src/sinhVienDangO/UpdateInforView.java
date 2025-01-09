@@ -1,22 +1,26 @@
 package sinhVienDangO;
 
+import quanLyPhong.DormitoryDataManager;
+import quanLyPhong.Room;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class UpdateInforView extends JFrame {
     JScrollBar s2;
     JLabel labelName, labelGender, labelBirthYear, labelID, labelPhone, labelAddress, labelDe, labelRoom, labelDorm, labelCardID, labelNation, policyArea;
-    JTextField fieldName, fieldBY, fieldID, fieldPhone, fieldAddress, fieldRoom, fieldCardID;
+    JTextField fieldName, fieldBY, fieldID, fieldPhone, fieldAddress, fieldCardID;
     JCheckBox martyrs, poorHousehold;
-    JComboBox cbDe, cbGender, cbNation, cbDorm;
+    JComboBox cbDe, cbGender, cbNation, cbDorm, cbRoom;
     JButton btnUpdate, btnBack;
     StudentListView studentListView;
     StudentController studentController;
     Student currentStudent;
 
-    public UpdateInforView( StudentListView studentListView, StudentController studentController, Student currentStudent) {
+    public UpdateInforView(StudentListView studentListView, StudentController studentController, Student currentStudent) {
         this.studentListView = studentListView;
         this.studentController = studentController;
         this.currentStudent = currentStudent;
@@ -61,7 +65,7 @@ public class UpdateInforView extends JFrame {
         labelGender = new JLabel("Giới tính: ");
         String[] gender = {"Nam", "Nữ"};
         cbGender = new JComboBox(gender);
-        labelBirthYear = new JLabel("Ngày sinh: ");
+        labelBirthYear = new JLabel("Ngày sinh (dd/MM/yyyy): ");
         fieldBY = new JTextField(10);
         labelID = new JLabel("Mã số sinh viên: ");
         fieldID = new JTextField(10);
@@ -72,10 +76,21 @@ public class UpdateInforView extends JFrame {
         labelDe = new JLabel("Khoa: ");
         cbDe = new JComboBox(department);
         labelRoom = new JLabel("Phòng: ");
-        fieldRoom = new JTextField(10);
+        cbRoom = new JComboBox();
+
         labelDorm = new JLabel("Cư xá: ");
         String[] dorm = {"A", "B", "C", "D", "E", "F"};
         cbDorm = new JComboBox(dorm);
+        cbDorm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedDormitory = (String) cbDorm.getSelectedItem();
+                System.out.println("Cư xá được chọn: " + selectedDormitory);  // Kiểm tra xem cư xá có đúng không
+                updateRoomComboBox(selectedDormitory); // Cập nhật danh sách phòng dựa trên cư xá
+            }
+        });
+
+
         labelCardID = new JLabel("CCCD / CMND: ");
         fieldCardID = new JTextField(10);
         labelNation = new JLabel("Dân tộc: ");
@@ -94,7 +109,7 @@ public class UpdateInforView extends JFrame {
                                         .addComponent(labelID)
                                         .addComponent(labelAddress)
                                         .addComponent(labelDe)
-                                        .addComponent(labelRoom)
+                                        .addComponent(labelDorm)
                                         .addComponent(labelCardID)
                                         .addComponent(labelNation)
                                         .addComponent(policyArea))
@@ -111,9 +126,10 @@ public class UpdateInforView extends JFrame {
                                         .addComponent(fieldAddress)
                                         .addComponent(cbDe)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(fieldRoom)
-                                                .addComponent(labelDorm)
-                                                .addComponent(cbDorm))
+                                                .addComponent(cbDorm)
+                                                .addGap(30)
+                                                .addComponent(labelRoom)
+                                                .addComponent(cbRoom))
                                         .addComponent(fieldCardID)
                                         .addComponent(cbNation)
                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -153,10 +169,10 @@ public class UpdateInforView extends JFrame {
                                 .addComponent(labelDe)
                                 .addComponent(cbDe))
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(labelRoom)
-                                .addComponent(fieldRoom)
                                 .addComponent(labelDorm)
-                                .addComponent(cbDorm))
+                                .addComponent(cbDorm)
+                                .addComponent(labelRoom)
+                                .addComponent(cbRoom))
                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelCardID)
                                 .addComponent(fieldCardID))
@@ -185,7 +201,7 @@ public class UpdateInforView extends JFrame {
                 String phone = fieldPhone.getText();
                 String address = fieldAddress.getText();
                 String department = cbDe.getSelectedItem().toString();
-                String room = fieldRoom.getText();
+                String room = cbRoom.getSelectedItem().toString();
                 String dorm = cbDorm.getSelectedItem().toString();
                 String cardID = fieldCardID.getText();
                 String nation = cbNation.getSelectedItem().toString();
@@ -219,23 +235,42 @@ public class UpdateInforView extends JFrame {
     }
 
     public void setStudentDetails(Student student) {
-            fieldName.setText(student.getTen());
-            fieldBY.setText(student.getNamSinh());
-            fieldID.setText(student.getMssv());
-            cbGender.setSelectedItem(student.getGioiTinh());
-            fieldPhone.setText(student.getSđt());
-            fieldAddress.setText(student.getDiaChi());
-            cbDe.setSelectedItem(student.getKhoa());
-            fieldRoom.setText(student.getPhong());
-            cbDorm.setSelectedItem(student.getCuXa());
-            fieldCardID.setText(student.getIdCCCD());
-            cbNation.setSelectedItem(student.getDanToc());
+        fieldName.setText(student.getTen());
+        fieldBY.setText(student.getNamSinh());
+        fieldID.setText(student.getMssv());
+        cbGender.setSelectedItem(student.getGioiTinh());
+        fieldPhone.setText(student.getSđt());
+        fieldAddress.setText(student.getDiaChi());
+        cbDe.setSelectedItem(student.getKhoa());
+        cbDorm.setSelectedItem(student.getCuXa());
+        fieldCardID.setText(student.getIdCCCD());
+        cbNation.setSelectedItem(student.getDanToc());
 
-            // Cập nhật checkbox chính sách
-            martyrs.setSelected(student.isMartyrs());
-            poorHousehold.setSelected(student.isPoorHousehold());
+        // Cập nhật phòng sau khi cư xá thay đổi
+        updateRoomComboBox(student.getCuXa());
+        cbRoom.setSelectedItem(student.getPhong()); // Chọn phòng của sinh viên
+
+        // Cập nhật checkbox chính sách
+        martyrs.setSelected(student.isMartyrs());
+        poorHousehold.setSelected(student.isPoorHousehold());
     }
 
+    /**
+     * Phương thức cập nhật JComboBox phòng dựa trên cư xá được chọn
+     */
+    private void updateRoomComboBox(String dormitory) {
+        cbRoom.removeAllItems(); // Xóa tất cả các mục hiện tại
+        List<Room> rooms = DormitoryDataManager.getInstance().getRoomsByDormitory(dormitory); // Lấy danh sách phòng
+
+        if (rooms != null) {
+            for (Room room : rooms) {
+                System.out.println("Thêm phòng vào JComboBox: " + room.getRoomNumber()); // Kiểm tra việc thêm phòng
+                cbRoom.addItem(room.getRoomNumber()); // Thêm từng phòng vào JComboBox
+            }
+        } else {
+            System.out.println("Không có phòng nào cho cư xá: " + dormitory); // Kiểm tra nếu không có phòng
+        }
+    }
 
 
 }

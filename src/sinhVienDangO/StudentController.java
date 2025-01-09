@@ -17,14 +17,14 @@ public class StudentController {
         this.students = new ArrayList<>();
         this.layDuLieuSV = TakeData.getInstances();
         this.view = view;
-        Student st1 = new Student("Nguyễn Văn A", "23130001", "Nam", "Công nghệ thông tin", "24/01/2005", "A", "101", "Bình Định", "123456", "0987654321", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
-        Student st2 = new Student("Nguyễn Thị B", "23130002", "Nữ", "Công nghệ sinh học", "20/05/2004", "D", "201", "Tiền Giang", "234567", "0345678990", "Mông", "Gia đình đặc biệt khó khăn");
-        Student st3 = new Student("Nguyễn Văn C", "23130003", "Nam", "Công nghệ thực phẩm", "02/10/2005", "C", "102", "Long An", "341678", "0168390591", "Kinh", "");
-        Student st4 = new Student("Nguyễn Văn D", "23130004", "Nam", "Công nghệ thông tin", "04/08/2005", "A", "103", "Kiên Giang", "401231", "0636036812", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
-        Student st5 = new Student("Nguyễn Thị E", "23130005", "Nữ", "Lâm nghiệp", "09/11/2004", "B", "205", "Dak Lak", "579130", "0470641237", "Kinh", "Gia đình đặc biệt khó khăn");
-        Student st6 = new Student("Đinh Thị M", "23130014", "Nữ", "Thú y", "19/05/2006", "E", "304", "Kiên Giang", "428450", "0470646432", "Thái", "");
-        Student st7 = new Student("Trần Văn N", "23130015", "Nam", "Kinh tế", "17/01/2003", "F", "206", "TP.HCM", "085342", "0470646289", "Kinh", "Gia đình đặc biệt khó khăn");
-        Student st8 = new Student("Đặng Thị O", "23130021", "Nữ", "Ngôn ngữ anh", "09/11/2001", "B", "105", "Long An", "581534", "0260641237", "Kinh", "");
+        Student st1 = new Student("Nguyễn Văn A", "23130001", "Nam", "Công nghệ thông tin", "24/01/2005", "A", "A04", "Bình Định", "123456", "0987654321", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
+        Student st2 = new Student("Nguyễn Thị B", "23130002", "Nữ", "Công nghệ sinh học", "20/05/2004", "D", "D10", "Tiền Giang", "234567", "0345678990", "Mông", "Gia đình đặc biệt khó khăn");
+        Student st3 = new Student("Nguyễn Văn C", "23130003", "Nam", "Công nghệ thực phẩm", "02/10/2005", "C", "C02", "Long An", "341678", "0168390591", "Kinh", "");
+        Student st4 = new Student("Nguyễn Văn D", "23130004", "Nam", "Công nghệ thông tin", "04/08/2005", "A", "A03", "Kiên Giang", "401231", "0636036812", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
+        Student st5 = new Student("Nguyễn Thị E", "23130005", "Nữ", "Lâm nghiệp", "09/11/2004", "B", "B05", "Dak Lak", "579130", "0470641237", "Kinh", "Gia đình đặc biệt khó khăn");
+        Student st6 = new Student("Đinh Thị M", "23130014", "Nữ", "Thú y", "19/05/2006", "E", "E04", "Kiên Giang", "428450", "0470646432", "Thái", "");
+        Student st7 = new Student("Trần Văn N", "23130015", "Nam", "Kinh tế", "17/01/2003", "F", "F06", "TP.HCM", "085342", "0470646289", "Kinh", "Gia đình đặc biệt khó khăn");
+        Student st8 = new Student("Đặng Thị O", "23130021", "Nữ", "Ngôn ngữ anh", "09/11/2001", "B", "B11", "Long An", "581534", "0260641237", "Kinh", "");
         List<Student> storedData = layDuLieuSV.getsVLuu();
 
         students.add(st1);
