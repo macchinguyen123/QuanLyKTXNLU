@@ -73,15 +73,20 @@ public class VRegister extends JFrame {
 
         // Thanh tìm kiếm (di chuyển lên trên)
         filterField = new JTextField();
-        filterField.setBounds(20, 20, 670, 30);
+        filterField.setBounds(200, 20, 400, 30);
         mainPanel.add(filterField);
 
         filterButton = new JButton("Lọc");
-        filterButton.setBounds(700, 20, 100, 30);
+        filterButton.setBounds(620, 20, 100, 30);
         mainPanel.add(filterButton);
 
         // Bảng danh sách
         studentTable = new JTable(mdsvDangKi);
+        studentTable.setRowHeight(25);
+        studentTable.getTableHeader().setFont(new Font("Inter", Font.BOLD, 14));
+        studentTable.getTableHeader().setPreferredSize(new Dimension(0, 30));
+        studentTable.setFont(new Font("Inter", Font.PLAIN, 14));
+        studentTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         studentTable.setFillsViewportHeight(true);
         // Bắt sự kiện khi nhấp chuột vào hàng
         studentTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,8 +146,8 @@ public class VRegister extends JFrame {
                                 setVisible(true);
                                 mdsvDangKi.removeStudentTimKiem(rowIndex);
                                 mdsvDangKi.removeStudent(rowIndex);
-                                detailView=null;
                                 detailView.dispose();
+                                detailView=null;
                             }
                         });
                     }
