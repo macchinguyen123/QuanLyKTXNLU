@@ -22,17 +22,18 @@ public class PageFillInformatinDK extends JPanel {
     JLabel titleLabel;
     JPanel mainPanel;
     Stack<String> pageStack = new Stack<>();
-     String currentMSSV;
+    String currentMSSV;
 
-     MDSVDangKi tableModel;
-     List<JTextField> textFields = new java.util.ArrayList<>();
-     List<JComboBox<String>> comboBoxes = new java.util.ArrayList<>();
-     JCheckBox checkBox1;
-     JCheckBox checkBox2;
-     Set<Map<String, String>> listSaveTaiKhoan;
+    MDSVDangKi tableModel;
+    List<JTextField> textFields = new java.util.ArrayList<>();
+    List<JComboBox<String>> comboBoxes = new java.util.ArrayList<>();
+    JCheckBox checkBox1;
+    JCheckBox checkBox2;
+    Set<Map<String, String>> listSaveTaiKhoan;
     JPanel policyPanel;
     JButton confirmButton,backHome,backToPagePrevious;
-     StudentDataStorage storage;
+    StudentDataStorage storage;
+    String[] listKhoa = {"Công nghệ thông tin","Chăn nuôi thú y","Cơ khí","Khoa học sinh học","Thủy sản","Nông học"};
 
     public PageFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PageTTCNcuaSVDaO pageTTCN, MDSVDangKi tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV) {
         this.tableModel = tableModel;
@@ -52,15 +53,15 @@ public class PageFillInformatinDK extends JPanel {
         mainPanel.add(Box.createVerticalStrut(20));
 
         mainPanel.add(createInputField("Họ và tên:"));
-        mainPanel.add(createTwoInputFields1("Giới tính:", "Ngày sinh:"));
+        mainPanel.add(createTwoInputFields1("Giới tính:", "Ngày sinh (dd/MM/yyyy):"));
         mainPanel.add(createTwoInputFields2("Mã số sinh viên:", "Số điện thoại:"));
         mainPanel.add(createInputField("Hộ khẩu thường trú:"));
-        mainPanel.add(createInputField("Khoa:"));
+        mainPanel.add(createInputField1("Khoa:",listKhoa));
         mainPanel.add(createTwoInputFields3("Cư xá:", "Phòng:"));
         mainPanel.add(createInputField("CCCD / CMND:"));
         mainPanel.add(createInputField("Dân tộc:"));
 
-         policyPanel = new JPanel();
+        policyPanel = new JPanel();
         policyPanel.setLayout(new BoxLayout(policyPanel, BoxLayout.Y_AXIS));
         policyPanel.setBorder(BorderFactory.createTitledBorder("Diện chính sách"));
         checkBox1 = new JCheckBox("Con liệt sĩ, thương binh, bệnh binh");
@@ -97,30 +98,40 @@ public class PageFillInformatinDK extends JPanel {
 
         mainPanel.add(confirmButton);
 
-         backHome = new JButton(new ImageIcon("src/img/iconHome.png"));
-        backHome.setForeground(Color.WHITE);
-        backHome.setAlignmentX(Component.CENTER_ALIGNMENT);
-        backHome.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "studentPanel");
-            }
-        });
-        mainPanel.add(backHome);
 
+        // Tạo một panel cho nút "Back"
+        JPanel backButtonPanel = new JPanel(new BorderLayout());
+        backButtonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Thêm khoảng cách
+        backButtonPanel.setOpaque(false);
+
+        // Nút "Back"
         backToPagePrevious = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
         backToPagePrevious.setForeground(Color.WHITE);
-        backToPagePrevious.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backToPagePrevious.setFocusPainted(false); // Loại bỏ đường viền focus
+        backToPagePrevious.setBackground(new Color(240, 240, 240)); // Màu nền nút
         backToPagePrevious.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(cardPanel, "chooseRoom");
             }
         });
-        mainPanel.add(backToPagePrevious);
+
+        backButtonPanel.add(backToPagePrevious, BorderLayout.WEST); // Đặt nút ở góc trái
+        this.add(backButtonPanel, BorderLayout.NORTH); // Thêm panel chứa nút vào đầu màn hình
 
         scrollPane = new JScrollPane(mainPanel);
         this.add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private JPanel createInputField1(String s, String[] listKhoa) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 2, 10, 10));
+        JLabel label = new JLabel(s);
+        panel.add(label);
+        JComboBox<String> comboBox = new JComboBox<>(listKhoa);
+        panel.setMaximumSize(new Dimension(600, 80));
+        panel.add(comboBox);
+        return panel;
     }
 
     public boolean allFieldsFilled() {
