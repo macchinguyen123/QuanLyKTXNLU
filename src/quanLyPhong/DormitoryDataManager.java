@@ -5,12 +5,11 @@ import java.util.*;
 public class DormitoryDataManager {
     private List<String> roomData;
     private Map<String, List<Room>> dormitoryData;
-    private List<RoomPaymentData> paymentData;
+    private List<Room> paymentData;
 
     public DormitoryDataManager() {
         dormitoryData = new TreeMap<>();
         initializeDormitoryData();
-        initializeData();
     }
 
     private void initializeDormitoryData() {
@@ -116,6 +115,7 @@ public class DormitoryDataManager {
     public Map<String, List<Room>> getDormitoryData() {
         return dormitoryData;
     }
+
     public List<String> getRoomMembers(String roomNumber, int memberCount) {
         List<String> maleNames = List.of("Nguyễn Văn Anh", "Lê Văn Bảo", "Hoàng Văn Tài", "Phạm Văn Huy ", "Vũ Thành", "Ngô Văn Giang", "Đinh Quang Toàn");
         List<String> femaleNames = List.of("Nguyễn Thị Lan", "Trần Thị Thư", "Lê Thị Hoa", "Nguyễn Thị Kim", "Trần Thị Tuyết", "Lê Thị Thu", "Nguyễn Thị Mai");
@@ -147,31 +147,21 @@ public class DormitoryDataManager {
     public List<String> getRoomData() {
         return roomData;
     }
-    private void initializeData() {
-        roomData = List.of(
-                "1. Cư xá A: 7 phòng trống",
-                "2. Cư xá B: 5 phòng trống",
-                "3. Cư xá C: không còn phòng trống",
-                "4. Cư xá D: 1 phòng trống",
-                "5. Cư xá E: 2 phòng trống",
-                "6. Cư xá F: không còn phòng trống"
-        );
-    }
-    public List<RoomPaymentData> generateRoomPaymentData(String dormitory) {
+
+
+
+    public List<Room> generateRoomPaymentData(String dormitory) {
         Random random = new Random();
-         paymentData = new ArrayList<>();
+        paymentData = new ArrayList<>();
 
         List<Room> rooms = dormitoryData.get(dormitory);
         if (rooms != null) {
             for (Room room : rooms) {
                 boolean isPaid = random.nextBoolean();
-                paymentData.add(new RoomPaymentData(
-                        room.getRoomNumber(),
-                        room.getRoomType(),
-                        isPaid,
-                        !isPaid,
-                        (500 + random.nextInt(301)) + "K" // Số Tiền (500K - 800K)
-                ));
+                room.setPaid(isPaid);
+                room.setUnpaid(!isPaid);
+                room.setPaymentAmount((500 + random.nextInt(301)) + "K"); // Số tiền (500K - 800K)
+                paymentData.add(room);
             }
         }
         return paymentData;
