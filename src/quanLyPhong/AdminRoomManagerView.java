@@ -7,7 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class AdminRoomManagerView extends JFrame {
     private JList<String> maleDormitoryList;
@@ -17,8 +16,8 @@ public class AdminRoomManagerView extends JFrame {
     private JButton backButton;
     private JButton viewDetailsButton;
     private Map<String, List<Room>> dormitoryData;
-    List<Room> rooms = new ArrayList<>();
-    String dormitoryName;
+    private List<Room> rooms = new ArrayList<>();
+    private String dormitoryName;
 
     public AdminRoomManagerView() {
         setTitle("Quản Lý Cư Xá");
@@ -27,8 +26,8 @@ public class AdminRoomManagerView extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Tạo dữ liệu giả lập
-        initializeDormitoryData();
+        // Tạo dữ liệu cư xá từ DormitoryDataManager
+        initializeDormitoryData();;
 
         // Panel chính chứa hình nền
         JPanel mainPanel = new JPanel() {
@@ -174,18 +173,21 @@ public class AdminRoomManagerView extends JFrame {
         maleDormitoryModel.clear();
         femaleDormitoryModel.clear();
 
-        for (String dormitory : dormitoryData.keySet()) {
-            long emptyRooms = dormitoryData.get(dormitory).stream()
-                    .filter(room -> room.getAvailableSlots() > 0)
-                    .count();
+        dormitoryData.forEach((dormitory, rooms) -> {
+            long emptyRooms = rooms.stream()
+                    .filter(room -> room.getCapacity() > room.getCurrentOccupancy())
+                    .count(); // Đếm số phòng có ít nhất một chỗ trống
 
-            if (dormitory.equals("Cư Xá B") || dormitory.equals("Cư Xá D") || dormitory.equals("Cư Xá E")) {
-                femaleDormitoryModel.addElement(dormitory + " - Phòng Trống: " + emptyRooms);
+            String displayText = dormitory + " - Phòng Trống: " + emptyRooms;
+
+            if (dormitory.equals("B") || dormitory.equals("D") || dormitory.equals("E")) {
+                femaleDormitoryModel.addElement(displayText);
             } else {
-                maleDormitoryModel.addElement(dormitory + " - Phòng Trống: " + emptyRooms);
+                maleDormitoryModel.addElement(displayText);
             }
-        }
+        });
     }
+
 
     private void openRoomManagerView() {
         AdminRoomManagerView roomManagerView = new AdminRoomManagerView();

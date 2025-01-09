@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StudentListView extends JFrame {
     private JTextField txtSearch;
@@ -20,10 +21,11 @@ public class StudentListView extends JFrame {
     private JMenuItem menuExit, menuManage, roomManage;
 
     private StudentController controller;
+    private Map<String, Student> studentMap;
 
     public StudentListView() {
         setTitle("Quản Lý Sinh Viên");
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -49,18 +51,29 @@ public class StudentListView extends JFrame {
         JLabel titleLabel = new JLabel("Danh sách sinh viên", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 
-        JPanel searchPanel = new JPanel(new FlowLayout());
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         searchPanel.setBackground(new Color(0, 0, 0, 0));
-        txtSearch = new JTextField(20);
+        txtSearch = new JTextField(25);
         btnSearch = new JButton("Tìm kiếm");
+        btnSearch.setPreferredSize(new Dimension(120, 35));
+        btnSearch.setFont(new Font("Inter", Font.BOLD, 14));
+        txtSearch.setPreferredSize(new Dimension(300, 35));
         searchPanel.add(txtSearch);
         searchPanel.add(btnSearch);
 
         String[] columnNames = {"STT", "Tên", "MSSV", "Giới tính", "Khoa", "Năm sinh", "Cư xá", "Phòng", "Địa chỉ", "CCCD"};
         tableModel = new DefaultTableModel(columnNames, 0);
         studentTable = new JTable(tableModel);
+
+        studentTable.setRowHeight(25); // Đặt chiều cao mỗi hàng
+        studentTable.getTableHeader().setFont(new Font("Inter", Font.BOLD, 14));
+        studentTable.getTableHeader().setPreferredSize(new Dimension(0, 30));
+        studentTable.setFont(new Font("Inter", Font.PLAIN, 14));
+        studentTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         studentTable.setFillsViewportHeight(true);
+
         JScrollPane scrollPane = new JScrollPane(studentTable);
+        scrollPane.setPreferredSize(new Dimension(850, 400));
 
         studentTable.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) { // Chỉ xử lý khi chọn xong
@@ -95,10 +108,11 @@ public class StudentListView extends JFrame {
 
         JPanel backPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         btnBack = new JButton("Quay về");
+        btnBack.setPreferredSize(new Dimension(120, 35));
         btnBack.setBounds(20, 400, 100, 40);
         btnBack.setBackground(new Color(153, 0, 0));
         btnBack.setForeground(Color.WHITE);
-        btnBack.setFont(new Font("Arial", Font.BOLD, 14));
+        btnBack.setFont(new Font("Inter", Font.BOLD, 14));
         backPanel.add(btnBack);
         backPanel.setOpaque(false);
 
@@ -128,9 +142,9 @@ public class StudentListView extends JFrame {
 
 
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(900, 700, Image.SCALE_SMOOTH);
         JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
-        backgroundImage.setBounds(0, 0, 800, 500);
+        backgroundImage.setBounds(0, 0, 900, 700);
         backgroundImage.setLayout(new BorderLayout());
 
         backgroundImage.add(searchPanel, BorderLayout.NORTH);
@@ -178,6 +192,7 @@ public class StudentListView extends JFrame {
 
     public void updateStudentList(List<Student> students) {
         tableModel.setRowCount(0); // Xóa dữ liệu cũ trong bảng
+        studentMap = new HashMap<>();
         int stt = 1;
         for (Student student : students) {
             tableModel.addRow(new Object[]{
@@ -192,6 +207,7 @@ public class StudentListView extends JFrame {
                     student.getDiaChi(),          // Địa chỉ
                     student.getIdCCCD(),          // CCCD
             });
+            studentMap.put(student.getMssv(), student);
         }
     }
 
@@ -213,20 +229,10 @@ public class StudentListView extends JFrame {
     }
 
     private List<Student> searchStudentByMSSV(String mssv) {
-        StudentController studentController = new StudentController(StudentListView.this);
-        StudentListView studentListView = new StudentListView();
-        studentListView.setController(studentController);
-        // Tạo HashMap tạm thời để ánh xạ MSSV với Student
-        HashMap<String, Student> studentMap = new HashMap<>();
-        for (Student student : studentController.getStudents()) {
-            studentMap.put(student.getMssv(), student);
-        }
-
-        // Tìm kiếm sinh viên trong HashMap
         List<Student> result = new ArrayList<>();
-        Student foundStudent = studentMap.get(mssv.trim());
-        if (foundStudent != null) {
-            result.add(foundStudent);
+        Student foundStu = studentMap.get(mssv.trim());
+        if(foundStu != null) {
+            result.add(foundStu);
         }
         return result;
     }

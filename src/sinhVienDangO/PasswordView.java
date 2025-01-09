@@ -13,7 +13,7 @@ public class PasswordView extends JFrame {
 
     public PasswordView() {
         setTitle("Admin Login");
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

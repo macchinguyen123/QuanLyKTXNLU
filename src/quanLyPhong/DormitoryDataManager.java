@@ -5,15 +5,30 @@ import java.util.*;
 public class DormitoryDataManager {
     private List<String> roomData;
     private Map<String, List<Room>> dormitoryData;
+    private List<Room> paymentData;
+    private static DormitoryDataManager instance;
+    private Map<String, Boolean> roomAvailability;
 
     public DormitoryDataManager() {
         dormitoryData = new TreeMap<>();
+        roomAvailability = new HashMap<>();
         initializeDormitoryData();
-        initializeData();
     }
 
+    /**
+     * Phương thức để lấy instance duy nhất của DormitoryDataManager
+     */
+    public static DormitoryDataManager getInstance() {
+        if (instance == null) {
+            instance = new DormitoryDataManager();
+        }
+        return instance;
+    }
+
+
+
     private void initializeDormitoryData() {
-        dormitoryData.put("Cư Xá A", List.of(
+        dormitoryData.put("A", List.of(
                 new Room("A01", "Phòng 6 người", 6, 1),
                 new Room("A02", "Phòng 8 người", 8, 4),
                 new Room("A03", "Phòng 8 người", 8, 4),
@@ -30,7 +45,7 @@ public class DormitoryDataManager {
                 new Room("A14", "Phòng 8 người", 8, 7),
                 new Room("A15", "Phòng 8 người", 8, 6)
         ));
-        dormitoryData.put("Cư Xá B", List.of(
+        dormitoryData.put("B", List.of(
                 new Room("B01", "Phòng 8 người", 8, 0),
                 new Room("B02", "Phòng 8 người", 8, 1),
                 new Room("B03", "Phòng 8 người", 8, 3),
@@ -50,7 +65,7 @@ public class DormitoryDataManager {
                 new Room("B17", "Phòng 8 người", 8, 6),
                 new Room("B18", "Phòng 8 người", 8, 8)
         ));
-        dormitoryData.put("Cư Xá C", List.of(
+        dormitoryData.put("C", List.of(
                 new Room("C01", "Phòng 8 người", 8, 0),
                 new Room("C02", "Phòng 8 người", 8, 1),
                 new Room("C03", "Phòng 6 người", 6, 3),
@@ -68,7 +83,7 @@ public class DormitoryDataManager {
                 new Room("C15", "Phòng 8 người", 8, 6),
                 new Room("C16", "Phòng 8 người", 8, 6)
         ));
-        dormitoryData.put("Cư Xá D", List.of(
+        dormitoryData.put("D", List.of(
                 new Room("D01", "Phòng 6 người", 6, 3),
                 new Room("D02", "Phòng 6 người", 6, 1),
                 new Room("D03", "Phòng 6 người", 6, 3),
@@ -84,7 +99,7 @@ public class DormitoryDataManager {
                 new Room("D13", "Phòng 8 người", 8, 6),
                 new Room("D14", "Phòng 8 người", 8, 6)
         ));
-        dormitoryData.put("Cư Xá E", List.of(
+        dormitoryData.put("E", List.of(
                 new Room("E01", "Phòng 6 người", 6, 3),
                 new Room("E02", "Phòng 6 người", 6, 1),
                 new Room("E03", "Phòng 6 người", 6, 3),
@@ -98,7 +113,7 @@ public class DormitoryDataManager {
                 new Room("E11", "Phòng 8 người", 8, 6),
                 new Room("E12", "Phòng 8 người", 8, 6)
         ));
-        dormitoryData.put("Cư Xá F", List.of(
+        dormitoryData.put("F", List.of(
                 new Room("F01", "Phòng 6 người", 6, 3),
                 new Room("F02", "Phòng 6 người", 6, 1),
                 new Room("F03", "Phòng 6 người", 6, 3),
@@ -115,40 +130,71 @@ public class DormitoryDataManager {
     public Map<String, List<Room>> getDormitoryData() {
         return dormitoryData;
     }
+
     public List<String> getRoomMembers(String roomNumber, int memberCount) {
-        return List.of("Nguyễn Văn A", "Trần Thị B", "Lê Văn C", "Hoàng Thị D", "Phạm Văn E", "Vũ Thị F", "Ngô Văn G", "Đinh Thị H")
-                .subList(0, Math.min(memberCount, 8));
+        List<String> maleNames = List.of("Nguyễn Văn Anh", "Lê Văn Bảo", "Hoàng Văn Tài", "Phạm Văn Huy ", "Vũ Thành", "Ngô Văn Giang", "Đinh Quang Toàn");
+        List<String> femaleNames = List.of("Nguyễn Thị Lan", "Trần Thị Thư", "Lê Thị Hoa", "Nguyễn Thị Kim", "Trần Thị Tuyết", "Lê Thị Thu", "Nguyễn Thị Mai");
+
+        Random random = new Random();
+        List<String> selectedMembers = new ArrayList<>();
+        List<String> availableNames;
+
+        // Kiểm tra cư xá và phân loại tên người
+        if (roomNumber.startsWith("A") || roomNumber.startsWith("C") || roomNumber.startsWith("F")) {
+            // Cư xá nam
+            availableNames = new ArrayList<>(maleNames);
+        } else {
+            // Cư xá nữ
+            availableNames = new ArrayList<>(femaleNames);
+        }
+
+        // Xáo trộn danh sách tên
+        Collections.shuffle(availableNames, random);
+
+        // Lấy các tên ngẫu nhiên mà không trùng lặp
+        for (int i = 0; i < memberCount && i < availableNames.size(); i++) {
+            selectedMembers.add(availableNames.get(i));
+        }
+
+        return selectedMembers;
     }
+
     public List<String> getRoomData() {
         return roomData;
     }
-    private void initializeData() {
-        roomData = List.of(
-                "1. Cư xá A: 7 phòng trống",
-                "2. Cư xá B: 5 phòng trống",
-                "3. Cư xá C: không còn phòng trống",
-                "4. Cư xá D: 1 phòng trống",
-                "5. Cư xá E: 2 phòng trống",
-                "6. Cư xá F: không còn phòng trống"
-        );
-    }
-    public List<RoomPaymentData> generateRoomPaymentData(String dormitory) {
+
+
+
+    public List<Room> generateRoomPaymentData(String dormitory) {
         Random random = new Random();
-        List<RoomPaymentData> paymentData = new ArrayList<>();
+        paymentData = new ArrayList<>();
 
         List<Room> rooms = dormitoryData.get(dormitory);
         if (rooms != null) {
             for (Room room : rooms) {
                 boolean isPaid = random.nextBoolean();
-                paymentData.add(new RoomPaymentData(
-                        room.getRoomNumber(),
-                        room.getRoomType(),
-                        isPaid,
-                        !isPaid,
-                        (500 + random.nextInt(301)) + "K" // Số Tiền (500K - 800K)
-                ));
+                room.setPaid(isPaid);
+                room.setUnpaid(!isPaid);
+                room.setPaymentAmount((500 + random.nextInt(301)) + "K"); // Số tiền (500K - 800K)
+                paymentData.add(room);
             }
         }
         return paymentData;
+    }
+
+
+    /**
+     * Phương thức lấy danh sách phòng theo cư xá
+     */
+    public List<Room> getRoomsByDormitory(String dormitory) {
+        List<Room> roomList = dormitoryData.get(dormitory);
+        if (roomList == null) {
+            System.out.println("Không có phòng cho cư xá: " + dormitory);
+        } else {
+            for (Room room : roomList) {
+                System.out.println("Phòng: " + room.getRoomNumber());
+            }
+        }
+        return roomList;
     }
 }

@@ -21,7 +21,7 @@ public class View extends JFrame {
         currentView = this;
 
         setTitle("Quản Lý Sinh Viên");
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -38,6 +38,7 @@ public class View extends JFrame {
         roomManageMenuItem.addActionListener(e -> openRoomManagerView());
         exitMenuItem.addActionListener(e -> showLogoutConfirmation());
     }
+
     // Cung cấp phương thức truy cập View hiện tại
     public static View getCurrentView() {
         return currentView;
@@ -51,9 +52,9 @@ public class View extends JFrame {
 
         // Tải và thay đổi kích thước ảnh nền
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/img/hinhanh.jpg"));
-        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
-        backgroundImage.setBounds(0, 0, 800, 500);
+        backgroundImage.setBounds(0, 0, getWidth(), getHeight());
         panel.add(backgroundImage);
 
         return panel;
@@ -120,33 +121,7 @@ public class View extends JFrame {
         }
     }
 
-
-    // Mở giao diện "Chọn chế độ"
-    private void openChooseStudentOrManagerView() {
-        JFrame newFrame = new JFrame("Chọn chế độ");
-        CardLayout cardLayout = new CardLayout();
-        JPanel cardPanel = new JPanel(cardLayout);
-
-        // Thêm PanelChooseStudentOrManager vào cardPanel
-//        cardPanel.add(new PanelChooseStudentOrManager(cardPanel, cardLayout, (Home) newFrame), "choosePanel");
-
-        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        newFrame.setSize(800, 500);
-        newFrame.setLocationRelativeTo(null);
-        newFrame.setContentPane(cardPanel);
-        newFrame.setVisible(true);
-    }
-
-    // Cung cấp phương thức để gắn sự kiện cho các menu item
-    public void setExitMenuItemListener(ActionListener listener) {
-        exitMenuItem.addActionListener(listener);
-    }
-
     public void setManageMenuItemListener(ActionListener listener) {
         manageMenuItem.addActionListener(listener);
-    }
-
-    public void setRoomManageMenuItemListener(ActionListener listener) {
-        roomManageMenuItem.addActionListener(listener);
     }
 }

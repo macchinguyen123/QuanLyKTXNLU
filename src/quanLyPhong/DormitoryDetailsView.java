@@ -8,10 +8,11 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class DormitoryDetailsView extends JFrame {
-    private JTable roomTable;
+    private JTable roomTable; // Bảng hiển thị thông tin phòng
+    private DormitoryDataManager dataManager; // Quản lý dữ liệu ký túc xá
 
     public DormitoryDetailsView(String dormitoryName, List<Room> rooms) {
-        setTitle("Chi Tiết Cư Xá - " + dormitoryName);
+        setTitle("Chi Tiết Cư Xá Cư Xá " + dormitoryName);
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -19,9 +20,14 @@ public class DormitoryDetailsView extends JFrame {
         JPanel mainPanel = createMainPanel(dormitoryName);
         add(mainPanel);
 
-        populateTable(mainPanel, rooms);
-
-        addButtons(mainPanel, rooms);
+        if (rooms != null && !rooms.isEmpty()) {
+            populateTable(mainPanel, rooms);
+            addButtons(mainPanel, rooms);
+        } else {
+            JLabel noRoomsLabel = new JLabel("Không có phòng nào trong ký túc xá.", JLabel.CENTER);
+            noRoomsLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+            mainPanel.add(noRoomsLabel, BorderLayout.CENTER);
+        }
     }
 
     private JPanel createMainPanel(String dormitoryName) {
@@ -38,7 +44,7 @@ public class DormitoryDetailsView extends JFrame {
         };
         mainPanel.setLayout(null);
 
-        JLabel titleLabel = new JLabel("Chi Tiết Phòng - " + dormitoryName, JLabel.CENTER);
+        JLabel titleLabel = new JLabel("Chi Tiết Phòng Cư Xá " + dormitoryName, JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
         titleLabel.setForeground(Color.BLACK);
         titleLabel.setBounds(50, 20, 700, 40);
@@ -55,8 +61,8 @@ public class DormitoryDetailsView extends JFrame {
             tableModel.addRow(new Object[]{
                     room.getRoomNumber(),
                     room.getRoomType(),
-                    room.getAvailableSlots(),
-                    room.getTotalSlots()
+                    room.getCurrentOccupancy(),
+                    room.getCapacity()
             });
         }
 
@@ -69,6 +75,7 @@ public class DormitoryDetailsView extends JFrame {
         scrollPane.setBounds(50, 80, 700, 300);
         mainPanel.add(scrollPane);
 
+        dataManager = new DormitoryDataManager();
         roomTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -78,7 +85,6 @@ public class DormitoryDetailsView extends JFrame {
                     int availableSlots = Integer.parseInt(tableModel.getValueAt(selectedRow, 2).toString());
                     int totalSlots = Integer.parseInt(tableModel.getValueAt(selectedRow, 3).toString());
 
-                    DormitoryDataManager dataManager = new DormitoryDataManager();
                     List<String> members = dataManager.getRoomMembers(roomNumber, totalSlots - availableSlots);
                     showRoomMembersDialog(roomNumber, members);
                 }
@@ -89,7 +95,7 @@ public class DormitoryDetailsView extends JFrame {
     private void addButtons(JPanel mainPanel, List<Room> rooms) {
         JButton backButton = new JButton("Quay Lại");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
-        backButton.setBounds(100, 400, 150, 40);
+        backButton.setBounds(520, 400, 150, 40);
         backButton.addActionListener(e -> {
             this.setVisible(false);
             new AdminRoomManagerView().setVisible(true);
@@ -98,7 +104,7 @@ public class DormitoryDetailsView extends JFrame {
 
         JButton paymentButton = new JButton("Danh sách thanh toán tiền điện nước");
         paymentButton.setFont(new Font("Arial", Font.BOLD, 18));
-        paymentButton.setBounds(300, 400, 400, 40);
+        paymentButton.setBounds(100, 400, 400, 40);
         paymentButton.addActionListener(e -> {
             PaymentDetailsView paymentDetailsView = new PaymentDetailsView(rooms, this);
             paymentDetailsView.setVisible(true);

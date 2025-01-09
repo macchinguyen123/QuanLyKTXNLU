@@ -22,16 +22,16 @@ public class StudentDataStorage {
 
     public void addStudent(String[] data) {
         String name = data[0];
-        String gender = data[9];
+        String gender = data[8];
         String birthYear = data[1]; // Giả sử birthYear là một số nguyên
         String MSSV = data[2];
         String SĐT = data[3];
         String HKTT = data[4];
-        String Khoa = data[5];
+        String Khoa = data[9];
         String CuXa = data[10];
-        String Phong = data[6];
-        String cMND = data[7];
-        String danToc = data[8];
+        String Phong = data[5];
+        String cMND = data[6];
+        String danToc = data[7];
         String dienChinhSach = data[11];
 
         // Khởi tạo đối tượng Student
@@ -45,12 +45,17 @@ public class StudentDataStorage {
         return studentData;
     }
 
-    public void clearData() {
-        studentData.clear();
-    }
-
     public void removeStudent(String mssv) {
         studentData.removeIf(student -> student.getMssv().equals(mssv));
+    }
+    // Lấy thông tin sinh viên theo MSSV
+    public Student getStudent(String mssv) {
+        for (Student student : studentData) {
+            if (student.getMssv().equals(mssv)) {
+                return student;
+            }
+        }
+        return null; // Không tìm thấy
     }
 
 }
