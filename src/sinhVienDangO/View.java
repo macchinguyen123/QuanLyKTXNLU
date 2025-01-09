@@ -21,7 +21,7 @@ public class View extends JFrame {
         currentView = this;
 
         setTitle("Quản Lý Sinh Viên");
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -52,9 +52,9 @@ public class View extends JFrame {
 
         // Tải và thay đổi kích thước ảnh nền
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/img/hinhanh.jpg"));
-        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
-        backgroundImage.setBounds(0, 0, 800, 500);
+        backgroundImage.setBounds(0, 0, getWidth(), getHeight());
         panel.add(backgroundImage);
 
         return panel;

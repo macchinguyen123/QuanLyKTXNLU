@@ -24,40 +24,39 @@ public class GDSVDangKi extends JFrame {
 
     public GDSVDangKi(MDSVDangKi mdsvDangKi) {
         setTitle("Quản Lý Sinh Viên");
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
         // Tạo nền ảnh
         ImageIcon originalIcon = new ImageIcon("src/img/hinhanh.jpg");
-        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         backgroundImage = new JLabel(scaledIcon);
-        backgroundImage.setBounds(0, 0, 800, 500);
+        backgroundImage.setBounds(0, 0, getWidth(), getHeight());
         setContentPane(backgroundImage); // Đặt nền ảnh làm nền chính
         backgroundImage.setLayout(null);
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                // Lấy kích thước mới của JFrame
-                int width = getWidth();
-                int height = getHeight();
-
-                // Thay đổi kích thước ảnh theo JFrame
-                Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-                ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                backgroundImage.setIcon(scaledIcon);
-
-                // Đặt lại kích thước của JLabel
-                backgroundImage.setBounds(0, 0, width, height);
-
-            }
-        });
+//        addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                // Lấy kích thước mới của JFrame
+//                int width = getWidth();
+//                int height = getHeight();
+//
+//                // Thay đổi kích thước ảnh theo JFrame
+//                Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+//                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+//                backgroundImage.setIcon(scaledIcon);
+//
+//                // Đặt lại kích thước của JLabel
+//                backgroundImage.setBounds(0, 0, width, height);
+//            }
+//        });
 
         // Tạo panel chính
         mainPanel = new JPanel(null);
         mainPanel.setOpaque(false); // Cho phép hiển thị nền phía sau
-        mainPanel.setBounds(0, 0, 800, 500);
+        mainPanel.setBounds(0, 0, getWidth(), getHeight());
         backgroundImage.add(mainPanel);
 
         // Thanh menu
@@ -76,11 +75,11 @@ public class GDSVDangKi extends JFrame {
 
         // Thanh tìm kiếm (di chuyển lên trên)
         filterField = new JTextField();
-        filterField.setBounds(20, 20, 600, 30);
+        filterField.setBounds(20, 20, 670, 30);
         mainPanel.add(filterField);
 
         filterButton = new JButton("Lọc");
-        filterButton.setBounds(640, 20, 100, 30);
+        filterButton.setBounds(700, 20, 100, 30);
         mainPanel.add(filterButton);
 
         // Bảng danh sách
@@ -146,7 +145,7 @@ public class GDSVDangKi extends JFrame {
             }
         });
         JScrollPane scrollPane = new JScrollPane(studentTable);
-        scrollPane.setBounds(20, 60, 760, 300);
+        scrollPane.setBounds(20, 70, 860, 500); // Đặt bảng bên dưới thanh tìm kiếm
         mainPanel.add(scrollPane);
 
         backButton = new JButton("Quay về") {
@@ -172,7 +171,7 @@ public class GDSVDangKi extends JFrame {
                 super.paint(g);
             }
         };
-        backButton.setBounds(20, 380, 100, 30); // Kích thước nút
+        backButton.setBounds(20, 600, 120, 40); // Nút Quay về ở góc trái
         backButton.setBackground(new Color(220, 53, 69)); // Màu đỏ đẹp hơn
         backButton.setForeground(Color.WHITE); // Chữ màu trắng
         backButton.setFont(new Font("Arial", Font.BOLD, 14)); // Font chữ đậm
