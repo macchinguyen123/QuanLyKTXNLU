@@ -74,8 +74,7 @@ public class PanelChooseRoom extends JPanel {
         if (typeOfRoom != null && typeOfRoom.getSelectedItem() != null) {
             selected.add(typeOfRoom.getSelectedItem().toString());
         }
-        if (chooseDorm != null && chooseDorm.getSelectedItem() != null) {
-            selected.add(chooseDorm.getSelectedItem().toString());
+        if (chooseDorm != null && chooseDorm.getSelectedItem() != null) {selected.add(chooseDorm.getSelectedItem().toString());
         }
         return selected;
     }

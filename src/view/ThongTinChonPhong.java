@@ -1,34 +1,42 @@
 package view;
 
 import javax.swing.*;
+
+import quanLyPhong.DormitoryDataManager;
+import quanLyPhong.Room;
+
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ThongTinChonPhong extends JPanel {
     Image imgBackround;
-    JComboBox<String> genderBox,capacityBox,dormBox;
+    JComboBox<String> genderBox, capacityBox, dormBox;
     JButton btnBack;
     JPanel topPanel, mainPanel;
     JScrollPane scrollPane;
-    String[] roomsA, roomsB,roomsC,roomsD,roomsE,roomsF;
+    String[] roomsA, roomsB, roomsC, roomsD, roomsE, roomsF;
+    private DormitoryDataManager dataManager;
+
     public ThongTinChonPhong(JPanel cardPanel, CardLayout cardLayout, List<String> selectedAttributes) {
         if (selectedAttributes == null || selectedAttributes.isEmpty()) {
             throw new IllegalArgumentException("Danh sách thuộc tính đã chọn không được null hoặc rỗng!");
         }
+        dataManager = DormitoryDataManager.getInstance();
 
         imgBackround = new ImageIcon("src/img/backroundKTX.jpg").getImage();
 
-        genderBox = createStyledComboBox(new String[]{selectedAttributes.get(0)});
-        capacityBox = createStyledComboBox(new String[]{selectedAttributes.get(1)});
-        dormBox = createStyledComboBox(new String[]{selectedAttributes.get(2)});
+        genderBox = createStyledComboBox(new String[] { selectedAttributes.get(0) });
+        capacityBox = createStyledComboBox(new String[] { selectedAttributes.get(1) });
+        dormBox = createStyledComboBox(new String[] { selectedAttributes.get(2) });
 
         // Nút quay lại
-         btnBack = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
+        btnBack = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
         btnBack.setBounds(20, 10, 25, 25);
         this.add(btnBack);
         btnBack.addActionListener(e -> cardLayout.show(cardPanel, "chooseRoom"));
 
-         topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         topPanel.setBackground(new Color(200, 220, 255));
         topPanel.add(genderBox);
         topPanel.add(capacityBox);
@@ -38,48 +46,46 @@ public class ThongTinChonPhong extends JPanel {
         this.add(topPanel, BorderLayout.NORTH);
 
         // Nội dung chính
-         mainPanel = new JPanel();
+        mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBackground(Color.WHITE);
-         scrollPane = new JScrollPane(mainPanel);
+        scrollPane = new JScrollPane(mainPanel);
         this.add(scrollPane, BorderLayout.CENTER);
 
-        roomsA = new String[] {"A101 còn 1 chỗ trống", "A201 còn 1 chỗ trống", "A206 còn 1 chỗ trống","A207 còn 1 chỗ trống"};
-         roomsB = new String[]{"B101 còn 1 chỗ trống", "B201 còn 1 chỗ trống", "B206 còn 1 chỗ trống"};
-        roomsC = new String[]{"C101 còn 1 chỗ trống", "C201 còn 1 chỗ trống", "C206 còn 1 chỗ trống"};
-        roomsD =new String[] {"D101 còn 1 chỗ trống", "D201 còn 1 chỗ trống", "D206 còn 1 chỗ trống"};
-        roomsE = new String[]{"E101 còn 1 chỗ trống", "E201 còn 1 chỗ trống", "E206 còn 1 chỗ trống"};
-         roomsF =new String[] {"F101 còn 1 chỗ trống", "F201 còn 1 chỗ trống", "F206 còn 1 chỗ trống"};
+        ActionListener filterListener = e -> updateRoomList(getName(), cardPanel, cardLayout);
+        genderBox.addActionListener(filterListener);
+        capacityBox.addActionListener(filterListener);
+        dormBox.addActionListener(filterListener);
         // hien thi danh sach phong trong theo cu xa
+        updateRoomList(getName(), cardPanel, cardLayout);
+    }
 
-        if (dormBox.getSelectedItem().equals("B")){
-            for (String room : roomsB) {
-                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
-            }
-        }else if (dormBox.getSelectedItem().equals("C")){
-            for (String room : roomsC) {
-                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
-            }
-        }else if (dormBox.getSelectedItem().equals("D")){
-            for (String room : roomsD) {
-                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
-            }
-        }else if (dormBox.getSelectedItem().equals("E")){
-            for (String room : roomsE) {
-                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
-            }
-        }else if (dormBox.getSelectedItem().equals("A")){
-            for (String room : roomsA) {
-                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
+    private void updateRoomList(String dormitory, JPanel cardPanel, CardLayout cardLayout) {
+        mainPanel.removeAll();
+
+        String selectedGender = (String) genderBox.getSelectedItem();
+        String selectedCapacity = (String) capacityBox.getSelectedItem();
+        String selectedDorm = (String) dormBox.getSelectedItem();
+
+        // Dữ liệu từ DormitoryDataManager
+        DormitoryDataManager dataManager = DormitoryDataManager.getInstance();
+        List<Room> rooms = dataManager.getRoomsByDormitory(selectedDorm);
+
+        // Lọc danh sách phòng
+        for (Room room : rooms) {
+            boolean isGenderMatch = (selectedGender.equals("Nam") && room.getRoomNumber().startsWith("A")) ||
+                    (selectedGender.equals("Nữ") && room.getRoomNumber().startsWith("B")) ||
+                    (selectedGender.equals("Nam") && room.getRoomNumber().startsWith("C")) ||
+                    (selectedGender.equals("Nữ") && room.getRoomNumber().startsWith("D")) ||
+                    (selectedGender.equals("Nam") && room.getRoomNumber().startsWith("F")) ||
+                    (selectedGender.equals("Nữ") && room.getRoomNumber().startsWith("E"));
+
+            boolean isCapacityMatch = selectedCapacity.equals(room.getCapacity() + " người");
+            if (isGenderMatch && isCapacityMatch && room.getCurrentOccupancy() > 0) {
+                String roomInfo = room.getRoomNumber() + " - Còn " + room.getCurrentOccupancy() + " chỗ trống";
+                mainPanel.add(createRoomPanelA(roomInfo, cardPanel, cardLayout));
             }
         }
-        else {
-            for (String room : roomsF) {
-                mainPanel.add(createRoomPanelA(room, cardPanel, cardLayout));
-            }
-        }
-
-
     }
 
     private JComboBox<String> createStyledComboBox(String[] items) {
@@ -91,11 +97,11 @@ public class ThongTinChonPhong extends JPanel {
         return comboBox;
     }
 
-    private JComponent createRoomPanelA(String room, JPanel cardPanel, CardLayout cardLayout) {
+    private JComponent createRoomPanelA(String roomInfo, JPanel cardPanel, CardLayout cardLayout) {
         JPanel roomPanel = new JPanel(new BorderLayout());
         roomPanel.setPreferredSize(new Dimension(700, 50));
 
-        JButton roomButton = new JButton(room);
+        JButton roomButton = new JButton(roomInfo);
         roomButton.setFont(new Font("Arial", Font.BOLD, 16));
         roomButton.addActionListener(e -> cardLayout.show(cardPanel, "fillInformatinDK"));
 
@@ -105,7 +111,6 @@ public class ThongTinChonPhong extends JPanel {
 
         return roomPanel;
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {

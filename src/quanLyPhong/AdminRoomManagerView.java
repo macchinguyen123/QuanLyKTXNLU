@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AdminRoomManagerView extends JFrame {
     private JList<String> maleDormitoryList;
@@ -21,7 +22,7 @@ public class AdminRoomManagerView extends JFrame {
 
     public AdminRoomManagerView() {
         setTitle("Quản Lý Cư Xá");
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -36,20 +37,21 @@ public class AdminRoomManagerView extends JFrame {
                 super.paintComponent(g);
                 // Sử dụng getResource để tải hình ảnh từ thư mục resources
                 ImageIcon originalIcon = new ImageIcon("src/img/ktx.jpg");
-                Image scaledImage = originalIcon.getImage().getScaledInstance(800, 500, Image.SCALE_SMOOTH);
+                Image scaledImage = originalIcon.getImage().getScaledInstance(900, 700, Image.SCALE_SMOOTH);
                 JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
-                backgroundImage.setBounds(0, 0, 800, 500);
+                backgroundImage.setBounds(0, 0, 900, 700);
                 g.drawImage(scaledImage, 0, 0, null);
             }
         };
         mainPanel.setLayout(new BorderLayout());
 
+
 // Danh sách cư xá nam
         maleDormitoryModel = new DefaultListModel<>();
         maleDormitoryList = new JList<>(maleDormitoryModel);
         maleDormitoryList.setFont(new Font("Arial", Font.PLAIN, 25));  // Kích thước chữ nhỏ hơn
-        maleDormitoryList.setFixedCellHeight(30);  // Chiều cao mỗi ô nhỏ hơn
-        maleDormitoryList.setVisibleRowCount(4);   // Hiển thị tối đa 4 hàng (giảm chiều dài)
+//        maleDormitoryList.setFixedCellHeight(30);  // Chiều cao mỗi ô nhỏ hơn
+//        maleDormitoryList.setVisibleRowCount(3);   // Hiển thị tối đa 4 hàng (giảm chiều dài)
         maleDormitoryList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 femaleDormitoryList.clearSelection();
@@ -64,20 +66,22 @@ public class AdminRoomManagerView extends JFrame {
         maleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         malePanel.add(maleLabel, BorderLayout.NORTH);
         malePanel.add(new JScrollPane(maleDormitoryList), BorderLayout.CENTER);
-        malePanel.setPreferredSize(new Dimension(150, 80)); // Giảm chiều dài và chiều cao
+//        malePanel.setPreferredSize(new Dimension(400, 150)); // Giảm chiều dài và chiều cao
 
 
 // Danh sách cư xá nữ
         femaleDormitoryModel = new DefaultListModel<>();
         femaleDormitoryList = new JList<>(femaleDormitoryModel);
         femaleDormitoryList.setFont(new Font("Arial", Font.PLAIN, 25));  // Kích thước chữ nhỏ hơn
-        femaleDormitoryList.setFixedCellHeight(30);  // Chiều cao mỗi ô nhỏ hơn
-        femaleDormitoryList.setVisibleRowCount(4);   // Hiển thị tối đa 4 hàng (giảm chiều dài)
+//        femaleDormitoryList.setFixedCellHeight(30);  // Chiều cao mỗi ô nhỏ hơn
+//        femaleDormitoryList.setVisibleRowCount(3);   // Hiển thị tối đa 4 hàng (giảm chiều dài)
         femaleDormitoryList.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 maleDormitoryList.clearSelection();
             }
         });
+
+
 
         JPanel femalePanel = new JPanel(new BorderLayout());
         femalePanel.setOpaque(true); // Hiển thị màu nền trắng
@@ -87,7 +91,7 @@ public class AdminRoomManagerView extends JFrame {
         femaleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         femalePanel.add(femaleLabel, BorderLayout.NORTH);
         femalePanel.add(new JScrollPane(femaleDormitoryList), BorderLayout.CENTER);
-        femalePanel.setPreferredSize(new Dimension(150, 80));
+//        femalePanel.setPreferredSize(new Dimension(400, 150));
 
 
         // Panel chứa cả hai danh sách với BoxLayout
@@ -96,15 +100,15 @@ public class AdminRoomManagerView extends JFrame {
         listsPanel.setOpaque(false);
 
 // Thiết lập kích thước nhỏ hơn cho các panel cư xá nam và nữ
-        malePanel.setPreferredSize(new Dimension(200, 150));
-        femalePanel.setPreferredSize(new Dimension(200, 150));
+//        malePanel.setPreferredSize(new Dimension(150, 100));
+//        femalePanel.setPreferredSize(new Dimension(150, 100));
 
 // Thêm khoảng trống hai bên để căn giữa
-        listsPanel.add(Box.createHorizontalStrut(50)); // Khoảng cách từ viền trái
+        listsPanel.add(Box.createHorizontalStrut(60)); // Khoảng cách từ viền trái
         listsPanel.add(malePanel);
-        listsPanel.add(Box.createHorizontalStrut(30)); // Khoảng cách giữa hai panel
+        listsPanel.add(Box.createHorizontalStrut(60)); // Khoảng cách giữa hai panel
         listsPanel.add(femalePanel);
-        listsPanel.add(Box.createHorizontalStrut(50)); // Khoảng cách từ viền phải
+        listsPanel.add(Box.createHorizontalStrut(60)); // Khoảng cách từ viền phải
 
         mainPanel.add(listsPanel, BorderLayout.CENTER);
 
@@ -126,8 +130,8 @@ public class AdminRoomManagerView extends JFrame {
 
         backButton = new JButton("Quay Lại");
         viewDetailsButton = new JButton("Xem Chi Tiết");
-        backButton.setFont(new Font("Arial", Font.BOLD, 18));
-        viewDetailsButton.setFont(new Font("Arial", Font.BOLD, 18));
+        backButton.setFont(new Font("Arial", Font.BOLD, 20));
+        viewDetailsButton.setFont(new Font("Arial", Font.BOLD, 20));
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         buttonPanel.setOpaque(false);
@@ -157,16 +161,16 @@ public class AdminRoomManagerView extends JFrame {
         });
 
         backButton.addActionListener(e -> {
-            this.setVisible(false); // Ẩn AdminRoomManagerView
-            View.getCurrentView().setVisible(true); // Hiển thị lại View hiện tại
+            setVisible(false);
+            View.getCurrentView().setVisible(true);
         });
-        // Hiển thị danh sách cư xá
+
         updateDormitoryLists();
     }
 
     private void initializeDormitoryData() {
-       DormitoryDataManager dataManager = new DormitoryDataManager();
-       dormitoryData = dataManager.getDormitoryData();
+        DormitoryDataManager dataManager = new DormitoryDataManager();
+        dormitoryData = dataManager.getDormitoryData();
     }
 
     private void updateDormitoryLists() {
@@ -174,18 +178,34 @@ public class AdminRoomManagerView extends JFrame {
         femaleDormitoryModel.clear();
 
         dormitoryData.forEach((dormitory, rooms) -> {
-            long emptyRooms = rooms.stream()
-                    .filter(room -> room.getCapacity() > room.getCurrentOccupancy())
-                    .count(); // Đếm số phòng có ít nhất một chỗ trống
+            // Lọc danh sách phòng còn trống
+            long totalEmptyRooms = rooms.stream()
+                    .filter(room -> room.getCurrentOccupancy() < room.getCapacity())
+                    .count();
 
-            String displayText = dormitory + " - Phòng Trống: " + emptyRooms;
+            if (totalEmptyRooms > 0) {
+                String displayText = dormitory + " - Phòng trống: " + totalEmptyRooms;
 
-            if (dormitory.equals("B") || dormitory.equals("D") || dormitory.equals("E")) {
-                femaleDormitoryModel.addElement(displayText);
-            } else {
-                maleDormitoryModel.addElement(displayText);
+                // Phân loại cư xá theo giới tính
+                if (dormitory.equals("B") || dormitory.equals("D") || dormitory.equals("E")) {
+                    femaleDormitoryModel.addElement(displayText);
+                } else if (dormitory.equals("A") || dormitory.equals("C") || dormitory.equals("F")) {
+                    maleDormitoryModel.addElement(displayText);
+                }
             }
         });
+
+    }
+
+
+    private List<Room> filterRoomsByGender(String dormitoryName) {
+        String gender = getDormitoryGender(dormitoryName);
+        return dormitoryData.get(dormitoryName).stream()
+                .filter(room -> {
+                    String roomGender = getDormitoryGender(dormitoryName);
+                    return roomGender.equalsIgnoreCase(gender);
+                })
+                .collect(Collectors.toList());
     }
 
 
@@ -199,12 +219,14 @@ public class AdminRoomManagerView extends JFrame {
         return backButton;
     }
 
-    public String getDormitoryName() {
-        return dormitoryName;
+
+    public String getDormitoryGender(String dormitoryName) {
+        if (dormitoryName.equals("B") || dormitoryName.equals("D") || dormitoryName.equals("E")) {
+            return "Nữ"; // Cư xá nữ
+        } else {
+            return "Nam"; // Cư xá nam
+        }
     }
 
-    public List<Room> getRooms() {
-        return rooms;
-    }
 
 }

@@ -16,7 +16,7 @@ public class PaymentDetailsView extends JFrame {
     public PaymentDetailsView(List<Room> rooms, DormitoryDetailsView dormitoryDetailsView) {
         this.dormitoryDetailsView = dormitoryDetailsView;
         setTitle("Danh sách thanh toán tiền điện nước");
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -85,7 +85,8 @@ public class PaymentDetailsView extends JFrame {
         JButton filterUnpaidButton = new JButton("Lọc phòng chưa thanh toán");
         filterUnpaidButton.setFont(new Font("Arial", Font.BOLD, 18));
         filterUnpaidButton.addActionListener(e -> {
-            showRooms(false);
+            this.dispose(); // Đóng cửa sổ hiện tại
+            showFilteredRooms(false); // Mở trang mới hiển thị danh sách phòng chưa thanh toán
         });
 
         // Nút quay lại
@@ -105,6 +106,61 @@ public class PaymentDetailsView extends JFrame {
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
         add(mainPanel);
     }
+    private void showFilteredRooms(boolean showPaid) {
+        String[] columnNames = {"Số Phòng", "Loại Phòng", "Số Tiền"};
+        DefaultTableModel filteredTableModel = new DefaultTableModel(columnNames, 0);
+
+        // Lọc và thêm các phòng dựa trên trạng thái thanh toán
+        List<Object[]> filteredRooms = new ArrayList<>();
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            boolean isPaid = (Boolean) tableModel.getValueAt(i, 2); // Cột "Đã Thanh Toán"
+            if (isPaid == showPaid) {
+                filteredRooms.add(new Object[]{
+                        tableModel.getValueAt(i, 0), // Số Phòng
+                        tableModel.getValueAt(i, 1), // Loại Phòng
+                        Integer.parseInt(tableModel.getValueAt(i, 4).toString().replace("K", "")) // Số Tiền
+                });
+            }
+        }
+
+        // Sắp xếp theo số tiền giảm dần
+        filteredRooms.sort((o1, o2) -> (int) o2[2] - (int) o1[2]);
+
+        // Thêm dữ liệu vào bảng đã sắp xếp
+        for (Object[] rowData : filteredRooms) {
+            filteredTableModel.addRow(new Object[]{rowData[0], rowData[1], rowData[2] + "K"});
+        }
+
+        // Hiển thị cửa sổ mới
+        JFrame filteredRoomFrame = new JFrame(showPaid ? "Phòng đã thanh toán" : "Phòng chưa thanh toán");
+        filteredRoomFrame.setSize(900, 700);
+        filteredRoomFrame.setLocationRelativeTo(null);
+
+        JTable filteredTable = new JTable(filteredTableModel);
+        filteredTable.setRowHeight(30);
+        filteredTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
+        filteredTable.setFont(new Font("Arial", Font.PLAIN, 18));
+        JScrollPane scrollPane = new JScrollPane(filteredTable);
+
+        // Nút quay lại
+        JButton backButton = new JButton("Quay lại");
+        backButton.setFont(new Font("Arial", Font.BOLD, 18));
+        backButton.addActionListener(e -> {
+            filteredRoomFrame.dispose(); // Đóng cửa sổ hiện tại
+            this.setVisible(true); // Hiển thị lại cửa sổ PaymentDetailsView
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(backButton);
+
+        filteredRoomFrame.setLayout(new BorderLayout());
+        filteredRoomFrame.add(scrollPane, BorderLayout.CENTER);
+        filteredRoomFrame.add(buttonPanel, BorderLayout.SOUTH);
+
+        this.setVisible(false); // Ẩn cửa sổ hiện tại
+        filteredRoomFrame.setVisible(true); // Hiển thị cửa sổ mới
+    }
+
 
     private void showRooms(boolean showPaid) {
         String[] columnNames = {"Số Phòng", "Loại Phòng", "Số Tiền"};
@@ -133,8 +189,10 @@ public class PaymentDetailsView extends JFrame {
 
         // Hiển thị cửa sổ mới
         JFrame filteredRoomFrame = new JFrame(showPaid ? "Phòng đã thanh toán" : "Phòng chưa thanh toán");
-        filteredRoomFrame.setSize(800, 500);
+        filteredRoomFrame.setSize(900, 700);
         filteredRoomFrame.setLocationRelativeTo(this);
+        filteredRoomFrame.setVisible(true);
+        dormitoryDetailsView.setVisible(false);
 
         JTable filteredTable = new JTable(filteredTableModel);
         filteredTable.setRowHeight(30);
