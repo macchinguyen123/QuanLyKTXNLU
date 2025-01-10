@@ -151,21 +151,31 @@ public class VRegisterDetail extends JFrame {
             }
         }
 
-        // Nút Quay lại, Xác nhận, và Hủy
-        buttonQuayLai = new JButton("Quay Lại");
-        buttonQuayLai.setBounds(580, yStart + 20, 120, 40);
-        buttonQuayLai.setBackground(new Color(30, 144, 255));
-        buttonQuayLai.setForeground(Color.WHITE);
+        ImageIcon backIcon = new ImageIcon("src/img/arrow-back-icon.png"); // Đường dẫn đến file hình ảnh
+        Image scaledBackIcon = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH); // Điều chỉnh kích thước
+        buttonQuayLai = new JButton(backIcon);
+        buttonQuayLai.setIcon(new ImageIcon(scaledBackIcon));
+        buttonQuayLai.setText(null);
+        buttonQuayLai.setContentAreaFilled(false);
+        buttonQuayLai.setBorderPainted(false);
+        buttonQuayLai.setFocusPainted(false);
+        buttonQuayLai.setBounds(0,  0, 140, 60);
 
         buttonXacNhan = new JButton("Xác Nhận");
-        buttonXacNhan.setBounds(180, yStart + 20, 120, 40);
-        buttonXacNhan.setBackground(Color.GREEN);
+        buttonXacNhan.setBounds(270, yStart + 20, 120, 40);
+        buttonXacNhan.setBackground(new Color(40, 167, 69));
         buttonXacNhan.setForeground(Color.WHITE);
 
+// Thay đổi phông chữ, kích thước và độ đậm
+        buttonXacNhan.setFont(new Font("Arial", Font.BOLD, 16)); // Font.BOLD làm chữ đậm, 16 là kích thước chữ
+
+
         buttonHuy = new JButton("Từ Chối");
-        buttonHuy.setBounds(380, yStart + 20, 120, 40);
+        buttonHuy.setBounds(480, yStart + 20, 120, 40);
         buttonHuy.setBackground(Color.RED);
         buttonHuy.setForeground(Color.WHITE);
+        buttonHuy.setFont(new Font("Arial", Font.BOLD, 16)); // Font.BOLD làm chữ đậm, 16 là kích thước chữ
+
 
         add(buttonQuayLai);
         add(buttonXacNhan);
