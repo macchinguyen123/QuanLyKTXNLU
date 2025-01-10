@@ -10,7 +10,9 @@ import java.util.List;
 public class PanelChooseRoom extends JPanel {
     Image imgBackround;
     JComboBox<String> gender, typeOfRoom, chooseDorm;
-    String[] optionsGender, optionsTypeOfRoom, optionsChooseDorm;
+    String[] optionsGender, optionsTypeOfRoom;
+    String[] dormitoryNam = {"A", "C", "F"};
+    String[] dormitoryNu = {"B", "D", "E"};
 
     public PanelChooseRoom(JPanel cardPanel, CardLayout cardLayout) {
         this.setLayout(null);
@@ -20,7 +22,6 @@ public class PanelChooseRoom extends JPanel {
         // Các tùy chọn ComboBox
         optionsGender = new String[]{"Nam", "Nữ"};
         optionsTypeOfRoom = new String[]{"6 người", "8 người"};
-        optionsChooseDorm = new String[]{"A", "B", "C", "D", "E", "F"};
 
         gender = new JComboBox<>(optionsGender);
         gender.setSelectedIndex(0);
@@ -32,10 +33,11 @@ public class PanelChooseRoom extends JPanel {
         typeOfRoom.setBounds(250, 40, 150, 30);
         this.add(typeOfRoom);
 
-        chooseDorm = new JComboBox<>(optionsChooseDorm);
+        chooseDorm = new JComboBox<>(dormitoryNam);
         chooseDorm.setSelectedIndex(0);
         chooseDorm.setBounds(500, 40, 150, 30);
         this.add(chooseDorm);
+        gender.addActionListener(e -> updateDormitoryOptions());
 
         // Nút "Tìm kiếm"
         JButton btnTimKiem = new JButton("Tìm kiếm");
@@ -64,6 +66,19 @@ public class PanelChooseRoom extends JPanel {
         btnBack.setBounds(20, 10, 25, 25);
         this.add(btnBack);
         btnBack.addActionListener(e -> cardLayout.show(cardPanel, "studentPanel"));
+    }
+
+    private void updateDormitoryOptions() {
+        chooseDorm.removeAllItems();
+        if ("Nam".equals(gender.getSelectedItem().toString())) {
+            for (String dorm : dormitoryNam) {
+                chooseDorm.addItem(dorm);
+            }
+        } else if ("Nữ".equals(gender.getSelectedItem().toString())) {
+            for (String dorm : dormitoryNu) {
+                chooseDorm.addItem(dorm);
+            }
+        }
     }
 
     public List<String> getSelectedAttributes() {
