@@ -49,16 +49,16 @@ public class DormitoryDataManager {
                 new Room("B01", "Phòng 8 người", 8, 0),
                 new Room("B02", "Phòng 8 người", 8, 1),
                 new Room("B03", "Phòng 8 người", 8, 3),
-                new Room("B04", "Phòng 8 người", 8, 4),
+                new Room("B04", "Phòng 6 người", 6, 4),
                 new Room("B05", "Phòng 8 người", 8, 3),
                 new Room("B06", "Phòng 8 người", 8, 4),
                 new Room("B07", "Phòng 8 người", 8, 7),
                 new Room("B08", "Phòng 8 người", 8, 6),
-                new Room("B09", "Phòng 8 người", 8, 4),
+                new Room("B09", "Phòng 6 người", 6, 4),
                 new Room("B10", "Phòng 8 người", 8, 5),
                 new Room("B11", "Phòng 8 người", 8, 6),
                 new Room("B12", "Phòng 8 người", 8, 6),
-                new Room("B13", "Phòng 8 người", 8, 6),
+                new Room("B13", "Phòng 6 người", 6, 1),
                 new Room("B14", "Phòng 8 người", 8, 6),
                 new Room("B15", "Phòng 8 người", 8, 6),
                 new Room("B16", "Phòng 8 người", 8, 6),
@@ -66,7 +66,7 @@ public class DormitoryDataManager {
                 new Room("B18", "Phòng 8 người", 8, 8)
         ));
         dormitoryData.put("C", List.of(
-                new Room("C01", "Phòng 8 người", 8, 0),
+                new Room("C01", "Phòng 8 người", 8, 1),
                 new Room("C02", "Phòng 8 người", 8, 1),
                 new Room("C03", "Phòng 6 người", 6, 3),
                 new Room("C04", "Phòng 6 người", 6, 4),

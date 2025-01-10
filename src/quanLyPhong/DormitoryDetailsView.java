@@ -13,7 +13,7 @@ public class DormitoryDetailsView extends JFrame {
 
     public DormitoryDetailsView(String dormitoryName, List<Room> rooms) {
         setTitle("Chi Tiết Cư Xá Cư Xá " + dormitoryName);
-        setSize(800, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -36,9 +36,9 @@ public class DormitoryDetailsView extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 ImageIcon originalIcon = new ImageIcon("src/img/nonglam.jpeg");
-                Image scaledImage = originalIcon.getImage().getScaledInstance(1200, 700, Image.SCALE_SMOOTH);
+                Image scaledImage = originalIcon.getImage().getScaledInstance(1400, 900, Image.SCALE_SMOOTH);
                 JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
-                backgroundImage.setBounds(0, 0, 800, 500);
+                backgroundImage.setBounds(0, 0, 900, 700);
                 g.drawImage(scaledImage, 0, 0, null);
             }
         };
@@ -72,7 +72,7 @@ public class DormitoryDetailsView extends JFrame {
         roomTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 22));
 
         JScrollPane scrollPane = new JScrollPane(roomTable);
-        scrollPane.setBounds(50, 80, 700, 300);
+        scrollPane.setBounds(50, 80, 800, 430);
         mainPanel.add(scrollPane);
 
         dataManager = new DormitoryDataManager();
@@ -95,7 +95,7 @@ public class DormitoryDetailsView extends JFrame {
     private void addButtons(JPanel mainPanel, List<Room> rooms) {
         JButton backButton = new JButton("Quay Lại");
         backButton.setFont(new Font("Arial", Font.BOLD, 18));
-        backButton.setBounds(520, 400, 150, 40);
+        backButton.setBounds(600, 550, 150, 40);
         backButton.addActionListener(e -> {
             this.setVisible(false);
             new AdminRoomManagerView().setVisible(true);
@@ -104,7 +104,7 @@ public class DormitoryDetailsView extends JFrame {
 
         JButton paymentButton = new JButton("Danh sách thanh toán tiền điện nước");
         paymentButton.setFont(new Font("Arial", Font.BOLD, 18));
-        paymentButton.setBounds(100, 400, 400, 40);
+        paymentButton.setBounds(100, 550, 400, 40);
         paymentButton.addActionListener(e -> {
             PaymentDetailsView paymentDetailsView = new PaymentDetailsView(rooms, this);
             paymentDetailsView.setVisible(true);
