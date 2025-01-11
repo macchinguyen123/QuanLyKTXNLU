@@ -162,57 +162,6 @@ public class PaymentDetailsView extends JFrame {
     }
 
 
-    private void showRooms(boolean showPaid) {
-        String[] columnNames = {"Số Phòng", "Loại Phòng", "Số Tiền"};
-        DefaultTableModel filteredTableModel = new DefaultTableModel(columnNames, 0);
-
-        // Lọc và thêm các phòng dựa trên trạng thái thanh toán
-        List<Object[]> filteredRooms = new ArrayList<>();
-        for (int i = 0; i < tableModel.getRowCount(); i++) {
-            boolean isPaid = (Boolean) tableModel.getValueAt(i, 2); // Cột "Đã Thanh Toán"
-            if (isPaid == showPaid) {
-                filteredRooms.add(new Object[]{
-                        tableModel.getValueAt(i, 0), // Số Phòng
-                        tableModel.getValueAt(i, 1), // Loại Phòng
-                        Integer.parseInt(tableModel.getValueAt(i, 4).toString().replace("K", "")) // Số Tiền
-                });
-            }
-        }
-
-        // Sắp xếp theo số tiền giảm dần
-        filteredRooms.sort((o1, o2) -> (int) o2[2] - (int) o1[2]);
-
-        // Thêm dữ liệu vào bảng đã sắp xếp
-        for (Object[] rowData : filteredRooms) {
-            filteredTableModel.addRow(new Object[]{rowData[0], rowData[1], rowData[2] + "K"});
-        }
-
-        // Hiển thị cửa sổ mới
-        JFrame filteredRoomFrame = new JFrame(showPaid ? "Phòng đã thanh toán" : "Phòng chưa thanh toán");
-        filteredRoomFrame.setSize(900, 700);
-        filteredRoomFrame.setLocationRelativeTo(this);
-        filteredRoomFrame.setVisible(true);
-        dormitoryDetailsView.setVisible(false);
-
-        JTable filteredTable = new JTable(filteredTableModel);
-        filteredTable.setRowHeight(30);
-        filteredTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 20));
-        filteredTable.setFont(new Font("Arial", Font.PLAIN, 18));
-        JScrollPane scrollPane = new JScrollPane(filteredTable);
-
-        JButton closeButton = new JButton("Đóng");
-        closeButton.setFont(new Font("Arial", Font.BOLD, 18));
-        closeButton.addActionListener(e -> filteredRoomFrame.dispose());
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(closeButton);
-
-        filteredRoomFrame.setLayout(new BorderLayout());
-        filteredRoomFrame.add(scrollPane, BorderLayout.CENTER);
-        filteredRoomFrame.add(buttonPanel, BorderLayout.SOUTH);
-        filteredRoomFrame.setVisible(true);
-    }
-
     public JButton getBackButton() {
         return backButton;
     }

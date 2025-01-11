@@ -19,6 +19,7 @@ public class AdminRoomManagerView extends JFrame {
     private Map<String, List<Room>> dormitoryData;
     private List<Room> rooms = new ArrayList<>();
     private String dormitoryName;
+    private DormitoryDataManager dataManager;
 
     public AdminRoomManagerView() {
         setTitle("Quản Lý Cư Xá");
@@ -169,7 +170,7 @@ public class AdminRoomManagerView extends JFrame {
     }
 
     private void initializeDormitoryData() {
-        DormitoryDataManager dataManager = new DormitoryDataManager();
+         dataManager = new DormitoryDataManager();
         dormitoryData = dataManager.getDormitoryData();
     }
 
@@ -209,11 +210,6 @@ public class AdminRoomManagerView extends JFrame {
     }
 
 
-    private void openRoomManagerView() {
-        AdminRoomManagerView roomManagerView = new AdminRoomManagerView();
-        this.setVisible(false); // Ẩn View hiện tại
-        roomManagerView.setVisible(true); // Hiển thị AdminRoomManagerView
-    }
 
     public JButton getBackButton() {
         return backButton;
