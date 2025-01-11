@@ -165,23 +165,6 @@ public class DormitoryDataManager {
 
 
 
-    public List<Room> generateRoomPaymentData(String dormitory) {
-        Random random = new Random();
-        paymentData = new ArrayList<>();
-
-        List<Room> rooms = dormitoryData.get(dormitory);
-        if (rooms != null) {
-            for (Room room : rooms) {
-                boolean isPaid = random.nextBoolean();
-                room.setPaid(isPaid);
-                room.setUnpaid(!isPaid);
-                room.setPaymentAmount((500 + random.nextInt(301)) + "K"); // Số tiền (500K - 800K)
-                paymentData.add(room);
-            }
-        }
-        return paymentData;
-    }
-
 
     /**
      * Phương thức lấy danh sách phòng theo cư xá
