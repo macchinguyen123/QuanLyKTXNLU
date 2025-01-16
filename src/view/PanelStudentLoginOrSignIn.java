@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SVLoginOrSignIn extends JPanel {
+public class PanelStudentLoginOrSignIn extends JPanel {
     Image imgBackround;
     JButton btnLogin, btnSignIn, backToHome;
     GridBagConstraints gbcCenter,gbc;
     JPanel panelCenter,panelTopLeft;
-    public SVLoginOrSignIn(JPanel cardPanel, CardLayout cardLayout) {
+    public PanelStudentLoginOrSignIn(JPanel cardPanel, CardLayout cardLayout) {
         this.setLayout(new GridBagLayout());
          gbc = new GridBagConstraints();
 

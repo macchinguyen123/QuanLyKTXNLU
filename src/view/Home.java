@@ -16,15 +16,15 @@ public class Home extends JFrame {
     List<String> selectedAttributes;
     MRegister mdsvDangKi = new MRegister();
     String currentMSSV; // thêm biến currentMSSV
-    SVLoginOrSignIn studentPanel;
+    PanelStudentLoginOrSignIn studentPanel;
     PanelLogin pageLogin;
-    PanelTTCNcuaSVDaO pageTTCNcuaSVDaO;
+    PanelInformationOfStudentInDormitory pageTTCNcuaSVDaO;
     PanelChooseRoom chooseRoom;
     PanelHeaderOfHome header;
-    ThongTinChonPhong thongTinChonPhong;
+    PanelInformationChooseRoom thongTinChonPhong;
     PanelFillInformatinDK fillInformatinDK;
     PanelChooseStudentOrManager chooseStudentOrManager;
-    PanelDangKiTaiKhoan dangKiTaiKhoanSV;
+    PanelRegisterAccount dangKiTaiKhoanSV;
     PanelHeaderOfHome headerPanel;
     Model model;
 
@@ -42,16 +42,16 @@ public class Home extends JFrame {
 
         // Add panels to cardPanel
         mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout, this);
-        studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
+        studentPanel = new PanelStudentLoginOrSignIn(cardPanel, cardLayout);
         pageLogin = new PanelLogin(cardPanel, cardLayout, listSaveTaiKhoan);
-        pageTTCNcuaSVDaO = new PanelTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
+        pageTTCNcuaSVDaO = new PanelInformationOfStudentInDormitory(cardPanel, cardLayout, listSaveTaiKhoan);
         chooseRoom = new PanelChooseRoom(cardPanel, cardLayout);
         header = new PanelHeaderOfHome(cardPanel, cardLayout);
 
-        thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
+        thongTinChonPhong = new PanelInformationChooseRoom(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
         fillInformatinDK = new PanelFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV, chooseRoom);
         chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout, this);
-        dangKiTaiKhoanSV = new PanelDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
+        dangKiTaiKhoanSV = new PanelRegisterAccount(cardPanel, cardLayout, listSaveTaiKhoan);
 
 
         cardPanel.add(mainPanel, "choosePanel");

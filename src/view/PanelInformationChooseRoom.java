@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ThongTinChonPhong extends JPanel {
+public class PanelInformationChooseRoom extends JPanel {
     Image imgBackround;
     JComboBox<String> genderBox, capacityBox, dormBox;
     JButton btnBack;
@@ -18,7 +18,7 @@ public class ThongTinChonPhong extends JPanel {
     String[] roomsA, roomsB, roomsC, roomsD, roomsE, roomsF;
     private DormitoryDataManager dataManager;
 
-    public ThongTinChonPhong(JPanel cardPanel, CardLayout cardLayout, List<String> selectedAttributes) {
+    public PanelInformationChooseRoom(JPanel cardPanel, CardLayout cardLayout, List<String> selectedAttributes) {
         if (selectedAttributes == null || selectedAttributes.isEmpty()) {
             throw new IllegalArgumentException("Danh sách thuộc tính đã chọn không được null hoặc rỗng!");
         }

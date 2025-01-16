@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class PanelTTCNcuaSVDaO extends JPanel {
+public class PanelInformationOfStudentInDormitory extends JPanel {
     // Các thành phần khác không thay đổi
     JLabel lbInfor;
     DefaultTableModel tableModel;
@@ -25,7 +25,7 @@ public class PanelTTCNcuaSVDaO extends JPanel {
     private final DataRegister dataSVDangKi;
 
 
-    public PanelTTCNcuaSVDaO(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
+    public PanelInformationOfStudentInDormitory(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.setLayout(new BorderLayout());
         lbInfor = new JLabel("", JLabel.CENTER); // Hiện ban đầu để trống
         this.add(lbInfor, BorderLayout.NORTH);
