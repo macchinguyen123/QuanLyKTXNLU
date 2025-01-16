@@ -1,7 +1,12 @@
 package sinhVienDangKy;
 
+import quanLyPhong.Model;
+import sinhVienDangO.Controller;
+import sinhVienDangO.PasswordView;
 import sinhVienDangO.Student;
-import view.Home;
+import sinhVienDangO.View;
+//import view.Home;
+import view.HomeLass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -83,16 +88,16 @@ public class VRegister extends JFrame {
         mainPanel.add(filterButton);
 
         add = new JButton("Thêm Sinh Viên");
-        add.setBounds(520, 20,100,30);
+        add.setBounds(520, 20, 100, 30);
         mainPanel.add(add);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Home home = new Home();
+                HomeLass home = new HomeLass();
                 home.setVisible(true);
+                setVisible(false);
             }
         });
-
 
 
         // Bảng danh sách
@@ -140,7 +145,7 @@ public class VRegister extends JFrame {
                             public void actionPerformed(ActionEvent e) {
                                 setVisible(true);
                                 detailView.dispose();
-                                detailView=null;
+                                detailView = null;
                             }
                         });
                         detailView.getButtonXacNhan().addActionListener(new ActionListener() {
@@ -151,7 +156,7 @@ public class VRegister extends JFrame {
                                 mdsvDangKi.removeStudent(rowIndex);
                                 mdsvDangKi.removeStudentTimKiem(rowIndex);
                                 detailView.dispose();
-                                detailView=null;
+                                detailView = null;
                                 setVisible(true);
                             }
                         });
@@ -162,7 +167,7 @@ public class VRegister extends JFrame {
                                 mdsvDangKi.removeStudentTimKiem(rowIndex);
                                 mdsvDangKi.removeStudent(rowIndex);
                                 detailView.dispose();
-                                detailView=null;
+                                detailView = null;
                             }
                         });
                     }
@@ -203,6 +208,16 @@ public class VRegister extends JFrame {
         backButton.setFont(new Font("Arial", Font.BOLD, 14)); // Font chữ đậm
         backButton.setFocusPainted(false); // Loại bỏ viền khi chọn
         backButton.setBorder(BorderFactory.createLineBorder(new Color(200, 40, 50), 2, true)); // Viền bo tròn
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Model combinedModel = new Model();
+                PasswordView passwordView = new PasswordView();
+                Controller controller = new Controller(combinedModel, passwordView);
+                controller.studentView();
+                setVisible(false);
+            }
+        });
 
         mainPanel.add(backButton);
         setLocationRelativeTo(null);
@@ -223,9 +238,9 @@ public class VRegister extends JFrame {
         return filterButton;
     }
 
-    public JButton getBackButton() {
-        return backButton;
-    }
+//    public JButton getBackButton() {
+//        return backButton;
+//    }
 
     public JMenuItem getExitMenuItem() {
         return exitMenuItem;

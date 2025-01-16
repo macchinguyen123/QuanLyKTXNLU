@@ -2,6 +2,7 @@ package sinhVienDangKy;
 
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 
 public class CRegister {
     private MRegister model;

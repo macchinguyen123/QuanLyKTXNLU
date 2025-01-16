@@ -8,9 +8,9 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class Home extends JFrame {
+public class HomeLass extends  JFrame {
     private static Set<Map<String, String>> listSaveTaiKhoan = new HashSet<>();
-    PanelChooseStudentOrManager mainPanel;
+//    PanelChooseStudentOrManager mainPanel;
     CardLayout cardLayout;
     JPanel cardPanel;
     List<String> selectedAttributes;
@@ -23,62 +23,49 @@ public class Home extends JFrame {
     PanelHeaderOfHome header;
     ThongTinChonPhong thongTinChonPhong;
     PanelFillInformatinDK fillInformatinDK;
-    PanelChooseStudentOrManager chooseStudentOrManager;
+//    PanelChooseStudentOrManager chooseStudentOrManager;
     PanelDangKiTaiKhoan dangKiTaiKhoanSV;
     PanelHeaderOfHome headerPanel;
     Model model;
 
 
-    public Home() throws HeadlessException {
+    public HomeLass() throws HeadlessException {
         setTitle("Dormitory management system");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(900, 700);
-//        this.setResizable(false);
+
         selectedAttributes = new ArrayList<>();
-        // Initialize CardLayout and JPanel
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
-        // Add panels to cardPanel
-        mainPanel = new PanelChooseStudentOrManager(cardPanel, cardLayout, this);
 //        studentPanel = new SVLoginOrSignIn(cardPanel, cardLayout);
 //        pageLogin = new PanelLogin(cardPanel, cardLayout, listSaveTaiKhoan);
 //        pageTTCNcuaSVDaO = new PanelTTCNcuaSVDaO(cardPanel, cardLayout, listSaveTaiKhoan);
-//        chooseRoom = new PanelChooseRoom(cardPanel, cardLayout);
-//        header = new PanelHeaderOfHome(cardPanel, cardLayout);
+        chooseRoom = new PanelChooseRoom(cardPanel, cardLayout,this);
+        header = new PanelHeaderOfHome(cardPanel, cardLayout,this);
 
         thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
-//        fillInformatinDK = new PanelFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV, chooseRoom);
-        chooseStudentOrManager = new PanelChooseStudentOrManager(cardPanel, cardLayout, this);
+        fillInformatinDK = new PanelFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV, chooseRoom,this);
         dangKiTaiKhoanSV = new PanelDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
 
-
-        cardPanel.add(mainPanel, "choosePanel");
-        cardPanel.add(studentPanel, "studentPanel");
-        cardPanel.add(pageLogin, "login");
-        cardPanel.add(pageTTCNcuaSVDaO, "TTCNcuaSVDaO");
+//        cardPanel.add(studentPanel, "studentPanel");
+//        cardPanel.add(pageLogin, "login");
+//        cardPanel.add(pageTTCNcuaSVDaO, "TTCNcuaSVDaO");
         cardPanel.add(chooseRoom, "chooseRoom");
         cardPanel.add(thongTinChonPhong, "thongTinChonPhong");
         cardPanel.add(fillInformatinDK, "fillInformatinDK");
-        cardPanel.add(chooseStudentOrManager, "chooseStudentOrManager");
-        cardPanel.add(dangKiTaiKhoanSV, "dangKiTaiKhoanSV");
+//        cardPanel.add(dangKiTaiKhoanSV, "dangKiTaiKhoanSV");
 
-        // Add header panel
-//        headerPanel = new PanelHeaderOfHome(cardPanel, cardLayout);
+        headerPanel = new PanelHeaderOfHome(cardPanel, cardLayout,this);
         getContentPane().add(headerPanel, BorderLayout.NORTH);
-
-        // Add cardPanel to the frame
         getContentPane().add(cardPanel, BorderLayout.CENTER);
+
+        // Đặt trang mặc định là "chooseRoom"
+        cardLayout.show(cardPanel, "chooseRoom");
+
         this.setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    public MRegister getMdsvDangKi() {
-        return mdsvDangKi;
-    }
-
-//    public static void main(String[] args) {
-//        Home frame = new Home();
-//    }
 }

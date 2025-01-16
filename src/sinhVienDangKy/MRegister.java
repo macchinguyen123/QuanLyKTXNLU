@@ -11,22 +11,26 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class MRegister extends AbstractTableModel {
-    private final List<Student> students;
+    private StudentRepository studentRepository;
+    public List<Student> students;
     public StudentDataStorage studentDataStorage;
     TreeSet<Student> filteredTreeSet;
-    private final List<Student> originalStudents = new ArrayList<>();
+    public final List<Student> originalStudents = new ArrayList<>();
 
     public MRegister() {
         students = new ArrayList<>();
-        studentDataStorage = StudentDataStorage.getInstance();
-        // Sample data
-        students.add(new Student("Nguyen Van Tung", "2313335", "Nam", "Công Nghệ Thông Tin", "22/08/2005", "A", "101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Có"));
-        students.add(new Student("Phạm Gia Bảo", "24120943", "Nam", "Chăn Nuôi Thú Y", "29/03/2004", "C", "306", "Đà Nẳng", "09327864532", "0942987534", "Tày", "Có"));
-        students.add(new Student("Hồ Văn Đạt", "24761290", "Nam", "Cơ Khí Công Nghệ", "01/07/2006", "F", "100", "Bình Thuận", "0897654123", "0934231768", "Kinh", "Không"));
-        students.add(new Student("Mai Van Hung", "23139990", "Nam", "Lâm Nghiệp", "22/08/2002", "A", "101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Không"));
-        students.add(new Student("Le Thi Ngoc Mai", "23130001", "Nữ", "Kinh tế", "23/01/2001", "B", "202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Không"));
-        students.add(new Student("Chau Mai Tú", "23126578", "Nam", "Kinh tế", "23/01/2001", "C", "202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Có"));
+        studentRepository = StudentRepository.getInstance();
 
+        studentDataStorage = StudentDataStorage.getInstance();
+        List<Student> storedData1 = studentRepository.getAllStudents();
+        // Sample data
+//        students.add(new Student("Nguyen Van Tung", "2313335", "Nam", "Công Nghệ Thông Tin", "22/08/2005", "A", "A101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Có"));
+//        storedData1.add(new Student("Phạm Gia Bảo", "24120943", "Nam", "Chăn Nuôi Thú Y", "29/03/2004", "C", "C306", "Đà Nẳng", "09327864532", "0942987534", "Tày", "Có"));
+//        storedData1.add(new Student("Hồ Văn Đạt", "24761290", "Nam", "Cơ Khí Công Nghệ", "01/07/2006", "F", "F100", "Bình Thuận", "0897654123", "0934231768", "Kinh", "Không"));
+//        storedData1.add(new Student("Mai Van Hung", "23139990", "Nam", "Lâm Nghiệp", "22/08/2002", "A", "A101", "Kiên Giang", "091205014759", "0948088315", "Kinh", "Không"));
+//        storedData1.add(new Student("Le Thi Ngoc Mai", "23130001", "Nữ", "Kinh tế", "23/01/2001", "B", "B202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Không"));
+//        storedData1.add(new Student("Chau Mai Tú", "23126578", "Nam", "Kinh tế", "23/01/2001", "C", "C202", "Ha Giang", "08347653421", "09320654332", "Hoa", "Có"));
+        students.addAll(storedData1);
         List<Student> storedData = studentDataStorage.getStudentData();
         if (storedData != null && !storedData.isEmpty()) {
             students.addAll(storedData);
@@ -38,14 +42,24 @@ public class MRegister extends AbstractTableModel {
 
     public void removeStudent(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < students.size()) {
+            // Lấy sinh viên cần xóa
             Student removedStudent = students.get(rowIndex);
-            students.remove(rowIndex);
-            fireTableDataChanged();
 
-            // Cập nhật StudentDataStorage
+            // Xóa sinh viên khỏi danh sách students và originalStudents
+            students.remove(rowIndex);
+            originalStudents.remove(removedStudent);
+
+            // Xóa sinh viên khỏi StudentRepository
+            studentRepository.removeStudent(removedStudent.getMssv());
+
+            // Xóa sinh viên khỏi StudentDataStorage
             studentDataStorage.removeStudent(removedStudent.getMssv());
+
+            // Thông báo cập nhật bảng
+            fireTableDataChanged();
         }
     }
+
 
     public void removeStudentTimKiem(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < originalStudents.size()) {

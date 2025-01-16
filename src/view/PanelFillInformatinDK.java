@@ -1,8 +1,9 @@
 package view;
 
-import sinhVienDangKy.DataRegister;
-import sinhVienDangKy.MRegister;
-import sinhVienDangKy.StudentDataStorage;
+import quanLyPhong.Model;
+import sinhVienDangKy.*;
+import sinhVienDangO.Controller;
+import sinhVienDangO.PasswordView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -34,10 +35,11 @@ public class PanelFillInformatinDK extends JPanel {
     JPanel policyPanel;
     JButton confirmButton,backHome,backToPagePrevious;
     StudentDataStorage storage;
-    DataRegister dataSVDangKi;
     String[] listKhoa = {"Công nghệ thông tin","Chăn nuôi thú y","Cơ khí","Khoa học sinh học","Thủy sản","Nông học"};
+    HomeLass parentFrame;
 
-    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MRegister tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV, PanelChooseRoom chooseRoom) {
+    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MRegister tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV, PanelChooseRoom chooseRoom, HomeLass homeLass) {
+        this.parentFrame = homeLass;
         this.tableModel = tableModel;
         this.listSaveTaiKhoan = listSaveTaiKhoan;
         this.currentMSSV = currentMSSV;
@@ -86,16 +88,27 @@ public class PanelFillInformatinDK extends JPanel {
                     saveData();
                     JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
                     // Cập nhật thông tin vào giao diện
-                    pageTTCN.updateInformation(storage.getStudentData().get(0).getMssv());
+//                    pageTTCN.updateInformation(storage.getStudentData().get(0).getMssv());
 //                    tableModel.addStudent(data);
                     clearFields();
                     // Xóa tài khoản đăng nhập hiện tại khỏi danh sách
                     listSaveTaiKhoan.removeIf(account -> account.get("Mã số sinh viên").equals(currentMSSV));
 
-                    cardLayout.show(cardPanel, "dangKiTaiKhoanSV");
+//                    cardLayout.show(cardPanel, "dangKiTaiKhoanSV");
                 } else {
                     JOptionPane.showMessageDialog(mainPanel, "Vui lòng điền đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
+                if (parentFrame != null) {
+                    parentFrame.dispose(); // Đóng JFrame Home
+                }
+                Model passwordModel = new Model();
+                PasswordView passwordView = new PasswordView();
+                Controller controller = new Controller(passwordModel,passwordView);
+                MRegister mRegister = new MRegister();
+                VRegister vRegister = new VRegister(mRegister);
+                CRegister cRegister = new CRegister(mRegister, vRegister);
+                vRegister.setVisible(true);
+                setVisible(false);
             }
         });
 
@@ -172,8 +185,6 @@ public class PanelFillInformatinDK extends JPanel {
 
         storage = StudentDataStorage.getInstance();
         storage.addStudent(data);
-        dataSVDangKi = DataRegister.getInstance();
-        dataSVDangKi.addStudent(data);
         System.out.println(Arrays.toString(data));
     }
 
