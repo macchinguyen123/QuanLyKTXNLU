@@ -1,6 +1,7 @@
 package sinhVienDangKy;
 
 import sinhVienDangO.Student;
+import view.Home;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ public class VRegister extends JFrame {
     private JTextField filterField;
     private JButton filterButton;
     private JButton backButton; // Nút Quay về
+    private JButton add; // Nút Quay về
     private JMenuItem exitMenuItem;
     private JMenuItem manageMenuItem;
     private JMenuItem roomManageMenuItem;
@@ -73,12 +75,25 @@ public class VRegister extends JFrame {
 
         // Thanh tìm kiếm (di chuyển lên trên)
         filterField = new JTextField();
-        filterField.setBounds(200, 20, 400, 30);
+        filterField.setBounds(50, 20, 300, 30);
         mainPanel.add(filterField);
 
         filterButton = new JButton("Lọc");
-        filterButton.setBounds(620, 20, 100, 30);
+        filterButton.setBounds(400, 20, 80, 30);
         mainPanel.add(filterButton);
+
+        add = new JButton("Thêm Sinh Viên");
+        add.setBounds(520, 20,100,30);
+        mainPanel.add(add);
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Home home = new Home();
+                home.setVisible(true);
+            }
+        });
+
+
 
         // Bảng danh sách
         studentTable = new JTable(mdsvDangKi);
