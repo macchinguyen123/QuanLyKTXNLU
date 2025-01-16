@@ -1,5 +1,12 @@
 package view;
 
+import quanLyPhong.Model;
+import sinhVienDangKy.CRegister;
+import sinhVienDangKy.MRegister;
+import sinhVienDangKy.VRegister;
+import sinhVienDangO.Controller;
+import sinhVienDangO.PasswordView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +20,10 @@ public class PanelChooseRoom extends JPanel {
     String[] optionsGender, optionsTypeOfRoom;
     String[] dormitoryNam = {"A", "C", "F"};
     String[] dormitoryNu = {"B", "D", "E"};
+    HomeLass parentFrame;
 
-    public PanelChooseRoom(JPanel cardPanel, CardLayout cardLayout) {
+    public PanelChooseRoom(JPanel cardPanel, CardLayout cardLayout, HomeLass homeLass) {
+        this.parentFrame = homeLass;
         this.setLayout(null);
 
         imgBackround = new ImageIcon("src/img/backroundKTX.jpg").getImage();
@@ -65,7 +74,22 @@ public class PanelChooseRoom extends JPanel {
         JButton btnBack = new JButton(new ImageIcon("src/img/arrow-back-icon.png"));
         btnBack.setBounds(20, 10, 25, 25);
         this.add(btnBack);
-        btnBack.addActionListener(e -> cardLayout.show(cardPanel, "studentPanel"));
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (parentFrame != null) {
+                    parentFrame.dispose(); // Đóng JFrame Home
+                }
+                Model passwordModel = new Model();
+                PasswordView passwordView = new PasswordView();
+                Controller controller = new Controller(passwordModel,passwordView);
+                MRegister mRegister = new MRegister();
+                VRegister vRegister = new VRegister(mRegister);
+                CRegister cRegister = new CRegister(mRegister, vRegister);
+                vRegister.setVisible(true);
+                setVisible(false);
+            }
+        });
     }
 
     private void updateDormitoryOptions() {
@@ -89,7 +113,8 @@ public class PanelChooseRoom extends JPanel {
         if (typeOfRoom != null && typeOfRoom.getSelectedItem() != null) {
             selected.add(typeOfRoom.getSelectedItem().toString());
         }
-        if (chooseDorm != null && chooseDorm.getSelectedItem() != null) {selected.add(chooseDorm.getSelectedItem().toString());
+        if (chooseDorm != null && chooseDorm.getSelectedItem() != null) {
+            selected.add(chooseDorm.getSelectedItem().toString());
         }
         return selected;
     }
@@ -99,8 +124,6 @@ public class PanelChooseRoom extends JPanel {
         super.paintComponent(g);
         g.drawImage(imgBackround, 0, 0, getWidth(), getHeight(), this);
     }
-
-
 
 
 }

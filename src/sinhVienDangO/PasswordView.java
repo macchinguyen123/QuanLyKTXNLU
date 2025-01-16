@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class PasswordView extends JFrame {
     private JPasswordField passwordField;
-    private JButton confirmButton, backButton;
+    private JButton confirmButton;
 
     public PasswordView() {
         setTitle("Admin Login");
@@ -35,25 +35,6 @@ public class PasswordView extends JFrame {
         topLeftPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         topLeftPanel.setOpaque(false);
 
-        ImageIcon backIcon = new ImageIcon("src/img/arrow-back-icon.png"); // Đường dẫn đến file hình ảnh
-        Image scaledBackIcon = backIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH); // Điều chỉnh kích thước
-        backButton = new JButton(backIcon);
-        backButton.setIcon(new ImageIcon(scaledBackIcon));
-        backButton.setText(null);
-        backButton.setContentAreaFilled(false);
-        backButton.setBorderPainted(false);
-        backButton.setFocusPainted(false);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Đóng cửa sổ PasswordView
-                Home home = new Home(); // Tạo cửa sổ Home
-                home.setVisible(true); // Hiển thị cửa sổ Home
-            }
-        });
-
-
-        topLeftPanel.add(backButton);
         backgroundPanel.add(topLeftPanel, BorderLayout.NORTH);
 
         // Main content in the center

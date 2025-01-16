@@ -34,7 +34,7 @@ public class Controller {
         });
     }
 
-    private void openMainView() {
+    public void openMainView() {
         passwordModel = new Model();
         mainView = new View();
 
@@ -49,7 +49,7 @@ public class Controller {
         mainView.setVisible(true);
     }
 
-    private void openStudentManagementView() {
+    public void openStudentManagementView() {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
         StudentController studentController = new StudentController(new StudentListView());
@@ -69,5 +69,30 @@ public class Controller {
         mainView.setVisible(false);
         studentView.setVisible(true);
     }
+    public void studentView() {
+        Model studentModel = new Model();
+        StudentView studentView = new StudentView();
+        StudentController studentController = new StudentController(new StudentListView());
+        MRegister mdsvDangKi = new MRegister();
+        VRegister g = new VRegister(mdsvDangKi);
+        View mainView = new View();
+
+        // Student View listeners
+        studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
+        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, mdsvDangKi, mainView));
+        studentView.getBtnBack().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                studentView.setVisible(false);
+                Model combinedModel = new Model();
+                PasswordView passwordView = new PasswordView();
+                Controller controller = new Controller(combinedModel, passwordView);
+                controller.openMainView();
+            }
+        });
+//        mainView.setVisible(false);
+        studentView.setVisible(true);
+    }
+
 
 }
