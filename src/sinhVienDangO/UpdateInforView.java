@@ -51,13 +51,20 @@ public class UpdateInforView extends JFrame {
         btnBack = new JButton("Quay lại");
         btnBack.setBounds(500, 620, 150, 40); // Dịch xuống và đặt ở giữa
         btnBack.setFont(new Font("Inter", Font.BOLD, 16));
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                studentListView.setVisible(true);
-            }
+//        btnBack.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                setVisible(false);
+//                studentListView.setVisible(true);
+//            }
+//        });
+        btnBack.addActionListener(e -> {
+            StudentListView listView = StudentListView.getInstance();
+            listView.setController(studentController); // Đảm bảo đồng bộ danh sách
+            listView.setVisible(true);
+           setVisible(false); // Đóng giao diện hiện tại
         });
+
 
         s2 = new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0, 200);
 

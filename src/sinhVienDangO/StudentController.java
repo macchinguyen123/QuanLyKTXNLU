@@ -5,6 +5,7 @@ import sinhVienDangKy.TakeData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class StudentController {
@@ -89,6 +90,22 @@ public class StudentController {
             }
         }
     }
+
+    public boolean removeStudentById(String studentID) {
+        // Lọc sinh viên có MSSV tương ứng
+        for (Student student : students) {
+            if (student.getMssv().equals(studentID)) {
+                students.remove(student); // Xóa sinh viên khỏi danh sách
+                return true; // Xóa thành công
+            }
+        }
+        return false; // Không tìm thấy sinh viên
+    }
+
+//    public void removeStudentById(String studentID) {
+//        students.removeIf(student -> student.getMssv().equals(studentID));
+//    }
+
 
     private class menuAction implements ActionListener {
         @Override

@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class BiographyView extends JFrame {
     private JMenuItem menuExit, menuManage, roomManage;
     JMenu manageMenu, exitMenu;
-    JButton btnUpdate, btnBack;
+    JButton btnUpdate, btnBack,btnRemoveRoom;
     JPanel mainPanel, inforStudentPanel;
     JLabel labelName, labelBY, labelID, labelGender, labelPhoneNumber, labelAddress, labelDorm, labelRoom, labelIDCard;
     StudentListView parentView;
@@ -87,6 +87,22 @@ public class BiographyView extends JFrame {
         inforStudentPanel.add(Box.createVerticalStrut(20));
         inforStudentPanel.add(btnUpdate);
 
+        // Nút xóa phòng
+        btnRemoveRoom = new JButton("Trả phòng");
+        btnRemoveRoom.setBackground(new Color(255, 69, 0));
+        btnRemoveRoom.setForeground(Color.WHITE);
+        btnRemoveRoom.setFont(new Font("Arial", Font.BOLD, 18));
+        btnRemoveRoom.setPreferredSize(new Dimension(200, 40));
+        btnRemoveRoom.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnRemoveRoom.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeRoom();
+            }
+        });
+        inforStudentPanel.add(Box.createVerticalStrut(20));
+        inforStudentPanel.add(btnRemoveRoom);
+
         // Nút quay về
         btnBack = new JButton("Quay về");
         btnBack.setBackground(new Color(153, 0, 0));
@@ -119,6 +135,55 @@ public class BiographyView extends JFrame {
 
         add(backgroundImage);
     }
+
+    private void removeRoom() {
+        // Lấy MSSV từ label hiển thị
+        String studentID = labelID.getText().replace("MSSV: ", "").trim();
+
+        // Xác nhận xóa
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Bạn có chắc chắn muốn trả phòng cho sinh viên có MSSV: " + studentID + "?",
+                "Xác nhận trả phòng",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Khởi tạo lại parentView và Controller nếu bị null
+            if (parentView == null) {
+                parentView = new StudentListView(); // Khởi tạo StudentListView
+            }
+
+            if (parentView.getController() == null) {
+                parentView.setController(new StudentController(parentView)); // Khởi tạo StudentController
+            }
+
+            // Xóa sinh viên thông qua controller
+            boolean isRemoved = parentView.getController().removeStudentById(studentID);
+            if (isRemoved) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Đã trả phòng cho sinh viên có MSSV: " + studentID
+                );
+
+                // Xóa sinh viên khỏi bảng JTable ở StudentListView
+                parentView.removeStudentFromTable(studentID);
+
+                this.setVisible(false);
+                parentView.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Không thể trả phòng. Vui lòng kiểm tra lại.",
+                        "Lỗi",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        }
+    }
+
+
+
 
     public void setStudentDetails(String name, String birthYear, String id, String gender,
                                   String faculty, String address, String dorm, String room, String idCard) {
