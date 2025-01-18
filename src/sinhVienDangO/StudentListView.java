@@ -22,6 +22,7 @@ public class StudentListView extends JFrame {
 
     private StudentController controller;
     private Map<String, Student> studentMap;
+    private static StudentListView instance;
 
     public StudentListView() {
         setTitle("Quản Lý Sinh Viên");
@@ -137,12 +138,21 @@ public class StudentListView extends JFrame {
         add(backgroundImage);
     }
 
+    // Phương thức để lấy instance duy nhất của StudentListView
+    public static StudentListView getInstance() {
+        if (instance == null) {
+            instance = new StudentListView();
+        }
+        return instance;
+    }
+
     public StudentController getController() {
         return controller;
     }
 
     public void setController(StudentController controller) {
         this.controller = controller;
+        updateStudentList(controller.getStudents());
     }
 
     public JTextField getSearchField() {
@@ -224,6 +234,7 @@ public class StudentListView extends JFrame {
         StudentController studentController = new StudentController(StudentListView.this);
         StudentListView studentListView = new StudentListView();
         studentListView.setController(studentController);
+
         String search = txtSearch.getText().trim();
 
         if (search.isEmpty()) {
@@ -240,5 +251,39 @@ public class StudentListView extends JFrame {
             updateStudentList(result); // Hiển thị danh sách kết quả tìm kiếm
         }
     }
+
+    public void removeStudentFromTable(String studentID) {
+        // Duyệt qua bảng để tìm và xóa sinh viên theo MSSV
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            String id = tableModel.getValueAt(i, 2).toString(); // Lấy MSSV từ cột 2
+            if (id.equals(studentID)) {
+                // Xóa dòng khỏi JTable
+                tableModel.removeRow(i);
+
+                // Xóa sinh viên khỏi Map
+                studentMap.remove(studentID);
+
+                // Xóa sinh viên khỏi danh sách trong StudentController
+                if (controller != null) {
+                    controller.removeStudentById(studentID);
+                }
+
+                // Cập nhật lại thứ tự (STT) trong bảng
+                updateTableSTT();
+
+                // Debug: In danh sách sinh viên còn lại
+                System.out.println("Danh sách sau khi xóa: " + controller.getStudents());
+                break;
+            }
+        }
+    }
+
+    private void updateTableSTT() {
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            // Cập nhật lại giá trị STT theo thứ tự hàng
+            tableModel.setValueAt(row + 1, row, 0); // Cột 0 là cột STT
+        }
+    }
+
 
 }
