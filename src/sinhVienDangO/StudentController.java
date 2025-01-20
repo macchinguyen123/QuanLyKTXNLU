@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class StudentController {
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
     private List<String[]> data1 = new ArrayList<>();
     private StudentListView view;
     public TakeData layDuLieuSV;
@@ -92,8 +92,8 @@ public class StudentController {
     }
 
     public boolean removeStudentById(String studentID) {
-        // Lọc sinh viên có MSSV tương ứng
-        for (Student student : students) {
+        List<Student> stu = getStudents(); // Lấy danh sách sinh viên
+        for (Student student : stu) {
             if (student.getMssv().equals(studentID)) {
                 students.remove(student); // Xóa sinh viên khỏi danh sách
                 return true; // Xóa thành công
@@ -101,11 +101,6 @@ public class StudentController {
         }
         return false; // Không tìm thấy sinh viên
     }
-
-//    public void removeStudentById(String studentID) {
-//        students.removeIf(student -> student.getMssv().equals(studentID));
-//    }
-
 
     private class menuAction implements ActionListener {
         @Override
