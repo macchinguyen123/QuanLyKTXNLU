@@ -16,9 +16,6 @@ public class HomeLass extends  JFrame {
     List<String> selectedAttributes;
     MRegister mdsvDangKi = new MRegister();
     String currentMSSV; // thêm biến currentMSSV
-    SVLoginOrSignIn studentPanel;
-    PanelLogin pageLogin;
-    PanelTTCNcuaSVDaO pageTTCNcuaSVDaO;
     PanelChooseRoom chooseRoom;
     PanelHeaderOfHome header;
     ThongTinChonPhong thongTinChonPhong;
@@ -46,7 +43,7 @@ public class HomeLass extends  JFrame {
         header = new PanelHeaderOfHome(cardPanel, cardLayout,this);
 
         thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
-        fillInformatinDK = new PanelFillInformatinDK(cardPanel, cardLayout, pageTTCNcuaSVDaO, mdsvDangKi, listSaveTaiKhoan, currentMSSV, chooseRoom,this);
+        fillInformatinDK = new PanelFillInformatinDK(cardPanel, cardLayout, mdsvDangKi, listSaveTaiKhoan, currentMSSV, chooseRoom,this);
         dangKiTaiKhoanSV = new PanelDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
 
 //        cardPanel.add(studentPanel, "studentPanel");
