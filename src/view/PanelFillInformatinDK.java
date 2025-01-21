@@ -38,7 +38,7 @@ public class PanelFillInformatinDK extends JPanel {
     String[] listKhoa = {"Công nghệ thông tin","Chăn nuôi thú y","Cơ khí","Khoa học sinh học","Thủy sản","Nông học"};
     HomeLass parentFrame;
 
-    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, PanelTTCNcuaSVDaO pageTTCN, MRegister tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV, PanelChooseRoom chooseRoom, HomeLass homeLass) {
+    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, MRegister tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV, PanelChooseRoom chooseRoom, HomeLass homeLass) {
         this.parentFrame = homeLass;
         this.tableModel = tableModel;
         this.listSaveTaiKhoan = listSaveTaiKhoan;
