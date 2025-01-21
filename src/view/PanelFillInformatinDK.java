@@ -87,28 +87,31 @@ public class PanelFillInformatinDK extends JPanel {
                 if (allFieldsFilled()) {
                     saveData();
                     JOptionPane.showMessageDialog(mainPanel, "Đăng ký thành công!");
+
                     // Cập nhật thông tin vào giao diện
-//                    pageTTCN.updateInformation(storage.getStudentData().get(0).getMssv());
-//                    tableModel.addStudent(data);
+                    // pageTTCN.updateInformation(storage.getStudentData().get(0).getMssv());
+                    // tableModel.addStudent(data);
                     clearFields();
+
                     // Xóa tài khoản đăng nhập hiện tại khỏi danh sách
                     listSaveTaiKhoan.removeIf(account -> account.get("Mã số sinh viên").equals(currentMSSV));
 
-//                    cardLayout.show(cardPanel, "dangKiTaiKhoanSV");
+                    // Chuyển sang giao diện khác
+                    if (parentFrame != null) {
+                        parentFrame.dispose(); // Đóng JFrame Home
+                    }
+                    Model passwordModel = new Model();
+                    PasswordView passwordView = new PasswordView();
+                    Controller controller = new Controller(passwordModel, passwordView);
+                    MRegister mRegister = new MRegister();
+                    VRegister vRegister = new VRegister(mRegister);
+                    CRegister cRegister = new CRegister(mRegister, vRegister);
+                    vRegister.setVisible(true);
+                    setVisible(false);
                 } else {
+                    // Hiển thị thông báo lỗi khi thông tin chưa đủ
                     JOptionPane.showMessageDialog(mainPanel, "Vui lòng điền đủ thông tin!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
-                if (parentFrame != null) {
-                    parentFrame.dispose(); // Đóng JFrame Home
-                }
-                Model passwordModel = new Model();
-                PasswordView passwordView = new PasswordView();
-                Controller controller = new Controller(passwordModel,passwordView);
-                MRegister mRegister = new MRegister();
-                VRegister vRegister = new VRegister(mRegister);
-                CRegister cRegister = new CRegister(mRegister, vRegister);
-                vRegister.setVisible(true);
-                setVisible(false);
             }
         });
 
