@@ -255,49 +255,4 @@ public class StudentListView extends JFrame {
         }
     }
 
-public void removeStudentFromTable(String studentID) {
-    boolean found = false; // Biến để kiểm tra xem sinh viên có được tìm thấy không
-
-    // Duyệt qua bảng để tìm và xóa sinh viên theo MSSV
-    for (int i = 0; i < tableModel.getRowCount(); i++) {
-        String id = tableModel.getValueAt(i, 2).toString(); // Lấy MSSV từ cột 2
-        if (id.equals(studentID)) {
-            // Xóa dòng khỏi JTable
-            tableModel.removeRow(i);
-            found = true; // Đánh dấu rằng sinh viên đã được tìm thấy
-
-            // Xóa sinh viên khỏi Map
-            studentMap.remove(studentID);
-
-            // Xóa sinh viên khỏi danh sách trong StudentController
-            if (controller != null) {
-                controller.removeStudentById(studentID);
-            }
-
-            // Cập nhật lại thứ tự (STT) trong bảng
-            updateTableSTT();
-
-            // Debug: In danh sách sinh viên còn lại
-            System.out.println("Danh sách sau khi xóa: " + controller.getStudents());
-            break; // Thoát khỏi vòng lặp sau khi xóa
-        }
-    }
-
-    // Thông báo cho người dùng
-    if (found) {
-        JOptionPane.showMessageDialog(this, "Sinh viên đã được xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        JOptionPane.showMessageDialog(this, "Không tìm thấy sinh viên để xóa!", "Thông báo", JOptionPane.ERROR_MESSAGE);
-    }
-}
-
-
-    public void updateTableSTT() {
-        for (int row = 0; row < tableModel.getRowCount(); row++) {
-            // Cập nhật lại giá trị STT theo thứ tự hàng
-            tableModel.setValueAt(row + 1, row, 0); // Cột 0 là cột STT
-        }
-    }
-
-
 }
