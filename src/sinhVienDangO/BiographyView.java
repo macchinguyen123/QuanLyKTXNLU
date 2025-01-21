@@ -174,11 +174,6 @@ public class BiographyView extends JFrame {
                         "Đã trả phòng cho sinh viên có MSSV: " + studentID
                 );
 
-                // Xóa sinh viên khỏi JTable
-//                parentView.removeStudentFromTable(studentID);
-//                parentView.updateStudentList(parentView.getController().getStudents());
-
-
                 // Đóng cửa sổ hiện tại và quay lại danh sách
                 this.setVisible(false);
                 parentView.setVisible(true);
