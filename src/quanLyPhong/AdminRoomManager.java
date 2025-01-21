@@ -7,9 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class AdminRoomManagerView extends JFrame {
+public class AdminRoomManager extends JFrame {
     private JList<String> maleDormitoryList;
     private JList<String> femaleDormitoryList;
     private DefaultListModel<String> maleDormitoryModel;
@@ -21,7 +20,7 @@ public class AdminRoomManagerView extends JFrame {
     private String dormitoryName;
     private DormitoryDataManager dataManager;
 
-    public AdminRoomManagerView() {
+    public AdminRoomManager() {
         setTitle("Quản Lý Cư Xá");
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -153,7 +152,7 @@ public class AdminRoomManagerView extends JFrame {
                 dormitoryName = selectedDormitory.split(" -")[0];
                 rooms = dormitoryData.get(dormitoryName);
                 if (rooms != null) {
-                    new DormitoryDetailsView(dormitoryName, rooms).setVisible(true);
+                    new DormitoryDetails(dormitoryName, rooms).setVisible(true);
                     setVisible(false);
                 }
             } else {
@@ -199,30 +198,10 @@ public class AdminRoomManagerView extends JFrame {
     }
 
 
-    private List<Room> filterRoomsByGender(String dormitoryName) {
-        String gender = getDormitoryGender(dormitoryName);
-        return dormitoryData.get(dormitoryName).stream()
-                .filter(room -> {
-                    String roomGender = getDormitoryGender(dormitoryName);
-                    return roomGender.equalsIgnoreCase(gender);
-                })
-                .collect(Collectors.toList());
-    }
-
-
-
     public JButton getBackButton() {
         return backButton;
     }
 
-
-    public String getDormitoryGender(String dormitoryName) {
-        if (dormitoryName.equals("B") || dormitoryName.equals("D") || dormitoryName.equals("E")) {
-            return "Nữ"; // Cư xá nữ
-        } else {
-            return "Nam"; // Cư xá nam
-        }
-    }
 
 
 }
