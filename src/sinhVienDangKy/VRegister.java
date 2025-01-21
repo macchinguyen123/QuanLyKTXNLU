@@ -78,17 +78,19 @@ public class VRegister extends JFrame {
 //        menuBar.add(fileMenu);
 //        setJMenuBar(menuBar);
 
-        // Thanh tìm kiếm (di chuyển lên trên)
+        // Thanh tìm kiếm (di chuyển lên trên, điều chỉnh vị trí)
         filterField = new JTextField();
-        filterField.setBounds(50, 20, 300, 30);
+        filterField.setBounds(50, 20, 500, 30); // Giữ nguyên vị trí
         mainPanel.add(filterField);
 
+// Nút "Lọc" - Điều chỉnh vị trí
         filterButton = new JButton("Lọc");
-        filterButton.setBounds(400, 20, 80, 30);
+        filterButton.setBounds(570, 20, 80, 30); // Di chuyển sát bên cạnh filterField
         mainPanel.add(filterButton);
 
+// Nút "Thêm Sinh Viên" - Điều chỉnh vị trí
         add = new JButton("Thêm Sinh Viên");
-        add.setBounds(520, 20, 100, 30);
+        add.setBounds(670, 20, 150, 30); // Tăng kích thước nút để cân đối hơn
         mainPanel.add(add);
         add.addActionListener(new ActionListener() {
             @Override
