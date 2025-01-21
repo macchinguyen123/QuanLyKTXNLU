@@ -7,11 +7,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class DormitoryDetailsView extends JFrame {
+public class DormitoryDetails extends JFrame {
     private JTable roomTable; // Bảng hiển thị thông tin phòng
     private DormitoryDataManager dataManager; // Quản lý dữ liệu ký túc xá
 
-    public DormitoryDetailsView(String dormitoryName, List<Room> rooms) {
+    public DormitoryDetails(String dormitoryName, List<Room> rooms) {
         setTitle("Chi Tiết Cư Xá Cư Xá " + dormitoryName);
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,7 +54,7 @@ public class DormitoryDetailsView extends JFrame {
     }
 
     private void populateTable(JPanel mainPanel, List<Room> rooms) {
-        String[] columnNames = {"Số Phòng", "Loại Phòng", "Số Chỗ Trống", "Tổng Số Chỗ"};
+        String[] columnNames = {"Số Phòng", "Loại Phòng", "Số Chỗ Trống", "Tổng Số Chỗ", "Nhập Chỉ Số"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
         for (Room room : rooms) {
@@ -62,25 +62,49 @@ public class DormitoryDetailsView extends JFrame {
                     room.getRoomNumber(),
                     room.getRoomType(),
                     room.getCurrentOccupancy(),
-                    room.getCapacity()
+                    room.getCapacity(),
+                    "Nhập"
             });
         }
 
-        roomTable = new JTable(tableModel);
+        roomTable = new JTable(tableModel) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 4; // Chỉ cho phép chỉnh sửa cột "Nhập Chỉ Số"
+            }
+        };
         roomTable.setFont(new Font("Arial", Font.PLAIN, 20));
         roomTable.setRowHeight(40);
         roomTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 22));
+// Thêm nút vào cột "Nhập Chỉ Số"
+        roomTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRendererNhap());
+        roomTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditorNhap(new JButton(), rooms));
+
 
         JScrollPane scrollPane = new JScrollPane(roomTable);
         scrollPane.setBounds(50, 80, 800, 430);
         mainPanel.add(scrollPane);
 
         dataManager = new DormitoryDataManager();
+        roomTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JTextField()) {
+            @Override
+            public boolean stopCellEditing() {
+                int selectedRow = roomTable.getSelectedRow();
+                Room selectedRoom = rooms.get(selectedRow);
+                InputDialog.showElectricityInputDialog(selectedRoom.getRoomNumber(), selectedRoom);
+                return super.stopCellEditing();
+            }
+        });
+
         roomTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = roomTable.getSelectedRow();
-                if (selectedRow != -1) {
+                int selectedColumn = roomTable.columnAtPoint(e.getPoint());
+
+                if (selectedColumn == 4) { // Nếu cột "Nhập Chỉ Số" được nhấn
+                    String roomNumber = tableModel.getValueAt(selectedRow, 0).toString();
+                } else if (selectedColumn != -1) { // Nếu nhấn các cột khác
                     String roomNumber = tableModel.getValueAt(selectedRow, 0).toString();
                     int availableSlots = Integer.parseInt(tableModel.getValueAt(selectedRow, 2).toString());
                     int totalSlots = Integer.parseInt(tableModel.getValueAt(selectedRow, 3).toString());
@@ -98,7 +122,7 @@ public class DormitoryDetailsView extends JFrame {
         backButton.setBounds(600, 550, 150, 40);
         backButton.addActionListener(e -> {
             this.setVisible(false);
-            new AdminRoomManagerView().setVisible(true);
+            new AdminRoomManager().setVisible(true);
         });
         mainPanel.add(backButton);
 
@@ -106,12 +130,13 @@ public class DormitoryDetailsView extends JFrame {
         paymentButton.setFont(new Font("Arial", Font.BOLD, 18));
         paymentButton.setBounds(100, 550, 400, 40);
         paymentButton.addActionListener(e -> {
-            PaymentDetailsView paymentDetailsView = new PaymentDetailsView(rooms, this);
+            PaymentDetails paymentDetailsView = new PaymentDetails(rooms, this);
             paymentDetailsView.setVisible(true);
             this.setVisible(false);
         });
         mainPanel.add(paymentButton);
     }
+
 
     private void showRoomMembersDialog(String roomNumber, List<String> members) {
         JPanel panel = new JPanel();
@@ -132,3 +157,6 @@ public class DormitoryDetailsView extends JFrame {
         JOptionPane.showMessageDialog(this, panel, "Danh Sách Thành Viên", JOptionPane.INFORMATION_MESSAGE);
     }
 }
+
+
+

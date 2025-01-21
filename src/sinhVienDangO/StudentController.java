@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class StudentController {
-    private List<Student> students = new ArrayList<>();
+    private static List<Student> students = new ArrayList<>();
     private List<String[]> data1 = new ArrayList<>();
     private StudentListView view;
     public TakeData layDuLieuSV;
@@ -60,7 +60,7 @@ public class StudentController {
         return view;
     }
 
-    public List<Student> getStudents() {
+    public static List<Student> getStudents() {
         return students;
     }
 

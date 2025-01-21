@@ -1,6 +1,6 @@
 package sinhVienDangO;
 
-import quanLyPhong.AdminRoomManagerView;
+import quanLyPhong.AdminRoomManager;
 import quanLyPhong.Model;
 import sinhVienDangKy.MRegister;
 import sinhVienDangKy.SVDangKiTheHien;
@@ -90,7 +90,7 @@ public class View extends JFrame {
 
     // Mở giao diện Quản Lý Phòng
     private void openRoomManagerView() {
-        AdminRoomManagerView roomManagerView = new AdminRoomManagerView();
+        AdminRoomManager roomManagerView = new AdminRoomManager();
 
         // Xử lý quay lại từ giao diện quản lý phòng
         roomManagerView.getBackButton().addActionListener(new ActionListener() {
