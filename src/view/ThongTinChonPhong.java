@@ -68,7 +68,7 @@ public class ThongTinChonPhong extends JPanel {
         String selectedDorm = (String) dormBox.getSelectedItem();
 
         // Dữ liệu từ DormitoryDataManager
-        DormitoryDataManager dataManager = DormitoryDataManager.getInstance();
+        dataManager = DormitoryDataManager.getInstance();
         List<Room> rooms = dataManager.getRoomsByDormitory(selectedDorm);
 
         // Lọc danh sách phòng

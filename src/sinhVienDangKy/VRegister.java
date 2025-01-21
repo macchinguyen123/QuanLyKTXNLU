@@ -41,22 +41,6 @@ public class VRegister extends JFrame {
         backgroundImage.setBounds(0, 0, getWidth(), getHeight());
         setContentPane(backgroundImage); // Đặt nền ảnh làm nền chính
         backgroundImage.setLayout(null);
-//        addComponentListener(new ComponentAdapter() {
-//            @Override
-//            public void componentResized(ComponentEvent e) {
-//                // Lấy kích thước mới của JFrame
-//                int width = getWidth();
-//                int height = getHeight();
-//
-//                // Thay đổi kích thước ảnh theo JFrame
-//                Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-//                ImageIcon scaledIcon = new ImageIcon(scaledImage);
-//                backgroundImage.setIcon(scaledIcon);
-//
-//                // Đặt lại kích thước của JLabel
-//                backgroundImage.setBounds(0, 0, width, height);
-//            }
-//        });
 
         // Tạo panel chính
         mainPanel = new JPanel(null);
@@ -65,7 +49,6 @@ public class VRegister extends JFrame {
         backgroundImage.add(mainPanel);
 
         // Thanh menu
-//        JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         exitMenuItem = new JMenuItem("Exit");
         manageMenuItem = new JMenuItem("Quản Lý");
@@ -75,20 +58,18 @@ public class VRegister extends JFrame {
         fileMenu.add(roomManageMenuItem);
         fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
-//        menuBar.add(fileMenu);
-//        setJMenuBar(menuBar);
 
         // Thanh tìm kiếm (di chuyển lên trên, điều chỉnh vị trí)
         filterField = new JTextField();
         filterField.setBounds(50, 20, 500, 30); // Giữ nguyên vị trí
         mainPanel.add(filterField);
 
-// Nút "Lọc" - Điều chỉnh vị trí
+        // Nút "Lọc" - Điều chỉnh vị trí
         filterButton = new JButton("Lọc");
         filterButton.setBounds(570, 20, 80, 30); // Di chuyển sát bên cạnh filterField
         mainPanel.add(filterButton);
 
-// Nút "Thêm Sinh Viên" - Điều chỉnh vị trí
+        // Nút "Thêm Sinh Viên" - Điều chỉnh vị trí
         add = new JButton("Thêm Sinh Viên");
         add.setBounds(670, 20, 150, 30); // Tăng kích thước nút để cân đối hơn
         mainPanel.add(add);
