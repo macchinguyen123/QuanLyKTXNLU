@@ -4,8 +4,7 @@ import model.MRegister;
 import quanLyPhong.Model;
 import sinhVienDangO.Controller;
 import sinhVienDangO.PasswordView;
-import sinhVienDangO.Student;
-import sinhVienDangO.View;
+import model.Student;
 //import view.Home;
 import view.HomeLass;
 

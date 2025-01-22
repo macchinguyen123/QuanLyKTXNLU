@@ -1,23 +1,27 @@
-package sinhVienDangO;
+package model;
 
+import quanLyPhong.DormitoryDataManager;
+import quanLyPhong.Room;
 import sinhVienDangKy.TakeData;
+import sinhVienDangO.StudentListView;
+import sinhVienDangO.UpdateInforView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StudentController {
     private static List<Student> students = new ArrayList<>();
-    private List<String[]> data1 = new ArrayList<>();
-    private StudentListView view;
     public TakeData layDuLieuSV;
+    private Map<String, Student> studentMap = new HashMap<>();
 
-    public StudentController(StudentListView view) {
+    public StudentController() {
         this.students = new ArrayList<>();
         this.layDuLieuSV = TakeData.getInstances();
-        this.view = view;
         Student st1 = new Student("Nguyễn Văn A", "23130001", "Nam", "Công nghệ thông tin", "24/01/2005", "A", "A04", "Bình Định", "123456", "0987654321", "Kinh", "Con liệt sĩ, thương binh, bệnh binh");
         Student st2 = new Student("Nguyễn Thị B", "23130002", "Nữ", "Công nghệ sinh học", "20/05/2004", "D", "D10", "Tiền Giang", "234567", "0345678990", "Mông", "Gia đình đặc biệt khó khăn");
         Student st3 = new Student("Nguyễn Văn C", "23130003", "Nam", "Công nghệ thực phẩm", "02/10/2005", "C", "C02", "Long An", "341678", "0168390591", "Kinh", "");
@@ -42,8 +46,10 @@ public class StudentController {
             System.out.println(" ");
         }
 
-        this.view.addSearchActionListener(new searchAction());
-        this.view.addMenuActionListener(new menuAction());
+        for (Student student : students) {
+            studentMap.put(student.getMssv(), student);
+        }
+
     }
 
 
@@ -56,10 +62,6 @@ public class StudentController {
         return null;
     }
 
-    public StudentListView getView() {
-        return view;
-    }
-
     public static List<Student> getStudents() {
         return students;
     }
@@ -67,6 +69,40 @@ public class StudentController {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+    // Tim sinh vien theo mssv
+    public List<Student> searchStudentByMSSV(String mssv) {
+        List<Student> result = new ArrayList<>();
+        Student foundStu = studentMap.get(mssv.trim());
+        if (foundStu != null) {
+            result.add(foundStu);
+        }
+        return result;
+    }
+
+    // Cap nhat thong tin sinh vien
+    public void updateStudent(Student updatedStudent) {
+        if (updatedStudent == null || updatedStudent.getMssv() == null) {
+            throw new IllegalArgumentException("Thông tin sinh viên không hợp lệ!");
+        }
+        boolean isUpdated = false;
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getMssv().equals(updatedStudent.getMssv())) {
+                students.set(i, updatedStudent); // Cập nhật thông tin
+                isUpdated = true;
+                break;
+            }
+        }
+        if (!isUpdated) {
+            throw new IllegalArgumentException("Không tìm thấy sinh viên có MSSV: " + updatedStudent.getMssv());
+        }
+    }
+
+    // Xoa sinh vien
+    public boolean removeStudentById(String studentID) {
+        return students.removeIf(student -> student.getMssv().equals(studentID));
+    }
+
 
     public List<String> getStudentStrings() {
         List<String> studentStrings = new ArrayList<>();
@@ -76,60 +112,11 @@ public class StudentController {
         return studentStrings;
     }
 
-    public void openUpdateInforView(Student currentStudent) {
-        UpdateInforView updateView = new UpdateInforView(view, this, currentStudent);
-        updateView.setStudentDetails(currentStudent);
-        updateView.setVisible(true);
-    }
-
-    public void updateStudent(Student updatedStudent) {
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getMssv().equals(updatedStudent.getMssv())) {
-                students.set(i, updatedStudent); // Cập nhật thông tin
-                break;
-            }
+    public Student getStudentAtRow(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < students.size()) {
+            return students.get(rowIndex);
         }
-    }
-
-    public boolean removeStudentById(String studentID) {
-        List<Student> stu = getStudents(); // Lấy danh sách sinh viên
-        for (Student student : stu) {
-            if (student.getMssv().equals(studentID)) {
-                students.remove(student); // Xóa sinh viên khỏi danh sách
-                return true; // Xóa thành công
-            }
-        }
-        return false; // Không tìm thấy sinh viên
-    }
-
-    private class menuAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-        }
-    }
-
-    private class searchAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String query = view.getSearchQuery().trim();
-            List<Student> results = searchStudents(query);
-            view.updateStudentList(results);
-        }
-
-        private List<Student> searchStudents(String query) {
-            List<Student> result = new ArrayList<>();
-
-            for (Student s : students) {
-                if (s.getTen().toLowerCase().contains(query.toLowerCase())
-                        || s.getMssv().contains(query)
-                        || s.getKhoa().toLowerCase().contains(query.toLowerCase())) {
-                    result.add(s);
-                }
-            }
-            return result;
-        }
-
+        return null;
     }
 
 }

@@ -1,6 +1,5 @@
 package model;
 import sinhVienDangKy.StudentRepository;
-import sinhVienDangO.Student;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
