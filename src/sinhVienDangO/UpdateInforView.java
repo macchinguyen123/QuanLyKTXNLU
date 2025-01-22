@@ -1,5 +1,7 @@
 package sinhVienDangO;
 
+import model.Student;
+import model.StudentController;
 import quanLyPhong.DormitoryDataManager;
 import quanLyPhong.Room;
 
@@ -364,11 +366,6 @@ public class UpdateInforView extends JFrame {
 
         studentController.updateStudent(currentStudent);
 
-//        studentListView.updateStudentList(studentController.getStudents());
-        // Đồng bộ hóa lại danh sách sinh viên trong StudentListView
-//         if (studentListView != null) {
-//        studentListView.updateStudentList(studentController.getStudents()); // Cập nhật bảng với danh sách mới
-//    }
         JOptionPane.showMessageDialog(UpdateInforView.this, "Thông tin đã được cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 
         setVisible(false);

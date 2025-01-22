@@ -1,4 +1,4 @@
-package sinhVienDangO;
+package model;
 
 public class Student {
     private String ten, mssv, gioiTinh, khoa;

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class HomeLass extends  JFrame {
     private static Set<Map<String, String>> listSaveTaiKhoan = new HashSet<>();
-//    PanelChooseStudentOrManager mainPanel;
+    //    PanelChooseStudentOrManager mainPanel;
     CardLayout cardLayout;
     JPanel cardPanel;
     List<String> selectedAttributes;
@@ -18,10 +18,10 @@ public class HomeLass extends  JFrame {
     String currentMSSV; // thêm biến currentMSSV
     PanelChooseRoom chooseRoom;
     PanelHeaderOfHome header;
-    ThongTinChonPhong thongTinChonPhong;
+    PanelInformationChooseRoom thongTinChonPhong;
     PanelFillInformatinDK fillInformatinDK;
-//    PanelChooseStudentOrManager chooseStudentOrManager;
-    PanelDangKiTaiKhoan dangKiTaiKhoanSV;
+    //    PanelChooseStudentOrManager chooseStudentOrManager;
+    PanelRegisterAccount dangKiTaiKhoanSV;
     PanelHeaderOfHome headerPanel;
     Model model;
 
@@ -42,9 +42,9 @@ public class HomeLass extends  JFrame {
         chooseRoom = new PanelChooseRoom(cardPanel, cardLayout,this);
         header = new PanelHeaderOfHome(cardPanel, cardLayout,this);
 
-        thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
+        thongTinChonPhong = new PanelInformationChooseRoom(cardPanel, cardLayout, new ArrayList<>(chooseRoom.getSelectedAttributes()));
         fillInformatinDK = new PanelFillInformatinDK(cardPanel, cardLayout, mdsvDangKi, listSaveTaiKhoan, currentMSSV, chooseRoom,this);
-        dangKiTaiKhoanSV = new PanelDangKiTaiKhoan(cardPanel, cardLayout, listSaveTaiKhoan);
+        dangKiTaiKhoanSV = new PanelRegisterAccount(cardPanel, cardLayout, listSaveTaiKhoan);
 
 //        cardPanel.add(studentPanel, "studentPanel");
 //        cardPanel.add(pageLogin, "login");

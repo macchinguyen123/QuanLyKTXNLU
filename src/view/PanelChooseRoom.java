@@ -62,7 +62,7 @@ public class PanelChooseRoom extends JPanel {
                     return;
                 }
 
-                ThongTinChonPhong thongTinChonPhong = new ThongTinChonPhong(cardPanel, cardLayout, selectedAttributes);
+                PanelInformationChooseRoom thongTinChonPhong = new PanelInformationChooseRoom(cardPanel, cardLayout, selectedAttributes);
                 cardPanel.add(thongTinChonPhong, "thongTinChonPhong");
                 cardLayout.show(cardPanel, "thongTinChonPhong");
             }

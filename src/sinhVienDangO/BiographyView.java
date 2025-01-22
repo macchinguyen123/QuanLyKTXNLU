@@ -1,5 +1,8 @@
 package sinhVienDangO;
 
+import model.Student;
+import model.StudentController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +12,7 @@ import java.util.List;
 public class BiographyView extends JFrame {
     private JMenuItem menuExit, menuManage, roomManage;
     JMenu manageMenu, exitMenu;
-    JButton btnUpdate, btnBack,btnRemoveRoom;
+    JButton btnUpdate, btnBack, btnRemoveRoom;
     JPanel mainPanel, inforStudentPanel;
     JLabel labelName, labelBY, labelID, labelGender, labelPhoneNumber, labelAddress, labelDorm, labelRoom, labelIDCard;
     StudentListView parentView;
@@ -41,7 +44,6 @@ public class BiographyView extends JFrame {
 
         setJMenuBar(menuBar);
 
-        // Tạo một panel chính với layout BoxLayout
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.LIGHT_GRAY);
@@ -49,7 +51,7 @@ public class BiographyView extends JFrame {
         inforStudentPanel = new JPanel();
         inforStudentPanel.setPreferredSize(new Dimension(600, 500));
         inforStudentPanel.setLayout(new BoxLayout(inforStudentPanel, BoxLayout.PAGE_AXIS));
-        inforStudentPanel.setBackground(new Color(173, 216, 230)); // Màu nền giống như trong hình
+        inforStudentPanel.setBackground(new Color(173, 216, 230));
 
         // Tạo các JLabel cho thông tin sinh viên
         labelName = new JLabel("Họ và Tên: ");
@@ -62,13 +64,12 @@ public class BiographyView extends JFrame {
         labelRoom = new JLabel("Phòng: ");
         labelIDCard = new JLabel("CCCD: ");
 
-        // Thiết lập font và màu sắc cho các JLabel
         JLabel[] labels = {labelName, labelBY, labelID, labelGender, labelPhoneNumber, labelAddress, labelDorm, labelRoom, labelIDCard};
         for (JLabel label : labels) {
             label.setForeground(Color.BLACK);
             label.setFont(new Font("Arial", Font.BOLD, 18));
-            label.setAlignmentX(Component.CENTER_ALIGNMENT); // Căn giữa
-            inforStudentPanel.add(Box.createVerticalStrut(10)); // Khoảng cách giữa các nhãn
+            label.setAlignmentX(Component.CENTER_ALIGNMENT);
+            inforStudentPanel.add(Box.createVerticalStrut(10));
             inforStudentPanel.add(label);
         }
 
@@ -85,7 +86,7 @@ public class BiographyView extends JFrame {
                 updateInforSt();
             }
         });
-        inforStudentPanel.add(Box.createVerticalStrut(20)); // Khoảng cách trước nút
+        inforStudentPanel.add(Box.createVerticalStrut(20));
         inforStudentPanel.add(btnUpdate);
 
 // Nút xóa phòng
@@ -101,7 +102,7 @@ public class BiographyView extends JFrame {
                 removeRoom();
             }
         });
-        inforStudentPanel.add(Box.createVerticalStrut(20)); // Khoảng cách trước nút
+        inforStudentPanel.add(Box.createVerticalStrut(20));
         inforStudentPanel.add(btnRemoveRoom);
 
 // Nút quay về
@@ -132,12 +133,12 @@ public class BiographyView extends JFrame {
         Image scaledImage = originalIcon.getImage().getScaledInstance(900, 700, Image.SCALE_SMOOTH);
         JLabel backgroundImage = new JLabel(new ImageIcon(scaledImage));
         backgroundImage.setBounds(0, 0, 900, 700);
-        backgroundImage.setLayout(new GridBagLayout()); // Đặt layout là GridBagLayout để căn giữa
+        backgroundImage.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0; // Cột giữa
-        gbc.gridy = 0; // Hàng giữa
-        gbc.anchor = GridBagConstraints.CENTER; // Căn bên trái
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
         backgroundImage.add(inforStudentPanel, gbc);
 
         add(backgroundImage);
@@ -150,18 +151,17 @@ public class BiographyView extends JFrame {
         // Xác nhận xóa
         int confirm = JOptionPane.showConfirmDialog(
                 this,
-                "Bạn có chắc chắn muốn trả phòng cho sinh viên có MSSV: " + studentID + "?",
-                "Xác nhận trả phòng",
+                "Bạn có chắc chắn muốn xóa sinh viên có MSSV: " + studentID + " ra khỏi kí túc xá",
+                "Xác nhận xóa sinh viên",
                 JOptionPane.YES_NO_OPTION
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
-            // Đảm bảo `parentView` và `controller` không bị null
             if (parentView == null) {
                 parentView = StudentListView.getInstance(); // Lấy instance của StudentListView
             }
             if (parentView.getController() == null) {
-                parentView.setController(new StudentController(parentView)); // Khởi tạo controller
+                parentView.setController(new StudentController()); // Khởi tạo controller
             }
 
             // Gọi phương thức xóa sinh viên trong controller
@@ -171,7 +171,7 @@ public class BiographyView extends JFrame {
                 parentView.updateStudentList(students);
                 JOptionPane.showMessageDialog(
                         this,
-                        "Đã trả phòng cho sinh viên có MSSV: " + studentID
+                        "Đã xóa sinh viên có MSSV: " + studentID + "."
                 );
 
                 // Đóng cửa sổ hiện tại và quay lại danh sách
@@ -180,16 +180,13 @@ public class BiographyView extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(
                         this,
-                        "Không thể trả phòng. Vui lòng kiểm tra lại.",
+                        "Không thể xóa sinh viên. Vui lòng kiểm tra lại.",
                         "Lỗi",
                         JOptionPane.ERROR_MESSAGE
                 );
             }
         }
     }
-
-
-
 
     public void setStudentDetails(String name, String birthYear, String id, String gender,
                                   String faculty, String address, String dorm, String room, String idCard) {
@@ -204,33 +201,17 @@ public class BiographyView extends JFrame {
         labelIDCard.setText("CCCD: " + idCard);
     }
 
-    public void displayStudentDetails(Student student) {
-        labelName.setText("Họ và Tên: " + student.getTen());
-        labelBY.setText("Năm sinh: " + student.getNamSinh());
-        labelID.setText("MSSV: " + student.getMssv());
-        labelGender.setText("Giới tính: " + student.getGioiTinh());
-        labelPhoneNumber.setText("SĐT: " + student.getSđt());
-        labelAddress.setText("HKTT: " + student.getDiaChi());
-        labelDorm.setText("Cư xá: " + student.getCuXa());
-        labelRoom.setText("Phòng: " + student.getPhong());
-        labelIDCard.setText("CCCD: " + student.getIdCCCD());
-    }
-
     private void updateInforSt() {
         // Lấy ID sinh viên từ view hiện tại
         String studentID = labelID.getText().replace("MSSV: ", "").trim(); // Trích xuất ID từ label
 
         // Lấy thông tin sinh viên từ controller
-        StudentController controller = new StudentController(parentView);
-        StudentListView studentListView = new StudentListView();
-        studentListView.setController(controller);
-        Student student = studentListView.getController().getStudentById(studentID);
+        Student student = parentView.getController().getStudentById(studentID);
         if (student != null) {
-            // Tạo một instance của UpdateInforView
-            UpdateInforView updateView = new UpdateInforView(parentView, controller, student);
+            UpdateInforView updateView = new UpdateInforView(parentView, parentView.getController(), student);
             updateView.setStudentDetails(student); // Đặt thông tin sinh viên vào UpdateInforView
-            updateView.setVisible(true); // Hiển thị UpdateInforView
-            dispose(); // Đóng BiographyView
+            updateView.setVisible(true);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên với ID: " + studentID);
         }
