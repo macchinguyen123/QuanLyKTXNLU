@@ -2,10 +2,8 @@ package quanLyPhong;
 
 import java.util.*;
 
-import javax.swing.JLabel;
-
-import sinhVienDangO.Student;
-import sinhVienDangO.StudentController;
+import model.Student;
+import model.StudentController;
 
 public class DormitoryDataManager {
     private List<String> roomData;

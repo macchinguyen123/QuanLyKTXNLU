@@ -1,5 +1,8 @@
 package sinhVienDangO;
 
+import model.Student;
+import model.StudentController;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -20,8 +23,7 @@ public class StudentListView extends JFrame {
 
     private JMenuItem menuExit, menuManage, roomManage;
 
-    private StudentController controller;
-    private Map<String, Student> studentMap;
+    private StudentController controller = new StudentController();
     private static StudentListView instance;
 
     public StudentListView() {
@@ -185,7 +187,6 @@ public class StudentListView extends JFrame {
 
     public void updateStudentList(List<Student> students) {
         tableModel.setRowCount(0); // Xóa dữ liệu cũ trong bảng
-        studentMap = new HashMap<>();
         int stt = 1;
         for (Student student : students) {
             tableModel.addRow(new Object[]{
@@ -200,10 +201,7 @@ public class StudentListView extends JFrame {
                     student.getDiaChi(),          // Địa chỉ
                     student.getIdCCCD(),          // CCCD
             });
-            studentMap.put(student.getMssv(), student);
         }
-        // Làm mới bảng
-        tableModel.fireTableDataChanged();
     }
 
 
@@ -211,7 +209,7 @@ public class StudentListView extends JFrame {
         // Lấy thông tin mới nhất từ StudentController
         Student updatedStudent = controller.getStudentById(selectedStudent.getMssv());
         if (updatedStudent != null) {
-            UpdateInforView updateDetailView = new UpdateInforView(this, controller, selectedStudent);
+            UpdateInforView updateDetailView = new UpdateInforView(this, controller, updatedStudent);
             updateDetailView.setStudentDetails(updatedStudent);
         }
     }
@@ -219,25 +217,14 @@ public class StudentListView extends JFrame {
     public void studentTableMouseClicked(MouseEvent e) {
         int selectedRow = studentTable.getSelectedRow();
         if (selectedRow != -1) {
-            Student selectedStudent = controller.getStudents().get(selectedRow);
-            onStudentSelected(selectedStudent);
+            Student selectedStudent = controller.getStudentAtRow(selectedRow);
+            if(selectedStudent != null) {
+                onStudentSelected(selectedStudent);
+            }
         }
-    }
-
-    private List<Student> searchStudentByMSSV(String mssv) {
-        List<Student> result = new ArrayList<>();
-        Student foundStu = studentMap.get(mssv.trim());
-        if(foundStu != null) {
-            result.add(foundStu);
-        }
-        return result;
     }
 
     private  void handleSearchAction(){
-        StudentController studentController = new StudentController(StudentListView.this);
-        StudentListView studentListView = new StudentListView();
-        studentListView.setController(studentController);
-
         String search = txtSearch.getText().trim();
 
         if (search.isEmpty()) {
@@ -245,11 +232,11 @@ public class StudentListView extends JFrame {
             return;
         }
 
-        List<Student> result = searchStudentByMSSV(search);
+        List<Student> result = controller.searchStudentByMSSV(search);
 
         if (result.isEmpty()) {
-            JOptionPane.showMessageDialog(StudentListView.this, "Không tìm thấy sinh viên với mã số: " + search, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            updateStudentList(studentController.getStudents()); // Hiển thị lại danh sách sinh viên ban đầu
+            JOptionPane.showMessageDialog(StudentListView.this, "Không tìm thấy sinh viên với mã số " + search, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            updateStudentList(controller.getStudents()); // Hiển thị lại danh sách sinh viên ban đầu
         } else {
             updateStudentList(result); // Hiển thị danh sách kết quả tìm kiếm
         }

@@ -1,6 +1,7 @@
 package sinhVienDangO;
 
 import model.MRegister;
+import model.StudentController;
 import quanLyPhong.Model;
 import sinhVienDangKy.VRegister;
 import sinhVienDangKy.SVDangKiTheHien;
@@ -52,7 +53,7 @@ public class Controller {
     public void openStudentManagementView() {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
-        StudentController studentController = new StudentController(new StudentListView());
+        StudentController studentController = new StudentController();
         MRegister mdsvDangKi = new MRegister();
         VRegister g = new VRegister(mdsvDangKi);
 
@@ -72,7 +73,7 @@ public class Controller {
     public void studentView() {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
-        StudentController studentController = new StudentController(new StudentListView());
+        StudentController studentController = new StudentController();
         MRegister mdsvDangKi = new MRegister();
         VRegister g = new VRegister(mdsvDangKi);
         View mainView = new View();
