@@ -1,6 +1,13 @@
 package sinhVienDangKy;
 
+import model.MRegister;
+import quanLyPhong.Model;
+import sinhVienDangO.Controller;
+import sinhVienDangO.PasswordView;
 import sinhVienDangO.Student;
+import sinhVienDangO.View;
+//import view.Home;
+import view.HomeLass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +19,7 @@ public class VRegister extends JFrame {
     private JTextField filterField;
     private JButton filterButton;
     private JButton backButton; // Nút Quay về
+    private JButton add; // Nút Quay về
     private JMenuItem exitMenuItem;
     private JMenuItem manageMenuItem;
     private JMenuItem roomManageMenuItem;
@@ -34,22 +42,6 @@ public class VRegister extends JFrame {
         backgroundImage.setBounds(0, 0, getWidth(), getHeight());
         setContentPane(backgroundImage); // Đặt nền ảnh làm nền chính
         backgroundImage.setLayout(null);
-//        addComponentListener(new ComponentAdapter() {
-//            @Override
-//            public void componentResized(ComponentEvent e) {
-//                // Lấy kích thước mới của JFrame
-//                int width = getWidth();
-//                int height = getHeight();
-//
-//                // Thay đổi kích thước ảnh theo JFrame
-//                Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-//                ImageIcon scaledIcon = new ImageIcon(scaledImage);
-//                backgroundImage.setIcon(scaledIcon);
-//
-//                // Đặt lại kích thước của JLabel
-//                backgroundImage.setBounds(0, 0, width, height);
-//            }
-//        });
 
         // Tạo panel chính
         mainPanel = new JPanel(null);
@@ -58,7 +50,6 @@ public class VRegister extends JFrame {
         backgroundImage.add(mainPanel);
 
         // Thanh menu
-//        JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         exitMenuItem = new JMenuItem("Exit");
         manageMenuItem = new JMenuItem("Quản Lý");
@@ -68,17 +59,30 @@ public class VRegister extends JFrame {
         fileMenu.add(roomManageMenuItem);
         fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
-//        menuBar.add(fileMenu);
-//        setJMenuBar(menuBar);
 
-        // Thanh tìm kiếm (di chuyển lên trên)
+        // Thanh tìm kiếm (di chuyển lên trên, điều chỉnh vị trí)
         filterField = new JTextField();
-        filterField.setBounds(200, 20, 400, 30);
+        filterField.setBounds(50, 20, 500, 30); // Giữ nguyên vị trí
         mainPanel.add(filterField);
 
+        // Nút "Lọc" - Điều chỉnh vị trí
         filterButton = new JButton("Lọc");
-        filterButton.setBounds(620, 20, 100, 30);
+        filterButton.setBounds(570, 20, 80, 30); // Di chuyển sát bên cạnh filterField
         mainPanel.add(filterButton);
+
+        // Nút "Thêm Sinh Viên" - Điều chỉnh vị trí
+        add = new JButton("Thêm Sinh Viên");
+        add.setBounds(670, 20, 150, 30); // Tăng kích thước nút để cân đối hơn
+        mainPanel.add(add);
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HomeLass home = new HomeLass();
+                home.setVisible(true);
+                setVisible(false);
+            }
+        });
+
 
         // Bảng danh sách
         studentTable = new JTable(mdsvDangKi);
@@ -125,7 +129,7 @@ public class VRegister extends JFrame {
                             public void actionPerformed(ActionEvent e) {
                                 setVisible(true);
                                 detailView.dispose();
-                                detailView=null;
+                                detailView = null;
                             }
                         });
                         detailView.getButtonXacNhan().addActionListener(new ActionListener() {
@@ -136,7 +140,7 @@ public class VRegister extends JFrame {
                                 mdsvDangKi.removeStudent(rowIndex);
                                 mdsvDangKi.removeStudentTimKiem(rowIndex);
                                 detailView.dispose();
-                                detailView=null;
+                                detailView = null;
                                 setVisible(true);
                             }
                         });
@@ -147,7 +151,7 @@ public class VRegister extends JFrame {
                                 mdsvDangKi.removeStudentTimKiem(rowIndex);
                                 mdsvDangKi.removeStudent(rowIndex);
                                 detailView.dispose();
-                                detailView=null;
+                                detailView = null;
                             }
                         });
                     }
@@ -188,6 +192,16 @@ public class VRegister extends JFrame {
         backButton.setFont(new Font("Arial", Font.BOLD, 14)); // Font chữ đậm
         backButton.setFocusPainted(false); // Loại bỏ viền khi chọn
         backButton.setBorder(BorderFactory.createLineBorder(new Color(200, 40, 50), 2, true)); // Viền bo tròn
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Model combinedModel = new Model();
+                PasswordView passwordView = new PasswordView();
+                Controller controller = new Controller(combinedModel, passwordView);
+                controller.studentView();
+                setVisible(false);
+            }
+        });
 
         mainPanel.add(backButton);
         setLocationRelativeTo(null);
@@ -208,9 +222,9 @@ public class VRegister extends JFrame {
         return filterButton;
     }
 
-    public JButton getBackButton() {
-        return backButton;
-    }
+//    public JButton getBackButton() {
+//        return backButton;
+//    }
 
     public JMenuItem getExitMenuItem() {
         return exitMenuItem;

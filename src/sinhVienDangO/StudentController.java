@@ -5,10 +5,11 @@ import sinhVienDangKy.TakeData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class StudentController {
-    private List<Student> students;
+    private static List<Student> students = new ArrayList<>();
     private List<String[]> data1 = new ArrayList<>();
     private StudentListView view;
     public TakeData layDuLieuSV;
@@ -59,7 +60,7 @@ public class StudentController {
         return view;
     }
 
-    public List<Student> getStudents() {
+    public static List<Student> getStudents() {
         return students;
     }
 
@@ -88,6 +89,17 @@ public class StudentController {
                 break;
             }
         }
+    }
+
+    public boolean removeStudentById(String studentID) {
+        List<Student> stu = getStudents(); // Lấy danh sách sinh viên
+        for (Student student : stu) {
+            if (student.getMssv().equals(studentID)) {
+                students.remove(student); // Xóa sinh viên khỏi danh sách
+                return true; // Xóa thành công
+            }
+        }
+        return false; // Không tìm thấy sinh viên
     }
 
     private class menuAction implements ActionListener {

@@ -170,6 +170,7 @@ public class VRegisterDetail extends JFrame {
         buttonXacNhan.setFont(new Font("Arial", Font.BOLD, 16)); // Font.BOLD làm chữ đậm, 16 là kích thước chữ
 
 
+
         buttonHuy = new JButton("Từ Chối");
         buttonHuy.setBounds(480, yStart + 20, 120, 40);
         buttonHuy.setBackground(Color.RED);

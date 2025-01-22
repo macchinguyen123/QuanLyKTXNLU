@@ -2,7 +2,9 @@ package sinhVienDangO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class StudentView extends JFrame {
     private JButton btnStudentList;
@@ -42,7 +44,6 @@ public class StudentView extends JFrame {
         btnStudentList.setHorizontalTextPosition(SwingConstants.CENTER); // Đặt text vào giữa theo chiều ngang
         btnStudentList.setVerticalTextPosition(SwingConstants.BOTTOM);   // Đặt text vào giữa theo chiều dọc
         btnStudentList.setIconTextGap(0); // Loại bỏ khoảng cách giữa text và ảnh
-
 
         ImageIcon icon1 = new ImageIcon("src/img/cong.jpg"); // Đường dẫn đến hình ảnh
         Image img1 = icon1.getImage().getScaledInstance(380, 120, Image.SCALE_SMOOTH); // Resize ảnh để vừa nút

@@ -22,6 +22,7 @@ public class StudentListView extends JFrame {
 
     private StudentController controller;
     private Map<String, Student> studentMap;
+    private static StudentListView instance;
 
     public StudentListView() {
         setTitle("Quản Lý Sinh Viên");
@@ -137,12 +138,21 @@ public class StudentListView extends JFrame {
         add(backgroundImage);
     }
 
+    // Phương thức để lấy instance duy nhất của StudentListView
+    public static StudentListView getInstance() {
+        if (instance == null) {
+            instance = new StudentListView();
+        }
+        return instance;
+    }
+
     public StudentController getController() {
         return controller;
     }
 
     public void setController(StudentController controller) {
         this.controller = controller;
+        updateStudentList(controller.getStudents());
     }
 
     public JTextField getSearchField() {
@@ -184,7 +194,7 @@ public class StudentListView extends JFrame {
                     student.getMssv(),            // Mã số
                     student.getGioiTinh(),        // Giới tính
                     student.getKhoa(),            // Khoa
-                    student.getNamSinh(),        // Năm sinh
+                    student.getNamSinh(),         // Năm sinh
                     student.getCuXa(),            // Cư xá
                     student.getPhong(),           // Phòng
                     student.getDiaChi(),          // Địa chỉ
@@ -192,7 +202,10 @@ public class StudentListView extends JFrame {
             });
             studentMap.put(student.getMssv(), student);
         }
+        // Làm mới bảng
+        tableModel.fireTableDataChanged();
     }
+
 
     public void onStudentSelected(Student selectedStudent) {
         // Lấy thông tin mới nhất từ StudentController
@@ -224,6 +237,7 @@ public class StudentListView extends JFrame {
         StudentController studentController = new StudentController(StudentListView.this);
         StudentListView studentListView = new StudentListView();
         studentListView.setController(studentController);
+
         String search = txtSearch.getText().trim();
 
         if (search.isEmpty()) {

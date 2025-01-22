@@ -1,5 +1,6 @@
 package sinhVienDangKy;
 
+import model.MRegister;
 import sinhVienDangO.StudentView;
 import sinhVienDangO.View;
 
@@ -25,10 +26,10 @@ public class SVDangKiTheHien implements ActionListener {
 
         view.setVisible(true);
         studentView.setVisible(false);
-        view.getBackButton().addActionListener(event -> {
-            view1.setVisible(true);
-            view.setVisible(false);
-        });
+//        view.getBackButton().addActionListener(event -> {
+//            view1.setVisible(true);
+//            view.setVisible(false);
+//        });
     }
 
 }

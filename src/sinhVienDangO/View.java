@@ -1,9 +1,7 @@
 package sinhVienDangO;
 
-import quanLyPhong.AdminRoomManagerView;
+import quanLyPhong.AdminRoomManager;
 import quanLyPhong.Model;
-import view.Home;
-import view.PanelChooseStudentOrManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +35,7 @@ public class View extends JFrame {
         // Xử lý sự kiện cho các menu item
         roomManageMenuItem.addActionListener(e -> openRoomManagerView());
         exitMenuItem.addActionListener(e -> showLogoutConfirmation());
+
     }
 
     // Cung cấp phương thức truy cập View hiện tại
@@ -86,7 +85,7 @@ public class View extends JFrame {
 
     // Mở giao diện Quản Lý Phòng
     private void openRoomManagerView() {
-        AdminRoomManagerView roomManagerView = new AdminRoomManagerView();
+        AdminRoomManager roomManagerView = new AdminRoomManager();
 
         // Xử lý quay lại từ giao diện quản lý phòng
         roomManagerView.getBackButton().addActionListener(new ActionListener() {

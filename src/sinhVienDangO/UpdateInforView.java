@@ -51,13 +51,33 @@ public class UpdateInforView extends JFrame {
         btnBack = new JButton("Quay lại");
         btnBack.setBounds(500, 620, 150, 40); // Dịch xuống và đặt ở giữa
         btnBack.setFont(new Font("Inter", Font.BOLD, 16));
+//        btnBack.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                setVisible(false);
+//                studentListView.setVisible(true);
+//            }
+//        });
+//        btnBack.addActionListener(e -> {
+//            StudentListView listView = StudentListView.getInstance();
+//            listView.setController(studentController); // Đảm bảo đồng bộ danh sách
+//            listView.setVisible(true);
+//           setVisible(false); // Đóng giao diện hiện tại
+//        });
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Làm mới danh sách sinh viên trong StudentListView
+                if (studentListView != null && studentListView.getController() != null) {
+                    List<Student> students = studentListView.getController().getStudents();
+                    studentListView.updateStudentList(students);
+                }
                 setVisible(false);
                 studentListView.setVisible(true);
             }
         });
+
+
 
         s2 = new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0, 200);
 
@@ -344,11 +364,15 @@ public class UpdateInforView extends JFrame {
 
         studentController.updateStudent(currentStudent);
 
+//        studentListView.updateStudentList(studentController.getStudents());
+        // Đồng bộ hóa lại danh sách sinh viên trong StudentListView
+//         if (studentListView != null) {
+//        studentListView.updateStudentList(studentController.getStudents()); // Cập nhật bảng với danh sách mới
+//    }
         JOptionPane.showMessageDialog(UpdateInforView.this, "Thông tin đã được cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 
-        studentListView.updateStudentList(studentController.getStudents());
-
         setVisible(false);
+        studentListView.updateStudentList(studentController.getStudents());
         studentListView.setVisible(true);
     }
 
