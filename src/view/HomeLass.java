@@ -1,7 +1,7 @@
 package view;
 
+import model.MRegister;
 import quanLyPhong.Model;
-import sinhVienDangKy.MRegister;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,8 +1,8 @@
 package sinhVienDangO;
 
+import model.MRegister;
 import quanLyPhong.Model;
 import sinhVienDangKy.VRegister;
-import sinhVienDangKy.MRegister;
 import sinhVienDangKy.SVDangKiTheHien;
 
 import java.awt.event.ActionEvent;

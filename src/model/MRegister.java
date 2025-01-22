@@ -1,5 +1,5 @@
-package sinhVienDangKy;
-
+package model;
+import sinhVienDangKy.StudentRepository;
 import sinhVienDangO.Student;
 
 import javax.swing.*;

@@ -1,6 +1,8 @@
 package sinhVienDangKy;
 
 
+import model.MRegister;
+
 import javax.swing.*;
 import javax.swing.table.TableModel;
 

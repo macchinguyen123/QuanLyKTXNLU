@@ -1,5 +1,7 @@
 package view;
 
+import model.MRegister;
+import model.StudentDataStorage;
 import quanLyPhong.Model;
 import sinhVienDangKy.*;
 import sinhVienDangO.Controller;

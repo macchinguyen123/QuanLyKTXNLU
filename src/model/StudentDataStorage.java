@@ -1,4 +1,4 @@
-package sinhVienDangKy;
+package model;
 
 import sinhVienDangO.Student;
 

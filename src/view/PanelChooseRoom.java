@@ -1,8 +1,8 @@
 package view;
 
+import model.MRegister;
 import quanLyPhong.Model;
 import sinhVienDangKy.CRegister;
-import sinhVienDangKy.MRegister;
 import sinhVienDangKy.VRegister;
 import sinhVienDangO.Controller;
 import sinhVienDangO.PasswordView;
