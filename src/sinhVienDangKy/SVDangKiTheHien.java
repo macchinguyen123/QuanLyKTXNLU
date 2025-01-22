@@ -1,5 +1,6 @@
 package sinhVienDangKy;
 
+import model.MRegister;
 import sinhVienDangO.StudentView;
 import sinhVienDangO.View;
 
