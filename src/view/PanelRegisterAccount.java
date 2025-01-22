@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class PanelDangKiTaiKhoan extends JPanel {
+public class PanelRegisterAccount extends JPanel {
     JPanel mainPanel;
     JLabel mssv, passwordLabel,labelDangKy,pp;
     JTextField mssvTextField;
@@ -18,7 +18,7 @@ public class PanelDangKiTaiKhoan extends JPanel {
     Set<Map<String, String>> listSaveTaiKhoan;
 
 
-    public PanelDangKiTaiKhoan(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
+    public PanelRegisterAccount(JPanel cardPanel, CardLayout cardLayout, Set<Map<String, String>> listSaveTaiKhoan) {
         this.listSaveTaiKhoan = listSaveTaiKhoan;
 
         mainPanel = new JPanel(new GridLayout(5, 2));
