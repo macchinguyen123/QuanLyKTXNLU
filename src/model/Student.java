@@ -130,4 +130,5 @@ public class Student {
     public boolean isPoorHousehold() {
         return this.dienChinhSach.equalsIgnoreCase("Gia đình đặc biệt khó khăn");
     }
+
 }
