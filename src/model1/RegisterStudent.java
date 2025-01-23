@@ -1,12 +1,18 @@
 package model1;
 
+import sinhVienDangKy.StudentRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
 public class RegisterStudent {
-    private List<Student> students;
+    private List<model.Student> students;
     public StudentDataStorage studentDataStorage;
     public TreeSet<Student> filteredTreeSet;
-    private List<Student> originalStudents;
+    private final List<model.Student> originalStudents = new ArrayList<model.Student>();
 
+    public RegisterStudent() {
+
+    }
 }

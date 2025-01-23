@@ -8,4 +8,6 @@ public class Manager {
         this.manageRoom = manageRoom;
         this.manageStudent = manageStudent;
     }
+
+
 }
