@@ -1,28 +1,29 @@
 package model1;
 
 public class Student {
-    private String nameStudent;
-    private String idStudent;
+    private String nameStudent;// ten sinh vien
 
-    private String gender;
+    private String idStudent;// ma so sinh vien
 
-    private String faculty;
+    private String gender;// gioi tinh
 
-    private String dateOfBirth;
+    private String faculty;// khoa
 
-    private String dormitory;
+    private String dateOfBirth;// ngay thanh nam sinh
 
-    private String room;
+    private String dormitory;// cu xa
 
-    private String address;
+    private String room;// phong
 
-    private String idCCCD;
+    private String address;// dia chi
 
-    private String numberPhone;
+    private String idCCCD;// so can cuoc cong dan
 
-    private String nation;
+    private String numberPhone;// so dien thoai
 
-    private String politicalForum;
+    private String nation;// quoc tich
+
+    private String politicalForum;// dien chinh sach
 
     public Student(String nameStudent, String idStudent, String gender, String faculty, String dateOfBirth, String dormitory, String room, String address, String idCCCD, String numberPhone, String nation, String politicalForum) {
         this.nameStudent = nameStudent;
@@ -135,11 +136,11 @@ public class Student {
         this.politicalForum = politicalForum;
     }
 
-    public boolean isMartyrs() {
+    public boolean isMartyrs() {// phuong thuc kiem tra co phai liet si hay khong
         return this.politicalForum.equalsIgnoreCase("Con liệt sĩ, thương binh, bệnh binh");
     }
 
-    public boolean isPoorHousehold() {
+    public boolean isPoorHousehold() {// phuong thuc kiem tra co phai gia dinh kho khan khong
         return this.politicalForum.equalsIgnoreCase("Gia đình đặc biệt khó khăn");
     }
 }
