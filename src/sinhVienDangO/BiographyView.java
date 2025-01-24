@@ -1,6 +1,6 @@
 package sinhVienDangO;
 
-import model.StudentController;
+import model1.StayedStudent;
 import model1.Student;
 
 import javax.swing.*;
@@ -116,8 +116,12 @@ public class BiographyView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Kiểm tra và cập nhật danh sách sinh viên trong bảng StudentListView
-                if (parentView != null && parentView.getController() != null) {
-                    List<Student> students = parentView.getController().getStudents();
+//                if (parentView != null && parentView.getController() != null) {
+//                    List<Student> students = parentView.getController().getStudents();
+//                    parentView.updateStudentList(students);
+//                }
+                if (parentView != null && parentView.getStayedStudent() != null) {
+                    List<Student> students = parentView.getStayedStudent().getStudents();
                     parentView.updateStudentList(students);
                 }
                 setVisible(false);
@@ -160,14 +164,14 @@ public class BiographyView extends JFrame {
             if (parentView == null) {
                 parentView = StudentListView.getInstance(); // Lấy instance của StudentListView
             }
-            if (parentView.getController() == null) {
-                parentView.setController(new StudentController()); // Khởi tạo controller
+            if (parentView.getStayedStudent() == null) {
+                parentView.setStayedStudent(new StayedStudent()); // Khởi tạo controller
             }
 
             // Gọi phương thức xóa sinh viên trong controller
-            boolean isRemoved = parentView.getController().removeStudentById(studentID);
+            boolean isRemoved = parentView.getStayedStudent().removeStudentById(studentID);
             if (isRemoved) {
-                List<Student> students = parentView.getController().getStudents();
+                List<Student> students = parentView.getStayedStudent().getStudents();
                 parentView.updateStudentList(students);
                 JOptionPane.showMessageDialog(
                         this,
@@ -206,9 +210,9 @@ public class BiographyView extends JFrame {
         String studentID = labelID.getText().replace("MSSV: ", "").trim(); // Trích xuất ID từ label
 
         // Lấy thông tin sinh viên từ controller
-        Student student = parentView.getController().getStudentById(studentID);
+        Student student = parentView.getStayedStudent().getStudentById(studentID);
         if (student != null) {
-            UpdateInforView updateView = new UpdateInforView(parentView, parentView.getController(), student);
+            UpdateInforView updateView = new UpdateInforView(parentView, parentView.getStayedStudent(), student);
             updateView.setStudentDetails(student); // Đặt thông tin sinh viên vào UpdateInforView
             updateView.setVisible(true);
             dispose();

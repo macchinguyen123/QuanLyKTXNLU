@@ -2,7 +2,7 @@ package quanLyPhong;
 
 import java.util.*;
 
-import model.StudentController;
+import model1.StayedStudent;
 import model1.Student;
 
 public class DormitoryDataManager {
@@ -91,7 +91,7 @@ public class DormitoryDataManager {
 
         List<String> selectedMembers = new ArrayList<>();
         List<String> availableNames;
-        List<Student> students = StudentController.getStudents();
+        List<Student> students = StayedStudent.getStudents();
 
         // Lọc sinh viên theo mã phòng
         for (Student student : students) {

@@ -1,6 +1,6 @@
 package sinhVienDangO;
 
-import model.StudentController;
+import model1.StayedStudent;
 import model1.Student;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class StudentListView extends JFrame {
 
     private JMenuItem menuExit, menuManage, roomManage;
 
-    private StudentController controller = new StudentController();
+    private StayedStudent stayedStudent = new StayedStudent();
     private static StudentListView instance;
 
     public StudentListView() {
@@ -144,14 +144,13 @@ public class StudentListView extends JFrame {
         }
         return instance;
     }
-
-    public StudentController getController() {
-        return controller;
+    public StayedStudent getStayedStudent() {
+        return stayedStudent;
     }
 
-    public void setController(StudentController controller) {
-        this.controller = controller;
-        updateStudentList(controller.getStudents());
+    public void setStayedStudent(StayedStudent stayedStudent) {
+        this.stayedStudent = stayedStudent;
+        updateStudentList(stayedStudent.getStudents());
     }
 
     public JTextField getSearchField() {
@@ -204,9 +203,9 @@ public class StudentListView extends JFrame {
 
     public void onStudentSelected(Student selectedStudent) {
         // Lấy thông tin mới nhất từ StudentController
-        Student updatedStudent = controller.getStudentById(selectedStudent.getMssv());
+        Student updatedStudent = stayedStudent.getStudentById(selectedStudent.getMssv());
         if (updatedStudent != null) {
-            UpdateInforView updateDetailView = new UpdateInforView(this, controller, updatedStudent);
+            UpdateInforView updateDetailView = new UpdateInforView(this, stayedStudent, updatedStudent);
             updateDetailView.setStudentDetails(updatedStudent);
         }
     }
@@ -214,7 +213,7 @@ public class StudentListView extends JFrame {
     public void studentTableMouseClicked(MouseEvent e) {
         int selectedRow = studentTable.getSelectedRow();
         if (selectedRow != -1) {
-            Student selectedStudent = controller.getStudentAtRow(selectedRow);
+            Student selectedStudent = stayedStudent.getStudentAtRow(selectedRow);
             if(selectedStudent != null) {
                 onStudentSelected(selectedStudent);
             }
@@ -229,11 +228,11 @@ public class StudentListView extends JFrame {
             return;
         }
 
-        List<Student> result = controller.searchStudentByMSSV(search);
+        List<Student> result = stayedStudent.searchStudentByMSSV(search);
 
         if (result.isEmpty()) {
             JOptionPane.showMessageDialog(StudentListView.this, "Không tìm thấy sinh viên với mã số " + search, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            updateStudentList(controller.getStudents()); // Hiển thị lại danh sách sinh viên ban đầu
+            updateStudentList(stayedStudent.getStudents()); // Hiển thị lại danh sách sinh viên ban đầu
         } else {
             updateStudentList(result); // Hiển thị danh sách kết quả tìm kiếm
         }

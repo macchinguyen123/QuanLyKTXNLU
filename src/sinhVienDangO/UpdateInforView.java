@@ -1,6 +1,6 @@
 package sinhVienDangO;
 
-import model.StudentController;
+import model1.StayedStudent;
 import model1.Student;
 import quanLyPhong.DormitoryDataManager;
 import quanLyPhong.Room;
@@ -19,12 +19,12 @@ public class UpdateInforView extends JFrame {
     JComboBox cbDe, cbGender, cbNation, cbDorm, cbRoom;
     JButton btnUpdate, btnBack;
     StudentListView studentListView;
-    StudentController studentController;
+    StayedStudent stayedStudent;
     Student currentStudent;
 
-    public UpdateInforView(StudentListView studentListView, StudentController studentController, Student currentStudent) {
+    public UpdateInforView(StudentListView studentListView, StayedStudent stayedStudent, Student currentStudent) {
         this.studentListView = studentListView;
-        this.studentController = studentController;
+        this.stayedStudent = stayedStudent;
         this.currentStudent = currentStudent;
         setTitle("Cập nhật thông tin");
         setSize(900, 700);
@@ -53,25 +53,12 @@ public class UpdateInforView extends JFrame {
         btnBack = new JButton("Quay lại");
         btnBack.setBounds(500, 620, 150, 40); // Dịch xuống và đặt ở giữa
         btnBack.setFont(new Font("Inter", Font.BOLD, 16));
-//        btnBack.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                setVisible(false);
-//                studentListView.setVisible(true);
-//            }
-//        });
-//        btnBack.addActionListener(e -> {
-//            StudentListView listView = StudentListView.getInstance();
-//            listView.setController(studentController); // Đảm bảo đồng bộ danh sách
-//            listView.setVisible(true);
-//           setVisible(false); // Đóng giao diện hiện tại
-//        });
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Làm mới danh sách sinh viên trong StudentListView
-                if (studentListView != null && studentListView.getController() != null) {
-                    List<Student> students = studentListView.getController().getStudents();
+                if (studentListView != null && studentListView.getStayedStudent() != null) {
+                    List<Student> students = studentListView.getStayedStudent().getStudents();
                     studentListView.updateStudentList(students);
                 }
                 setVisible(false);
@@ -364,12 +351,12 @@ public class UpdateInforView extends JFrame {
         currentStudent.setIdCCCD(cardID);
         currentStudent.setDanToc(nation);
 
-        studentController.updateStudent(currentStudent);
+        stayedStudent.updateStudent(currentStudent);
 
         JOptionPane.showMessageDialog(UpdateInforView.this, "Thông tin đã được cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 
         setVisible(false);
-        studentListView.updateStudentList(studentController.getStudents());
+        studentListView.updateStudentList(stayedStudent.getStudents());
         studentListView.setVisible(true);
     }
 
