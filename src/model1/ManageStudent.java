@@ -25,13 +25,13 @@ public class ManageStudent {
 
     // Cap nhat thong tin sinh vien
     public void updateStudentInStayed(Student updatedStudent) {
-        if (updatedStudent == null || updatedStudent.getIdStudent() == null) {
+        if (updatedStudent == null || updatedStudent.getMssv() == null) {
             throw new IllegalArgumentException("Thông tin sinh viên không hợp lệ!");
         }
 
         boolean isUpdated = false;
         for (StayedStudent stayedStudent : stayedStudents) {
-            Student existingStudent = stayedStudent.findStudentById(updatedStudent.getIdStudent());
+            Student existingStudent = stayedStudent.findStudentById(updatedStudent.getMssv());
             if (existingStudent != null) {
                 stayedStudent.updateStudent(updatedStudent);
                 isUpdated = true;
@@ -40,7 +40,7 @@ public class ManageStudent {
         }
 
         if (!isUpdated) {
-            throw new IllegalArgumentException("Không tìm thấy sinh viên với MSSV: " + updatedStudent.getIdStudent());
+            throw new IllegalArgumentException("Không tìm thấy sinh viên với MSSV: " + updatedStudent.getMssv());
         }
     }
 

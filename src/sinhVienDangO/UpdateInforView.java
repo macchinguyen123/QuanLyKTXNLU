@@ -1,7 +1,7 @@
 package sinhVienDangO;
 
-import model.Student;
 import model.StudentController;
+import model1.Student;
 import quanLyPhong.DormitoryDataManager;
 import quanLyPhong.Room;
 

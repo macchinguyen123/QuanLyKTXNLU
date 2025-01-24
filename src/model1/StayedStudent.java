@@ -33,10 +33,10 @@ public class StayedStudent {
 
     // Thêm sinh viên vào danh sách
     public void addStudent(Student student) {
-        if (student == null || student.getIdStudent() == null) {
+        if (student == null || student.getMssv() == null) {
             throw new IllegalArgumentException("Thông tin sinh viên không hợp lệ!");
         }
-        studentMap.put(student.getIdStudent(), student);
+        studentMap.put(student.getMssv(), student);
     }
 
     // Tìm sinh viên theo MSSV
@@ -46,11 +46,11 @@ public class StayedStudent {
 
     // Cap nhat thong tin sinh vien
     public void updateStudent(Student updatedStudent) {
-        if (updatedStudent == null || updatedStudent.getIdStudent() == null) {
+        if (updatedStudent == null || updatedStudent.getMssv() == null) {
             throw new IllegalArgumentException("Thông tin sinh viên không hợp lệ!");
         }
 
-        String mssv = updatedStudent.getIdStudent();
+        String mssv = updatedStudent.getMssv();
         if (studentMap.containsKey(mssv)) {
             studentMap.put(mssv, updatedStudent); // Thay thế thông tin sinh viên trong map
         } else {

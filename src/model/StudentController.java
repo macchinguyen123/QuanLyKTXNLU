@@ -1,5 +1,6 @@
 package model;
 
+import model1.Student;
 import quanLyPhong.DormitoryDataManager;
 import quanLyPhong.Room;
 import sinhVienDangKy.TakeData;

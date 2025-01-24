@@ -1,6 +1,6 @@
 package sinhVienDangKy;
 
-import model.Student;
+import model1.Student;
 
 import java.util.ArrayList;
 import java.util.List;

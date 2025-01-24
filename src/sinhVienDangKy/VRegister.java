@@ -1,10 +1,10 @@
 package sinhVienDangKy;
 
-import model.MRegister;
+import model1.RegisterStudent;
+import model1.Student;
 import quanLyPhong.Model;
 import sinhVienDangO.Controller;
 import sinhVienDangO.PasswordView;
-import model.Student;
 //import view.Home;
 import view.HomeLass;
 
@@ -27,7 +27,7 @@ public class VRegister extends JFrame {
     private TakeData storage;
     private VRegisterDetail detailView;
 
-    public VRegister(MRegister mdsvDangKi) {
+    public VRegister(RegisterStudent mdsvDangKi) {
         setTitle("Quản Lý Sinh Viên");
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
