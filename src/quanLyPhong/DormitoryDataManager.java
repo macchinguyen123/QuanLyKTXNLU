@@ -2,8 +2,8 @@ package quanLyPhong;
 
 import java.util.*;
 
-import model.Student;
 import model.StudentController;
+import model1.Student;
 
 public class DormitoryDataManager {
     private List<String> roomData;

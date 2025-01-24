@@ -1,6 +1,6 @@
 package view;
 
-import model.MRegister;
+import model1.RegisterStudent;
 import quanLyPhong.Model;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ public class HomeLass extends  JFrame {
     CardLayout cardLayout;
     JPanel cardPanel;
     List<String> selectedAttributes;
-    MRegister mdsvDangKi = new MRegister();
+    RegisterStudent mdsvDangKi = new RegisterStudent();
     String currentMSSV; // thêm biến currentMSSV
     PanelChooseRoom chooseRoom;
     PanelHeaderOfHome header;

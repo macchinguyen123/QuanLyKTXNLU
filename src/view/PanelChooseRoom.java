@@ -1,6 +1,6 @@
 package view;
 
-import model.MRegister;
+import model1.RegisterStudent;
 import quanLyPhong.Model;
 import sinhVienDangKy.CRegister;
 import sinhVienDangKy.VRegister;
@@ -83,7 +83,7 @@ public class PanelChooseRoom extends JPanel {
                 Model passwordModel = new Model();
                 PasswordView passwordView = new PasswordView();
                 Controller controller = new Controller(passwordModel,passwordView);
-                MRegister mRegister = new MRegister();
+                RegisterStudent mRegister = new RegisterStudent();
                 VRegister vRegister = new VRegister(mRegister);
                 CRegister cRegister = new CRegister(mRegister, vRegister);
                 vRegister.setVisible(true);

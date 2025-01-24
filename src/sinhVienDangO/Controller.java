@@ -1,7 +1,7 @@
 package sinhVienDangO;
 
-import model.MRegister;
 import model.StudentController;
+import model1.RegisterStudent;
 import quanLyPhong.Model;
 import sinhVienDangKy.VRegister;
 import sinhVienDangKy.SVDangKiTheHien;
@@ -54,7 +54,7 @@ public class Controller {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
         StudentController studentController = new StudentController();
-        MRegister mdsvDangKi = new MRegister();
+        RegisterStudent mdsvDangKi = new RegisterStudent();
         VRegister g = new VRegister(mdsvDangKi);
 
         // Student View listeners
@@ -74,7 +74,7 @@ public class Controller {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
         StudentController studentController = new StudentController();
-        MRegister mdsvDangKi = new MRegister();
+        RegisterStudent mdsvDangKi = new RegisterStudent();
         VRegister g = new VRegister(mdsvDangKi);
         View mainView = new View();
 

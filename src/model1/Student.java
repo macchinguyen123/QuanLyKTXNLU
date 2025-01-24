@@ -1,146 +1,135 @@
 package model1;
 
 public class Student {
-    private String nameStudent;// ten sinh vien
+    private String ten, mssv, gioiTinh, khoa;
+    private String namSinh;
+    private String cuXa, phong;
+    private String diaChi, idCCCD, sđt;
+    private String danToc, dienChinhSach;
 
-    private String idStudent;// ma so sinh vien
-
-    private String gender;// gioi tinh
-
-    private String faculty;// khoa
-
-    private String dateOfBirth;// ngay thanh nam sinh
-
-    private String dormitory;// cu xa
-
-    private String room;// phong
-
-    private String address;// dia chi
-
-    private String idCCCD;// so can cuoc cong dan
-
-    private String numberPhone;// so dien thoai
-
-    private String nation;// quoc tich
-
-    private String politicalForum;// dien chinh sach
-
-    public Student(String nameStudent, String idStudent, String gender, String faculty, String dateOfBirth, String dormitory, String room, String address, String idCCCD, String numberPhone, String nation, String politicalForum) {
-        this.nameStudent = nameStudent;
-        this.idStudent = idStudent;
-        this.gender = gender;
-        this.faculty = faculty;
-        this.dateOfBirth = dateOfBirth;
-        this.dormitory = dormitory;
-        this.room = room;
-        this.address = address;
+    public Student(String ten, String mssv, String gioiTinh, String khoa, String namSinh, String cuXa, String phong, String diaChi, String idCCCD, String sđt, String danToc, String dienChinhSach) {
+        this.ten = ten;
+        this.mssv = mssv;
+        this.gioiTinh = gioiTinh;
+        this.khoa = khoa;
+        this.namSinh = namSinh;
+        this.cuXa = cuXa;
+        this.phong = phong;
+        this.diaChi = diaChi;
         this.idCCCD = idCCCD;
-        this.numberPhone = numberPhone;
-        this.nation = nation;
-        this.politicalForum = politicalForum;
+        this.sđt = sđt;
+        this.danToc = danToc;
+        this.dienChinhSach = dienChinhSach;
     }
 
-    public String getNameStudent() {
-        return nameStudent;
+    @Override
+    public String toString() {
+        return ten + "_" + mssv + "_" + gioiTinh + "_" + khoa + "_" + namSinh + "_" + cuXa + "_" + phong + "_" + diaChi + "_" + idCCCD + "_" + sđt;
     }
 
-    public void setNameStudent(String nameStudent) {
-        this.nameStudent = nameStudent;
+    public String getTen() {
+        return ten;
     }
 
-    public String getIdStudent() {
-        return idStudent;
+    public String getMssv() {
+        return mssv;
     }
 
-    public void setIdStudent(String idStudent) {
-        this.idStudent = idStudent;
+    public String getKhoa() {
+        return khoa;
     }
 
-    public String getGender() {
-        return gender;
+    public String getGioiTinh() {
+        return gioiTinh;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public String getNamSinh() {
+        return namSinh;
     }
 
-    public String getFaculty() {
-        return faculty;
+    public String getCuXa() {
+        return cuXa;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
+    public String getPhong() {
+        return phong;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getDormitory() {
-        return dormitory;
-    }
-
-    public void setDormitory(String dormitory) {
-        this.dormitory = dormitory;
-    }
-
-    public String getRoom() {
-        return room;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public String getDiaChi() {
+        return diaChi;
     }
 
     public String getIdCCCD() {
         return idCCCD;
     }
 
+    public String getSđt() {
+        return sđt;
+    }
+
+    public String getDanToc() {
+        return danToc;
+    }
+
+    public String getDienChinhSach() {
+        return dienChinhSach;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
+    }
+
+    public void setMssv(String mssv) {
+        this.mssv = mssv;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public void setKhoa(String khoa) {
+        this.khoa = khoa;
+    }
+
+    public void setNamSinh(String namSinh) {
+        this.namSinh = namSinh;
+    }
+
+    public void setCuXa(String cuXa) {
+        this.cuXa = cuXa;
+    }
+
+    public void setPhong(String phong) {
+        this.phong = phong;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
     public void setIdCCCD(String idCCCD) {
         this.idCCCD = idCCCD;
     }
 
-    public String getNumberPhone() {
-        return numberPhone;
+    public void setSđt(String sđt) {
+        this.sđt = sđt;
     }
 
-    public void setNumberPhone(String numberPhone) {
-        this.numberPhone = numberPhone;
+    public void setDanToc(String danToc) {
+        this.danToc = danToc;
     }
 
-    public String getNation() {
-        return nation;
+    public void setDienChinhSach(String dienChinhSach) {
+        this.dienChinhSach = dienChinhSach;
     }
 
-    public void setNation(String nation) {
-        this.nation = nation;
+    public boolean isMartyrs() {
+        return this.dienChinhSach.equalsIgnoreCase("Con liệt sĩ, thương binh, bệnh binh");
     }
 
-    public String getPoliticalForum() {
-        return politicalForum;
+    public boolean isPoorHousehold() {
+        return this.dienChinhSach.equalsIgnoreCase("Gia đình đặc biệt khó khăn");
     }
 
-    public void setPoliticalForum(String politicalForum) {
-        this.politicalForum = politicalForum;
-    }
 
-    public boolean isMartyrs() {// phuong thuc kiem tra co phai liet si hay khong
-        return this.politicalForum.equalsIgnoreCase("Con liệt sĩ, thương binh, bệnh binh");
-    }
-
-    public boolean isPoorHousehold() {// phuong thuc kiem tra co phai gia dinh kho khan khong
-        return this.politicalForum.equalsIgnoreCase("Gia đình đặc biệt khó khăn");
-    }
 }
