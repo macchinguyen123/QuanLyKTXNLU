@@ -77,8 +77,8 @@ public class DormitoryDetails extends JFrame {
         roomTable.setRowHeight(40);
         roomTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 22));
 // Thêm nút vào cột "Nhập Chỉ Số"
-        roomTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRendererNhap());
-        roomTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditorNhap(new JButton(), rooms));
+        roomTable.getColumnModel().getColumn(4).setCellRenderer(new ButtonRendererInput());
+        roomTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditorInput(new JButton(), rooms));
 
 
         JScrollPane scrollPane = new JScrollPane(roomTable);

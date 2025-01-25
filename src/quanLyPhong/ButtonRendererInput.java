@@ -4,8 +4,8 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
-public class ButtonRendererNhap extends JButton implements TableCellRenderer {
-    public ButtonRendererNhap() {
+public class ButtonRendererInput extends JButton implements TableCellRenderer {
+    public ButtonRendererInput() {
         setOpaque(true);
         setText("Nhập");
     }

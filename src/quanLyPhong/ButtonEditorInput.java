@@ -1,8 +1,5 @@
 package quanLyPhong;
 
-import quanLyPhong.InputDialog;
-import quanLyPhong.Room;
-
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
@@ -10,13 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ButtonEditorNhap extends AbstractCellEditor implements TableCellEditor, ActionListener {
+public class ButtonEditorInput extends AbstractCellEditor implements TableCellEditor, ActionListener {
     private JButton button;
     private String roomNumber;
     private Room currentRoom;
     private List<Room> rooms;
 
-    public ButtonEditorNhap(JButton button, List<Room> rooms) {
+    public ButtonEditorInput(JButton button, List<Room> rooms) {
         this.button = button;
         this.rooms = rooms;
         this.button.addActionListener(this);
