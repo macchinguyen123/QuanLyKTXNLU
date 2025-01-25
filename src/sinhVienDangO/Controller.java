@@ -1,7 +1,7 @@
 package sinhVienDangO;
 
-import model.MRegister;
-import model.StudentController;
+import model1.RegisterStudent;
+import model1.StayedStudent;
 import quanLyPhong.Model;
 import sinhVienDangKy.VRegister;
 import sinhVienDangKy.SVDangKiTheHien;
@@ -53,12 +53,12 @@ public class Controller {
     public void openStudentManagementView() {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
-        StudentController studentController = new StudentController();
-        MRegister mdsvDangKi = new MRegister();
+        StayedStudent stayedStudent = new StayedStudent();
+        RegisterStudent mdsvDangKi = new RegisterStudent();
         VRegister g = new VRegister(mdsvDangKi);
 
         // Student View listeners
-        studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
+        studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, stayedStudent));
         studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, mdsvDangKi, mainView));
         studentView.getBtnBack().addActionListener(new ActionListener() {
             @Override
@@ -73,13 +73,13 @@ public class Controller {
     public void studentView() {
         Model studentModel = new Model();
         StudentView studentView = new StudentView();
-        StudentController studentController = new StudentController();
-        MRegister mdsvDangKi = new MRegister();
+        StayedStudent stayedStudent = new StayedStudent();
+        RegisterStudent mdsvDangKi = new RegisterStudent();
         VRegister g = new VRegister(mdsvDangKi);
         View mainView = new View();
 
         // Student View listeners
-        studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, studentController));
+        studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, stayedStudent));
         studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, mdsvDangKi, mainView));
         studentView.getBtnBack().addActionListener(new ActionListener() {
             @Override

@@ -1,6 +1,6 @@
 package sinhVienDangKy;
 
-import model.MRegister;
+import model1.RegisterStudent;
 import sinhVienDangO.StudentView;
 import sinhVienDangO.View;
 
@@ -10,10 +10,10 @@ import java.awt.event.ActionListener;
 // Lớp riêng cho RegisteredStudentsButtonListener
 public class SVDangKiTheHien implements ActionListener {
     private StudentView studentView;
-    private MRegister mdsvDangKi;
+    private RegisterStudent mdsvDangKi;
     private View view1;
 
-    public SVDangKiTheHien(StudentView studentView, MRegister mdsvDangKi, View view1) {
+    public SVDangKiTheHien(StudentView studentView, RegisterStudent mdsvDangKi, View view1) {
         this.studentView = studentView;
         this.mdsvDangKi = mdsvDangKi;
         this.view1=view1;

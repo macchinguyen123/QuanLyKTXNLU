@@ -1,7 +1,7 @@
 package view;
 
-import model.MRegister;
-import model.StudentDataStorage;
+import model1.RegisterStudent;
+import model1.StudentDataStorage;
 import quanLyPhong.Model;
 import sinhVienDangKy.*;
 import sinhVienDangO.Controller;
@@ -28,7 +28,7 @@ public class PanelFillInformatinDK extends JPanel {
     Stack<String> pageStack = new Stack<>();
     String currentMSSV;
 
-    MRegister tableModel;
+    RegisterStudent tableModel;
     List<JTextField> textFields = new java.util.ArrayList<>();
     List<JComboBox<String>> comboBoxes = new java.util.ArrayList<>();
     JCheckBox checkBox1;
@@ -41,7 +41,7 @@ public class PanelFillInformatinDK extends JPanel {
     HomeLass parentFrame;
     PanelInformationChooseRoom thongTinChonPhong;
 
-    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, MRegister tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV, PanelChooseRoom chooseRoom, HomeLass homeLass) {
+    public PanelFillInformatinDK(JPanel cardPanel, CardLayout cardLayout, RegisterStudent tableModel, Set<Map<String, String>> listSaveTaiKhoan, String currentMSSV, PanelChooseRoom chooseRoom, HomeLass homeLass) {
         this.parentFrame = homeLass;
         this.tableModel = tableModel;
         this.listSaveTaiKhoan = listSaveTaiKhoan;
@@ -106,7 +106,7 @@ public class PanelFillInformatinDK extends JPanel {
                     Model passwordModel = new Model();
                     PasswordView passwordView = new PasswordView();
                     Controller controller = new Controller(passwordModel, passwordView);
-                    MRegister mRegister = new MRegister();
+                    RegisterStudent mRegister = new RegisterStudent();
                     VRegister vRegister = new VRegister(mRegister);
                     CRegister cRegister = new CRegister(mRegister, vRegister);
                     vRegister.setVisible(true);

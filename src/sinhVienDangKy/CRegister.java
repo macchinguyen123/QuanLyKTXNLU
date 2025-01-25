@@ -1,16 +1,15 @@
 package sinhVienDangKy;
 
 
-import model.MRegister;
+import model1.RegisterStudent;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 
 public class CRegister {
-    private MRegister model;
+    private RegisterStudent model;
     private VRegister view;
 
-    public CRegister(MRegister model, VRegister view1) {
+    public CRegister(RegisterStudent model, VRegister view1) {
         this.model = model;
         this.view = view1;
 
