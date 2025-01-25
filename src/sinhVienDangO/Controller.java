@@ -4,7 +4,7 @@ import model1.RegisterStudent;
 import model1.StayedStudent;
 import quanLyPhong.Model;
 import sinhVienDangKy.VRegister;
-import sinhVienDangKy.SVDangKiTheHien;
+import sinhVienDangKy.StudentsDemonstrate;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,7 +59,7 @@ public class Controller {
 
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, stayedStudent));
-        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, mdsvDangKi, mainView));
+        studentView.getBtnRegisteredStudents().addActionListener(new StudentsDemonstrate(studentView, mdsvDangKi, mainView));
         studentView.getBtnBack().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,7 +80,7 @@ public class Controller {
 
         // Student View listeners
         studentView.getBtnStudentList().addActionListener(new StudentListButtonListener(studentView, stayedStudent));
-        studentView.getBtnRegisteredStudents().addActionListener(new SVDangKiTheHien(studentView, mdsvDangKi, mainView));
+        studentView.getBtnRegisteredStudents().addActionListener(new StudentsDemonstrate(studentView, mdsvDangKi, mainView));
         studentView.getBtnBack().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
