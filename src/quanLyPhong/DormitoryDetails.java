@@ -112,7 +112,7 @@ public class DormitoryDetails extends JFrame {
                     int availableSlots = Integer.parseInt(tableModel.getValueAt(selectedRow, 2).toString());
                     int totalSlots = Integer.parseInt(tableModel.getValueAt(selectedRow, 3).toString());
 
-                    List<String> members = dataManager.getRoomMembers(roomNumber, totalSlots - availableSlots);
+                    List<String> members = dataManager.getRoomMembers(roomNumber, (totalSlots - availableSlots));
                     showRoomMembersDialog(roomNumber, members);
                 }
             }
