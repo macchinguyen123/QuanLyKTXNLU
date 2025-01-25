@@ -4,11 +4,9 @@ import java.util.List;
 
 public class Model {
     private String password;
-    private DormitoryDataManager dormitoryDataManager;
 
     public Model() {
         // Sử dụng DormitoryDataManager để quản lý dữ liệu ký túc xá
-        dormitoryDataManager = new DormitoryDataManager();
     }
 
     // Methods for Model
@@ -37,9 +35,5 @@ public class Model {
         return password != null && password.length() == 6;
     }
 
-    // Methods for Room Data
-    public List<String> getRoomData() {
-        // Lấy dữ liệu phòng từ DormitoryDataManager
-        return dormitoryDataManager.getRoomData();
-    }
+
 }

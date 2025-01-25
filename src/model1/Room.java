@@ -1,4 +1,4 @@
-package quanLyPhong;
+package model1;
 
 public class Room {
     private String roomNumber;       // Số phòng
@@ -20,9 +20,6 @@ public class Room {
         this.isUnpaid = isUnpaid;
     }
 
-    public int getElectricityIndex() {
-        return electricityIndex;
-    }
 
     public int getPaymentAmount() {
         return paymentAmount;
@@ -59,7 +56,5 @@ public class Room {
         return currentOccupancy;
     }
 
-    public void setCurrentOccupancy(int currentOccupancy) {
-        this.currentOccupancy = currentOccupancy;
-    }
+
 }

@@ -1,5 +1,7 @@
 package quanLyPhong;
 
+import model1.Room;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -130,6 +132,7 @@ public class DormitoryDetails extends JFrame {
         paymentButton.setFont(new Font("Arial", Font.BOLD, 18));
         paymentButton.setBounds(100, 550, 400, 40);
         paymentButton.addActionListener(e -> {
+
             PaymentDetails paymentDetailsView = new PaymentDetails(rooms, this);
             paymentDetailsView.setVisible(true);
             this.setVisible(false);
