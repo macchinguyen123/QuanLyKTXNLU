@@ -1,6 +1,5 @@
 package model1;
 
-import sinhVienDangKy.TakeData;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,9 +62,9 @@ public class StayedStudent {
     }
 
     // Tim sinh vien theo mssv
-    public List<Student> searchStudentByMSSV(String mssv) {
+    public List<Student> searchStudentByID(String id) {
         List<Student> result = new ArrayList<>();
-        Student foundStu = studentMap.get(mssv.trim());
+        Student foundStu = studentMap.get(id.trim());
         if (foundStu != null) {
             result.add(foundStu);
         }
