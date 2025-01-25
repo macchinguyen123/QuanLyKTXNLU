@@ -19,6 +19,7 @@ public class PaymentDetails extends JFrame {
     private List<Map<String, Object>> initialData = new ArrayList<>();
     private static List<Map<String, Object>> savedData = new ArrayList<>();
     private ManageRoom managerRoom;
+    private List<Room> rooms = new ArrayList<>();
 
     public PaymentDetails(List<Room> rooms, DormitoryDetails dormitoryDetailsView) {
         this.dormitoryDetailsView = dormitoryDetailsView;
@@ -124,6 +125,29 @@ public class PaymentDetails extends JFrame {
         }
     }
 
+    private void saveTableData() {
+        savedData.clear();
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
+            Map<String, Object> rowData = new TreeMap<>();
+            String roomNumber = (String) tableModel.getValueAt(i, 0);
+            boolean isPaid = (Boolean) tableModel.getValueAt(i, 2);
+
+            rowData.put("Số Phòng", roomNumber);
+            rowData.put("Loại Phòng", tableModel.getValueAt(i, 1));
+            rowData.put("Đã Thanh Toán", isPaid);
+            rowData.put("Chưa Thanh Toán", !isPaid);
+            rowData.put("Số Tiền", tableModel.getValueAt(i, 4));
+            savedData.add(rowData);
+
+            // Cập nhật trực tiếp trong danh sách rooms
+            for (Room room : rooms) {
+                if (room.getRoomNumber().equals(roomNumber)) {
+                    room.placePaid(isPaid);
+                }
+            }
+        }
+    }
+
     private void handleBackAction() {
         int choice = JOptionPane.showConfirmDialog(
                 this,
@@ -143,18 +167,18 @@ public class PaymentDetails extends JFrame {
         }
     }
 
-    private void saveTableData() {
-        savedData.clear();
-        for (int i = 0; i < tableModel.getRowCount(); i++) {
-            Map<String, Object> rowData = new TreeMap<>();
-            rowData.put("Số Phòng", tableModel.getValueAt(i, 0));
-            rowData.put("Loại Phòng", tableModel.getValueAt(i, 1));
-            rowData.put("Đã Thanh Toán", tableModel.getValueAt(i, 2));
-            rowData.put("Chưa Thanh Toán", tableModel.getValueAt(i, 3));
-            rowData.put("Số Tiền", tableModel.getValueAt(i, 4));
-            savedData.add(rowData);
-        }
-    }
+//    private void saveTableData() {
+//        savedData.clear();
+//        for (int i = 0; i < tableModel.getRowCount(); i++) {
+//            Map<String, Object> rowData = new TreeMap<>();
+//            rowData.put("Số Phòng", tableModel.getValueAt(i, 0));
+//            rowData.put("Loại Phòng", tableModel.getValueAt(i, 1));
+//            rowData.put("Đã Thanh Toán", tableModel.getValueAt(i, 2));
+//            rowData.put("Chưa Thanh Toán", tableModel.getValueAt(i, 3));
+//            rowData.put("Số Tiền", tableModel.getValueAt(i, 4));
+//            savedData.add(rowData);
+//        }
+//    }
 
     private void resetTableDataToInitial() {
         tableModel.setRowCount(0);

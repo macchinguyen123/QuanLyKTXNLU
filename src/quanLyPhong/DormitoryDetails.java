@@ -57,6 +57,7 @@ public class DormitoryDetails extends JFrame {
 
     private void populateTable(JPanel mainPanel, List<Room> rooms) {
         String[] columnNames = {"Số Phòng", "Loại Phòng", "Số Chỗ Trống", "Tổng Số Chỗ", "Nhập Chỉ Số"};
+        String r = "Nhập";
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
         for (Room room : rooms) {
@@ -65,7 +66,7 @@ public class DormitoryDetails extends JFrame {
                     room.getRoomType(),
                     room.getCurrentOccupancy(),
                     room.getCapacity(),
-                    "Nhập"
+                    r
             });
         }
 
@@ -159,6 +160,7 @@ public class DormitoryDetails extends JFrame {
 
         JOptionPane.showMessageDialog(this, panel, "Danh Sách Thành Viên", JOptionPane.INFORMATION_MESSAGE);
     }
+
 }
 
 

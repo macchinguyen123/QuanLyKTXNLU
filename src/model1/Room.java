@@ -57,4 +57,7 @@ public class Room {
     }
 
 
+    public void placePaid(boolean isPaid) {
+        this.isPaid = isPaid;
+    }
 }
