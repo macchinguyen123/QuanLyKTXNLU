@@ -1,3 +1,4 @@
+
 package quanLyPhong;
 
 import model1.Room;
@@ -17,20 +18,30 @@ public class InputDialog {
         panel.add(label);
         panel.add(inputField);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Nhập Chỉ Số Điện Nước", JOptionPane.OK_CANCEL_OPTION);
-        if (result == JOptionPane.OK_OPTION) {
-            String input = inputField.getText();
-            if (!input.isEmpty()) {
-                try {
-                    int electricityIndex = Integer.parseInt(input);
-                    room.setElectricityIndex(electricityIndex);
-                    room.setPaymentAmount(electricityIndex ); // Ví dụ: Mỗi chỉ số là 5K
-                    JOptionPane.showMessageDialog(null, "Dữ liệu đã được lưu.", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "Vui lòng nhập số hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        boolean isDataSaved = false; // Cờ để kiểm tra xem dữ liệu đã được lưu hay chưa
+
+        while (!isDataSaved) {
+            int result = JOptionPane.showConfirmDialog(null, panel, "Nhập Chỉ Số Điện Nước", JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+                String input = inputField.getText();
+                if (!input.isEmpty()) {
+                    try {
+                        int electricityIndex = Integer.parseInt(input);
+                        room.setElectricityIndex(electricityIndex);
+                        room.setPaymentAmount(electricityIndex);
+                        JOptionPane.showMessageDialog(null, "Dữ liệu đã được lưu thành công!", "Thông Báo", JOptionPane.INFORMATION_MESSAGE);
+                        isDataSaved = true; // Đánh dấu là dữ liệu đã được lưu
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Vui lòng nhập số hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vui lòng không để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
+            } else {
+                // Nếu người dùng nhấn "Cancel" hoặc đóng dialog
+                break;
             }
         }
     }
-
 }
+

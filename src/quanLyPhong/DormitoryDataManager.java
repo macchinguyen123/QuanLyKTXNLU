@@ -2,6 +2,7 @@ package quanLyPhong;
 
 import java.util.*;
 
+import model1.ManageRoom;
 import model1.Room;
 import model1.StayedStudent;
 import model1.Student;
@@ -10,10 +11,12 @@ public class DormitoryDataManager {
     private List<String> roomData;
     private Map<String, List<Room>> dormitoryData;
     private static DormitoryDataManager instance;
+    private ManageRoom manageRoom;
 
     public DormitoryDataManager() {
         dormitoryData = new TreeMap<>();
         initializeDormitoryData();
+        manageRoom = new ManageRoom();
     }
 
     /**
@@ -83,44 +86,10 @@ public class DormitoryDataManager {
     }
 
     public List<String> getRoomMembers(String roomNumber, int memberCount) {
-        List<String> maleNames = List.of("Nguyễn Văn Anh", "Lê Văn Bảo", "Hoàng Văn Tài", "Phạm Văn Huy ", "Vũ Thành",
-                "Ngô Văn Giang", "Đinh Quang Toàn", "Nguyễn Văn Thanh");
-        List<String> femaleNames = List.of("Nguyễn Thị Lan", "Trần Thị Thư", "Lê Thị Hoa", "Nguyễn Thị Kim",
-                "Trần Thị Tuyết", "Lê Thị Thu", "Nguyễn Thị Mai", "Phạm Mai Phương");
+        List<String> result = manageRoom.getRoomMembers(roomNumber, memberCount);
+        return result;
 
-        Random random = new Random();
 
-        List<String> selectedMembers = new ArrayList<>();
-        List<String> availableNames;
-        List<Student> students = StayedStudent.getStudents();
-
-        // Lọc sinh viên theo mã phòng
-        for (Student student : students) {
-            if (student.getPhong().equalsIgnoreCase(roomNumber)) {
-                selectedMembers.add(student.getTen());
-            }
-        }
-        if (selectedMembers.size() > memberCount) {
-            selectedMembers = selectedMembers.subList(0, memberCount);
-        }
-
-        // Kiểm tra cư xá và phân loại tên người
-        if (roomNumber.startsWith("A") || roomNumber.startsWith("C") || roomNumber.startsWith("F")) {
-            // Cư xá nam
-            availableNames = new ArrayList<>(maleNames);
-        } else {
-            // Cư xá nữ
-            availableNames = new ArrayList<>(femaleNames);
-        }
-
-        // Xáo trộn danh sách tên
-        Collections.shuffle(availableNames, random);
-
-        // Lấy các tên ngẫu nhiên mà không trùng lặp
-        for (int i = 0; i < memberCount && i < availableNames.size(); i++) {
-            selectedMembers.add(availableNames.get(i));
-        }
-        return selectedMembers;
     }
 
     public List<String> getRoomData() {

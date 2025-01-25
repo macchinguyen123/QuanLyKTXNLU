@@ -151,10 +151,4 @@ public class RegisterStudent extends AbstractTableModel {
         return null;
     }
 
-//    public String checkRoomAndName(String room ){
-//        if (students.contains(room)) {
-//            return students.get(students.indexOf(room)).getTen();
-//        }else{
-//            return null ;
-//        }
 }
