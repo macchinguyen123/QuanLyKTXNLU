@@ -2,6 +2,7 @@ package sinhVienDangKy;
 
 import model1.RegisterStudent;
 import model1.Student;
+import model1.TakeData;
 import quanLyPhong.Model;
 import sinhVienDangO.Controller;
 import sinhVienDangO.PasswordView;

@@ -228,7 +228,7 @@ public class StudentListView extends JFrame {
             return;
         }
 
-        List<Student> result = stayedStudent.searchStudentByMSSV(search);
+        List<Student> result = stayedStudent.searchStudentByID(search);
 
         if (result.isEmpty()) {
             JOptionPane.showMessageDialog(StudentListView.this, "Không tìm thấy sinh viên với mã số " + search, "Thông báo", JOptionPane.INFORMATION_MESSAGE);

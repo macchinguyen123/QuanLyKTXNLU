@@ -1,6 +1,4 @@
-package sinhVienDangKy;
-
-import model1.Student;
+package model1;
 
 import java.util.ArrayList;
 import java.util.List;
