@@ -2,6 +2,7 @@ package quanLyPhong;
 
 import java.util.*;
 
+import model1.Room;
 import model1.StayedStudent;
 import model1.Student;
 

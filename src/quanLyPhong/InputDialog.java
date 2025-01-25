@@ -1,5 +1,7 @@
 package quanLyPhong;
 
+import model1.Room;
+
 import javax.swing.*;
 import java.awt.*;
 

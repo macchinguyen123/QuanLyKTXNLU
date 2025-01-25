@@ -1,10 +1,15 @@
 package quanLyPhong;
 
+import model1.ManageRoom;
+import model1.Room;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class PaymentDetails extends JFrame {
     private JTable paymentTable;
@@ -12,8 +17,8 @@ public class PaymentDetails extends JFrame {
     private DormitoryDetails dormitoryDetailsView;
     private DefaultTableModel tableModel;
     private List<Map<String, Object>> initialData = new ArrayList<>();
-    private List<Map<String, Object>> savedData = new ArrayList<>();
-
+    private static List<Map<String, Object>> savedData = new ArrayList<>();
+    private ManageRoom managerRoom;
 
     public PaymentDetails(List<Room> rooms, DormitoryDetails dormitoryDetailsView) {
         this.dormitoryDetailsView = dormitoryDetailsView;
@@ -47,33 +52,6 @@ public class PaymentDetails extends JFrame {
             int row = e.getFirstRow();
             int column = e.getColumn();
 
-            if (column == 4) { // Khi cột "Số Tiền" được chỉnh sửa
-                List<Object[]> rowsData = new ArrayList<>();
-
-                for (int i = 0; i < tableModel.getRowCount(); i++) {
-                    rowsData.add(new Object[]{
-                            tableModel.getValueAt(i, 0), // Số Phòng
-                            tableModel.getValueAt(i, 1), // Loại Phòng
-                            tableModel.getValueAt(i, 2), // Đã Thanh Toán
-                            tableModel.getValueAt(i, 3), // Chưa Thanh Toán
-                            Integer.parseInt(tableModel.getValueAt(i, 4).toString().replace("K", "")) // Số Tiền
-                    });
-                }
-
-                rowsData.sort((o1, o2) -> (int) o2[4] - (int) o1[4]);
-
-                tableModel.setRowCount(0);
-                for (Object[] rowData : rowsData) {
-                    tableModel.addRow(new Object[]{
-                            rowData[0],
-                            rowData[1],
-                            rowData[2],
-                            rowData[3],
-                            rowData[4] + "K"
-                    });
-                }
-            }
-
             if (column == 2) { // "Đã Thanh Toán" được chọn
                 boolean isPaid = (Boolean) tableModel.getValueAt(row, 2);
                 if (isPaid) {
@@ -92,10 +70,10 @@ public class PaymentDetails extends JFrame {
         paymentTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 22));
         paymentTable.setFont(new Font("Arial", Font.PLAIN, 18));
 
+        // Ẩn cột "Số Tiền"
         paymentTable.getColumnModel().getColumn(4).setMinWidth(0);
         paymentTable.getColumnModel().getColumn(4).setMaxWidth(0);
-        paymentTable.getColumnModel().getColumn(4).setWidth(0);
-
+        paymentTable.getColumnModel().getColumn(4).setPreferredWidth(0);
         JScrollPane scrollPane = new JScrollPane(paymentTable);
 
         JButton filterUnpaidButton = new JButton("Lọc phòng chưa thanh toán");
@@ -120,14 +98,16 @@ public class PaymentDetails extends JFrame {
     }
 
     private void initializeData(List<Room> rooms) {
-        for (Room room : rooms) {
-            Map<String, Object> rowData = new TreeMap<>();
-            rowData.put("Số Phòng", room.getRoomNumber());
-            rowData.put("Loại Phòng", room.getRoomType());
-            rowData.put("Đã Thanh Toán", false);
-            rowData.put("Chưa Thanh Toán", true);
-            rowData.put("Số Tiền", room.getPaymentAmount() + "K");
-            initialData.add(rowData);
+        if (savedData.isEmpty()) { // Chỉ khởi tạo dữ liệu ban đầu nếu chưa có dữ liệu đã lưu
+            for (Room room : rooms) {
+                Map<String, Object> rowData = new TreeMap<>();
+                rowData.put("Số Phòng", room.getRoomNumber());
+                rowData.put("Loại Phòng", room.getRoomType());
+                rowData.put("Đã Thanh Toán", false);
+                rowData.put("Chưa Thanh Toán", true);
+                rowData.put("Số Tiền", room.getPaymentAmount() + "K");
+                initialData.add(rowData);
+            }
         }
     }
 
@@ -195,21 +175,24 @@ public class PaymentDetails extends JFrame {
 
         List<Object[]> filteredRooms = new ArrayList<>();
         for (int i = 0; i < tableModel.getRowCount(); i++) {
-            boolean isPaid = (Boolean) tableModel.getValueAt(i, 2);
-            if (isPaid == showPaid) {
-                filteredRooms.add(new Object[]{
-                        tableModel.getValueAt(i, 0),
-                        tableModel.getValueAt(i, 1),
-                        Integer.parseInt(tableModel.getValueAt(i, 4).toString().replace("K", ""))
-                });
-            }
+            filteredRooms.add(new Object[]{
+                    tableModel.getValueAt(i, 0), // Số Phòng
+                    tableModel.getValueAt(i, 1), // Loại Phòng
+                    tableModel.getValueAt(i, 2), // Đã Thanh Toán
+                    tableModel.getValueAt(i, 3), // Chưa Thanh Toán
+                    tableModel.getValueAt(i, 4)  // Số Tiền
+            });
         }
 
-        filteredRooms.sort((o1, o2) -> (int) o2[2] - (int) o1[2]);
 
-        for (Object[] rowData : filteredRooms) {
+        // Gọi hàm lọc và sắp xếp từ ManagerRoom
+        List<Object[]> filteredRoom = managerRoom.filterRoomsByPaymentStatus(filteredRooms, showPaid);
+        managerRoom.sortRoomsByAmount(filteredRoom); // Sắp xếp các phòng sau khi đã lọc
+
+        for (Object[] rowData : filteredRoom) {
             filteredTableModel.addRow(new Object[]{rowData[0], rowData[1], rowData[2] + "K"});
         }
+
 
         JFrame filteredRoomFrame = new JFrame(showPaid ? "Phòng đã thanh toán" : "Phòng chưa thanh toán");
         filteredRoomFrame.setSize(900, 700);

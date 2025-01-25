@@ -1,7 +1,6 @@
 package quanLyPhong;
 
-import quanLyPhong.InputDialog;
-import quanLyPhong.Room;
+import model1.Room;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;

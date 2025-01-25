@@ -1,5 +1,6 @@
 package quanLyPhong;
 
+import model1.Room;
 import sinhVienDangO.View;
 
 import javax.swing.*;
@@ -62,6 +63,8 @@ public class AdminRoomManager extends JFrame {
         malePanel.setOpaque(true); // Hiển thị màu nền trắng
         malePanel.setBackground(Color.WHITE);
         malePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Đường viền xám
+
+
         JLabel maleLabel = new JLabel("Cư Xá Nam", JLabel.CENTER);
         maleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         malePanel.add(maleLabel, BorderLayout.NORTH);

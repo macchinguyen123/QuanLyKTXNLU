@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 
 import quanLyPhong.DormitoryDataManager;
-import quanLyPhong.Room;
+import model1.Room;
 
 import java.awt.*;
 import java.awt.event.ActionListener;

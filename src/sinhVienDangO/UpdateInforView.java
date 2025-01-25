@@ -3,7 +3,7 @@ package sinhVienDangO;
 import model1.StayedStudent;
 import model1.Student;
 import quanLyPhong.DormitoryDataManager;
-import quanLyPhong.Room;
+import model1.Room;
 
 import javax.swing.*;
 import java.awt.*;
