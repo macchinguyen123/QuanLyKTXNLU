@@ -5,7 +5,7 @@ import java.util.*;
 public class ManageRoom {
     private Map<String, List<Room>> dormitoryData;
     private List<Map<String, Object>> savedData;
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
 
     public ManageRoom() {
         dormitoryData = new TreeMap<>();
@@ -43,7 +43,7 @@ public class ManageRoom {
 
         List<String> selectedMembers = new ArrayList<>();
         List<String> availableNames;
-         students = StayedStudent.getStudents();
+        students = StayedStudent.getStudents();
 
         // Lọc sinh viên theo mã phòng
         for (Student student : students) {
